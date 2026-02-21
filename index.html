@@ -121,23 +121,76 @@ body {
 .page-nav a:hover { color: var(--text); }
 .page-nav a.active { color: var(--orange); border-bottom-color: var(--orange); }
 
+/* Top 10 Ticker */
+.t10-ticker-outer {
+  background: rgba(239,68,68,0.04);
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  display: flex;
+  align-items: stretch;
+  height: 32px;
+}
+.t10t-item {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0 24px;
+  white-space: nowrap;
+}
+.t10t-rk {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; color: var(--muted);
+  width: 14px; text-align: center; flex-shrink: 0;
+}
+.t10t-rk.r1 { color: var(--danger); }
+.t10t-rk.r2 { color: var(--yellow); }
+.t10t-rk.r3 { color: var(--blue); }
+.t10t-eq {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px; color: var(--text); letter-spacing: 0.3px;
+}
+.t10t-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; color: var(--orange);
+}
+.t10t-rep {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; color: var(--muted);
+}
+.t10t-sep {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--border);
+  padding: 0 8px; flex-shrink: 0; white-space: nowrap;
+}
+
 /* 3-col layout */
 .layout {
   display: grid;
-  grid-template-columns: minmax(0,300px) minmax(0,1fr) minmax(0,360px);
-  height: calc(100vh - 88px);
+  grid-template-columns: minmax(0,290px) minmax(0,1fr) minmax(0,520px);
+  height: calc(100vh - 124px);
 }
 .col-l { border-right: 1px solid var(--border); border-left: 3px solid var(--red); overflow-y: auto; height: 100%; }
 .col-c { overflow-y: auto; height: 100%; }
 .col-r { border-left: 1px solid var(--border); overflow-y: auto; height: 100%; }
 
+/* IG 2x2 grid for detail tables */
+.ig-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.ig-cell {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.ig-cell:nth-child(even) { border-right: none; }
+.ig-cell:nth-child(3), .ig-cell:nth-child(4) { border-bottom: none; }
+
 /* Stat pairs */
 .pair { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
-.cell { padding: clamp(6px,0.7vw,10px) clamp(8px,1vw,16px); }
+.cell { padding: clamp(3px,0.35vw,5px) clamp(8px,1vw,16px); }
 .cell + .cell { border-left: 1px solid var(--border); }
-.ctag { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,9px); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-.cval { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(22px,3vw,34px); line-height: 1; }
-.csub { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); margin-top: 2px; }
+.ctag { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,9px); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 1px; }
+.cval { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(18px,2.2vw,26px); line-height: 1; }
+.csub { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--dim); margin-top: 1px; }
 .trend { display: inline-flex; align-items: center; gap: 3px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); font-weight: 700; margin-left: 6px; }
 .trend.up   { color: var(--danger); }
 .trend.down { color: var(--green); }
@@ -148,15 +201,15 @@ body {
 .leg { display: flex; gap: 10px; padding: 5px clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
 .leg-i { display: flex; align-items: center; gap: 5px; font-size: clamp(8px,0.7vw,11px); color: var(--dim); }
 .leg-d { width: 9px; height: 9px; border-radius: 1px; flex-shrink: 0; }
-.mix { display: flex; align-items: center; gap: 6px; padding: clamp(4px,0.5vw,7px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); }
+.mix { display: flex; align-items: center; gap: 6px; padding: clamp(3px,0.3vw,5px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); }
 .mix-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); width: 26px; }
-.mix-b  { flex: 1; height: 18px; display: flex; overflow: hidden; border-radius: 1px; }
+.mix-b  { flex: 1; height: 14px; display: flex; overflow: hidden; border-radius: 1px; }
 .mix-s  { height: 100%; display: flex; align-items: center; justify-content: center; font-size: clamp(7px,0.65vw,9px); font-weight: 700; color: rgba(0,0,0,0.7); white-space: nowrap; overflow: hidden; }
 .mix-t  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 38px; text-align: right; }
 
 /* Target bars */
-.tgt { padding: clamp(6px,0.7vw,10px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); }
-.tgt-h { font-size: clamp(8px,0.7vw,11px); font-weight: 700; color: var(--dim); margin-bottom: 7px; }
+.tgt { padding: clamp(4px,0.4vw,6px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); }
+.tgt-h { font-size: clamp(8px,0.7vw,11px); font-weight: 700; color: var(--dim); margin-bottom: 4px; }
 .tr { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
 .tr:last-of-type { margin-bottom: 0; }
 .tr-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); width: 26px; }
@@ -167,7 +220,7 @@ body {
 .tgt-n { font-size: clamp(8px,0.65vw,10px); color: var(--muted); margin-top: 4px; font-family: 'Share Tech Mono', monospace; }
 
 /* Alerts */
-.alert { padding: clamp(6px,0.7vw,10px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); border-left: 4px solid var(--danger); background: rgba(200,16,46,0.07); font-size: clamp(9px,0.8vw,12px); line-height: 1.6; }
+.alert { padding: clamp(4px,0.4vw,6px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); border-left: 4px solid var(--danger); background: rgba(200,16,46,0.07); font-size: clamp(9px,0.8vw,12px); line-height: 1.4; }
 .alert.warn { border-left-color: var(--yellow); background: rgba(245,158,11,0.05); }
 .a-title { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.65vw,9px); letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-bottom: 3px; }
 .er { color: var(--danger); font-family: 'Share Tech Mono', monospace; font-weight: 700; }
@@ -197,7 +250,7 @@ td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11p
 
 /* Line cards */
 .lcards { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--border); }
-.lcard  { padding: clamp(5px,0.6vw,10px) clamp(6px,0.8vw,14px); border-right: 1px solid var(--border); }
+.lcard  { padding: clamp(3px,0.3vw,5px) clamp(6px,0.8vw,14px); border-right: 1px solid var(--border); }
 .lcard:last-child { border-right: none; }
 .lc-n { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(18px,2.2vw,28px); line-height: 1; }
 .lc-h { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); color: var(--muted); letter-spacing: 1px; margin-bottom: 4px; }
@@ -207,22 +260,22 @@ td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11p
 .lc-v { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.85vw,13px); font-weight: 700; }
 
 /* MTBF */
-.mtbf { padding: clamp(6px,0.7vw,10px) clamp(8px,1vw,16px); }
-.mbr  { display: grid; grid-template-columns: 32px 1fr 48px; align-items: center; gap: 6px; margin-bottom: 5px; }
+.mtbf { padding: clamp(4px,0.4vw,6px) clamp(8px,1vw,16px); }
+.mbr  { display: grid; grid-template-columns: 32px 1fr 48px; align-items: center; gap: 6px; margin-bottom: 3px; }
 .mbr:last-child { margin-bottom: 0; }
 .mb-l  { font-family: 'Share Tech Mono', monospace; font-size: clamp(10px,0.9vw,12px); font-weight: 700; }
-.mb-bg { height: 18px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.mb-bg { height: 14px; background: var(--border); border-radius: 1px; overflow: hidden; }
 .mb-f  { height: 100%; display: flex; align-items: center; padding-left: 6px; font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(8px,0.7vw,11px); color: rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; }
 .mb-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-align: right; }
 
 /* Detail tables */
-.lhdr { padding: clamp(4px,0.5vw,7px) clamp(8px,1vw,16px) 2px; border-top: 1px solid var(--border); display: flex; align-items: baseline; gap: 8px; }
+.lhdr { padding: clamp(2px,0.25vw,4px) clamp(8px,1vw,16px) 1px; border-top: 1px solid var(--border); display: flex; align-items: baseline; gap: 8px; }
 .lhdr.first { border-top: none; }
 .lh-n { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,18px); }
 .lh-h { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); }
 table.dt { width: 100%; border-collapse: collapse; }
 table.dt th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.35vw,5px) clamp(4px,0.7vw,10px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
-table.dt td { padding: clamp(2px,0.3vw,5px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.6); font-size: clamp(10px,0.95vw,13px); vertical-align: middle; }
+table.dt td { padding: clamp(1px,0.2vw,3px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.6); font-size: clamp(9px,0.85vw,11px); vertical-align: middle; }
 table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--orange); font-weight: 700; border-bottom: none; }
 table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); transition: background 0.15s; }
 .bdg { display: inline-block; padding: 1px 5px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); border-radius: 2px; font-weight: 700; white-space: nowrap; }
@@ -230,7 +283,7 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
 .bg { background: rgba(34,197,94,0.15);  color: var(--green); }
 .bw { background: rgba(245,158,11,0.15); color: var(--yellow); }
 .br { background: rgba(239,68,68,0.15);  color: var(--danger); }
-.bdg-leg { padding: clamp(5px,0.6vw,10px) clamp(8px,1vw,16px); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.bdg-leg { padding: clamp(3px,0.3vw,5px) clamp(8px,1vw,16px); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .bdg-leg .lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); }
 @keyframes countUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 .cval { animation: countUp 0.6s ease-out both; }
@@ -497,6 +550,104 @@ body.shift-page-active #global-ticker { display: flex; }
 
 
 <div id="kpi-page">
+
+<!-- TOP 10 TICKER -->
+<div class="t10-ticker-outer">
+  <div class="ticker-label" style="background:#0f1219;">
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--red);">TOP 10</span>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Downtime · Jan &amp; Feb</span>
+  </div>
+  <div class="ticker-wrap">
+    <div class="ticker-track" style="animation-duration:60s;">
+      <span class="t10t-sep">── JAN 2026 ──</span>
+      <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">26h 35m</span><span class="t10t-rep">12 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">MEZ B2</span><span class="t10t-val">17h 45m</span><span class="t10t-rep">7 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">IG1 SQUID</span><span class="t10t-val">11h 50m</span><span class="t10t-rep">5 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">4</span><span class="t10t-eq">AE3</span><span class="t10t-val">10h 35m</span><span class="t10t-rep">6 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">AE1</span><span class="t10t-val">9h 55m</span><span class="t10t-rep">6 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">6</span><span class="t10t-eq">CUT CT3</span><span class="t10t-val">9h 45m</span><span class="t10t-rep">5 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">7</span><span class="t10t-eq">IG1 VWASH</span><span class="t10t-val">8h 1m</span><span class="t10t-rep">3 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">8</span><span class="t10t-eq">CUT CC3</span><span class="t10t-val">8h 1m</span><span class="t10t-rep">4 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">9</span><span class="t10t-eq">IG4 TGRIND</span><span class="t10t-val">8h 0m</span><span class="t10t-rep">1 repair</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">AE4</span><span class="t10t-val">6h 20m</span><span class="t10t-rep">6 repairs</span></span>
+      <span class="t10t-sep">────────</span>
+      <span class="t10t-sep">── FEB 2026 ──</span>
+      <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 VWASH</span><span class="t10t-val" style="color:var(--danger);">48h 30m</span><span class="t10t-rep">4 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">QCB1</span><span class="t10t-val">19h 45m</span><span class="t10t-rep">4 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">TMP FURN</span><span class="t10t-val">18h 50m</span><span class="t10t-rep">6 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">4</span><span class="t10t-eq">AE7</span><span class="t10t-val">13h 45m</span><span class="t10t-rep">2 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">MEZ B1</span><span class="t10t-val">12h 0m</span><span class="t10t-rep">1 repair</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">6</span><span class="t10t-eq">CUT LT1</span><span class="t10t-val">9h 10m</span><span class="t10t-rep">3 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">7</span><span class="t10t-eq">CUT CT2</span><span class="t10t-val">8h 0m</span><span class="t10t-rep">2 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">8</span><span class="t10t-eq">CUT CC1</span><span class="t10t-val">7h 35m</span><span class="t10t-rep">4 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">9</span><span class="t10t-eq">IG3 RB2</span><span class="t10t-val">6h 45m</span><span class="t10t-rep">1 repair</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">6h 12m</span><span class="t10t-rep">5 repairs</span></span>
+      <span class="t10t-sep">────────</span>
+      <!-- duplicate for seamless loop -->
+      <span class="t10t-sep">── JAN 2026 ──</span>
+      <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">26h 35m</span><span class="t10t-rep">12 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">MEZ B2</span><span class="t10t-val">17h 45m</span><span class="t10t-rep">7 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">IG1 SQUID</span><span class="t10t-val">11h 50m</span><span class="t10t-rep">5 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">4</span><span class="t10t-eq">AE3</span><span class="t10t-val">10h 35m</span><span class="t10t-rep">6 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">AE1</span><span class="t10t-val">9h 55m</span><span class="t10t-rep">6 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">6</span><span class="t10t-eq">CUT CT3</span><span class="t10t-val">9h 45m</span><span class="t10t-rep">5 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">7</span><span class="t10t-eq">IG1 VWASH</span><span class="t10t-val">8h 1m</span><span class="t10t-rep">3 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">8</span><span class="t10t-eq">CUT CC3</span><span class="t10t-val">8h 1m</span><span class="t10t-rep">4 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">9</span><span class="t10t-eq">IG4 TGRIND</span><span class="t10t-val">8h 0m</span><span class="t10t-rep">1 repair</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">AE4</span><span class="t10t-val">6h 20m</span><span class="t10t-rep">6 repairs</span></span>
+      <span class="t10t-sep">────────</span>
+      <span class="t10t-sep">── FEB 2026 ──</span>
+      <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 VWASH</span><span class="t10t-val" style="color:var(--danger);">48h 30m</span><span class="t10t-rep">4 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">QCB1</span><span class="t10t-val">19h 45m</span><span class="t10t-rep">4 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">TMP FURN</span><span class="t10t-val">18h 50m</span><span class="t10t-rep">6 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">4</span><span class="t10t-eq">AE7</span><span class="t10t-val">13h 45m</span><span class="t10t-rep">2 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">MEZ B1</span><span class="t10t-val">12h 0m</span><span class="t10t-rep">1 repair</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">6</span><span class="t10t-eq">CUT LT1</span><span class="t10t-val">9h 10m</span><span class="t10t-rep">3 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">7</span><span class="t10t-eq">CUT CT2</span><span class="t10t-val">8h 0m</span><span class="t10t-rep">2 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">8</span><span class="t10t-eq">CUT CC1</span><span class="t10t-val">7h 35m</span><span class="t10t-rep">4 repairs</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">9</span><span class="t10t-eq">IG3 RB2</span><span class="t10t-val">6h 45m</span><span class="t10t-rep">1 repair</span></span>
+      <span class="t10t-sep">·</span>
+      <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">6h 12m</span><span class="t10t-rep">5 repairs</span></span>
+      <span class="t10t-sep">────────</span>
+    </div>
+  </div>
+</div>
+
 <div class="layout">
 
   <!-- LEFT COLUMN -->
@@ -550,7 +701,6 @@ body.shift-page-active #global-ticker { display: flex; }
         <div class="csub">PM 352h &nbsp;|&nbsp; BD 221h &nbsp;<span class="trend up-bad">↑ BD hrs ▲</span></div>
       </div>
     </div>
-
     <div class="tag">Labor Hour Mix <span class="hl">Planned vs Emergency Repairs</span></div>
     <div class="leg">
       <div class="leg-i"><div class="leg-d" style="background:var(--green);"></div>Planned / Preventive</div>
@@ -575,80 +725,33 @@ body.shift-page-active #global-ticker { display: flex; }
       </div>
       <div class="mix-t">605h</div>
     </div>
-
     <div class="tgt">
-      <div class="tgt-h">Goal: Keep Breakdown Hours Under 35% of Total Labor</div>
+      <div class="tgt-h">Goal: Breakdown Hours Under 35% of Total Labor</div>
       <div class="tr">
         <div class="tr-mo">JAN</div>
-        <div class="tr-bg">
-          <div class="tr-f" style="width:30.5%;background:var(--green);"></div>
-          <div class="tr-ln"></div>
-        </div>
-        <div class="tr-v" style="color:var(--green);">30.5% ✓ Under</div>
+        <div class="tr-bg"><div class="tr-f" style="width:30.5%;background:var(--green);"></div><div class="tr-ln"></div></div>
+        <div class="tr-v" style="color:var(--green);">30.5% ✓</div>
       </div>
       <div class="tr">
         <div class="tr-mo">FEB</div>
-        <div class="tr-bg">
-          <div class="tr-f" style="width:36.5%;background:var(--danger);"></div>
-          <div class="tr-ln"></div>
-        </div>
-        <div class="tr-v" style="color:var(--danger);">36.5% ⚠ Over</div>
+        <div class="tr-bg"><div class="tr-f" style="width:36.5%;background:var(--danger);"></div><div class="tr-ln"></div></div>
+        <div class="tr-v" style="color:var(--danger);">36.5% ⚠</div>
       </div>
-      <div class="tgt-n">Orange line = 35% target threshold</div>
+      <div class="tgt-n">Orange line = 35% target</div>
     </div>
-
     <div class="tag">⚑ Priority Alerts</div>
     <div class="alert">
       <div class="a-title">🔴 New Problem — February</div>
-      <span class="er">IG3 VWASH</span> — 48h 30m of downtime across 4 repairs this month. Was not in January's top 10. Needs immediate investigation.
+      <span class="er">IG3 VWASH</span> — 48h 30m downtime, 4 repairs. Not in January top 10.
     </div>
     <div class="alert warn">
-      <div class="a-title">🟡 Repeat Offender — Both Months</div>
-      <span class="ey">IG3 SQUID</span> — #1 in January (26h 35m, 12 repairs). Still in February's top 10. Breaks down every 73 hours on average.
+      <div class="a-title">🟡 Repeat Offender</div>
+      <span class="ey">IG3 SQUID</span> — #1 Jan, still top 10 Feb. Fails every 73h avg.
     </div>
   </div><!-- /col-l -->
 
-  <!-- CENTER COLUMN -->
-  <div class="col-c">
-    <div class="t10g">
-      <div class="t10p">
-        <div class="tag">Top 10 Downtime — January 2026 <span class="hl">01/01–01/31</span></div>
-        <table class="t10">
-          <thead><tr><th>#</th><th>Equipment</th><th>Downtime</th><th>Repairs</th><th>Relative</th></tr></thead>
-          <tbody>
-            <tr><td><span class="rk r1">1</span></td><td><span class="eq">IG3 SQUID</span></td><td class="m">26h 35m</td><td class="m">12</td><td class="bc"><div class="bb"><div class="bf" style="width:100%;background:var(--danger);"></div></div></td></tr>
-            <tr><td><span class="rk r2">2</span></td><td><span class="eq">MEZ B2</span></td><td class="m">17h 45m</td><td class="m">7</td><td class="bc"><div class="bb"><div class="bf" style="width:66.7%;background:var(--yellow);"></div></div></td></tr>
-            <tr><td><span class="rk r3">3</span></td><td><span class="eq">IG1 SQUID</span></td><td class="m">11h 50m</td><td class="m">5</td><td class="bc"><div class="bb"><div class="bf" style="width:44.5%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">4</span></td><td><span class="eq">AE3</span></td><td class="m">10h 35m</td><td class="m">6</td><td class="bc"><div class="bb"><div class="bf" style="width:39.8%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">5</span></td><td><span class="eq">AE1</span></td><td class="m">9h 55m</td><td class="m">6</td><td class="bc"><div class="bb"><div class="bf" style="width:37.3%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">6</span></td><td><span class="eq">CUT CT3</span></td><td class="m">9h 45m</td><td class="m">5</td><td class="bc"><div class="bb"><div class="bf" style="width:36.7%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">7</span></td><td><span class="eq">IG1 VWASH</span></td><td class="m">8h 1m</td><td class="m">3</td><td class="bc"><div class="bb"><div class="bf" style="width:30.2%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">8</span></td><td><span class="eq">CUT CC3</span></td><td class="m">8h 1m</td><td class="m">4</td><td class="bc"><div class="bb"><div class="bf" style="width:30.2%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">9</span></td><td><span class="eq">IG4 TGRIND</span></td><td class="m">8h 0m</td><td class="m">1</td><td class="bc"><div class="bb"><div class="bf" style="width:30.1%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">10</span></td><td><span class="eq">AE4</span></td><td class="m">6h 20m</td><td class="m">6</td><td class="bc"><div class="bb"><div class="bf" style="width:23.8%;background:var(--blue);"></div></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="t10p">
-        <div class="tag">Top 10 Downtime — February 2026 <span class="hl">02/01–02/20</span><span class="partial-badge">PARTIAL MONTH</span></div>
-        <table class="t10">
-          <thead><tr><th>#</th><th>Equipment</th><th>Downtime</th><th>Repairs</th><th>Relative</th></tr></thead>
-          <tbody>
-            <tr><td><span class="rk r1">1</span></td><td><span class="eq">IG3 VWASH</span></td><td class="m">48h 30m</td><td class="m">4</td><td class="bc"><div class="bb"><div class="bf" style="width:100%;background:var(--danger);"></div></div></td></tr>
-            <tr><td><span class="rk r2">2</span></td><td><span class="eq">QCB1</span></td><td class="m">19h 45m</td><td class="m">4</td><td class="bc"><div class="bb"><div class="bf" style="width:40.7%;background:var(--yellow);"></div></div></td></tr>
-            <tr><td><span class="rk r3">3</span></td><td><span class="eq">TMP FURN</span></td><td class="m">18h 50m</td><td class="m">6</td><td class="bc"><div class="bb"><div class="bf" style="width:38.8%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">4</span></td><td><span class="eq">AE7</span></td><td class="m">13h 45m</td><td class="m">2</td><td class="bc"><div class="bb"><div class="bf" style="width:28.4%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">5</span></td><td><span class="eq">MEZ B1</span></td><td class="m">12h 0m</td><td class="m">1</td><td class="bc"><div class="bb"><div class="bf" style="width:24.7%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">6</span></td><td><span class="eq">CUT LT1</span></td><td class="m">9h 10m</td><td class="m">3</td><td class="bc"><div class="bb"><div class="bf" style="width:18.9%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">7</span></td><td><span class="eq">CUT CT2</span></td><td class="m">8h 0m</td><td class="m">2</td><td class="bc"><div class="bb"><div class="bf" style="width:16.5%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">8</span></td><td><span class="eq">CUT CC1</span></td><td class="m">7h 35m</td><td class="m">4</td><td class="bc"><div class="bb"><div class="bf" style="width:15.6%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">9</span></td><td><span class="eq">IG3 RB2</span></td><td class="m">6h 45m</td><td class="m">1</td><td class="bc"><div class="bb"><div class="bf" style="width:13.9%;background:var(--blue);"></div></div></td></tr>
-            <tr><td><span class="rk">10</span></td><td><span class="eq">IG3 SQUID</span></td><td class="m">6h 12m</td><td class="m">5</td><td class="bc"><div class="bb"><div class="bf" style="width:12.8%;background:var(--blue);"></div></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
+  <!-- CENTER + RIGHT: merged into wide area -->
+  <div class="col-c" style="grid-column: span 1;">
     <div class="tag">IG Line Health — January 2026 <span class="hl">Longer MTBF = more reliable</span></div>
     <div class="lcards">
       <div class="lcard">
@@ -676,7 +779,137 @@ body.shift-page-active #global-ticker { display: flex; }
         <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--green);">1h 35m</span></div>
       </div>
     </div>
+    <div class="tag">Line Reliability — January 2026 <span class="hl">Longer bar = breaks down less often</span></div>
+    <div class="mtbf">
+      <div class="mbr">
+        <div class="mb-l" style="color:var(--green);">IG2</div>
+        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(34,197,94,0.55);">BEST — 108h between breakdowns</div></div>
+        <div class="mb-v" style="color:var(--green);">108h</div>
+      </div>
+      <div class="mbr">
+        <div class="mb-l" style="color:var(--blue);">IG1</div>
+        <div class="mb-bg"><div class="mb-f" style="width:61.1%;background:rgba(56,189,248,0.45);">66h</div></div>
+        <div class="mb-v" style="color:var(--blue);">66h</div>
+      </div>
+      <div class="mbr">
+        <div class="mb-l" style="color:var(--danger);">IG3</div>
+        <div class="mb-bg"><div class="mb-f" style="width:47.2%;background:rgba(239,68,68,0.5);">51h</div></div>
+        <div class="mb-v" style="color:var(--danger);">51h</div>
+      </div>
+      <div class="mbr">
+        <div class="mb-l" style="color:var(--yellow);">IG4</div>
+        <div class="mb-bg"><div class="mb-f" style="width:46.3%;background:rgba(245,158,11,0.5);">50h</div></div>
+        <div class="mb-v" style="color:var(--yellow);">50h</div>
+      </div>
+    </div>
+  </div><!-- /col-c -->
 
+  <!-- RIGHT COLUMN: 4 tables in 2x2 grid -->
+  <div class="col-r">
+    <div class="tag">Equipment Repair Detail — January 2026 <span class="hl">All IG Lines</span></div>
+    <div class="ig-grid">
+      <!-- IG1 -->
+      <div class="ig-cell">
+        <div class="lhdr first"><span class="lh-n" style="color:var(--blue);">IG1</span><span class="lh-h">793 line hours</span></div>
+        <table class="dt">
+          <thead><tr><th>Equipment</th><th>Rep</th><th>Avg Btw</th><th>Avg Fix</th></tr></thead>
+          <tbody>
+            <tr><td>51x90 Squid</td><td class="m">5</td><td class="m">158h</td><td><span class="bdg bw">2h 22m</span></td></tr>
+            <tr><td>IG1 Washer</td><td class="m">3</td><td class="m">264h</td><td><span class="bdg bw">2h 40m</span></td></tr>
+            <tr><td>Mask Master 3</td><td class="m">2</td><td class="m">396h</td><td><span class="bdg bg">1h 15m</span></td></tr>
+            <tr><td>48x96 Load Conv</td><td class="m">1</td><td class="m">793h</td><td><span class="bdg bg">0h 20m</span></td></tr>
+            <tr><td>Mask Master 1</td><td class="m">1</td><td class="m">793h</td><td><span class="bdg bg">0h 20m</span></td></tr>
+            <tr><td><strong>IG1 Total</strong></td><td class="m"><strong>12</strong></td><td class="m"><strong>66h</strong></td><td><span class="bdg bw">1h 55m</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- IG2 -->
+      <div class="ig-cell">
+        <div class="lhdr first"><span class="lh-n" style="color:var(--green);">IG2</span><span class="lh-h">432 line hours</span></div>
+        <table class="dt">
+          <thead><tr><th>Equipment</th><th>Rep</th><th>Avg Btw</th><th>Avg Fix</th></tr></thead>
+          <tbody>
+            <tr><td>IG2 Washer</td><td class="m">2</td><td class="m">216h</td><td><span class="bdg bg">0h 10m</span></td></tr>
+            <tr><td>IG2 Flipper</td><td class="m">1</td><td class="m">432h</td><td><span class="bdg bg">0h 15m</span></td></tr>
+            <tr><td>Mask Master 1</td><td class="m">1</td><td class="m">432h</td><td><span class="bdg bg">0h 30m</span></td></tr>
+            <tr><td><strong>IG2 Total</strong></td><td class="m"><strong>4</strong></td><td class="m"><strong>108h</strong></td><td><span class="bdg bg">0h 16m</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- IG3 -->
+      <div class="ig-cell">
+        <div class="lhdr first"><span class="lh-n" style="color:var(--danger);">IG3</span><span class="lh-h">881 line hours</span></div>
+        <table class="dt">
+          <thead><tr><th>Equipment</th><th>Rep</th><th>Avg Btw</th><th>Avg Fix</th></tr></thead>
+          <tbody>
+            <tr><td>84x144 Squid</td><td class="m" style="color:var(--danger);">12</td><td class="m" style="color:var(--danger);">73h</td><td><span class="bdg bw">2h 12m</span></td></tr>
+            <tr><td>IG3 Washer</td><td class="m">2</td><td class="m">440h</td><td><span class="bdg bw">2h 15m</span></td></tr>
+            <tr><td>Mask Master 1</td><td class="m">1</td><td class="m">881h</td><td><span class="bdg bg">0h 15m</span></td></tr>
+            <tr><td>IG3 Flipper</td><td class="m">1</td><td class="m">881h</td><td><span class="bdg bg">0h 10m</span></td></tr>
+            <tr><td>IG3 UnFlipper</td><td class="m">1</td><td class="m">881h</td><td><span class="bdg bw">2h 0m</span></td></tr>
+            <tr><td><strong>IG3 Total</strong></td><td class="m"><strong>17</strong></td><td class="m" style="color:var(--danger);"><strong>51h</strong></td><td><span class="bdg bw">1h 58m</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- IG4 -->
+      <div class="ig-cell">
+        <div class="lhdr first"><span class="lh-n" style="color:var(--yellow);">IG4</span><span class="lh-h">861 line hours</span></div>
+        <table class="dt">
+          <thead><tr><th>Equipment</th><th>Rep</th><th>Avg Btw</th><th>Avg Fix</th></tr></thead>
+          <tbody>
+            <tr><td>IG4 Squid</td><td class="m" style="color:var(--yellow);">7</td><td class="m">123h</td><td><span class="bdg bg">0h 46m</span></td></tr>
+            <tr><td>Billco V.Wash</td><td class="m">2</td><td class="m">430h</td><td><span class="bdg br">3h 0m</span></td></tr>
+            <tr><td>Viprotron Scan</td><td class="m">2</td><td class="m">430h</td><td><span class="bdg bg">0h 41m</span></td></tr>
+            <tr><td>Conveyor 3</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg br">3h 20m</span></td></tr>
+            <tr><td>Conveyor 4</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg bg">1h 0m</span></td></tr>
+            <tr><td>IQ Test</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg bg">0h 40m</span></td></tr>
+            <tr><td>Mask Master 1</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg bg">0h 40m</span></td></tr>
+            <tr><td>Mask Master 2</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg bg">0h 30m</span></td></tr>
+            <tr><td>IG4 Tru Grind</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg br">8h 0m</span></td></tr>
+            <tr><td><strong>IG4 Total</strong></td><td class="m"><strong>17</strong></td><td class="m"><strong>50h</strong></td><td><span class="bdg bg">1h 35m</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="bdg-leg">
+      <span class="lbl">Repair Time:</span>
+      <span class="bdg bg">Under 1 hr — Good</span>
+      <span class="bdg bw">1–3 hrs — Monitor</span>
+      <span class="bdg br">Over 3 hrs — Concern</span>
+    </div>
+  </div><!-- /col-r -->
+
+</div><!-- /layout -->
+</div><!-- /kpi-page -->
+
+  <div class="col-c">
+    <div class="tag">IG Line Health — January 2026 <span class="hl">Longer MTBF = more reliable</span></div>
+    <div class="lcards">
+      <div class="lcard">
+        <div class="lc-n" style="color:var(--blue);">IG1</div>
+        <div class="lc-h">793 HRS &nbsp;|&nbsp; 12 BD</div>
+        <div class="lc-r"><span class="lc-l">Avg between BD</span><span class="lc-v">66h 0m</span></div>
+        <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--yellow);">1h 55m</span></div>
+      </div>
+      <div class="lcard">
+        <div class="lc-n" style="color:var(--green);">IG2</div>
+        <div class="lc-h">432 HRS &nbsp;|&nbsp; 4 BD</div>
+        <div class="lc-r"><span class="lc-l">Avg between BD</span><span class="lc-v" style="color:var(--green);">108h 0m</span></div>
+        <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--green);">0h 16m</span></div>
+      </div>
+      <div class="lcard">
+        <div class="lc-n" style="color:var(--danger);">IG3</div>
+        <div class="lc-h">881 HRS &nbsp;|&nbsp; 17 BD</div>
+        <div class="lc-r"><span class="lc-l">Avg between BD</span><span class="lc-v" style="color:var(--danger);">51h 0m</span></div>
+        <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--yellow);">1h 58m</span></div>
+      </div>
+      <div class="lcard">
+        <div class="lc-n" style="color:var(--yellow);">IG4</div>
+        <div class="lc-h">861 HRS &nbsp;|&nbsp; 17 BD</div>
+        <div class="lc-r"><span class="lc-l">Avg between BD</span><span class="lc-v" style="color:var(--yellow);">50h 0m</span></div>
+        <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--green);">1h 35m</span></div>
+      </div>
+    </div>
     <div class="tag">Line Reliability — January 2026 <span class="hl">Longer bar = breaks down less often</span></div>
     <div class="mtbf">
       <div class="mbr">
@@ -777,6 +1010,8 @@ body.shift-page-active #global-ticker { display: flex; }
 
 </div><!-- /layout -->
 </div><!-- /kpi-page -->
+
+
 
 <!-- ═══════════════════════════ SHIFT PERFORMANCE PAGE ═══════════════════════════ -->
 <div id="shift-page">
