@@ -39,13 +39,22 @@ body > header, body > nav, .ux-header, .ux-nav,
 }
 
 html, body {
+  background: #000;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#dashboard {
   background: var(--bg);
   color: var(--text);
   font-family: 'Barlow', 'Segoe UI', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.4;
-  width: 100%;
-  min-height: 100vh;
+  width: 1920px;
+  transform-origin: top left;
 }
 
 /* ── SECTION LABEL ── */
@@ -80,6 +89,10 @@ html, body {
 .logo-dept { font-size: 11px; color: var(--dim); letter-spacing: 1px; }
 .hdr-center { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 20px; letter-spacing: 4px; color: var(--dim); }
 .hdr-right  { text-align: right; }
+.hdr-clock-row { display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
+.hdr-weather-row { display: flex; align-items: center; gap: 8px; justify-content: flex-end; margin: 2px 0; }
+#wx-icon { font-size: 18px; }
+#wx-temp { font-size: 20px !important; }
 .hdr-date   { font-family: 'Share Tech Mono', 'Courier New', monospace; font-size: 13px; color: var(--orange); }
 .hdr-src    { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
@@ -201,6 +214,7 @@ table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--oran
 </style>
 </head>
 <body>
+<div id="dashboard">
 
 <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
 <header class="hdr">
@@ -213,7 +227,15 @@ table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--oran
   </div>
   <div class="hdr-center">Maintenance KPI Dashboard</div>
   <div class="hdr-right">
-    <div class="hdr-date">02 / 20 / 2026</div>
+    <div class="hdr-clock-row">
+      <div id="hdr-clock" class="hdr-date">--:-- --</div>
+      <div id="hdr-day" class="hdr-src"></div>
+    </div>
+    <div class="hdr-weather-row">
+      <span id="wx-icon">&#9728;</span>
+      <span id="wx-temp" class="hdr-date">--°F</span>
+      <span id="wx-desc" class="hdr-src">Roanoke, VA</span>
+    </div>
     <div class="hdr-src">PMWare CMMS &nbsp;|&nbsp; Planner: C. Zahner</div>
   </div>
 </header>
@@ -528,6 +550,68 @@ table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--oran
   <span>Cardinal IG Roanoke &nbsp;|&nbsp; Maintenance Department &nbsp;|&nbsp; PMWare CMMS</span>
   <span>Report Date: 02/20/2026 &nbsp;|&nbsp; Planner: C. Zahner</span>
 </footer>
+
+</div><!-- /dashboard -->
+
+<script>
+function fit() {
+  var d = document.getElementById("dashboard");
+  var scale = Math.min(window.innerWidth / 1920, window.innerHeight / d.offsetHeight);
+  d.style.transform = "scale(" + scale + ")";
+}
+window.addEventListener("load", fit);
+window.addEventListener("resize", fit);
+
+// ── CLOCK ──
+function updateClock() {
+  var now = new Date();
+  var h = now.getHours();
+  var m = now.getMinutes();
+  var s = now.getSeconds();
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  document.getElementById('hdr-clock').textContent =
+    h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s + ' ' + ampm;
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('hdr-day').textContent =
+    days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ' ' + now.getFullYear();
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ── WEATHER (Open-Meteo, no API key needed) ──
+// Roanoke, VA: lat 37.2710, lon -79.9414
+fetch('https://api.open-meteo.com/v1/forecast?latitude=37.2710&longitude=-79.9414&current=temperature_2m,weathercode,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    var temp = Math.round(d.current.temperature_2m);
+    var code = d.current.weathercode;
+    var wind = Math.round(d.current.windspeed_10m);
+    var icons = {
+      0:'☀️', 1:'🌤️', 2:'⛅', 3:'☁️',
+      45:'🌫️', 48:'🌫️',
+      51:'🌦️', 53:'🌦️', 55:'🌧️',
+      61:'🌧️', 63:'🌧️', 65:'🌧️',
+      71:'🌨️', 73:'🌨️', 75:'🌨️',
+      80:'🌦️', 81:'🌧️', 82:'⛈️',
+      95:'⛈️', 96:'⛈️', 99:'⛈️'
+    };
+    var descs = {
+      0:'Clear', 1:'Mostly Clear', 2:'Partly Cloudy', 3:'Overcast',
+      45:'Foggy', 48:'Foggy',
+      51:'Light Drizzle', 53:'Drizzle', 55:'Heavy Drizzle',
+      61:'Light Rain', 63:'Rain', 65:'Heavy Rain',
+      71:'Light Snow', 73:'Snow', 75:'Heavy Snow',
+      80:'Rain Showers', 81:'Rain Showers', 82:'Heavy Showers',
+      95:'Thunderstorm', 96:'Thunderstorm', 99:'Thunderstorm'
+    };
+    document.getElementById('wx-icon').textContent = icons[code] || '🌡️';
+    document.getElementById('wx-temp').textContent = temp + '°F';
+    document.getElementById('wx-desc').textContent = (descs[code] || 'Roanoke, VA') + ' · ' + wind + ' mph';
+  })
+  .catch(function(){ document.getElementById('wx-desc').textContent = 'Roanoke, VA'; });
+</script>
 
 </body>
 </html>
