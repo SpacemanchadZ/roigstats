@@ -27,14 +27,21 @@
   --dim:     #8490aa;
 }
 
-html { background: var(--bg); }
+html { background: var(--bg); height: 100%; overflow: hidden; }
+
+/* ── CUSTOM SCROLLBARS ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Barlow', 'Segoe UI', Arial, sans-serif;
   font-size: clamp(11px, 1.1vw, 14px);
   line-height: 1.4;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* ── TAG ── */
@@ -73,6 +80,7 @@ body {
 .hdr-center { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(12px,1.4vw,20px); letter-spacing: 4px; color: var(--dim); }
 .hdr-right  { text-align: right; }
 .hdr-clock-row { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.5s infinite; flex-shrink: 0; }
 .hdr-weather-row { display: flex; align-items: center; gap: 6px; justify-content: flex-end; margin: 2px 0; }
 .hdr-date { font-family: 'Share Tech Mono', monospace; font-size: clamp(11px,1vw,13px); color: var(--orange); }
 .hdr-src  { font-size: clamp(8px,0.75vw,11px); color: var(--muted); }
@@ -82,9 +90,23 @@ body {
 .layout {
   display: grid;
   grid-template-columns: minmax(0,300px) minmax(0,1fr) minmax(0,360px);
+  height: calc(100vh - 60px); /* fill viewport minus header */
 }
-.col-l { border-right: 1px solid var(--border); }
-.col-r { border-left:  1px solid var(--border); }
+.col-l {
+  border-right: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  overflow-y: auto;
+  height: 100%;
+}
+.col-c {
+  overflow-y: auto;
+  height: 100%;
+}
+.col-r {
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  height: 100%;
+}
 
 /* ── STAT PAIRS ── */
 .pair { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
@@ -130,7 +152,13 @@ table.t10 { width: 100%; border-collapse: collapse; }
 table.t10 th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.4vw,6px) clamp(4px,0.7vw,10px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
 table.t10 td { padding: clamp(3px,0.35vw,5px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.8); vertical-align: middle; font-size: clamp(10px,0.9vw,13px); }
 table.t10 tr:last-child td { border-bottom: none; }
-table.t10 tr:hover td { background: rgba(255,255,255,0.02); }
+table.t10 tr:hover td { background: rgba(255,255,255,0.04); transition: background 0.15s; }
+table.t10 tbody tr:nth-child(1) td { background: rgba(239,68,68,0.07); }
+table.t10 tbody tr:nth-child(2) td { background: rgba(245,158,11,0.05); }
+table.t10 tbody tr:nth-child(3) td { background: rgba(56,189,248,0.04); }
+table.t10 tbody tr:nth-child(1):hover td { background: rgba(239,68,68,0.13); }
+table.t10 tbody tr:nth-child(2):hover td { background: rgba(245,158,11,0.10); }
+table.t10 tbody tr:nth-child(3):hover td { background: rgba(56,189,248,0.08); }
 .rk { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,20px); color: var(--border); display: inline-block; min-width: 16px; }
 .r1 { color: var(--danger); } .r2 { color: var(--yellow); } .r3 { color: var(--dim); }
 .eq { font-family: 'Share Tech Mono', monospace; font-size: clamp(10px,0.9vw,13px); font-weight: 700; }
@@ -168,33 +196,50 @@ table.dt { width: 100%; border-collapse: collapse; }
 table.dt th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.35vw,5px) clamp(4px,0.7vw,10px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
 table.dt td { padding: clamp(2px,0.3vw,4px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.6); font-size: clamp(9px,0.8vw,12px); vertical-align: middle; }
 table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--orange); font-weight: 700; border-bottom: none; }
+table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); transition: background 0.15s; }
 .bdg { display: inline-block; padding: 1px 5px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); border-radius: 2px; font-weight: 700; white-space: nowrap; }
 .bg { background: rgba(34,197,94,0.15);  color: var(--green); }
 .bw { background: rgba(245,158,11,0.15); color: var(--yellow); }
 .br { background: rgba(239,68,68,0.15);  color: var(--danger); }
 .bdg-leg { padding: clamp(5px,0.6vw,10px) clamp(8px,1vw,16px); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .bdg-leg .lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); }
+@keyframes countUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.cval { animation: countUp 0.6s ease-out both; }
 
 /* ── FOOTER ── */
-.ftr { border-top: 1px solid var(--border); padding: clamp(6px,0.7vw,12px) clamp(10px,1.2vw,20px); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--muted); background: var(--surface); }
+.ftr { border-top: 1px solid var(--border); padding: clamp(4px,0.5vw,8px) clamp(10px,1.2vw,20px); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--muted); background: var(--surface); }
+.hdr-shifts { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.shift { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 2px; font-family: 'Share Tech Mono', monospace; color: var(--muted); transition: all 0.3s; background: rgba(255,255,255,0.02); }
+.shift.active { border-color: var(--green); background: rgba(34,197,94,0.08); }
+.shift-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: all 0.3s; }
+.shift.active .shift-dot { background: var(--green); animation: pulse 2s infinite; }
+.shift-name { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.4vw,18px); color: var(--dim); line-height: 1; transition: color 0.3s; }
+.shift.active .shift-name { color: var(--green); }
+.shift-crew { font-size: clamp(7px,0.6vw,9px); color: var(--muted); letter-spacing: 0.5px; display: block; margin-top: 1px; transition: color 0.3s; }
+.shift.active .shift-crew { color: var(--green); opacity: 0.8; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
 /* ══════════════════════════════════════════
    RESPONSIVE BREAKPOINTS
 ══════════════════════════════════════════ */
 
-/* Tablet landscape — 2 col, left spans top */
+/* Tablet landscape — 2 col, left spans top, revert to scroll */
 @media (max-width: 1100px) {
-  .layout { grid-template-columns: 1fr 1fr; }
-  .col-l { grid-column: 1 / -1; border-right: none; border-bottom: 2px solid var(--border); }
-  .col-c { border-right: 1px solid var(--border); }
-  .col-r { border-left: none; }
+  body { height: auto; overflow: auto; }
+  html { height: auto; overflow: auto; }
+  .layout { grid-template-columns: 1fr 1fr; height: auto; }
+  .col-l { grid-column: 1 / -1; border-right: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
+  .col-c { border-right: 1px solid var(--border); height: auto; overflow: visible; }
+  .col-r { border-left: none; height: auto; overflow: visible; }
   .hdr-center { display: none; }
 }
 
-/* Tablet portrait — single col, top 10 side by side */
+/* Tablet portrait — single col, normal scroll */
 @media (max-width: 768px) {
-  .layout { grid-template-columns: 1fr; }
-  .col-l, .col-c, .col-r { grid-column: 1 / -1; border: none; border-bottom: 2px solid var(--border); }
+  body { height: auto; overflow: auto; }
+  html { height: auto; overflow: auto; }
+  .layout { grid-template-columns: 1fr; height: auto; }
+  .col-l, .col-c, .col-r { grid-column: 1 / -1; border: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
   .lcards { grid-template-columns: repeat(2, 1fr); }
   .hdr-center { display: none; }
 }
@@ -228,9 +273,15 @@ table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--oran
       <div class="logo-dept">Maintenance Department</div>
     </div>
   </div>
-  <div class="hdr-center">Maintenance KPI Dashboard</div>
+  <div class="hdr-shifts">
+    <div class="shift" id="shift-A"><div class="shift-dot"></div><div><span class="shift-name">A</span><span class="shift-crew">Link · Green · Gilmer · Nakhle</span></div></div>
+    <div class="shift" id="shift-B"><div class="shift-dot"></div><div><span class="shift-name">B</span><span class="shift-crew">Doss · Halstead · Tofano</span></div></div>
+    <div class="shift" id="shift-C"><div class="shift-dot"></div><div><span class="shift-name">C</span><span class="shift-crew">Moreno · Richard · Hall · Webb</span></div></div>
+    <div class="shift" id="shift-D"><div class="shift-dot"></div><div><span class="shift-name">D</span><span class="shift-crew">Beasley · Adkins · Waldron · Lyne</span></div></div>
+  </div>
   <div class="hdr-right">
     <div class="hdr-clock-row">
+      <div class="live-dot"></div>
       <div id="hdr-clock" class="hdr-date">--:-- --</div>
       <div id="hdr-day" class="hdr-src"></div>
     </div>
@@ -239,7 +290,6 @@ table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--oran
       <span id="wx-temp">--°F</span>
       <span id="wx-desc" class="hdr-src">Roanoke, VA</span>
     </div>
-    <div class="hdr-src">PMWare CMMS &nbsp;|&nbsp; Planner: C. Zahner</div>
   </div>
 </header>
 
@@ -531,13 +581,34 @@ table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--oran
 
 </div><!-- /layout -->
 
+  <div class="shift" id="shift-B"><div class="shift-dot"></div><div><div style="font-weight:700;">B-Shift</div><div class="shift-names">Doss · Halstead · Tofano</div></div></div>
+  <div class="shift" id="shift-C"><div class="shift-dot"></div><div><div style="font-weight:700;">C-Shift</div><div class="shift-names">Moreno · Richard · Hall · Webb</div></div></div>
+  <div class="shift" id="shift-D"><div class="shift-dot"></div><div><div style="font-weight:700;">D-Shift</div><div class="shift-names">Beasley · Adkins · Waldron · Lyne</div></div></div>
+</div>
 <footer class="ftr">
   <span>Cardinal IG Roanoke &nbsp;|&nbsp; Maintenance Department &nbsp;|&nbsp; PMWare CMMS</span>
-  <span>Report Date: 02/20/2026 &nbsp;|&nbsp; Planner: C. Zahner</span>
+  <span>Report Date: 02/20/2026</span>
 </footer>
 
 <script>
-// ── CLOCK ──
+// ── CLOCK + SHIFT ──
+// 12-hour rotating schedule: A=days 0-1, B=days 2-3, C=days 4-5, D=days 6-7
+// Shifts: 6AM-6PM = day rotation, 6PM-6AM = night rotation
+// Simplified: we use a known anchor date and rotation pattern
+// A: 6AM Mon Jan 6 2025 start (verified Roanoke pattern)
+// Each shift works 12hrs on, 12hrs off, 4-day cycles
+function getActiveShift(now) {
+  // 2-2-3 schedule. Confirmed anchor: Feb 20 2026 6AM = C-day, 6PM = D-night
+  // 20-slot repeating cycle (each slot = 12 hrs, day=6AM-6PM, night=6PM-6AM)
+  // C/D team: 3 on, 2 off, 2 on, 3 off  |  A/B team: inverse
+  var anchor = new Date('2026-02-20T06:00:00');
+  var msPerSlot = 12 * 60 * 60 * 1000;
+  var cycle = ['C','D','C','D','C','D','A','B','A','B','C','D','C','D','A','B','A','B','A','B'];
+  var slots = Math.floor((now - anchor) / msPerSlot);
+  var idx = ((slots % 20) + 20) % 20;
+  return cycle[idx];
+}
+
 function updateClock() {
   var now = new Date();
   var h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
@@ -549,9 +620,61 @@ function updateClock() {
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   document.getElementById('hdr-day').textContent =
     days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ' ' + now.getFullYear();
+
+  // Update active shift
+  var active = getActiveShift(now);
+  ['A','B','C','D'].forEach(function(s) {
+    var el = document.getElementById('shift-' + s);
+    if (el) {
+      el.classList.toggle('active', s === active);
+    }
+  });
 }
 setInterval(updateClock, 1000);
 updateClock();
+
+// ── COUNTER ANIMATION ──
+function animateCounter(el, target, isPercent, decimals) {
+  var start = 0;
+  var duration = 1200;
+  var startTime = null;
+  // Extract suffix (hrs, etc) from element
+  var suffix = el.querySelector('span') ? el.innerHTML.replace(/[\d.]+/, '') : '';
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    var progress = Math.min((timestamp - startTime) / duration, 1);
+    var ease = 1 - Math.pow(1 - progress, 3);
+    var current = start + (target - start) * ease;
+    var display = decimals ? current.toFixed(1) : Math.floor(current);
+    if (suffix) {
+      el.innerHTML = display + suffix;
+    } else {
+      el.textContent = display + (isPercent ? '%' : '');
+    }
+    if (progress < 1) requestAnimationFrame(step);
+    else {
+      if (suffix) el.innerHTML = target + suffix;
+      else el.textContent = target + (isPercent ? '%' : '');
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+window.addEventListener('load', function() {
+  // Animate each .cval
+  var counters = [
+    {id: null, sel: '.col-l .pair:nth-child(2) .cell:nth-child(1) .cval', val: 717, pct: false, dec: false},
+    {id: null, sel: '.col-l .pair:nth-child(2) .cell:nth-child(2) .cval', val: 699, pct: false, dec: false},
+    {id: null, sel: '.col-l .pair:nth-child(3) .cell:nth-child(1) .cval', val: 78.8, pct: true, dec: true},
+    {id: null, sel: '.col-l .pair:nth-child(3) .cell:nth-child(2) .cval', val: 80.1, pct: true, dec: true},
+    {id: null, sel: '.col-l .pair:nth-child(4) .cell:nth-child(1) .cval', val: 19.5, pct: true, dec: true},
+    {id: null, sel: '.col-l .pair:nth-child(4) .cell:nth-child(2) .cval', val: 16.6, pct: true, dec: true},
+  ];
+  counters.forEach(function(c) {
+    var el = document.querySelector(c.sel);
+    if (el) animateCounter(el, c.val, c.pct, c.dec);
+  });
+});
 
 // ── WEATHER (Open-Meteo, free, no API key) ──
 fetch('https://api.open-meteo.com/v1/forecast?latitude=37.2710&longitude=-79.9414&current=temperature_2m,weathercode,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
