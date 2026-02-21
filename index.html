@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,13 +31,11 @@ html { background: var(--bg); height: 100%; overflow: hidden; }
 html::before {
   content: '';
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 body > * { position: relative; z-index: 1; }
 
-/* ── CUSTOM SCROLLBARS ── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -53,7 +50,6 @@ body {
   overflow: hidden;
 }
 
-/* ── TAG ── */
 .tag {
   font-family: 'Share Tech Mono', monospace;
   font-size: clamp(8px, 0.75vw, 10px);
@@ -66,7 +62,6 @@ body {
 }
 .tag .hl { color: var(--orange); }
 
-/* ── HEADER ── */
 .hdr {
   background: var(--surface);
   border-bottom: 3px solid var(--red);
@@ -96,29 +91,47 @@ body {
 .hdr-src  { font-size: clamp(8px,0.75vw,11px); color: var(--muted); }
 #wx-temp  { font-family: 'Share Tech Mono', monospace; font-size: clamp(11px,1vw,13px); color: var(--orange); }
 
-/* ── 3-COLUMN LAYOUT ── */
+/* Shift tabs in header */
+.hdr-shifts { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.shift { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 2px; font-family: 'Share Tech Mono', monospace; color: var(--muted); transition: all 0.3s; background: rgba(255,255,255,0.02); }
+.shift.active { border-color: var(--green); background: rgba(34,197,94,0.08); }
+.shift-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: all 0.3s; }
+.shift.active .shift-dot { background: var(--green); animation: pulse 2s infinite; }
+.shift-name { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.4vw,18px); color: var(--dim); line-height: 1; transition: color 0.3s; }
+.shift.active .shift-name { color: var(--green); }
+.shift-crew { font-size: clamp(7px,0.6vw,9px); color: var(--muted); letter-spacing: 0.5px; display: block; margin-top: 1px; transition: color 0.3s; }
+.shift.active .shift-crew { color: var(--green); opacity: 0.8; }
+
+/* Page nav */
+.page-nav {
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
+  display: flex; gap: 0;
+  padding: 0 20px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.page-nav a {
+  color: var(--muted); text-decoration: none;
+  padding: 8px 16px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.page-nav a:hover { color: var(--text); }
+.page-nav a.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+/* 3-col layout */
 .layout {
   display: grid;
   grid-template-columns: minmax(0,300px) minmax(0,1fr) minmax(0,360px);
-  height: calc(100vh - 60px); /* fill viewport minus header */
+  height: calc(100vh - 88px);
 }
-.col-l {
-  border-right: 1px solid var(--border);
-  border-left: 3px solid var(--red);
-  overflow-y: auto;
-  height: 100%;
-}
-.col-c {
-  overflow-y: auto;
-  height: 100%;
-}
-.col-r {
-  border-left: 1px solid var(--border);
-  overflow-y: auto;
-  height: 100%;
-}
+.col-l { border-right: 1px solid var(--border); border-left: 3px solid var(--red); overflow-y: auto; height: 100%; }
+.col-c { overflow-y: auto; height: 100%; }
+.col-r { border-left: 1px solid var(--border); overflow-y: auto; height: 100%; }
 
-/* ── STAT PAIRS ── */
+/* Stat pairs */
 .pair { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
 .cell { padding: clamp(6px,0.7vw,10px) clamp(8px,1vw,16px); }
 .cell + .cell { border-left: 1px solid var(--border); }
@@ -131,7 +144,7 @@ body {
 .trend.up-bad   { color: var(--danger); }
 .trend.down-good { color: var(--green); }
 
-/* ── MIX BARS ── */
+/* Mix bars */
 .leg { display: flex; gap: 10px; padding: 5px clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
 .leg-i { display: flex; align-items: center; gap: 5px; font-size: clamp(8px,0.7vw,11px); color: var(--dim); }
 .leg-d { width: 9px; height: 9px; border-radius: 1px; flex-shrink: 0; }
@@ -141,7 +154,7 @@ body {
 .mix-s  { height: 100%; display: flex; align-items: center; justify-content: center; font-size: clamp(7px,0.65vw,9px); font-weight: 700; color: rgba(0,0,0,0.7); white-space: nowrap; overflow: hidden; }
 .mix-t  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 38px; text-align: right; }
 
-/* ── TARGET BARS ── */
+/* Target bars */
 .tgt { padding: clamp(6px,0.7vw,10px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); }
 .tgt-h { font-size: clamp(8px,0.7vw,11px); font-weight: 700; color: var(--dim); margin-bottom: 7px; }
 .tr { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
@@ -153,14 +166,14 @@ body {
 .tr-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 86px; text-align: right; }
 .tgt-n { font-size: clamp(8px,0.65vw,10px); color: var(--muted); margin-top: 4px; font-family: 'Share Tech Mono', monospace; }
 
-/* ── ALERTS ── */
+/* Alerts */
 .alert { padding: clamp(6px,0.7vw,10px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); border-left: 4px solid var(--danger); background: rgba(200,16,46,0.07); font-size: clamp(9px,0.8vw,12px); line-height: 1.6; }
 .alert.warn { border-left-color: var(--yellow); background: rgba(245,158,11,0.05); }
 .a-title { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.65vw,9px); letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-bottom: 3px; }
 .er { color: var(--danger); font-family: 'Share Tech Mono', monospace; font-weight: 700; }
 .ey { color: var(--yellow); font-family: 'Share Tech Mono', monospace; font-weight: 700; }
 
-/* ── TOP 10 ── */
+/* Top 10 */
 .t10g { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
 .t10p + .t10p { border-left: 1px solid var(--border); }
 table.t10 { width: 100%; border-collapse: collapse; }
@@ -182,7 +195,7 @@ td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11p
 .bb { height: 5px; background: var(--border); border-radius: 1px; }
 .bf { height: 100%; border-radius: 1px; }
 
-/* ── LINE CARDS ── */
+/* Line cards */
 .lcards { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--border); }
 .lcard  { padding: clamp(5px,0.6vw,10px) clamp(6px,0.8vw,14px); border-right: 1px solid var(--border); }
 .lcard:last-child { border-right: none; }
@@ -193,7 +206,7 @@ td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11p
 .lc-l { font-size: clamp(7px,0.65vw,10px); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); }
 .lc-v { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.85vw,13px); font-weight: 700; }
 
-/* ── MTBF ── */
+/* MTBF */
 .mtbf { padding: clamp(6px,0.7vw,10px) clamp(8px,1vw,16px); }
 .mbr  { display: grid; grid-template-columns: 32px 1fr 48px; align-items: center; gap: 6px; margin-bottom: 5px; }
 .mbr:last-child { margin-bottom: 0; }
@@ -202,7 +215,7 @@ td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11p
 .mb-f  { height: 100%; display: flex; align-items: center; padding-left: 6px; font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(8px,0.7vw,11px); color: rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; }
 .mb-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-align: right; }
 
-/* ── DETAIL TABLES ── */
+/* Detail tables */
 .lhdr { padding: clamp(4px,0.5vw,7px) clamp(8px,1vw,16px) 2px; border-top: 1px solid var(--border); display: flex; align-items: baseline; gap: 8px; }
 .lhdr.first { border-top: none; }
 .lh-n { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,18px); }
@@ -214,7 +227,6 @@ table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--oran
 table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); transition: background 0.15s; }
 .bdg { display: inline-block; padding: 1px 5px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); border-radius: 2px; font-weight: 700; white-space: nowrap; }
 .partial-badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); letter-spacing: 1.5px; color: var(--orange); border: 1px dashed var(--orange); padding: 1px 5px; border-radius: 2px; margin-left: 5px; opacity: 0.8; vertical-align: middle; }
-.last-refreshed { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--muted); margin-top: 2px; }
 .bg { background: rgba(34,197,94,0.15);  color: var(--green); }
 .bw { background: rgba(245,158,11,0.15); color: var(--yellow); }
 .br { background: rgba(239,68,68,0.15);  color: var(--danger); }
@@ -223,24 +235,128 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
 @keyframes countUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 .cval { animation: countUp 0.6s ease-out both; }
 
-/* ── FOOTER ── */
+/* ── SHIFT PERFORMANCE PAGE ── */
+#shift-page { display: none; }
+.sp-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: calc(100vh - 88px);
+}
+.sp-col {
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  height: 100%;
+}
+.sp-col:last-child { border-right: none; }
+.sp-col-hdr {
+  padding: clamp(8px,0.8vw,14px) clamp(8px,1vw,16px);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky; top: 0; z-index: 10;
+}
+.sp-shift-letter {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(36px,5vw,56px);
+  line-height: 1;
+}
+.sp-ytd {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px,0.7vw,10px);
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.sp-ytd-val {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(16px,2vw,24px);
+  line-height: 1;
+}
+.sp-body { padding: clamp(6px,0.7vw,12px) clamp(8px,1vw,16px); }
+.sp-stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(39,45,64,0.6);
+}
+.sp-stat-row:last-child { border-bottom: none; }
+.sp-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.sp-stat-val { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(18px,2vw,26px); }
+.sp-bar-section { padding: 10px clamp(8px,1vw,16px); border-top: 1px solid var(--border); }
+.sp-bar-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.sp-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.sp-bar-row:last-child { margin-bottom: 0; }
+.sp-bar-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--dim); width: 24px; }
+.sp-bar-bg { flex: 1; height: 12px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.sp-bar-f  { height: 100%; border-radius: 1px; }
+.sp-bar-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 32px; text-align: right; }
+
+/* Footer */
 .ftr { border-top: 1px solid var(--border); padding: clamp(4px,0.5vw,8px) clamp(10px,1.2vw,20px); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--muted); background: var(--surface); }
-.hdr-shifts { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.shift { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 2px; font-family: 'Share Tech Mono', monospace; color: var(--muted); transition: all 0.3s; background: rgba(255,255,255,0.02); }
-.shift.active { border-color: var(--green); background: rgba(34,197,94,0.08); }
-.shift-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: all 0.3s; }
-.shift.active .shift-dot { background: var(--green); animation: pulse 2s infinite; }
-.shift-name { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.4vw,18px); color: var(--dim); line-height: 1; transition: color 0.3s; }
-.shift.active .shift-name { color: var(--green); }
-.shift-crew { font-size: clamp(7px,0.6vw,9px); color: var(--muted); letter-spacing: 0.5px; display: block; margin-top: 1px; transition: color 0.3s; }
-.shift.active .shift-crew { color: var(--green); opacity: 0.8; }
+
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
-/* ══════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-══════════════════════════════════════════ */
+/* Ticker */
+.ticker-outer {
+  background: rgba(34,197,94,0.04);
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  display: flex;
+  align-items: stretch;
+  height: 36px;
+}
+.ticker-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 16px 0 14px;
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+  background: #0f1219;
+  white-space: nowrap;
+}
+.ticker-wrap {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: ticker-scroll 80s linear infinite;
+}
+.ticker-outer:hover .ticker-track { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 40px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(11px, 1vw, 13px);
+  color: var(--dim);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.ticker-item .ti-cat {
+  font-size: clamp(9px, 0.8vw, 11px);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 2px; font-weight: 700;
+  flex-shrink: 0;
+}
+.ti-cat.add      { background: rgba(34,197,94,0.15);  color: var(--green); }
+.ti-cat.info     { background: rgba(56,189,248,0.15);  color: var(--blue); }
+.ti-cat.warn     { background: rgba(245,158,11,0.15);  color: var(--yellow); }
+.ti-cat.crit     { background: rgba(239,68,68,0.15);   color: var(--danger); }
+.ti-cat.kpi-good { background: rgba(34,197,94,0.15);   color: var(--green);  font-size: clamp(10px,0.9vw,12px); }
+.ti-cat.kpi-bad  { background: rgba(239,68,68,0.15);   color: var(--danger); font-size: clamp(10px,0.9vw,12px); }
+.ticker-sep { color: var(--border); padding: 0 2px; font-size: 14px; flex-shrink: 0; }
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+#global-ticker { display: none; }
+body.shift-page-active #global-ticker { display: flex; }
 
-/* Tablet landscape — 2 col, left spans top, revert to scroll */
+/* Responsive */
 @media (max-width: 1100px) {
   body { height: auto; overflow: auto; }
   html { height: auto; overflow: auto; }
@@ -249,9 +365,9 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
   .col-c { border-right: 1px solid var(--border); height: auto; overflow: visible; }
   .col-r { border-left: none; height: auto; overflow: visible; }
   .hdr-center { display: none; }
+  .sp-layout { grid-template-columns: 1fr 1fr; height: auto; }
+  .sp-col { height: auto; overflow: visible; }
 }
-
-/* Tablet portrait — single col, normal scroll */
 @media (max-width: 768px) {
   body { height: auto; overflow: auto; }
   html { height: auto; overflow: auto; }
@@ -259,23 +375,18 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
   .col-l, .col-c, .col-r { grid-column: 1 / -1; border: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
   .lcards { grid-template-columns: repeat(2, 1fr); }
   .hdr-center { display: none; }
+  .sp-layout { grid-template-columns: 1fr; height: auto; }
 }
-
-/* Large phone */
 @media (max-width: 600px) {
   .t10g { grid-template-columns: 1fr; }
   .t10p + .t10p { border-left: none; border-top: 1px solid var(--border); }
   .lcards { grid-template-columns: 1fr 1fr; }
 }
-
-/* Phone */
 @media (max-width: 420px) {
   .hdr-right { display: none; }
   .pair { grid-template-columns: 1fr 1fr; }
   .mbr { grid-template-columns: 26px 1fr 42px; }
-  /* hide less critical table columns on phones */
   table.t10 .bc, table.t10 th:last-child { display: none; }
-  .ftr span:last-child { display: none; }
 }
 </style>
 </head>
@@ -307,15 +418,88 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
     <div class="hdr-weather-row">
       <span id="wx-icon">🌡️</span>
       <span id="wx-temp">--°F</span>
-      <span id="wx-desc" class="hdr-src">Roanoke, VA</span>
+      <span id="wx-desc" class="hdr-src">Vinton, VA</span>
     </div>
   </div>
 </header>
 
-<!-- ═══════════════════════════ MAIN LAYOUT ═══════════════════════════ -->
+<!-- UPDATES TICKER — shown only on Shift Performance page -->
+<div class="ticker-outer" id="global-ticker">
+  <div class="ticker-label">
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--orange);">UPDATES</span>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">PMs · KPIs · Alerts</span>
+  </div>
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Muttin Master — Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Furnace Water Filter — Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Manual Tapper — Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Silicone Pump — Weekly Inspection</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG Conveyor Inspection</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> QC Bender — Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Lami Table — Bi-Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG2 Washer — Bi-Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-good">↑ IMPROVING</span> Planned Work Rate — Jan 78.8% → Feb 80.1% &nbsp;+1.3%</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> Breakdown % of WOs — Jan 19.5% → Feb 16.6% &nbsp;−2.9%</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.5% → Feb 36.5% &nbsp;over 35% target</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 VWASH — 48h 30m downtime in Feb across 4 repairs — not in Jan top 10</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 SQUID — Repeat offender — #1 Jan, top 10 Feb — avg failure every 73h</span>
+      <span class="ticker-sep">·</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Muttin Master — Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Furnace Water Filter — Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Manual Tapper — Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Silicone Pump — Weekly Inspection</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG Conveyor Inspection</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> QC Bender — Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Lami Table — Bi-Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG2 Washer — Bi-Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-good">↑ IMPROVING</span> Planned Work Rate — Jan 78.8% → Feb 80.1% &nbsp;+1.3%</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> Breakdown % of WOs — Jan 19.5% → Feb 16.6% &nbsp;−2.9%</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.5% → Feb 36.5% &nbsp;over 35% target</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 VWASH — 48h 30m downtime in Feb across 4 repairs — not in Jan top 10</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 SQUID — Repeat offender — #1 Jan, top 10 Feb — avg failure every 73h</span>
+      <span class="ticker-sep">·</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE NAV -->
+<nav class="page-nav">
+  <a href="#" class="active" id="nav-kpi" onclick="showPage('kpi',this);return false;">KPI Dashboard</a>
+  <a href="#" id="nav-shift" onclick="showPage('shift',this);return false;">Shift Performance</a>
+</nav>
+
+
+
+<div id="kpi-page">
 <div class="layout">
 
-  <!-- ══════ LEFT COLUMN ══════ -->
+  <!-- LEFT COLUMN -->
   <div class="col-l">
     <div class="tag">Plant Overview — YTD 2026</div>
     <div class="pair">
@@ -327,7 +511,7 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
       <div class="cell">
         <div class="ctag">Feb — Work Orders <span class="partial-badge">PARTIAL</span></div>
         <div class="cval">699</div>
-        <div class="csub">Thru 02/20</div>
+        <div class="csub">Thru 02/20 &nbsp;<span class="trend" style="color:var(--dim);">↓ −2.5%</span></div>
       </div>
     </div>
     <div class="pair">
@@ -339,7 +523,7 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
       <div class="cell">
         <div class="ctag">Feb — Planned Work <span class="partial-badge">PARTIAL</span></div>
         <div class="cval" style="color:var(--green);">80.1%</div>
-        <div class="csub">560 of 699 scheduled <span class="trend down-good">↑ +1.3%</span></div>
+        <div class="csub">560 of 699 &nbsp;<span class="trend down-good">↑ +1.3% IMPROVING</span></div>
       </div>
     </div>
     <div class="pair">
@@ -350,8 +534,8 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
       </div>
       <div class="cell">
         <div class="ctag">Feb — Breakdowns <span class="partial-badge">PARTIAL</span></div>
-        <div class="cval" style="color:var(--yellow);">16.6%</div>
-        <div class="csub">116 repairs &nbsp;|&nbsp; 221 hrs <span class="trend down-good">↓ −2.9%</span></div>
+        <div class="cval" style="color:var(--green);">16.6%</div>
+        <div class="csub">116 repairs &nbsp;|&nbsp; 221 hrs &nbsp;<span class="trend down-good">↓ −2.9% IMPROVING</span></div>
       </div>
     </div>
     <div class="pair">
@@ -363,7 +547,7 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
       <div class="cell">
         <div class="ctag">Feb — Total Labor <span class="partial-badge">PARTIAL</span></div>
         <div class="cval">605<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
-        <div class="csub">PM 352h &nbsp;|&nbsp; BD 221h &nbsp;|&nbsp; Other 27h</div>
+        <div class="csub">PM 352h &nbsp;|&nbsp; BD 221h &nbsp;<span class="trend up-bad">↑ BD hrs ▲</span></div>
       </div>
     </div>
 
@@ -424,8 +608,7 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
     </div>
   </div><!-- /col-l -->
 
-
-  <!-- ══════ CENTER COLUMN ══════ -->
+  <!-- CENTER COLUMN -->
   <div class="col-c">
     <div class="t10g">
       <div class="t10p">
@@ -519,11 +702,9 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
     </div>
   </div><!-- /col-c -->
 
-
-  <!-- ══════ RIGHT COLUMN ══════ -->
+  <!-- RIGHT COLUMN -->
   <div class="col-r">
     <div class="tag">Equipment Repair Detail — January 2026 <span class="hl">All IG Lines</span></div>
-
     <div class="lhdr first">
       <span class="lh-n" style="color:var(--blue);">IG1</span>
       <span class="lh-h">793 line hours</span>
@@ -539,7 +720,6 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
         <tr><td><strong>IG1 Total</strong></td><td class="m"><strong>12</strong></td><td class="m"><strong>66h 0m</strong></td><td><span class="bdg bw">1h 55m</span></td></tr>
       </tbody>
     </table>
-
     <div class="lhdr">
       <span class="lh-n" style="color:var(--green);">IG2</span>
       <span class="lh-h">432 line hours</span>
@@ -553,7 +733,6 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
         <tr><td><strong>IG2 Total</strong></td><td class="m"><strong>4</strong></td><td class="m"><strong>108h 0m</strong></td><td><span class="bdg bg">0h 16m</span></td></tr>
       </tbody>
     </table>
-
     <div class="lhdr">
       <span class="lh-n" style="color:var(--danger);">IG3</span>
       <span class="lh-h">881 line hours</span>
@@ -569,7 +748,6 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
         <tr><td><strong>IG3 Total</strong></td><td class="m"><strong>17</strong></td><td class="m" style="color:var(--danger);"><strong>51h 0m</strong></td><td><span class="bdg bw">1h 58m</span></td></tr>
       </tbody>
     </table>
-
     <div class="lhdr">
       <span class="lh-n" style="color:var(--yellow);">IG4</span>
       <span class="lh-h">861 line hours</span>
@@ -589,7 +767,6 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
         <tr><td><strong>IG4 Total</strong></td><td class="m"><strong>17</strong></td><td class="m"><strong>50h 0m</strong></td><td><span class="bdg bg">1h 35m</span></td></tr>
       </tbody>
     </table>
-
     <div class="bdg-leg">
       <span class="lbl">Repair Time:</span>
       <span class="bdg bg">Under 1 hr — Good</span>
@@ -599,27 +776,193 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
   </div><!-- /col-r -->
 
 </div><!-- /layout -->
+</div><!-- /kpi-page -->
 
-  <div class="shift" id="shift-B"><div class="shift-dot"></div><div><div style="font-weight:700;">B-Shift</div><div class="shift-names">Doss · Halstead · Tofano</div></div></div>
-  <div class="shift" id="shift-C"><div class="shift-dot"></div><div><div style="font-weight:700;">C-Shift</div><div class="shift-names">Moreno · Richard · Hall · Webb</div></div></div>
-  <div class="shift" id="shift-D"><div class="shift-dot"></div><div><div style="font-weight:700;">D-Shift</div><div class="shift-names">Beasley · Adkins · Waldron · Lyne</div></div></div>
-</div>
+<!-- ═══════════════════════════ SHIFT PERFORMANCE PAGE ═══════════════════════════ -->
+<div id="shift-page">
+
+  <div class="sp-layout">
+
+    <!-- A Shift -->
+    <div class="sp-col" style="border-left:3px solid var(--blue);">
+      <div class="sp-col-hdr">
+        <div class="sp-shift-letter" style="color:var(--blue);">A</div>
+        <div class="sp-ytd">YTD Labor</div>
+        <div class="sp-ytd-val" style="color:var(--blue);">474h</div>
+      </div>
+      <div class="sp-body">
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">January</span>
+          <span class="sp-stat-val" style="color:var(--green);">268h</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">February</span>
+          <span class="sp-stat-val" style="color:var(--blue);">206h</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">Techs on Shift</span>
+          <span class="sp-stat-val" style="color:var(--dim);">4</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">Avg / Tech YTD</span>
+          <span class="sp-stat-val" style="color:var(--dim);">118h</span>
+        </div>
+      </div>
+      <div class="sp-bar-section">
+        <div class="sp-bar-lbl">Monthly Labor</div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo">JAN</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:100%;background:var(--blue);opacity:0.7;"></div></div>
+          <div class="sp-bar-v" style="color:var(--blue);">268h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo">FEB</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:76.8%;background:var(--blue);opacity:0.4;"></div></div>
+          <div class="sp-bar-v" style="color:var(--dim);">206h</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B Shift -->
+    <div class="sp-col" style="border-left:3px solid var(--green);">
+      <div class="sp-col-hdr">
+        <div class="sp-shift-letter" style="color:var(--green);">B</div>
+        <div class="sp-ytd">YTD Labor</div>
+        <div class="sp-ytd-val" style="color:var(--green);">272h</div>
+      </div>
+      <div class="sp-body">
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">January</span>
+          <span class="sp-stat-val" style="color:var(--green);">111h</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">February</span>
+          <span class="sp-stat-val" style="color:var(--green);">160h</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">Techs on Shift</span>
+          <span class="sp-stat-val" style="color:var(--dim);">3</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">Avg / Tech YTD</span>
+          <span class="sp-stat-val" style="color:var(--dim);">91h</span>
+        </div>
+      </div>
+      <div class="sp-bar-section">
+        <div class="sp-bar-lbl">Monthly Labor</div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo">JAN</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:41.4%;background:var(--green);opacity:0.7;"></div></div>
+          <div class="sp-bar-v" style="color:var(--dim);">111h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo">FEB</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:59.7%;background:var(--green);opacity:0.4;"></div></div>
+          <div class="sp-bar-v" style="color:var(--green);">160h</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C Shift -->
+    <div class="sp-col" style="border-left:3px solid var(--yellow);">
+      <div class="sp-col-hdr">
+        <div class="sp-shift-letter" style="color:var(--yellow);">C</div>
+        <div class="sp-ytd">YTD Labor</div>
+        <div class="sp-ytd-val" style="color:var(--yellow);">143h</div>
+      </div>
+      <div class="sp-body">
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">January</span>
+          <span class="sp-stat-val" style="color:var(--green);">105h</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">February</span>
+          <span class="sp-stat-val" style="color:var(--yellow);">38h</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">Techs on Shift</span>
+          <span class="sp-stat-val" style="color:var(--dim);">4</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">Avg / Tech YTD</span>
+          <span class="sp-stat-val" style="color:var(--dim);">36h</span>
+        </div>
+      </div>
+      <div class="sp-bar-section">
+        <div class="sp-bar-lbl">Monthly Labor</div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo">JAN</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:39.2%;background:var(--yellow);opacity:0.7;"></div></div>
+          <div class="sp-bar-v" style="color:var(--dim);">105h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo">FEB</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:14.2%;background:var(--yellow);opacity:0.4;"></div></div>
+          <div class="sp-bar-v" style="color:var(--yellow);">38h</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D Shift -->
+    <div class="sp-col" style="border-left:3px solid #ff6b84;">
+      <div class="sp-col-hdr">
+        <div class="sp-shift-letter" style="color:#ff6b84;">D</div>
+        <div class="sp-ytd">YTD Labor</div>
+        <div class="sp-ytd-val" style="color:#ff6b84;">167h</div>
+      </div>
+      <div class="sp-body">
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">January</span>
+          <span class="sp-stat-val" style="color:var(--green);">103h</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">February</span>
+          <span class="sp-stat-val" style="color:#ff6b84;">64h</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">Techs on Shift</span>
+          <span class="sp-stat-val" style="color:var(--dim);">4</span>
+        </div>
+        <div class="sp-stat-row">
+          <span class="sp-stat-lbl">Avg / Tech YTD</span>
+          <span class="sp-stat-val" style="color:var(--dim);">42h</span>
+        </div>
+      </div>
+      <div class="sp-bar-section">
+        <div class="sp-bar-lbl">Monthly Labor</div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo">JAN</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:38.4%;background:#ff6b84;opacity:0.7;"></div></div>
+          <div class="sp-bar-v" style="color:var(--dim);">103h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo">FEB</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:23.9%;background:#ff6b84;opacity:0.4;"></div></div>
+          <div class="sp-bar-v" style="color:#ff6b84;">64h</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sp-layout -->
+</div><!-- /shift-page -->
+
 <footer class="ftr">
   <span>Cardinal IG Roanoke &nbsp;|&nbsp; Maintenance Department &nbsp;|&nbsp; PMWare CMMS</span>
   <span>Report Date: 02/20/2026</span>
 </footer>
 
 <script>
-// ── CLOCK + SHIFT ──
-// 12-hour rotating schedule: A=days 0-1, B=days 2-3, C=days 4-5, D=days 6-7
-// Shifts: 6AM-6PM = day rotation, 6PM-6AM = night rotation
-// Simplified: we use a known anchor date and rotation pattern
-// A: 6AM Mon Jan 6 2025 start (verified Roanoke pattern)
-// Each shift works 12hrs on, 12hrs off, 4-day cycles
+// Page switching
+function showPage(page, el) {
+  document.getElementById('kpi-page').style.display   = page === 'kpi'   ? 'block' : 'none';
+  document.getElementById('shift-page').style.display = page === 'shift' ? 'block' : 'none';
+  document.querySelectorAll('.page-nav a').forEach(function(a){ a.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  document.body.classList.toggle('shift-page-active', page === 'shift');
+}
+
+// Active shift detection — 2-2-3 rotating schedule
 function getActiveShift(now) {
-  // 2-2-3 schedule. Confirmed anchor: Feb 20 2026 6AM = C-day, 6PM = D-night
-  // 20-slot repeating cycle (each slot = 12 hrs, day=6AM-6PM, night=6PM-6AM)
-  // C/D team: 3 on, 2 off, 2 on, 3 off  |  A/B team: inverse
   var anchor = new Date('2026-02-20T06:00:00');
   var msPerSlot = 12 * 60 * 60 * 1000;
   var cycle = ['C','D','C','D','C','D','A','B','A','B','C','D','C','D','A','B','A','B','A','B'];
@@ -628,6 +971,7 @@ function getActiveShift(now) {
   return cycle[idx];
 }
 
+// Clock + shift updater
 function updateClock() {
   var now = new Date();
   var h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
@@ -637,40 +981,31 @@ function updateClock() {
     h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s + ' ' + ampm;
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var now2 = new Date();
   document.getElementById('hdr-day').textContent =
-    days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ' ' + now.getFullYear();
-
-  // Update active shift
-  var active = getActiveShift(now);
+    days[now2.getDay()] + ', ' + months[now2.getMonth()] + ' ' + now2.getDate() + ' ' + now2.getFullYear();
+  var active = getActiveShift(now2);
   ['A','B','C','D'].forEach(function(s) {
     var el = document.getElementById('shift-' + s);
-    if (el) {
-      el.classList.toggle('active', s === active);
-    }
+    if (el) el.classList.toggle('active', s === active);
   });
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// ── COUNTER ANIMATION ──
+// Counter animation
 function animateCounter(el, target, isPercent, decimals) {
-  var start = 0;
-  var duration = 1200;
-  var startTime = null;
-  // Extract suffix (hrs, etc) from element
-  var suffix = el.querySelector('span') ? el.innerHTML.replace(/[\d.]+/, '') : '';
-  function step(timestamp) {
-    if (!startTime) startTime = timestamp;
-    var progress = Math.min((timestamp - startTime) / duration, 1);
-    var ease = 1 - Math.pow(1 - progress, 3);
-    var current = start + (target - start) * ease;
-    var display = decimals ? current.toFixed(1) : Math.floor(current);
-    if (suffix) {
-      el.innerHTML = display + suffix;
-    } else {
-      el.textContent = display + (isPercent ? '%' : '');
-    }
-    if (progress < 1) requestAnimationFrame(step);
+  var start = 0, duration = 1200, startTime = null;
+  var suffix = el.querySelector && el.querySelector('span') ? el.innerHTML.replace(/[\d.]+/, '') : '';
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    var p = Math.min((ts - startTime) / duration, 1);
+    var ease = 1 - Math.pow(1 - p, 3);
+    var cur = start + (target - start) * ease;
+    var display = decimals ? cur.toFixed(1) : Math.floor(cur);
+    if (suffix) el.innerHTML = display + suffix;
+    else el.textContent = display + (isPercent ? '%' : '');
+    if (p < 1) requestAnimationFrame(step);
     else {
       if (suffix) el.innerHTML = target + suffix;
       else el.textContent = target + (isPercent ? '%' : '');
@@ -678,16 +1013,14 @@ function animateCounter(el, target, isPercent, decimals) {
   }
   requestAnimationFrame(step);
 }
-
 window.addEventListener('load', function() {
-  // Animate each .cval
   var counters = [
-    {id: null, sel: '.col-l .pair:nth-child(2) .cell:nth-child(1) .cval', val: 717, pct: false, dec: false},
-    {id: null, sel: '.col-l .pair:nth-child(2) .cell:nth-child(2) .cval', val: 699, pct: false, dec: false},
-    {id: null, sel: '.col-l .pair:nth-child(3) .cell:nth-child(1) .cval', val: 78.8, pct: true, dec: true},
-    {id: null, sel: '.col-l .pair:nth-child(3) .cell:nth-child(2) .cval', val: 80.1, pct: true, dec: true},
-    {id: null, sel: '.col-l .pair:nth-child(4) .cell:nth-child(1) .cval', val: 19.5, pct: true, dec: true},
-    {id: null, sel: '.col-l .pair:nth-child(4) .cell:nth-child(2) .cval', val: 16.6, pct: true, dec: true},
+    {sel: '.col-l .pair:nth-child(2) .cell:nth-child(1) .cval', val: 717, pct: false, dec: false},
+    {sel: '.col-l .pair:nth-child(2) .cell:nth-child(2) .cval', val: 699, pct: false, dec: false},
+    {sel: '.col-l .pair:nth-child(3) .cell:nth-child(1) .cval', val: 78.8, pct: true, dec: true},
+    {sel: '.col-l .pair:nth-child(3) .cell:nth-child(2) .cval', val: 80.1, pct: true, dec: true},
+    {sel: '.col-l .pair:nth-child(4) .cell:nth-child(1) .cval', val: 19.5, pct: true, dec: true},
+    {sel: '.col-l .pair:nth-child(4) .cell:nth-child(2) .cval', val: 16.6, pct: true, dec: true},
   ];
   counters.forEach(function(c) {
     var el = document.querySelector(c.sel);
@@ -695,21 +1028,20 @@ window.addEventListener('load', function() {
   });
 });
 
-// ── WEATHER (Open-Meteo, free, no API key) ──
-fetch('https://api.open-meteo.com/v1/forecast?latitude=37.2710&longitude=-79.9414&current=temperature_2m,weathercode,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
+// Weather — Vinton, VA (lat 37.0887, lon -79.8981)
+fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0887&longitude=-79.8981&current=temperature_2m,weather_code,weathercode,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
   .then(function(r){ return r.json(); })
   .then(function(d){
     var temp = Math.round(d.current.temperature_2m);
-    var code = d.current.weathercode;
+    var code = d.current.weather_code !== undefined ? d.current.weather_code : d.current.weathercode;
     var wind = Math.round(d.current.windspeed_10m);
     var icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'🌨️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
     var descs = {0:'Clear',1:'Mostly Clear',2:'Partly Cloudy',3:'Overcast',45:'Foggy',48:'Foggy',51:'Light Drizzle',53:'Drizzle',55:'Heavy Drizzle',61:'Light Rain',63:'Rain',65:'Heavy Rain',71:'Light Snow',73:'Snow',75:'Heavy Snow',80:'Showers',81:'Showers',82:'Heavy Showers',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'};
     document.getElementById('wx-icon').textContent = icons[code] || '🌡️';
     document.getElementById('wx-temp').textContent = temp + '°F';
-    document.getElementById('wx-desc').textContent = (descs[code] || 'Roanoke, VA') + ' · ' + wind + ' mph';
+    document.getElementById('wx-desc').textContent = (descs[code] || 'Clear') + ' · ' + wind + ' mph · Vinton, VA';
   })
-  .catch(function(){ document.getElementById('wx-desc').textContent = 'Roanoke, VA'; });
+  .catch(function(){ document.getElementById('wx-desc').textContent = 'Vinton, VA'; });
 </script>
-
 </body>
 </html>
