@@ -1,108 +1,109 @@
-# Cardinal IG Roanoke — Maintenance Dashboard
+# 🏭 Cardinal IG Roanoke — Maintenance Dashboard
 
-A single-file maintenance KPI dashboard for Cardinal IG Roanoke, built for the Maintenance Planning & Scheduling team. Designed to run as a static GitHub Pages site — no server, no build process, no dependencies to install.
+![Static Site](https://img.shields.io/badge/static-site-brightgreen) ![GitHub Pages](https://img.shields.io/badge/hosted-GitHub%20Pages-blue) ![No Dependencies](https://img.shields.io/badge/dependencies-none-lightgrey) ![Data Source](https://img.shields.io/badge/data-PMWare%20CMMS-orange)
 
----
-
-## Live Site
-
-> `https://<your-username>.github.io/<repo-name>/`
-
-To set up GitHub Pages: **Settings → Pages → Branch: main → Folder: / (root) → Save**
-
-The file must be named `index.html` in the root of the repo for GitHub Pages to serve it at the root URL.
+> A single-file maintenance KPI dashboard for the Cardinal IG Roanoke Maintenance Planning & Scheduling team. No build tools. No frameworks. Just open it or push it.
 
 ---
 
-## What's on the Dashboard
+## 🚀 Live Site
+
+**`https://<your-username>.github.io/<repo-name>/`**
+
+### First-time setup
+1. Go to your repo → **Settings** → **Pages**
+2. Set source branch to `main`, folder to `/ (root)`
+3. Click **Save**
+4. Make sure the file is named **`index.html`** at the root
+
+> After pushing changes, hard refresh your browser (**Ctrl+Shift+R** / **Cmd+Shift+R**) to clear cache.
+
+---
+
+## 📊 Dashboard Pages
 
 ### KPI Dashboard
-The main page. Everything fits on one screen — no scrolling.
+Everything on one screen — no scrolling.
 
-- **Top 10 Downtime Ticker** — Scrolling ticker at the top showing January and February's top 10 breakdown equipment by downtime hours and repair count
-- **Plant Overview** — Side-by-side Jan vs Feb stats for Work Orders, Planned Work Rate, Breakdown %, and Total Labor hours with trend arrows (green = improving, red = trending bad)
-- **Labor Hour Mix** — Stacked bar showing PM vs Breakdown vs Other hours for each month
-- **35% BD Target Tracker** — Visual goal bar showing whether breakdown hours stayed under the 35% threshold
-- **Priority Alerts** — Flagged equipment issues (new problems and repeat offenders)
-- **IG Line Health Cards** — Summary cards for IG1–IG4 with MTBF and avg repair time
-- **Line Reliability Bars** — Horizontal bar chart comparing MTBF across all four lines
-- **Equipment Repair Detail** — 2×2 grid of breakdown tables for each IG line (equipment, repair count, avg time between failures, avg repair time with color-coded severity badges)
+| Section | Description |
+|---------|-------------|
+| 🎞️ **Top 10 Ticker** | Scrolling banner — Jan & Feb top 10 breakdown equipment by downtime |
+| 📈 **Plant Overview** | Jan vs Feb: Work Orders, Planned Work Rate, Breakdown %, Total Labor — with trend arrows |
+| 🟩 **Labor Hour Mix** | Stacked bar — PM vs Breakdown vs Other hours per month |
+| 🎯 **35% BD Target** | Goal tracker — are breakdown hours staying under 35% of total labor? |
+| 🚨 **Priority Alerts** | Flagged equipment — new problems and repeat offenders |
+| 🔧 **IG Line Health** | Summary cards for IG1–IG4: MTBF, avg repair time |
+| 📉 **Line Reliability** | MTBF bar chart comparing all four lines |
+| 🗂️ **Repair Detail** | 2×2 grid of breakdown tables per IG line with color-coded repair time badges |
 
 ### Shift Performance
-A separate page showing labor breakdown by shift (A/B/C/D/Day).
-
-- YTD labor totals per shift
-- Jan and Feb hours per shift
-- Tech count per shift
-- Scrolling **Updates Ticker** — color-coded badges for newly added PMs, KPI trends, and priority alerts
+| Section | Description |
+|---------|-------------|
+| 📋 **Shift Cards** | A/B/C/D/Day — YTD labor, Jan/Feb hours, tech count per shift |
+| 📡 **Updates Ticker** | Scrolling feed of new PMs added, KPI trends, and priority alerts |
 
 ---
 
-## Header Features (always visible)
+## 🖥️ Header (always visible)
 
-- **Cardinal IG logo** and facility name
-- **Shift indicators** — A/B/C/D tabs showing crew names, highlights the active shift
-- **Live clock** — Updates every second
-- **Live weather** — Current conditions for Vinton, VA via Open-Meteo API (temperature, condition, wind speed)
-
----
-
-## Data Source
-
-All data is sourced from **PMWare CMMS** labor reports exported for:
-- January 2026 (01/01–01/31)
-- February 2026 (01/01–02/20, partial month)
-
-Data is hardcoded into the HTML. To update for a new month, pull a fresh labor report from PMWare and update the relevant values in the file.
+- **🔴 Live clock** — updates every second
+- **🌤️ Live weather** — Vinton, VA via Open-Meteo (temp, condition, wind)
+- **👷 Shift indicators** — A/B/C/D tabs with crew names, active shift highlighted
 
 ---
 
-## Shift Roster
+## 👥 Shift Roster
 
-| Shift | Members |
-|-------|---------|
-| A | Link, Green, Gilmer, Nakhle |
-| B | Doss, Halstead, Tofano |
-| C | Moreno, Richard, Hall, Webb |
-| D | Beasley, Adkins, Waldron, Lyne |
-| Day | White, Willis, Gordon, Gudeman |
-| Facilities | Hoback, Sotherden |
+| Shift | Crew |
+|-------|------|
+| **A** | Link · Green · Gilmer · Nakhle |
+| **B** | Doss · Halstead · Tofano |
+| **C** | Moreno · Richard · Hall · Webb |
+| **D** | Beasley · Adkins · Waldron · Lyne |
+| **Day** | White · Willis · Gordon · Gudeman |
+| **Facilities** | Hoback · Sotherden |
 
 ---
 
-## File Structure
+## 📁 File Structure
 
 ```
-index.html        ← Entire dashboard (single self-contained file)
-README.md         ← This file
+├── index.html     ← Entire dashboard (single self-contained file)
+└── README.md      ← You are here
 ```
 
-No frameworks, no build tools, no npm. Just open `index.html` in a browser or push to GitHub Pages.
+---
+
+## 🗃️ Data Source
+
+All data is pulled from **PMWare CMMS** labor reports:
+
+| Month | Range | Status |
+|-------|-------|--------|
+| January 2026 | 01/01 – 01/31 | ✅ Full month |
+| February 2026 | 01/01 – 02/20 | ⚠️ Partial month |
+
+Data is hardcoded into `index.html`. To update for a new reporting period:
+
+1. Export a labor report from PMWare
+2. Open `index.html` in any text editor
+3. Find and update the relevant stat values, Top 10 tables, shift hours, and ticker items
+4. Commit and push
 
 ---
 
-## Updating the Dashboard
+## 🛠️ Tech Stack
 
-1. Export a labor report from PMWare for the desired date range
-2. Open `index.html` in a text editor
-3. Search for the data section you want to update (KPI stats, Top 10 tables, shift hours, ticker items)
-4. Update the values
-5. Commit and push — GitHub Pages will reflect the changes within a minute or two
-
-> **Tip:** After pushing, do a hard refresh in your browser (Ctrl+Shift+R / Cmd+Shift+R) to clear the cache and see the latest version.
-
----
-
-## Tech Stack
-
-| Layer | Detail |
-|-------|--------|
-| HTML/CSS/JS | Vanilla — no frameworks |
-| Fonts | Bebas Neue, Share Tech Mono, Barlow (Google Fonts) |
-| Weather API | [Open-Meteo](https://open-meteo.com/) — free, no API key required |
-| Hosting | GitHub Pages (static) |
+| | |
+|--|--|
+| **Languages** | HTML · CSS · Vanilla JS |
+| **Fonts** | Bebas Neue · Share Tech Mono · Barlow (Google Fonts) |
+| **Weather** | [Open-Meteo API](https://open-meteo.com/) — free, no key required |
+| **Hosting** | GitHub Pages (static) |
+| **Build tools** | None |
 
 ---
 
-*Maintained by the Maintenance Planning & Scheduling Department — Cardinal IG Roanoke*
+## ✏️ Maintained By
 
+Maintenance Planning & Scheduling — Cardinal IG Roanoke
