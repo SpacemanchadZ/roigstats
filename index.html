@@ -476,6 +476,16 @@ body.shift-page-active #global-ticker { display: flex; }
   font-size: clamp(7px,0.6vw,9px); color: var(--muted);
   margin-top: 4px; letter-spacing: 0.3px;
 }
+
+/* Corrective WO Trend */
+.corr-wrap { padding: clamp(4px,0.4vw,8px) clamp(8px,1vw,16px) clamp(6px,0.6vw,10px); }
+.corr-row { display: grid; grid-template-columns: 32px 1fr 36px; align-items: center; gap: 6px; margin-bottom: 5px; }
+.corr-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--muted); font-weight: 700; }
+.corr-bg { height: 22px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.corr-f  { height: 100%; display: flex; align-items: center; padding-left: 8px; }
+.corr-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: rgba(255,255,255,0.75); white-space: nowrap; }
+.corr-v  { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(16px,1.6vw,22px); text-align: right; }
+.corr-note { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--yellow); margin-top: 6px; line-height: 1.5; border-left: 2px solid var(--yellow); padding-left: 8px; }
 </style>
 </head>
 <body>
@@ -835,6 +845,31 @@ body.shift-page-active #global-ticker { display: flex; }
         <div class="mb-v" style="color:var(--yellow);">50h</div>
       </div>
     </div>
+    <div class="tag">Corrective Work Orders — Trend <span class="hl">Unplanned reactive work</span></div>
+    <div class="corr-wrap">
+      <div class="corr-row">
+        <div class="corr-mo">JAN</div>
+        <div class="corr-bg">
+          <div class="corr-f" style="width:52.2%;background:rgba(58,143,191,0.45);">
+            <span class="corr-lbl">12 WOs &nbsp;·&nbsp; 11 labor hrs</span>
+          </div>
+        </div>
+        <div class="corr-v" style="color:var(--blue);">12</div>
+      </div>
+      <div class="corr-row">
+        <div class="corr-mo">FEB</div>
+        <div class="corr-bg">
+          <div class="corr-f" style="width:100%;background:rgba(184,51,51,0.45);">
+            <span class="corr-lbl">23 WOs &nbsp;·&nbsp; 27 labor hrs</span>
+          </div>
+        </div>
+        <div class="corr-v" style="color:var(--danger);">23</div>
+      </div>
+      <div class="corr-note">
+        ⚠ Feb corrective WOs nearly doubled Jan &nbsp;·&nbsp; labor hrs up 145% &nbsp;·&nbsp; watch for systemic issues
+      </div>
+    </div>
+
   </div><!-- /col-c -->
 
   <!-- RIGHT COLUMN: 4 tables in 2x2 grid -->
