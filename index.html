@@ -8,14 +8,14 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:      #0e1017;
-  --surface: #161921;
-  --border:  #2a3045;
+  --bg:      #111318;
+  --surface: #191c24;
+  --border:  #2e3348;
   --red:     #a8192e;
   --orange:  #c9842a;
   --green:   #2d9e58;
@@ -43,7 +43,7 @@ body > * { position: relative; z-index: 1; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Barlow', 'Segoe UI', Arial, sans-serif;
+  font-family: Arial, 'Helvetica Neue', sans-serif;
   font-size: clamp(11px, 1.1vw, 14px);
   line-height: 1.4;
   height: 100vh;
@@ -204,7 +204,7 @@ body {
 .mix { display: flex; align-items: center; gap: 6px; padding: clamp(3px,0.3vw,5px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); }
 .mix-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); width: 26px; }
 .mix-b  { flex: 1; height: 14px; display: flex; overflow: hidden; border-radius: 1px; }
-.mix-s  { height: 100%; display: flex; align-items: center; justify-content: center; font-size: clamp(7px,0.65vw,9px); font-weight: 700; color: rgba(0,0,0,0.7); white-space: nowrap; overflow: hidden; }
+.mix-s  { height: 100%; display: flex; align-items: center; justify-content: center; font-size: clamp(7px,0.65vw,9px); font-weight: 700; color: rgba(0,0,0,0.75); white-space: nowrap; overflow: hidden; }
 .mix-t  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 38px; text-align: right; }
 
 /* Target bars */
@@ -231,13 +231,13 @@ body {
 .t10p + .t10p { border-left: 1px solid var(--border); }
 table.t10 { width: 100%; border-collapse: collapse; }
 table.t10 th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.4vw,6px) clamp(4px,0.7vw,10px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
-table.t10 td { padding: clamp(3px,0.4vw,6px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.8); vertical-align: middle; font-size: clamp(11px,1vw,14px); }
+table.t10 td { padding: clamp(3px,0.4vw,6px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.06); vertical-align: middle; font-size: clamp(11px,1vw,14px); }
 table.t10 tr:last-child td { border-bottom: none; }
 table.t10 tr:hover td { background: rgba(255,255,255,0.04); transition: background 0.15s; }
 table.t10 tbody tr:nth-child(1) td { background: rgba(160,40,40,0.06); }
 table.t10 tbody tr:nth-child(2) td { background: rgba(180,120,20,0.04); }
 table.t10 tbody tr:nth-child(3) td { background: rgba(56,189,248,0.04); }
-table.t10 tbody tr:nth-child(1):hover td { background: rgba(160,40,40,0.10); }
+table.t10 tbody tr:nth-child(1):hover td { background: rgba(160,40,40,0.06); }
 table.t10 tbody tr:nth-child(2):hover td { background: rgba(180,120,20,0.08); }
 table.t10 tbody tr:nth-child(3):hover td { background: rgba(56,189,248,0.08); }
 .rk { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,20px); color: var(--border); display: inline-block; min-width: 16px; }
@@ -254,7 +254,7 @@ td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11p
 .lcard:last-child { border-right: none; }
 .lc-n { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(18px,2.2vw,28px); line-height: 1; }
 .lc-h { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); color: var(--muted); letter-spacing: 1px; margin-bottom: 4px; }
-.lc-r { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; border-bottom: 1px solid rgba(39,45,64,0.6); }
+.lc-r { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; border-bottom: 1px solid rgba(39,45,64,0.06); }
 .lc-r:last-child { border-bottom: none; }
 .lc-l { font-size: clamp(7px,0.65vw,10px); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); }
 .lc-v { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.85vw,13px); font-weight: 700; }
@@ -265,7 +265,7 @@ td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11p
 .mbr:last-child { margin-bottom: 0; }
 .mb-l  { font-family: 'Share Tech Mono', monospace; font-size: clamp(10px,0.9vw,12px); font-weight: 700; }
 .mb-bg { height: 14px; background: var(--border); border-radius: 1px; overflow: hidden; }
-.mb-f  { height: 100%; display: flex; align-items: center; padding-left: 6px; font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(8px,0.7vw,11px); color: rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; }
+.mb-f  { height: 100%; display: flex; align-items: center; padding-left: 6px; font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(8px,0.7vw,11px); color: rgba(0,0,0,0.75); white-space: nowrap; overflow: hidden; }
 .mb-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-align: right; }
 
 /* Detail tables */
@@ -275,14 +275,14 @@ td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11p
 .lh-h { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); }
 table.dt { width: 100%; border-collapse: collapse; }
 table.dt th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.35vw,5px) clamp(4px,0.7vw,10px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
-table.dt td { padding: clamp(1px,0.2vw,3px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.6); font-size: clamp(9px,0.85vw,11px); vertical-align: middle; }
+table.dt td { padding: clamp(1px,0.2vw,3px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.06); font-size: clamp(9px,0.85vw,11px); vertical-align: middle; }
 table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--orange); font-weight: 700; border-bottom: none; }
 table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); transition: background 0.15s; }
 .bdg { display: inline-block; padding: 1px 5px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); border-radius: 2px; font-weight: 700; white-space: nowrap; }
 .partial-badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); letter-spacing: 1.5px; color: var(--orange); border: 1px dashed var(--orange); padding: 1px 5px; border-radius: 2px; margin-left: 5px; opacity: 0.8; vertical-align: middle; }
-.bg { background: rgba(30,120,60,0.12);  color: var(--green); }
-.bw { background: rgba(180,120,20,0.12); color: var(--yellow); }
-.br { background: rgba(239,68,68,0.15);  color: var(--danger); }
+.bg { background: rgba(30,120,60,0.22);  color: var(--green); }
+.bw { background: rgba(180,120,20,0.22); color: var(--yellow); }
+.br { background: rgba(160,40,40,0.22);  color: var(--danger); }
 .bdg-leg { padding: clamp(3px,0.3vw,5px) clamp(8px,1vw,16px); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .bdg-leg .lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); }
 @keyframes countUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
@@ -329,7 +329,7 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
 .sp-stat-row {
   display: flex; justify-content: space-between; align-items: center;
   padding: 6px 0;
-  border-bottom: 1px solid rgba(39,45,64,0.6);
+  border-bottom: 1px solid rgba(39,45,64,0.06);
 }
 .sp-stat-row:last-child { border-bottom: none; }
 .sp-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
@@ -394,12 +394,12 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
   padding: 2px 8px; border-radius: 2px; font-weight: 700;
   flex-shrink: 0;
 }
-.ti-cat.add      { background: rgba(30,120,60,0.12);  color: var(--green); }
-.ti-cat.info     { background: rgba(40,110,170,0.12);  color: var(--blue); }
-.ti-cat.warn     { background: rgba(180,120,20,0.12);  color: var(--yellow); }
-.ti-cat.crit     { background: rgba(239,68,68,0.15);   color: var(--danger); }
-.ti-cat.kpi-good { background: rgba(30,120,60,0.12);   color: var(--green);  font-size: clamp(10px,0.9vw,12px); }
-.ti-cat.kpi-bad  { background: rgba(239,68,68,0.15);   color: var(--danger); font-size: clamp(10px,0.9vw,12px); }
+.ti-cat.add      { background: rgba(30,120,60,0.06);  color: var(--green); }
+.ti-cat.info     { background: rgba(40,110,170,0.06);  color: var(--blue); }
+.ti-cat.warn     { background: rgba(180,120,20,0.06);  color: var(--yellow); }
+.ti-cat.crit     { background: rgba(239,68,68,0.06);   color: var(--danger); }
+.ti-cat.kpi-good { background: rgba(30,120,60,0.06);   color: var(--green);  font-size: clamp(10px,0.9vw,12px); }
+.ti-cat.kpi-bad  { background: rgba(239,68,68,0.06);   color: var(--danger); font-size: clamp(10px,0.9vw,12px); }
 .ticker-sep { color: var(--border); padding: 0 2px; font-size: 14px; flex-shrink: 0; }
 @keyframes ticker-scroll {
   0%   { transform: translateX(0); }
@@ -439,6 +439,42 @@ body.shift-page-active #global-ticker { display: flex; }
   .pair { grid-template-columns: 1fr 1fr; }
   .mbr { grid-template-columns: 26px 1fr 42px; }
   table.t10 .bc, table.t10 th:last-child { display: none; }
+}
+
+/* Hero stat — breaks Card Carnival uniform grid */
+.hero-stat {
+  padding: clamp(8px,0.8vw,14px) clamp(8px,1vw,16px) clamp(6px,0.6vw,10px);
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--orange);
+  background: rgba(200,132,42,0.04);
+}
+.hero-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(7px,0.6vw,8px);
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 3px;
+}
+.hero-row { display: flex; align-items: flex-end; gap: 16px; }
+.hero-val {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(42px,5.5vw,64px);
+  line-height: 1; color: var(--text);
+}
+.hero-delta { display: flex; flex-direction: column; gap: 2px; padding-bottom: 4px; }
+.hero-mo { display: flex; align-items: center; gap: 6px; }
+.hero-mo-lbl {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(7px,0.6vw,8px); letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted); width: 22px;
+}
+.hero-mo-val {
+  font-family: Arial, sans-serif;
+  font-size: clamp(11px,1vw,13px); color: var(--dim); font-weight: 600;
+}
+.hero-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(7px,0.6vw,9px); color: var(--muted);
+  margin-top: 4px; letter-spacing: 0.3px;
 }
 </style>
 </head>
@@ -503,7 +539,7 @@ body.shift-page-active #global-ticker { display: flex; }
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> Breakdown % of WOs — Jan 19.5% → Feb 16.6% &nbsp;−2.9%</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.5% → Feb 36.5% &nbsp;over 35% target</span>
+      <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.9% → Feb 36.8% &nbsp;over 35% target</span>
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 VWASH — 48h 30m downtime in Feb across 4 repairs — not in Jan top 10</span>
       <span class="ticker-sep">·</span>
@@ -530,7 +566,7 @@ body.shift-page-active #global-ticker { display: flex; }
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> Breakdown % of WOs — Jan 19.5% → Feb 16.6% &nbsp;−2.9%</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.5% → Feb 36.5% &nbsp;over 35% target</span>
+      <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.9% → Feb 36.8% &nbsp;over 35% target</span>
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 VWASH — 48h 30m downtime in Feb across 4 repairs — not in Jan top 10</span>
       <span class="ticker-sep">·</span>
@@ -651,18 +687,16 @@ body.shift-page-active #global-ticker { display: flex; }
 
   <!-- LEFT COLUMN -->
   <div class="col-l">
-    <div class="tag">Plant Overview — YTD 2026</div>
-    <div class="pair">
-      <div class="cell">
-        <div class="ctag">Jan — Work Orders</div>
-        <div class="cval">717</div>
-        <div class="csub">Total jobs issued</div>
+    <div class="hero-stat">
+      <div class="hero-label">YTD 2026 — Work Orders</div>
+      <div class="hero-row">
+        <div class="hero-val">1,416</div>
+        <div class="hero-delta">
+          <div class="hero-mo"><span class="hero-mo-lbl">JAN</span><span class="hero-mo-val">717</span></div>
+          <div class="hero-mo"><span class="hero-mo-lbl">FEB</span><span class="hero-mo-val" style="color:var(--dim);">699 <span style="font-size:9px;color:var(--danger);">↓</span></span></div>
+        </div>
       </div>
-      <div class="cell">
-        <div class="ctag">Feb — Work Orders <span class="partial-badge">PARTIAL</span></div>
-        <div class="cval">699</div>
-        <div class="csub">Thru 02/20 &nbsp;<span class="trend" style="color:var(--dim);">↓ −2.5%</span></div>
-      </div>
+      <div class="hero-sub">Thru 02/20 &nbsp;·&nbsp; <span style="color:var(--dim);">↓ −2.5% WO volume month-over-month</span></div>
     </div>
     <div class="pair">
       <div class="cell">
@@ -671,8 +705,8 @@ body.shift-page-active #global-ticker { display: flex; }
         <div class="csub">565 of 717 scheduled</div>
       </div>
       <div class="cell">
-        <div class="ctag">Feb — Planned Work <span class="partial-badge">PARTIAL</span></div>
-        <div class="cval" style="color:var(--green);">80.1%</div>
+        <div class="ctag">Feb — Planned Work</div>
+        <div class="cval" style="color:var(--green);">80.1% <span style="font-size:0.4em;vertical-align:middle;">↑</span></div>
         <div class="csub">560 of 699 &nbsp;<span class="trend down-good">↑ +1.3% IMPROVING</span></div>
       </div>
     </div>
@@ -683,21 +717,21 @@ body.shift-page-active #global-ticker { display: flex; }
         <div class="csub">140 repairs &nbsp;|&nbsp; 202 hrs</div>
       </div>
       <div class="cell">
-        <div class="ctag">Feb — Breakdowns <span class="partial-badge">PARTIAL</span></div>
-        <div class="cval" style="color:var(--green);">16.6%</div>
+        <div class="ctag">Feb — Breakdowns</div>
+        <div class="cval" style="color:var(--green);">16.6% <span style="font-size:0.4em;vertical-align:middle;">↓</span></div>
         <div class="csub">116 repairs &nbsp;|&nbsp; 221 hrs &nbsp;<span class="trend down-good">↓ −2.9% IMPROVING</span></div>
       </div>
     </div>
     <div class="pair">
       <div class="cell">
         <div class="ctag">Jan — Total Labor</div>
-        <div class="cval">663<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
+        <div class="cval">653<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
         <div class="csub">PM 440h &nbsp;|&nbsp; BD 202h &nbsp;|&nbsp; Other 11h</div>
       </div>
       <div class="cell">
-        <div class="ctag">Feb — Total Labor <span class="partial-badge">PARTIAL</span></div>
-        <div class="cval">605<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
-        <div class="csub">PM 352h &nbsp;|&nbsp; BD 221h &nbsp;<span class="trend up-bad">↑ BD hrs ▲</span></div>
+        <div class="ctag">Feb — Total Labor</div>
+        <div class="cval">600<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
+        <div class="csub">PM 352h &nbsp;|&nbsp; BD 221h &nbsp;|&nbsp; Other 27h &nbsp;<span class="trend up-bad">↑ BD hrs ▲</span></div>
       </div>
     </div>
     <div class="tag">Labor Hour Mix <span class="hl">Planned vs Emergency Repairs</span></div>
@@ -709,32 +743,32 @@ body.shift-page-active #global-ticker { display: flex; }
     <div class="mix">
       <div class="mix-mo">JAN</div>
       <div class="mix-b">
-        <div class="mix-s" style="width:66.4%;background:var(--green);">PM 66%</div>
-        <div class="mix-s" style="width:30.5%;background:var(--danger);">BD 31%</div>
-        <div class="mix-s" style="width:1.7%;background:var(--muted);"></div>
+        <div class="mix-s" style="width:67.4%;background:var(--green);">PM 67.4%</div>
+        <div class="mix-s" style="width:30.9%;background:var(--danger);">BD 30.9%</div>
+        <div class="mix-s" style="width:1.7%;background:var(--muted);">O</div>
       </div>
-      <div class="mix-t">663h</div>
+      <div class="mix-t">653h</div>
     </div>
     <div class="mix">
       <div class="mix-mo">FEB</div>
       <div class="mix-b">
-        <div class="mix-s" style="width:58.2%;background:var(--green);">PM 58%</div>
-        <div class="mix-s" style="width:36.5%;background:var(--danger);">BD 37%</div>
+        <div class="mix-s" style="width:58.7%;background:var(--green);">PM 58.7%</div>
+        <div class="mix-s" style="width:36.8%;background:var(--danger);">BD 36.8%</div>
         <div class="mix-s" style="width:4.5%;background:var(--muted);">O</div>
       </div>
-      <div class="mix-t">605h</div>
+      <div class="mix-t">600h</div>
     </div>
     <div class="tgt">
       <div class="tgt-h">Goal: Breakdown Hours Under 35% of Total Labor</div>
       <div class="tr">
         <div class="tr-mo">JAN</div>
-        <div class="tr-bg"><div class="tr-f" style="width:30.5%;background:var(--green);"></div><div class="tr-ln"></div></div>
-        <div class="tr-v" style="color:var(--green);">30.5% ✓</div>
+        <div class="tr-bg"><div class="tr-f" style="width:30.9%;background:var(--green);"></div><div class="tr-ln"></div></div>
+        <div class="tr-v" style="color:var(--green);">30.9% ✓</div>
       </div>
       <div class="tr">
         <div class="tr-mo">FEB</div>
-        <div class="tr-bg"><div class="tr-f" style="width:36.5%;background:var(--danger);"></div><div class="tr-ln"></div></div>
-        <div class="tr-v" style="color:var(--danger);">36.5% ⚠</div>
+        <div class="tr-bg"><div class="tr-f" style="width:36.8%;background:var(--danger);"></div><div class="tr-ln"></div></div>
+        <div class="tr-v" style="color:var(--danger);">36.8% ⚠</div>
       </div>
       <div class="tgt-n">Orange line = 35% target</div>
     </div>
@@ -782,22 +816,22 @@ body.shift-page-active #global-ticker { display: flex; }
     <div class="mtbf">
       <div class="mbr">
         <div class="mb-l" style="color:var(--green);">IG2</div>
-        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(30,120,60,0.45);">BEST — 108h between breakdowns</div></div>
+        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(30,120,60,0.50);">BEST — 108h between breakdowns</div></div>
         <div class="mb-v" style="color:var(--green);">108h</div>
       </div>
       <div class="mbr">
         <div class="mb-l" style="color:var(--blue);">IG1</div>
-        <div class="mb-bg"><div class="mb-f" style="width:61.1%;background:rgba(40,110,170,0.35);">66h</div></div>
+        <div class="mb-bg"><div class="mb-f" style="width:61.1%;background:rgba(40,110,170,0.42);">66h</div></div>
         <div class="mb-v" style="color:var(--blue);">66h</div>
       </div>
       <div class="mbr">
         <div class="mb-l" style="color:var(--danger);">IG3</div>
-        <div class="mb-bg"><div class="mb-f" style="width:47.2%;background:rgba(160,40,40,0.38);">51h</div></div>
+        <div class="mb-bg"><div class="mb-f" style="width:47.2%;background:rgba(160,40,40,0.45);">51h</div></div>
         <div class="mb-v" style="color:var(--danger);">51h</div>
       </div>
       <div class="mbr">
         <div class="mb-l" style="color:var(--yellow);">IG4</div>
-        <div class="mb-bg"><div class="mb-f" style="width:46.3%;background:rgba(180,120,20,0.38);">50h</div></div>
+        <div class="mb-bg"><div class="mb-f" style="width:46.3%;background:rgba(180,120,20,0.42);">50h</div></div>
         <div class="mb-v" style="color:var(--yellow);">50h</div>
       </div>
     </div>
@@ -1122,8 +1156,6 @@ function animateCounter(el, target, isPercent, decimals) {
 }
 window.addEventListener('load', function() {
   var counters = [
-    {sel: '.col-l .pair:nth-child(2) .cell:nth-child(1) .cval', val: 717, pct: false, dec: false},
-    {sel: '.col-l .pair:nth-child(2) .cell:nth-child(2) .cval', val: 699, pct: false, dec: false},
     {sel: '.col-l .pair:nth-child(3) .cell:nth-child(1) .cval', val: 78.8, pct: true, dec: true},
     {sel: '.col-l .pair:nth-child(3) .cell:nth-child(2) .cval', val: 80.1, pct: true, dec: true},
     {sel: '.col-l .pair:nth-child(4) .cell:nth-child(1) .cval', val: 19.5, pct: true, dec: true},
