@@ -13,18 +13,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:      #0c0e14;
-  --surface: #141720;
-  --border:  #272d40;
-  --red:     #c8102e;
-  --orange:  #f5a623;
-  --green:   #22c55e;
-  --blue:    #38bdf8;
-  --yellow:  #f59e0b;
-  --danger:  #ef4444;
-  --text:    #e6e8f0;
-  --muted:   #5a6278;
-  --dim:     #8490aa;
+  --bg:      #0e1017;
+  --surface: #161921;
+  --border:  #2a3045;
+  --red:     #a8192e;
+  --orange:  #c9842a;
+  --green:   #2d9e58;
+  --blue:    #3a8fbf;
+  --yellow:  #c48a14;
+  --danger:  #b83333;
+  --text:    #d4d8e8;
+  --muted:   #525c74;
+  --dim:     #7a8499;
 }
 
 html { background: var(--bg); height: 100%; overflow: hidden; }
@@ -64,7 +64,7 @@ body {
 
 .hdr {
   background: var(--surface);
-  border-bottom: 3px solid var(--red);
+  border-bottom: 2px solid var(--red);
   padding: clamp(8px,0.8vw,14px) clamp(10px,1.2vw,20px);
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 8px;
@@ -94,7 +94,7 @@ body {
 /* Shift tabs in header */
 .hdr-shifts { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .shift { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 2px; font-family: 'Share Tech Mono', monospace; color: var(--muted); transition: all 0.3s; background: rgba(255,255,255,0.02); }
-.shift.active { border-color: var(--green); background: rgba(34,197,94,0.08); }
+.shift.active { border-color: var(--green); background: rgba(30,120,60,0.06); }
 .shift-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: all 0.3s; }
 .shift.active .shift-dot { background: var(--green); animation: pulse 2s infinite; }
 .shift-name { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.4vw,18px); color: var(--dim); line-height: 1; transition: color 0.3s; }
@@ -123,7 +123,7 @@ body {
 
 /* Top 10 Ticker */
 .t10-ticker-outer {
-  background: rgba(239,68,68,0.04);
+  background: rgba(160,40,40,0.03);
   border-bottom: 1px solid var(--border);
   border-left: 3px solid var(--red);
   display: flex;
@@ -220,8 +220,8 @@ body {
 .tgt-n { font-size: clamp(8px,0.65vw,10px); color: var(--muted); margin-top: 4px; font-family: 'Share Tech Mono', monospace; }
 
 /* Alerts */
-.alert { padding: clamp(4px,0.4vw,6px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); border-left: 4px solid var(--danger); background: rgba(200,16,46,0.07); font-size: clamp(9px,0.8vw,12px); line-height: 1.4; }
-.alert.warn { border-left-color: var(--yellow); background: rgba(245,158,11,0.05); }
+.alert { padding: clamp(4px,0.4vw,6px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); border-left: 4px solid var(--danger); background: rgba(140,20,35,0.06); font-size: clamp(9px,0.8vw,12px); line-height: 1.4; }
+.alert.warn { border-left-color: var(--yellow); background: rgba(180,120,20,0.04); }
 .a-title { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.65vw,9px); letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-bottom: 3px; }
 .er { color: var(--danger); font-family: 'Share Tech Mono', monospace; font-weight: 700; }
 .ey { color: var(--yellow); font-family: 'Share Tech Mono', monospace; font-weight: 700; }
@@ -234,11 +234,11 @@ table.t10 th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0
 table.t10 td { padding: clamp(3px,0.4vw,6px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.8); vertical-align: middle; font-size: clamp(11px,1vw,14px); }
 table.t10 tr:last-child td { border-bottom: none; }
 table.t10 tr:hover td { background: rgba(255,255,255,0.04); transition: background 0.15s; }
-table.t10 tbody tr:nth-child(1) td { background: rgba(239,68,68,0.07); }
-table.t10 tbody tr:nth-child(2) td { background: rgba(245,158,11,0.05); }
+table.t10 tbody tr:nth-child(1) td { background: rgba(160,40,40,0.06); }
+table.t10 tbody tr:nth-child(2) td { background: rgba(180,120,20,0.04); }
 table.t10 tbody tr:nth-child(3) td { background: rgba(56,189,248,0.04); }
-table.t10 tbody tr:nth-child(1):hover td { background: rgba(239,68,68,0.13); }
-table.t10 tbody tr:nth-child(2):hover td { background: rgba(245,158,11,0.10); }
+table.t10 tbody tr:nth-child(1):hover td { background: rgba(160,40,40,0.10); }
+table.t10 tbody tr:nth-child(2):hover td { background: rgba(180,120,20,0.08); }
 table.t10 tbody tr:nth-child(3):hover td { background: rgba(56,189,248,0.08); }
 .rk { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,20px); color: var(--border); display: inline-block; min-width: 16px; }
 .r1 { color: var(--danger); } .r2 { color: var(--yellow); } .r3 { color: var(--dim); }
@@ -280,8 +280,8 @@ table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--oran
 table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); transition: background 0.15s; }
 .bdg { display: inline-block; padding: 1px 5px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); border-radius: 2px; font-weight: 700; white-space: nowrap; }
 .partial-badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); letter-spacing: 1.5px; color: var(--orange); border: 1px dashed var(--orange); padding: 1px 5px; border-radius: 2px; margin-left: 5px; opacity: 0.8; vertical-align: middle; }
-.bg { background: rgba(34,197,94,0.15);  color: var(--green); }
-.bw { background: rgba(245,158,11,0.15); color: var(--yellow); }
+.bg { background: rgba(30,120,60,0.12);  color: var(--green); }
+.bw { background: rgba(180,120,20,0.12); color: var(--yellow); }
 .br { background: rgba(239,68,68,0.15);  color: var(--danger); }
 .bdg-leg { padding: clamp(3px,0.3vw,5px) clamp(8px,1vw,16px); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .bdg-leg .lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); }
@@ -350,7 +350,7 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
 
 /* Ticker */
 .ticker-outer {
-  background: rgba(34,197,94,0.04);
+  background: rgba(30,120,60,0.04);
   border-bottom: 1px solid var(--border);
   border-left: 3px solid var(--green);
   display: flex;
@@ -379,7 +379,6 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
   white-space: nowrap;
   animation: ticker-scroll 80s linear infinite;
 }
-.ticker-outer:hover .ticker-track { animation-play-state: paused; }
 .ticker-item {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 0 40px;
@@ -395,11 +394,11 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
   padding: 2px 8px; border-radius: 2px; font-weight: 700;
   flex-shrink: 0;
 }
-.ti-cat.add      { background: rgba(34,197,94,0.15);  color: var(--green); }
-.ti-cat.info     { background: rgba(56,189,248,0.15);  color: var(--blue); }
-.ti-cat.warn     { background: rgba(245,158,11,0.15);  color: var(--yellow); }
+.ti-cat.add      { background: rgba(30,120,60,0.12);  color: var(--green); }
+.ti-cat.info     { background: rgba(40,110,170,0.12);  color: var(--blue); }
+.ti-cat.warn     { background: rgba(180,120,20,0.12);  color: var(--yellow); }
 .ti-cat.crit     { background: rgba(239,68,68,0.15);   color: var(--danger); }
-.ti-cat.kpi-good { background: rgba(34,197,94,0.15);   color: var(--green);  font-size: clamp(10px,0.9vw,12px); }
+.ti-cat.kpi-good { background: rgba(30,120,60,0.12);   color: var(--green);  font-size: clamp(10px,0.9vw,12px); }
 .ti-cat.kpi-bad  { background: rgba(239,68,68,0.15);   color: var(--danger); font-size: clamp(10px,0.9vw,12px); }
 .ticker-sep { color: var(--border); padding: 0 2px; font-size: 14px; flex-shrink: 0; }
 @keyframes ticker-scroll {
@@ -558,7 +557,7 @@ body.shift-page-active #global-ticker { display: flex; }
     <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Downtime · Jan &amp; Feb</span>
   </div>
   <div class="ticker-wrap">
-    <div class="ticker-track" style="animation-duration:60s;">
+    <div class="ticker-track" style="animation-duration:100s;">
       <span class="t10t-sep">── JAN 2026 ──</span>
       <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">26h 35m</span><span class="t10t-rep">12 repairs</span></span>
       <span class="t10t-sep">·</span>
@@ -783,22 +782,22 @@ body.shift-page-active #global-ticker { display: flex; }
     <div class="mtbf">
       <div class="mbr">
         <div class="mb-l" style="color:var(--green);">IG2</div>
-        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(34,197,94,0.55);">BEST — 108h between breakdowns</div></div>
+        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(30,120,60,0.45);">BEST — 108h between breakdowns</div></div>
         <div class="mb-v" style="color:var(--green);">108h</div>
       </div>
       <div class="mbr">
         <div class="mb-l" style="color:var(--blue);">IG1</div>
-        <div class="mb-bg"><div class="mb-f" style="width:61.1%;background:rgba(56,189,248,0.45);">66h</div></div>
+        <div class="mb-bg"><div class="mb-f" style="width:61.1%;background:rgba(40,110,170,0.35);">66h</div></div>
         <div class="mb-v" style="color:var(--blue);">66h</div>
       </div>
       <div class="mbr">
         <div class="mb-l" style="color:var(--danger);">IG3</div>
-        <div class="mb-bg"><div class="mb-f" style="width:47.2%;background:rgba(239,68,68,0.5);">51h</div></div>
+        <div class="mb-bg"><div class="mb-f" style="width:47.2%;background:rgba(160,40,40,0.38);">51h</div></div>
         <div class="mb-v" style="color:var(--danger);">51h</div>
       </div>
       <div class="mbr">
         <div class="mb-l" style="color:var(--yellow);">IG4</div>
-        <div class="mb-bg"><div class="mb-f" style="width:46.3%;background:rgba(245,158,11,0.5);">50h</div></div>
+        <div class="mb-bg"><div class="mb-f" style="width:46.3%;background:rgba(180,120,20,0.38);">50h</div></div>
         <div class="mb-v" style="color:var(--yellow);">50h</div>
       </div>
     </div>
