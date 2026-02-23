@@ -91,7 +91,6 @@ body {
 .hdr-src  { font-size: clamp(8px,0.75vw,11px); color: var(--muted); }
 #wx-temp  { font-family: 'Share Tech Mono', monospace; font-size: clamp(11px,1vw,13px); color: var(--orange); }
 
-/* Shift tabs in header */
 .hdr-shifts { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .shift { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 2px; font-family: 'Share Tech Mono', monospace; color: var(--muted); transition: all 0.3s; background: rgba(255,255,255,0.02); }
 .shift.active { border-color: var(--green); background: rgba(30,120,60,0.06); }
@@ -102,7 +101,6 @@ body {
 .shift-crew { font-size: clamp(7px,0.6vw,9px); color: var(--muted); letter-spacing: 0.5px; display: block; margin-top: 1px; transition: color 0.3s; }
 .shift.active .shift-crew { color: var(--green); opacity: 0.8; }
 
-/* Page nav */
 .page-nav {
   background: var(--bg);
   border-bottom: 2px solid var(--border);
@@ -171,7 +169,7 @@ body {
 .col-c { overflow-y: auto; height: 100%; }
 .col-r { border-left: 1px solid var(--border); overflow-y: auto; height: 100%; }
 
-/* IG 2x2 grid for detail tables */
+/* IG 2x2 grid */
 .ig-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -237,9 +235,6 @@ table.t10 tr:hover td { background: rgba(255,255,255,0.04); transition: backgrou
 table.t10 tbody tr:nth-child(1) td { background: rgba(160,40,40,0.06); }
 table.t10 tbody tr:nth-child(2) td { background: rgba(180,120,20,0.04); }
 table.t10 tbody tr:nth-child(3) td { background: rgba(56,189,248,0.04); }
-table.t10 tbody tr:nth-child(1):hover td { background: rgba(160,40,40,0.06); }
-table.t10 tbody tr:nth-child(2):hover td { background: rgba(180,120,20,0.08); }
-table.t10 tbody tr:nth-child(3):hover td { background: rgba(56,189,248,0.08); }
 .rk { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,20px); color: var(--border); display: inline-block; min-width: 16px; }
 .r1 { color: var(--danger); } .r2 { color: var(--yellow); } .r3 { color: var(--dim); }
 .eq { font-family: 'Share Tech Mono', monospace; font-size: clamp(10px,0.9vw,13px); font-weight: 700; }
@@ -279,7 +274,6 @@ table.dt td { padding: clamp(1px,0.2vw,3px) clamp(4px,0.7vw,10px); border-bottom
 table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--orange); font-weight: 700; border-bottom: none; }
 table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); transition: background 0.15s; }
 .bdg { display: inline-block; padding: 1px 5px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); border-radius: 2px; font-weight: 700; white-space: nowrap; }
-.partial-badge { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); letter-spacing: 1.5px; color: var(--orange); border: 1px dashed var(--orange); padding: 1px 5px; border-radius: 2px; margin-left: 5px; opacity: 0.8; vertical-align: middle; }
 .bg { background: rgba(30,120,60,0.22);  color: var(--green); }
 .bw { background: rgba(180,120,20,0.22); color: var(--yellow); }
 .br { background: rgba(160,40,40,0.22);  color: var(--danger); }
@@ -342,6 +336,31 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
 .sp-bar-bg { flex: 1; height: 12px; background: var(--border); border-radius: 1px; overflow: hidden; }
 .sp-bar-f  { height: 100%; border-radius: 1px; }
 .sp-bar-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 32px; text-align: right; }
+
+/* ── SCHEDULE TABLE ── */
+.sched-section { padding: 8px clamp(8px,1vw,16px) 0; border-top: 1px solid var(--border); }
+.sched-day-hdr {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(7px,0.65vw,9px);
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--orange);
+  padding: 6px 0 3px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+  display: flex; justify-content: space-between;
+}
+table.sched { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+table.sched th { font-family: 'Share Tech Mono', monospace; font-size: clamp(6px,0.55vw,8px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: 2px clamp(2px,0.4vw,5px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
+table.sched td { padding: clamp(1px,0.15vw,2px) clamp(2px,0.4vw,5px); border-bottom: 1px solid rgba(39,45,64,0.04); font-size: clamp(8px,0.75vw,10px); vertical-align: middle; font-family: 'Share Tech Mono', monospace; }
+table.sched tr:hover td { background: rgba(255,255,255,0.03); }
+.sched-type-pm  { color: var(--green); }
+.sched-type-bd  { color: var(--danger); font-weight: 700; }
+.sched-type-svc { color: var(--blue); }
+.sched-type-corr { color: var(--yellow); }
+.sched-overdue { color: var(--danger); font-size: clamp(7px,0.6vw,9px); }
+.sched-ok { color: var(--muted); font-size: clamp(7px,0.6vw,9px); }
+.wo-num { font-size: clamp(7px,0.6vw,8px); color: var(--muted); }
+.sched-unassigned { color: var(--muted); font-style: italic; }
 
 /* Footer */
 .ftr { border-top: 1px solid var(--border); padding: clamp(4px,0.5vw,8px) clamp(10px,1.2vw,20px); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--muted); background: var(--surface); }
@@ -408,40 +427,7 @@ table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); tran
 #global-ticker { display: none; }
 body.shift-page-active #global-ticker { display: flex; }
 
-/* Responsive */
-@media (max-width: 1100px) {
-  body { height: auto; overflow: auto; }
-  html { height: auto; overflow: auto; }
-  .layout { grid-template-columns: 1fr 1fr; height: auto; }
-  .col-l { grid-column: 1 / -1; border-right: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
-  .col-c { border-right: 1px solid var(--border); height: auto; overflow: visible; }
-  .col-r { border-left: none; height: auto; overflow: visible; }
-  .hdr-center { display: none; }
-  .sp-layout { grid-template-columns: 1fr 1fr; height: auto; }
-  .sp-col { height: auto; overflow: visible; }
-}
-@media (max-width: 768px) {
-  body { height: auto; overflow: auto; }
-  html { height: auto; overflow: auto; }
-  .layout { grid-template-columns: 1fr; height: auto; }
-  .col-l, .col-c, .col-r { grid-column: 1 / -1; border: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
-  .lcards { grid-template-columns: repeat(2, 1fr); }
-  .hdr-center { display: none; }
-  .sp-layout { grid-template-columns: 1fr; height: auto; }
-}
-@media (max-width: 600px) {
-  .t10g { grid-template-columns: 1fr; }
-  .t10p + .t10p { border-left: none; border-top: 1px solid var(--border); }
-  .lcards { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 420px) {
-  .hdr-right { display: none; }
-  .pair { grid-template-columns: 1fr 1fr; }
-  .mbr { grid-template-columns: 26px 1fr 42px; }
-  table.t10 .bc, table.t10 th:last-child { display: none; }
-}
-
-/* Hero stat — breaks Card Carnival uniform grid */
+/* Hero stat */
 .hero-stat {
   padding: clamp(8px,0.8vw,14px) clamp(8px,1vw,16px) clamp(6px,0.6vw,10px);
   border-bottom: 1px solid var(--border);
@@ -486,11 +472,51 @@ body.shift-page-active #global-ticker { display: flex; }
 .corr-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: rgba(255,255,255,0.75); white-space: nowrap; }
 .corr-v  { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(16px,1.6vw,22px); text-align: right; }
 .corr-note { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--yellow); margin-top: 6px; line-height: 1.5; border-left: 2px solid var(--yellow); padding-left: 8px; }
+
+/* Labor leaderboard */
+.labor-lb { padding: 0; }
+table.labor-tbl { width: 100%; border-collapse: collapse; }
+table.labor-tbl th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.35vw,5px) clamp(6px,0.8vw,12px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
+table.labor-tbl td { padding: clamp(2px,0.25vw,4px) clamp(6px,0.8vw,12px); border-bottom: 1px solid rgba(39,45,64,0.06); font-size: clamp(9px,0.85vw,11px); vertical-align: middle; }
+table.labor-tbl tr:last-child td { border-bottom: none; }
+table.labor-tbl tr:hover td { background: rgba(255,255,255,0.03); }
+.lb-name { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.85vw,11px); font-weight: 700; }
+.lb-bar-bg { height: 8px; background: var(--border); border-radius: 1px; overflow: hidden; display: inline-block; width: 80px; vertical-align: middle; margin-left: 6px; }
+.lb-bar-f  { height: 100%; border-radius: 1px; }
+.lb-hrs { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11px); color: var(--orange); font-weight: 700; }
+.lb-shift-tag { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); padding: 1px 4px; border-radius: 2px; margin-left: 4px; }
+.lb-A { background: rgba(40,110,170,0.15); color: var(--blue); }
+.lb-B { background: rgba(30,120,60,0.15); color: var(--green); }
+.lb-C { background: rgba(180,120,20,0.15); color: var(--yellow); }
+.lb-D { background: rgba(255,107,132,0.15); color: #ff6b84; }
+.lb-Day { background: rgba(200,132,42,0.15); color: var(--orange); }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  body { height: auto; overflow: auto; }
+  html { height: auto; overflow: auto; }
+  .layout { grid-template-columns: 1fr 1fr; height: auto; }
+  .col-l { grid-column: 1 / -1; border-right: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
+  .col-c { border-right: 1px solid var(--border); height: auto; overflow: visible; }
+  .col-r { border-left: none; height: auto; overflow: visible; }
+  .hdr-center { display: none; }
+  .sp-layout { grid-template-columns: 1fr 1fr; height: auto; }
+  .sp-col { height: auto; overflow: visible; }
+}
+@media (max-width: 768px) {
+  body { height: auto; overflow: auto; }
+  html { height: auto; overflow: auto; }
+  .layout { grid-template-columns: 1fr; height: auto; }
+  .col-l, .col-c, .col-r { grid-column: 1 / -1; border: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
+  .lcards { grid-template-columns: repeat(2, 1fr); }
+  .hdr-center { display: none; }
+  .sp-layout { grid-template-columns: 1fr; height: auto; }
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+<!-- HEADER -->
 <header class="hdr">
   <div class="logo-row">
     <div class="hex">ROIG</div>
@@ -533,15 +559,11 @@ body.shift-page-active #global-ticker { display: flex; }
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat add">Added PM</span> Furnace Water Filter — Weekly</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Manual Tapper — Monthly</span>
-      <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat add">Added PM</span> Silicone Pump — Weekly Inspection</span>
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG Conveyor Inspection</span>
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat add">Added PM</span> QC Bender — Weekly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Lami Table — Bi-Monthly</span>
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG2 Washer — Bi-Weekly</span>
       <span class="ticker-sep">·</span>
@@ -551,36 +573,30 @@ body.shift-page-active #global-ticker { display: flex; }
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.9% → Feb 36.8% &nbsp;over 35% target</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 VWASH — 48h 30m downtime in Feb across 4 repairs — not in Jan top 10</span>
+      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 Line 3 Washer — MTTR 12h 7m avg · 4 BDs in Feb</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 SQUID — Repeat offender — #1 Jan, top 10 Feb — avg failure every 73h</span>
+      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 Razorback #2 — single repair took 6h 45m</span>
       <span class="ticker-sep">·</span>
-      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ti-cat warn">Watch</span> IG3 SQUID — still failing · #1 Jan · top 10 Feb · avg fail every 140h in Feb</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat info">Schedule</span> A Shift 02/24 — IG2 Monthly Blowout series in progress (20+ WOs)</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat crit">Overdue</span> A Shift — IG3 HAWK PM overdue since 02/22 &nbsp;·&nbsp; CUT CT1 freq drive fault overdue 02/22</span>
+      <span class="ticker-sep">·</span>
+      <!-- duplicate for loop -->
       <span class="ticker-item"><span class="ti-cat add">Added PM</span> Muttin Master — Monthly</span>
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat add">Added PM</span> Furnace Water Filter — Weekly</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Manual Tapper — Monthly</span>
-      <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat add">Added PM</span> Silicone Pump — Weekly Inspection</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG Conveyor Inspection</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> QC Bender — Weekly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Lami Table — Bi-Monthly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG2 Washer — Bi-Weekly</span>
       <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat kpi-good">↑ IMPROVING</span> Planned Work Rate — Jan 78.8% → Feb 80.1% &nbsp;+1.3%</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> Breakdown % of WOs — Jan 19.5% → Feb 16.6% &nbsp;−2.9%</span>
-      <span class="ticker-sep">·</span>
       <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.9% → Feb 36.8% &nbsp;over 35% target</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 VWASH — 48h 30m downtime in Feb across 4 repairs — not in Jan top 10</span>
+      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 Line 3 Washer — MTTR 12h 7m avg · 4 BDs in Feb</span>
       <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 SQUID — Repeat offender — #1 Jan, top 10 Feb — avg failure every 73h</span>
+      <span class="ticker-item"><span class="ti-cat warn">Watch</span> IG3 SQUID — still failing · avg fail every 140h in Feb</span>
       <span class="ticker-sep">·</span>
     </div>
   </div>
@@ -592,8 +608,7 @@ body.shift-page-active #global-ticker { display: flex; }
   <a href="#" id="nav-shift" onclick="showPage('shift',this);return false;">Shift Performance</a>
 </nav>
 
-
-
+<!-- ═══════════════════════════ KPI PAGE ═══════════════════════════ -->
 <div id="kpi-page">
 
 <!-- TOP 10 TICKER -->
@@ -646,48 +661,20 @@ body.shift-page-active #global-ticker { display: flex; }
       <span class="t10t-sep">·</span>
       <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">6h 12m</span><span class="t10t-rep">5 repairs</span></span>
       <span class="t10t-sep">────────</span>
-      <!-- duplicate for seamless loop -->
+      <!-- duplicate -->
       <span class="t10t-sep">── JAN 2026 ──</span>
       <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">26h 35m</span><span class="t10t-rep">12 repairs</span></span>
       <span class="t10t-sep">·</span>
       <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">MEZ B2</span><span class="t10t-val">17h 45m</span><span class="t10t-rep">7 repairs</span></span>
       <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">IG1 SQUID</span><span class="t10t-val">11h 50m</span><span class="t10t-rep">5 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">4</span><span class="t10t-eq">AE3</span><span class="t10t-val">10h 35m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">·</span>
       <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">AE1</span><span class="t10t-val">9h 55m</span><span class="t10t-rep">6 repairs</span></span>
       <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">6</span><span class="t10t-eq">CUT CT3</span><span class="t10t-val">9h 45m</span><span class="t10t-rep">5 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">7</span><span class="t10t-eq">IG1 VWASH</span><span class="t10t-val">8h 1m</span><span class="t10t-rep">3 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">8</span><span class="t10t-eq">CUT CC3</span><span class="t10t-val">8h 1m</span><span class="t10t-rep">4 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">9</span><span class="t10t-eq">IG4 TGRIND</span><span class="t10t-val">8h 0m</span><span class="t10t-rep">1 repair</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">AE4</span><span class="t10t-val">6h 20m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">────────</span>
       <span class="t10t-sep">── FEB 2026 ──</span>
       <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 VWASH</span><span class="t10t-val" style="color:var(--danger);">48h 30m</span><span class="t10t-rep">4 repairs</span></span>
       <span class="t10t-sep">·</span>
       <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">QCB1</span><span class="t10t-val">19h 45m</span><span class="t10t-rep">4 repairs</span></span>
       <span class="t10t-sep">·</span>
       <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">TMP FURN</span><span class="t10t-val">18h 50m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">4</span><span class="t10t-eq">AE7</span><span class="t10t-val">13h 45m</span><span class="t10t-rep">2 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">MEZ B1</span><span class="t10t-val">12h 0m</span><span class="t10t-rep">1 repair</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">6</span><span class="t10t-eq">CUT LT1</span><span class="t10t-val">9h 10m</span><span class="t10t-rep">3 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">7</span><span class="t10t-eq">CUT CT2</span><span class="t10t-val">8h 0m</span><span class="t10t-rep">2 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">8</span><span class="t10t-eq">CUT CC1</span><span class="t10t-val">7h 35m</span><span class="t10t-rep">4 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">9</span><span class="t10t-eq">IG3 RB2</span><span class="t10t-val">6h 45m</span><span class="t10t-rep">1 repair</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">6h 12m</span><span class="t10t-rep">5 repairs</span></span>
       <span class="t10t-sep">────────</span>
     </div>
   </div>
@@ -700,13 +687,13 @@ body.shift-page-active #global-ticker { display: flex; }
     <div class="hero-stat">
       <div class="hero-label">YTD 2026 — Work Orders</div>
       <div class="hero-row">
-        <div class="hero-val">1,416</div>
+        <div class="hero-val">1,464</div>
         <div class="hero-delta">
           <div class="hero-mo"><span class="hero-mo-lbl">JAN</span><span class="hero-mo-val">717</span></div>
-          <div class="hero-mo"><span class="hero-mo-lbl">FEB</span><span class="hero-mo-val" style="color:var(--dim);">699 <span style="font-size:9px;color:var(--danger);">↓</span></span></div>
+          <div class="hero-mo"><span class="hero-mo-lbl">FEB</span><span class="hero-mo-val" style="color:var(--blue);">747 <span style="font-size:9px;color:var(--green);">↑</span></span></div>
         </div>
       </div>
-      <div class="hero-sub">Thru 02/20 &nbsp;·&nbsp; <span style="color:var(--dim);">↓ −2.5% WO volume month-over-month</span></div>
+      <div class="hero-sub">Thru 02/23 &nbsp;·&nbsp; <span style="color:var(--green);">↑ +4.2% WO volume month-over-month</span></div>
     </div>
     <div class="pair">
       <div class="cell">
@@ -716,20 +703,20 @@ body.shift-page-active #global-ticker { display: flex; }
       </div>
       <div class="cell">
         <div class="ctag">Feb — Planned Work</div>
-        <div class="cval" style="color:var(--green);">80.1% <span style="font-size:0.4em;vertical-align:middle;">↑</span></div>
-        <div class="csub">560 of 699 &nbsp;<span class="trend down-good">↑ +1.3% IMPROVING</span></div>
+        <div class="cval" style="color:var(--green);">73.9% <span style="font-size:0.4em;vertical-align:middle;">↓</span></div>
+        <div class="csub">552 of 747 &nbsp;<span class="trend up-bad">↓ −4.9% vs Jan</span></div>
       </div>
     </div>
     <div class="pair">
       <div class="cell">
         <div class="ctag">Jan — Breakdowns</div>
         <div class="cval" style="color:var(--yellow);">19.5%</div>
-        <div class="csub">140 repairs &nbsp;|&nbsp; 202 hrs</div>
+        <div class="csub">140 repairs &nbsp;|&nbsp; 221h labor</div>
       </div>
       <div class="cell">
         <div class="ctag">Feb — Breakdowns</div>
-        <div class="cval" style="color:var(--green);">16.6% <span style="font-size:0.4em;vertical-align:middle;">↓</span></div>
-        <div class="csub">116 repairs &nbsp;|&nbsp; 221 hrs &nbsp;<span class="trend down-good">↓ −2.9% IMPROVING</span></div>
+        <div class="cval" style="color:var(--green);">14.7% <span style="font-size:0.4em;vertical-align:middle;">↓</span></div>
+        <div class="csub">110 repairs &nbsp;|&nbsp; 232h &nbsp;<span class="trend down-good">↓ −4.8% IMPROVING</span></div>
       </div>
     </div>
     <div class="pair">
@@ -740,8 +727,8 @@ body.shift-page-active #global-ticker { display: flex; }
       </div>
       <div class="cell">
         <div class="ctag">Feb — Total Labor</div>
-        <div class="cval">600<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
-        <div class="csub">PM 352h &nbsp;|&nbsp; BD 221h &nbsp;|&nbsp; Other 27h &nbsp;<span class="trend up-bad">↑ BD hrs ▲</span></div>
+        <div class="cval">719<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
+        <div class="csub">Thru 02/23 &nbsp;<span class="trend up-bad">↑ +10.1% vs Jan</span></div>
       </div>
     </div>
     <div class="tag">Labor Hour Mix <span class="hl">Planned vs Emergency Repairs</span></div>
@@ -762,11 +749,11 @@ body.shift-page-active #global-ticker { display: flex; }
     <div class="mix">
       <div class="mix-mo">FEB</div>
       <div class="mix-b">
-        <div class="mix-s" style="width:58.7%;background:var(--green);">PM 58.7%</div>
-        <div class="mix-s" style="width:36.8%;background:var(--danger);">BD 36.8%</div>
-        <div class="mix-s" style="width:4.5%;background:var(--muted);">O</div>
+        <div class="mix-s" style="width:57.9%;background:var(--green);">PM 57.9%</div>
+        <div class="mix-s" style="width:32.2%;background:var(--danger);">BD 32.2%</div>
+        <div class="mix-s" style="width:9.9%;background:var(--muted);">Oth 9.9%</div>
       </div>
-      <div class="mix-t">600h</div>
+      <div class="mix-t">719h</div>
     </div>
     <div class="tgt">
       <div class="tgt-h">Goal: Breakdown Hours Under 35% of Total Labor</div>
@@ -777,170 +764,179 @@ body.shift-page-active #global-ticker { display: flex; }
       </div>
       <div class="tr">
         <div class="tr-mo">FEB</div>
-        <div class="tr-bg"><div class="tr-f" style="width:36.8%;background:var(--danger);"></div><div class="tr-ln"></div></div>
-        <div class="tr-v" style="color:var(--danger);">36.8% ⚠</div>
+        <div class="tr-bg"><div class="tr-f" style="width:32.2%;background:var(--green);"></div><div class="tr-ln"></div></div>
+        <div class="tr-v" style="color:var(--green);">32.2% ✓</div>
       </div>
       <div class="tgt-n">Orange line = 35% target</div>
     </div>
     <div class="tag">⚑ Priority Alerts</div>
     <div class="alert">
-      <div class="a-title">🔴 New Problem — February</div>
-      <span class="er">IG3 VWASH</span> — 48h 30m downtime, 4 repairs. Not in January top 10.
+      <div class="a-title">🔴 Critical — February MTTR</div>
+      <span class="er">IG3 Line 3 Washer</span> — avg 12h 7m repair time across 4 breakdowns. MTBF only 176h.
+    </div>
+    <div class="alert">
+      <div class="a-title">🔴 Critical — February MTTR</div>
+      <span class="er">IG3 Razorback #2</span> — single repair logged at 6h 45m. Investigate root cause.
     </div>
     <div class="alert warn">
       <div class="a-title">🟡 Repeat Offender</div>
-      <span class="ey">IG3 SQUID</span> — #1 Jan, still top 10 Feb. Fails every 73h avg.
+      <span class="ey">IG3 SQUID</span> — #1 Jan (73h MTBF), still failing in Feb (140h MTBF). Improving but watch.
+    </div>
+    <div class="alert warn">
+      <div class="a-title">🟡 IG3 — Worst Line Health</div>
+      <span class="ey">IG3</span> — 19 BDs in Feb, MTBF 37h, MTTR 3h 58m avg. All metrics worst on floor.
     </div>
   </div><!-- /col-l -->
 
-  <!-- CENTER + RIGHT: merged into wide area -->
-  <div class="col-c" style="grid-column: span 1;">
-    <div class="tag">IG Line Health — January 2026 <span class="hl">Longer MTBF = more reliable</span></div>
+  <!-- CENTER COLUMN -->
+  <div class="col-c">
+    <!-- Feb MTBF/MTTR updated -->
+    <div class="tag">IG Line Health — February 2026 <span class="hl">Thru 02/23 · Longer MTBF = more reliable</span></div>
     <div class="lcards">
       <div class="lcard">
         <div class="lc-n" style="color:var(--blue);">IG1</div>
-        <div class="lc-h">793 HRS &nbsp;|&nbsp; 12 BD</div>
-        <div class="lc-r"><span class="lc-l">Avg between BD</span><span class="lc-v">66h 0m</span></div>
-        <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--yellow);">1h 55m</span></div>
+        <div class="lc-h">656 HRS &nbsp;|&nbsp; 10 BD</div>
+        <div class="lc-r"><span class="lc-l">MTBF</span><span class="lc-v" style="color:var(--blue);">65h 0m</span></div>
+        <div class="lc-r"><span class="lc-l">MTTR</span><span class="lc-v" style="color:var(--green);">0h 41m</span></div>
       </div>
       <div class="lcard">
         <div class="lc-n" style="color:var(--green);">IG2</div>
-        <div class="lc-h">432 HRS &nbsp;|&nbsp; 4 BD</div>
-        <div class="lc-r"><span class="lc-l">Avg between BD</span><span class="lc-v" style="color:var(--green);">108h 0m</span></div>
-        <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--green);">0h 16m</span></div>
+        <div class="lc-h">568 HRS &nbsp;|&nbsp; 8 BD</div>
+        <div class="lc-r"><span class="lc-l">MTBF</span><span class="lc-v" style="color:var(--green);">71h 0m</span></div>
+        <div class="lc-r"><span class="lc-l">MTTR</span><span class="lc-v" style="color:var(--green);">0h 48m</span></div>
       </div>
       <div class="lcard">
         <div class="lc-n" style="color:var(--danger);">IG3</div>
-        <div class="lc-h">881 HRS &nbsp;|&nbsp; 17 BD</div>
-        <div class="lc-r"><span class="lc-l">Avg between BD</span><span class="lc-v" style="color:var(--danger);">51h 0m</span></div>
-        <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--yellow);">1h 58m</span></div>
+        <div class="lc-h">704 HRS &nbsp;|&nbsp; 19 BD</div>
+        <div class="lc-r"><span class="lc-l">MTBF</span><span class="lc-v" style="color:var(--danger);">37h 0m</span></div>
+        <div class="lc-r"><span class="lc-l">MTTR</span><span class="lc-v" style="color:var(--danger);">3h 58m</span></div>
       </div>
       <div class="lcard">
         <div class="lc-n" style="color:var(--yellow);">IG4</div>
-        <div class="lc-h">861 HRS &nbsp;|&nbsp; 17 BD</div>
-        <div class="lc-r"><span class="lc-l">Avg between BD</span><span class="lc-v" style="color:var(--yellow);">50h 0m</span></div>
-        <div class="lc-r"><span class="lc-l">Avg repair time</span><span class="lc-v" style="color:var(--green);">1h 35m</span></div>
+        <div class="lc-h">696 HRS &nbsp;|&nbsp; 8 BD</div>
+        <div class="lc-r"><span class="lc-l">MTBF</span><span class="lc-v" style="color:var(--green);">87h 0m</span></div>
+        <div class="lc-r"><span class="lc-l">MTTR</span><span class="lc-v" style="color:var(--green);">0h 22m</span></div>
       </div>
     </div>
-    <div class="tag">Line Reliability — January 2026 <span class="hl">Longer bar = breaks down less often</span></div>
+    <div class="tag">Line Reliability — February 2026 <span class="hl">MTBF — Longer bar = breaks down less often</span></div>
     <div class="mtbf">
       <div class="mbr">
+        <div class="mb-l" style="color:var(--yellow);">IG4</div>
+        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(180,120,20,0.50);">BEST — 87h between breakdowns</div></div>
+        <div class="mb-v" style="color:var(--yellow);">87h</div>
+      </div>
+      <div class="mbr">
         <div class="mb-l" style="color:var(--green);">IG2</div>
-        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(30,120,60,0.50);">BEST — 108h between breakdowns</div></div>
-        <div class="mb-v" style="color:var(--green);">108h</div>
+        <div class="mb-bg"><div class="mb-f" style="width:81.6%;background:rgba(30,120,60,0.45);">71h</div></div>
+        <div class="mb-v" style="color:var(--green);">71h</div>
       </div>
       <div class="mbr">
         <div class="mb-l" style="color:var(--blue);">IG1</div>
-        <div class="mb-bg"><div class="mb-f" style="width:61.1%;background:rgba(40,110,170,0.42);">66h</div></div>
-        <div class="mb-v" style="color:var(--blue);">66h</div>
+        <div class="mb-bg"><div class="mb-f" style="width:74.7%;background:rgba(40,110,170,0.42);">65h</div></div>
+        <div class="mb-v" style="color:var(--blue);">65h</div>
       </div>
       <div class="mbr">
         <div class="mb-l" style="color:var(--danger);">IG3</div>
-        <div class="mb-bg"><div class="mb-f" style="width:47.2%;background:rgba(160,40,40,0.45);">51h</div></div>
-        <div class="mb-v" style="color:var(--danger);">51h</div>
+        <div class="mb-bg"><div class="mb-f" style="width:42.5%;background:rgba(160,40,40,0.55);">37h — CRITICAL</div></div>
+        <div class="mb-v" style="color:var(--danger);">37h</div>
       </div>
+    </div>
+    <div class="tag">MTTR Comparison — February 2026 <span class="hl">Shorter = faster repairs</span></div>
+    <div class="mtbf">
       <div class="mbr">
         <div class="mb-l" style="color:var(--yellow);">IG4</div>
-        <div class="mb-bg"><div class="mb-f" style="width:46.3%;background:rgba(180,120,20,0.42);">50h</div></div>
-        <div class="mb-v" style="color:var(--yellow);">50h</div>
+        <div class="mb-bg"><div class="mb-f" style="width:9.3%;background:rgba(180,120,20,0.50);">0h 22m</div></div>
+        <div class="mb-v" style="color:var(--yellow);">0h 22m</div>
+      </div>
+      <div class="mbr">
+        <div class="mb-l" style="color:var(--blue);">IG1</div>
+        <div class="mb-bg"><div class="mb-f" style="width:17.2%;background:rgba(40,110,170,0.42);">0h 41m</div></div>
+        <div class="mb-v" style="color:var(--blue);">0h 41m</div>
+      </div>
+      <div class="mbr">
+        <div class="mb-l" style="color:var(--green);">IG2</div>
+        <div class="mb-bg"><div class="mb-f" style="width:20.1%;background:rgba(30,120,60,0.45);">0h 48m</div></div>
+        <div class="mb-v" style="color:var(--green);">0h 48m</div>
+      </div>
+      <div class="mbr">
+        <div class="mb-l" style="color:var(--danger);">IG3</div>
+        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(160,40,40,0.55);">3h 58m — CRITICAL</div></div>
+        <div class="mb-v" style="color:var(--danger);">3h 58m</div>
       </div>
     </div>
-    <div class="tag">Corrective Work Orders — Trend <span class="hl">Unplanned reactive work</span></div>
-    <div class="corr-wrap">
-      <div class="corr-row">
-        <div class="corr-mo">JAN</div>
-        <div class="corr-bg">
-          <div class="corr-f" style="width:52.2%;background:rgba(58,143,191,0.45);">
-            <span class="corr-lbl">12 WOs &nbsp;·&nbsp; 11 labor hrs</span>
-          </div>
-        </div>
-        <div class="corr-v" style="color:var(--blue);">12</div>
-      </div>
-      <div class="corr-row">
-        <div class="corr-mo">FEB</div>
-        <div class="corr-bg">
-          <div class="corr-f" style="width:100%;background:rgba(184,51,51,0.45);">
-            <span class="corr-lbl">23 WOs &nbsp;·&nbsp; 27 labor hrs</span>
-          </div>
-        </div>
-        <div class="corr-v" style="color:var(--danger);">23</div>
-      </div>
-      <div class="corr-note">
-        ⚠ Feb corrective WOs nearly doubled Jan &nbsp;·&nbsp; labor hrs up 145% &nbsp;·&nbsp; watch for systemic issues
-      </div>
-    </div>
-
   </div><!-- /col-c -->
 
-  <!-- RIGHT COLUMN: 4 tables in 2x2 grid -->
+  <!-- RIGHT COLUMN: Feb MTBF detail tables -->
   <div class="col-r">
-    <div class="tag">Equipment Repair Detail — January 2026 <span class="hl">All IG Lines</span></div>
+    <div class="tag">Equipment Repair Detail — February 2026 <span class="hl">All IG Lines · Thru 02/23</span></div>
     <div class="ig-grid">
-      <!-- IG1 -->
+      <!-- IG1 Feb -->
       <div class="ig-cell">
-        <div class="lhdr first"><span class="lh-n" style="color:var(--blue);">IG1</span><span class="lh-h">793 line hours</span></div>
+        <div class="lhdr first"><span class="lh-n" style="color:var(--blue);">IG1</span><span class="lh-h">656 line hrs</span></div>
         <table class="dt">
-          <thead><tr><th>Equipment</th><th>Rep</th><th>Avg Btw</th><th>Avg Fix</th></tr></thead>
+          <thead><tr><th>Equipment</th><th>BD</th><th>MTBF</th><th>MTTR</th></tr></thead>
           <tbody>
-            <tr><td>51x90 Squid</td><td class="m">5</td><td class="m">158h</td><td><span class="bdg bw">2h 22m</span></td></tr>
-            <tr><td>IG1 Washer</td><td class="m">3</td><td class="m">264h</td><td><span class="bdg bw">2h 40m</span></td></tr>
-            <tr><td>Mask Master 3</td><td class="m">2</td><td class="m">396h</td><td><span class="bdg bg">1h 15m</span></td></tr>
-            <tr><td>48x96 Load Conv</td><td class="m">1</td><td class="m">793h</td><td><span class="bdg bg">0h 20m</span></td></tr>
-            <tr><td>Mask Master 1</td><td class="m">1</td><td class="m">793h</td><td><span class="bdg bg">0h 20m</span></td></tr>
-            <tr><td><strong>IG1 Total</strong></td><td class="m"><strong>12</strong></td><td class="m"><strong>66h</strong></td><td><span class="bdg bw">1h 55m</span></td></tr>
+            <tr><td>Line 1 Squid</td><td class="m">7</td><td class="m">93h</td><td><span class="bdg bg">0h 43m</span></td></tr>
+            <tr><td>1ig042 Nozzle Cleaner</td><td class="m">1</td><td class="m">656h</td><td><span class="bdg bw">1h 0m</span></td></tr>
+            <tr><td>IG1 Mask Master 4</td><td class="m">1</td><td class="m">656h</td><td><span class="bdg bg">0h 30m</span></td></tr>
+            <tr><td>IG1 Razorback #2</td><td class="m">1</td><td class="m">656h</td><td><span class="bdg bg">0h 20m</span></td></tr>
+            <tr><td><strong>IG1 Total</strong></td><td class="m"><strong>10</strong></td><td class="m"><strong>65h</strong></td><td><span class="bdg bg">0h 41m</span></td></tr>
           </tbody>
         </table>
       </div>
-      <!-- IG2 -->
+      <!-- IG2 Feb -->
       <div class="ig-cell">
-        <div class="lhdr first"><span class="lh-n" style="color:var(--green);">IG2</span><span class="lh-h">432 line hours</span></div>
+        <div class="lhdr first"><span class="lh-n" style="color:var(--green);">IG2</span><span class="lh-h">568 line hrs</span></div>
         <table class="dt">
-          <thead><tr><th>Equipment</th><th>Rep</th><th>Avg Btw</th><th>Avg Fix</th></tr></thead>
+          <thead><tr><th>Equipment</th><th>BD</th><th>MTBF</th><th>MTTR</th></tr></thead>
           <tbody>
-            <tr><td>IG2 Washer</td><td class="m">2</td><td class="m">216h</td><td><span class="bdg bg">0h 10m</span></td></tr>
-            <tr><td>IG2 Flipper</td><td class="m">1</td><td class="m">432h</td><td><span class="bdg bg">0h 15m</span></td></tr>
-            <tr><td>Mask Master 1</td><td class="m">1</td><td class="m">432h</td><td><span class="bdg bg">0h 30m</span></td></tr>
-            <tr><td><strong>IG2 Total</strong></td><td class="m"><strong>4</strong></td><td class="m"><strong>108h</strong></td><td><span class="bdg bg">0h 16m</span></td></tr>
+            <tr><td>Line 2 Squid</td><td class="m">5</td><td class="m">113h</td><td><span class="bdg bg">0h 34m</span></td></tr>
+            <tr><td>2ig033 Nozzle Cleaner</td><td class="m">1</td><td class="m">568h</td><td><span class="bdg bw">1h 0m</span></td></tr>
+            <tr><td>IG2 Mask Master 3</td><td class="m">1</td><td class="m">568h</td><td><span class="bdg bw">2h 20m</span></td></tr>
+            <tr><td>LINE2 (general)</td><td class="m">1</td><td class="m">568h</td><td><span class="bdg bg">0h 20m</span></td></tr>
+            <tr><td><strong>IG2 Total</strong></td><td class="m"><strong>8</strong></td><td class="m"><strong>71h</strong></td><td><span class="bdg bg">0h 48m</span></td></tr>
           </tbody>
         </table>
       </div>
-      <!-- IG3 -->
+      <!-- IG3 Feb — CRITICAL -->
       <div class="ig-cell">
-        <div class="lhdr first"><span class="lh-n" style="color:var(--danger);">IG3</span><span class="lh-h">881 line hours</span></div>
+        <div class="lhdr first"><span class="lh-n" style="color:var(--danger);">IG3</span><span class="lh-h">704 line hrs · ⚠ CRITICAL</span></div>
         <table class="dt">
-          <thead><tr><th>Equipment</th><th>Rep</th><th>Avg Btw</th><th>Avg Fix</th></tr></thead>
+          <thead><tr><th>Equipment</th><th>BD</th><th>MTBF</th><th>MTTR</th></tr></thead>
           <tbody>
-            <tr><td>84x144 Squid</td><td class="m" style="color:var(--danger);">12</td><td class="m" style="color:var(--danger);">73h</td><td><span class="bdg bw">2h 12m</span></td></tr>
-            <tr><td>IG3 Washer</td><td class="m">2</td><td class="m">440h</td><td><span class="bdg bw">2h 15m</span></td></tr>
-            <tr><td>Mask Master 1</td><td class="m">1</td><td class="m">881h</td><td><span class="bdg bg">0h 15m</span></td></tr>
-            <tr><td>IG3 Flipper</td><td class="m">1</td><td class="m">881h</td><td><span class="bdg bg">0h 10m</span></td></tr>
-            <tr><td>IG3 UnFlipper</td><td class="m">1</td><td class="m">881h</td><td><span class="bdg bw">2h 0m</span></td></tr>
-            <tr><td><strong>IG3 Total</strong></td><td class="m"><strong>17</strong></td><td class="m" style="color:var(--danger);"><strong>51h</strong></td><td><span class="bdg bw">1h 58m</span></td></tr>
+            <tr><td>Line 3 Squid</td><td class="m">5</td><td class="m">140h</td><td><span class="bdg bw">1h 14m</span></td></tr>
+            <tr><td>Line 3 Washer</td><td class="m" style="color:var(--danger);">4</td><td class="m" style="color:var(--danger);">176h</td><td><span class="bdg br">12h 7m ⚠</span></td></tr>
+            <tr><td>3ig015 84x36 Conv.</td><td class="m">2</td><td class="m">352h</td><td><span class="bdg bw">1h 7m</span></td></tr>
+            <tr><td>3ig017 84x36 Conv/Vision</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">1h 55m</span></td></tr>
+            <tr><td>3ig033 Logo Master</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bg">0h 10m</span></td></tr>
+            <tr><td>3ig041 84x150 Conv.</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg br">3h 0m</span></td></tr>
+            <tr><td>3ig053 Nozzle Cleaner</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">1h 0m</span></td></tr>
+            <tr><td>Hand Seal Washer</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">2h 0m</span></td></tr>
+            <tr><td>IG3 Razorback #2</td><td class="m" style="color:var(--danger);">1</td><td class="m">704h</td><td><span class="bdg br">6h 45m ⚠</span></td></tr>
+            <tr><td>IG3 UnFlipper</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">1h 30m</span></td></tr>
+            <tr><td>Richter Manip.</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">2h 20m</span></td></tr>
+            <tr><td><strong>IG3 Total</strong></td><td class="m" style="color:var(--danger);"><strong>19</strong></td><td class="m" style="color:var(--danger);"><strong>37h</strong></td><td><span class="bdg br">3h 58m</span></td></tr>
           </tbody>
         </table>
       </div>
-      <!-- IG4 -->
+      <!-- IG4 Feb -->
       <div class="ig-cell">
-        <div class="lhdr first"><span class="lh-n" style="color:var(--yellow);">IG4</span><span class="lh-h">861 line hours</span></div>
+        <div class="lhdr first"><span class="lh-n" style="color:var(--yellow);">IG4</span><span class="lh-h">696 line hrs · Best MTBF</span></div>
         <table class="dt">
-          <thead><tr><th>Equipment</th><th>Rep</th><th>Avg Btw</th><th>Avg Fix</th></tr></thead>
+          <thead><tr><th>Equipment</th><th>BD</th><th>MTBF</th><th>MTTR</th></tr></thead>
           <tbody>
-            <tr><td>IG4 Squid</td><td class="m" style="color:var(--yellow);">7</td><td class="m">123h</td><td><span class="bdg bg">0h 46m</span></td></tr>
-            <tr><td>Billco V.Wash</td><td class="m">2</td><td class="m">430h</td><td><span class="bdg br">3h 0m</span></td></tr>
-            <tr><td>Viprotron Scan</td><td class="m">2</td><td class="m">430h</td><td><span class="bdg bg">0h 41m</span></td></tr>
-            <tr><td>Conveyor 3</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg br">3h 20m</span></td></tr>
-            <tr><td>Conveyor 4</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg bg">1h 0m</span></td></tr>
-            <tr><td>IQ Test</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg bg">0h 40m</span></td></tr>
-            <tr><td>Mask Master 1</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg bg">0h 40m</span></td></tr>
-            <tr><td>Mask Master 2</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg bg">0h 30m</span></td></tr>
-            <tr><td>IG4 Tru Grind</td><td class="m">1</td><td class="m">861h</td><td><span class="bdg br">8h 0m</span></td></tr>
-            <tr><td><strong>IG4 Total</strong></td><td class="m"><strong>17</strong></td><td class="m"><strong>50h</strong></td><td><span class="bdg bg">1h 35m</span></td></tr>
+            <tr><td>IG4 AGP</td><td class="m">3</td><td class="m">232h</td><td><span class="bdg bg">0h 13m</span></td></tr>
+            <tr><td>Line 4 Squid</td><td class="m">2</td><td class="m">348h</td><td><span class="bdg bg">0h 10m</span></td></tr>
+            <tr><td>IG4 IQ Test</td><td class="m">1</td><td class="m">696h</td><td><span class="bdg bg">0h 0m</span></td></tr>
+            <tr><td>IG4 Robot</td><td class="m">1</td><td class="m">696h</td><td><span class="bdg bw">1h 30m</span></td></tr>
+            <tr><td>Line 4 Washer</td><td class="m">1</td><td class="m">696h</td><td><span class="bdg bg">0h 30m</span></td></tr>
+            <tr><td><strong>IG4 Total</strong></td><td class="m"><strong>8</strong></td><td class="m" style="color:var(--yellow);"><strong>87h</strong></td><td><span class="bdg bg">0h 22m</span></td></tr>
           </tbody>
         </table>
       </div>
     </div>
     <div class="bdg-leg">
-      <span class="lbl">Repair Time:</span>
+      <span class="lbl">MTTR:</span>
       <span class="bdg bg">Under 1 hr — Good</span>
       <span class="bdg bw">1–3 hrs — Monitor</span>
       <span class="bdg br">Over 3 hrs — Concern</span>
@@ -951,12 +947,8 @@ body.shift-page-active #global-ticker { display: flex; }
 </div><!-- /kpi-page -->
 
 
-
-
-
 <!-- ═══════════════════════════ SHIFT PERFORMANCE PAGE ═══════════════════════════ -->
 <div id="shift-page">
-
   <div class="sp-layout">
 
     <!-- A Shift -->
@@ -997,6 +989,8 @@ body.shift-page-active #global-ticker { display: flex; }
           <div class="sp-bar-v" style="color:var(--dim);">206h</div>
         </div>
       </div>
+      <!-- A Shift Schedule — JS driven -->
+      <div id="sched-A"></div>
     </div>
 
     <!-- B Shift -->
@@ -1037,6 +1031,8 @@ body.shift-page-active #global-ticker { display: flex; }
           <div class="sp-bar-v" style="color:var(--green);">160h</div>
         </div>
       </div>
+      <!-- B Shift Schedule — JS driven -->
+      <div id="sched-B"></div>
     </div>
 
     <!-- C Shift -->
@@ -1075,6 +1071,29 @@ body.shift-page-active #global-ticker { display: flex; }
           <div class="sp-bar-mo">FEB</div>
           <div class="sp-bar-bg"><div class="sp-bar-f" style="width:14.2%;background:var(--yellow);opacity:0.4;"></div></div>
           <div class="sp-bar-v" style="color:var(--yellow);">38h</div>
+        </div>
+      </div>
+      <div class="sp-bar-section">
+        <div class="sp-bar-lbl">Week of 02/20 — Top Contributors</div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo" style="width:52px;font-size:9px;">Moreno</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:100%;background:var(--yellow);opacity:0.7;"></div></div>
+          <div class="sp-bar-v">22h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo" style="width:52px;font-size:9px;">Webb</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:51.9%;background:var(--yellow);opacity:0.5;"></div></div>
+          <div class="sp-bar-v">11h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo" style="width:52px;font-size:9px;">Richard</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:41.7%;background:var(--yellow);opacity:0.4;"></div></div>
+          <div class="sp-bar-v">9h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo" style="width:52px;font-size:9px;">Hall</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:14%;background:var(--yellow);opacity:0.3;"></div></div>
+          <div class="sp-bar-v">3h</div>
         </div>
       </div>
     </div>
@@ -1117,6 +1136,29 @@ body.shift-page-active #global-ticker { display: flex; }
           <div class="sp-bar-v" style="color:#ff6b84;">64h</div>
         </div>
       </div>
+      <div class="sp-bar-section">
+        <div class="sp-bar-lbl">Week of 02/20 — Top Contributors</div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo" style="width:52px;font-size:9px;">Waldron</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:100%;background:#ff6b84;opacity:0.7;"></div></div>
+          <div class="sp-bar-v">18h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo" style="width:52px;font-size:9px;">Adkins</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:92%;background:#ff6b84;opacity:0.6;"></div></div>
+          <div class="sp-bar-v">17h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo" style="width:52px;font-size:9px;">Lyne</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:74%;background:#ff6b84;opacity:0.5;"></div></div>
+          <div class="sp-bar-v">14h</div>
+        </div>
+        <div class="sp-bar-row">
+          <div class="sp-bar-mo" style="width:52px;font-size:9px;">Beasley</div>
+          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:41.4%;background:#ff6b84;opacity:0.4;"></div></div>
+          <div class="sp-bar-v">7h</div>
+        </div>
+      </div>
     </div>
 
   </div><!-- /sp-layout -->
@@ -1124,11 +1166,10 @@ body.shift-page-active #global-ticker { display: flex; }
 
 <footer class="ftr">
   <span>Cardinal IG Roanoke &nbsp;|&nbsp; Maintenance Department &nbsp;|&nbsp; PMWare CMMS</span>
-  <span>Report Date: 02/20/2026</span>
+  <span id="ftr-date">Report Date: 02/23/2026</span>
 </footer>
 
 <script>
-// Page switching
 function showPage(page, el) {
   document.getElementById('kpi-page').style.display   = page === 'kpi'   ? 'block' : 'none';
   document.getElementById('shift-page').style.display = page === 'shift' ? 'block' : 'none';
@@ -1137,7 +1178,6 @@ function showPage(page, el) {
   document.body.classList.toggle('shift-page-active', page === 'shift');
 }
 
-// Active shift detection — 2-2-3 rotating schedule
 function getActiveShift(now) {
   var anchor = new Date('2026-02-20T06:00:00');
   var msPerSlot = 12 * 60 * 60 * 1000;
@@ -1147,7 +1187,6 @@ function getActiveShift(now) {
   return cycle[idx];
 }
 
-// Clock + shift updater
 function updateClock() {
   var now = new Date();
   var h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
@@ -1169,45 +1208,12 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Counter animation
-function animateCounter(el, target, isPercent, decimals) {
-  var start = 0, duration = 1200, startTime = null;
-  var suffix = el.querySelector && el.querySelector('span') ? el.innerHTML.replace(/[\d.]+/, '') : '';
-  function step(ts) {
-    if (!startTime) startTime = ts;
-    var p = Math.min((ts - startTime) / duration, 1);
-    var ease = 1 - Math.pow(1 - p, 3);
-    var cur = start + (target - start) * ease;
-    var display = decimals ? cur.toFixed(1) : Math.floor(cur);
-    if (suffix) el.innerHTML = display + suffix;
-    else el.textContent = display + (isPercent ? '%' : '');
-    if (p < 1) requestAnimationFrame(step);
-    else {
-      if (suffix) el.innerHTML = target + suffix;
-      else el.textContent = target + (isPercent ? '%' : '');
-    }
-  }
-  requestAnimationFrame(step);
-}
-window.addEventListener('load', function() {
-  var counters = [
-    {sel: '.col-l .pair:nth-child(3) .cell:nth-child(1) .cval', val: 78.8, pct: true, dec: true},
-    {sel: '.col-l .pair:nth-child(3) .cell:nth-child(2) .cval', val: 80.1, pct: true, dec: true},
-    {sel: '.col-l .pair:nth-child(4) .cell:nth-child(1) .cval', val: 19.5, pct: true, dec: true},
-    {sel: '.col-l .pair:nth-child(4) .cell:nth-child(2) .cval', val: 16.6, pct: true, dec: true},
-  ];
-  counters.forEach(function(c) {
-    var el = document.querySelector(c.sel);
-    if (el) animateCounter(el, c.val, c.pct, c.dec);
-  });
-});
-
-// Weather — Vinton, VA (lat 37.0887, lon -79.8981)
-fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0887&longitude=-79.8981&current=temperature_2m,weather_code,weathercode,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
+// Weather
+fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0887&longitude=-79.8981&current=temperature_2m,weather_code,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
   .then(function(r){ return r.json(); })
   .then(function(d){
     var temp = Math.round(d.current.temperature_2m);
-    var code = d.current.weather_code !== undefined ? d.current.weather_code : d.current.weathercode;
+    var code = d.current.weather_code;
     var wind = Math.round(d.current.windspeed_10m);
     var icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'🌨️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
     var descs = {0:'Clear',1:'Mostly Clear',2:'Partly Cloudy',3:'Overcast',45:'Foggy',48:'Foggy',51:'Light Drizzle',53:'Drizzle',55:'Heavy Drizzle',61:'Light Rain',63:'Rain',65:'Heavy Rain',71:'Light Snow',73:'Snow',75:'Heavy Snow',80:'Showers',81:'Showers',82:'Heavy Showers',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'};
@@ -1216,6 +1222,199 @@ fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0887&longitude=-79.898
     document.getElementById('wx-desc').textContent = (descs[code] || 'Clear') + ' · ' + wind + ' mph · Vinton, VA';
   })
   .catch(function(){ document.getElementById('wx-desc').textContent = 'Vinton, VA'; });
+
+// ═══════════════════════════════════════════════════════════
+//  DAILY SCHEDULE ENGINE
+//  Each entry: { wo, equip, title, type, est, due, dueCls, note }
+//  type: 'pm' | 'bd' | 'svc' | 'corr'
+//  dueCls: 'ok' | 'overdue'
+//  note: optional inline note string (shown in orange)
+// ═══════════════════════════════════════════════════════════
+var SCHEDULE = {
+  'A': {
+    '2026-02-23': {
+      label: 'Monday 02/23',
+      wos: [
+        { wo:'118800', equip:'IG3 MM3',     title:'IG Mask Master Monthly PM',              type:'pm',   est:'0h 45m', due:'02/28', dueCls:'ok' },
+        { wo:'118799', equip:'IG3 MM4',     title:'IG Mask Master Monthly PM',              type:'pm',   est:'0h 45m', due:'02/28', dueCls:'ok' },
+        { wo:'118802', equip:'IG3 MM2',     title:'IG Mask Master Monthly PM',              type:'pm',   est:'0h 45m', due:'02/28', dueCls:'ok' },
+        { wo:'119947', equip:'IG3 HAWK',    title:'Hawk Weekly PM',                         type:'pm',   est:'0h 15m', due:'02/22', dueCls:'overdue' },
+        { wo:'120045', equip:'IG2 VWASH',   title:'CRITICAL: IG2 Washer Weekly Insp.',      type:'pm',   est:'1h 0m',  due:'02/25', dueCls:'ok',      note:'critical' },
+        { wo:'119655', equip:'IG2 VWASH',   title:'CRITICAL: IG2 Washer Bi-Weekly PM',      type:'pm',   est:'1h 0m',  due:'02/23', dueCls:'overdue', note:'critical' },
+        { wo:'120015', equip:'L2-SILP-02',  title:'Silicone Pump Weekly PM',                type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'120012', equip:'L2-SILP-01',  title:'Silicone Pump Weekly PM',                type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'120027', equip:'IG2 GS',      title:'IQTest & Gas Scope Merlin Weekly PMs',   type:'pm',   est:'0h 15m', due:'02/23', dueCls:'overdue' },
+        { wo:'120054', equip:'3/G013',      title:'Install Backboard wheels & O-Ring',      type:'svc',  est:'0h 35m', due:'02/23', dueCls:'overdue' },
+        { wo:'120084', equip:'IG3 MM3',     title:'Masker 3 backboard',                     type:'svc',  est:'0h 0m',  due:'02/23', dueCls:'overdue', note:'czahner' },
+        { wo:'120120', equip:'MEZ B9',      title:'Bend arm slamming/breaking',             type:'bd',   est:'0h 0m',  due:'02/23', dueCls:'overdue' }
+      ]
+    },
+    '2026-02-24': {
+      label: 'Tuesday 02/24',
+      wos: [
+        { wo:'118893', equip:'IG4 VWASH',   title:'CRITICAL: IG Washer Monthly PM',         type:'pm',   est:'1h 30m', due:'02/28', dueCls:'ok',      note:'critical' },
+        { wo:'119937', equip:'IG3 SQUID',   title:'Critical: IG Squid Weekly PM',           type:'pm',   est:'0h 50m', due:'02/22', dueCls:'overdue', note:'critical' },
+        { wo:'119881', equip:'CUT CT1',     title:'Freq drive shuttle gripper fault',        type:'bd',   est:'1h 0m',  due:'02/22', dueCls:'overdue', note:'ttolley' },
+        { wo:'120060', equip:'AE4',         title:'Wheel alignment',                         type:'svc',  est:'0h 0m',  due:'02/22', dueCls:'overdue', note:'clyons' },
+        { wo:'120056', equip:'IG4 MM3',     title:'Sensor back side',                        type:'svc',  est:'1h 0m',  due:'02/22', dueCls:'overdue', note:'czahner' },
+        { wo:'119874', equip:'IG4 MM4',     title:'Sensor',                                  type:'svc',  est:'0h 0m',  due:'02/22', dueCls:'overdue', note:'czahner' },
+        { wo:'119780', equip:'IG2 Squid',   title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119779', equip:'IG2 TGRIND',  title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119778', equip:'IG2 FLIP',    title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119777', equip:'IG2 MM4',     title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119776', equip:'IG2 MM3',     title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119775', equip:'IG2 MM2',     title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119774', equip:'IG2 MM1',     title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119773', equip:'IG2 GB',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119772', equip:'IG2 ASSM',    title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119771', equip:'IG2 LOGO',    title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119770', equip:'2/G032',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119769', equip:'2/G029',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119768', equip:'2/G028',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119767', equip:'2/G026',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119766', equip:'2/G024',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119765', equip:'2/G022',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119764', equip:'2/G020',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' }
+      ]
+    }
+  },
+  'B': {
+    '2026-02-23': {
+      label: 'Monday 02/23',
+      wos: [
+        { wo:'120014', equip:'L1-SILP-02',   title:'Silicone Pump Weekly PM',               type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'120011', equip:'L1-SILP-01',   title:'Silicone Pump Weekly PM',               type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'120113', equip:'Shop',          title:'Weekly 5\'s',                           type:'pm',   est:'1h 49m', due:'02/27', dueCls:'ok' },
+        { wo:'120041', equip:'IG4 IQ',        title:'IQTest & Gas Scope Merlin Weekly PMs',  type:'pm',   est:'0h 15m', due:'02/23', dueCls:'overdue' },
+        { wo:'119756', equip:'2/G009',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119755', equip:'2/G006',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119754', equip:'2/G004',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119753', equip:'2/G003',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'120055', equip:'CUT Crush2S',   title:'Safety guard broke off',                type:'bd',   est:'0h 0m',  due:'02/23', dueCls:'overdue', note:'czahner' }
+      ]
+    },
+    '2026-02-24': {
+      label: 'Tuesday 02/24',
+      wos: [
+        { wo:'119554', equip:'Plant',         title:'Check all Air wand stations for leaks', type:'svc',  est:'0h 30m', due:'02/28', dueCls:'ok',  note:'nwhite' },
+        { wo:'120009', equip:'L4-SILP-02',    title:'Silicone Pump Weekly PM',               type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'120008', equip:'L4-SILP-01',    title:'Silicone Pump Weekly PM',               type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'120042', equip:'IG4 AGP',       title:'CRITICAL: AGP Weekly PM',               type:'pm',   est:'2h 0m',  due:'02/25', dueCls:'ok',  note:'critical' },
+        { wo:'119763', equip:'2/G019',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119762', equip:'2/G017',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119761', equip:'2/G016',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119760', equip:'2/G014',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119759', equip:'L4/G012',       title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119758', equip:'2/G011',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
+        { wo:'119757', equip:'2/G010',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' }
+      ]
+    }
+  }
+};
+
+// ── helpers ──────────────────────────────────────────────
+function todayKey() {
+  var d = new Date();
+  var mm = String(d.getMonth()+1).padStart(2,'0');
+  var dd = String(d.getDate()).padStart(2,'0');
+  return d.getFullYear() + '-' + mm + '-' + dd;
+}
+
+var TYPE_CLASS = { pm:'sched-type-pm', bd:'sched-type-bd', svc:'sched-type-svc', corr:'sched-type-corr' };
+var TYPE_LABEL = { pm:'PM', bd:'BD', svc:'SVC', corr:'CORR' };
+
+function buildSchedHTML(shift) {
+  var key  = todayKey();
+  var data = SCHEDULE[shift] && SCHEDULE[shift][key];
+  var days  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var today = new Date();
+  var dayName = days[today.getDay()];
+  var dateDisp = (today.getMonth()+1).toString().padStart(2,'0') + '/' + today.getDate().toString().padStart(2,'0');
+
+  if (!data) {
+    return '<div style="padding:16px clamp(8px,1vw,16px);border-top:1px solid var(--border);">'
+      + '<div style="font-family:\'Share Tech Mono\',monospace;font-size:clamp(7px,0.65vw,9px);letter-spacing:2px;text-transform:uppercase;color:var(--orange);padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px;">'
+      + dayName.toUpperCase() + ' ' + dateDisp + ' — ' + shift + ' SHIFT</div>'
+      + '<div style="font-family:\'Share Tech Mono\',monospace;font-size:clamp(8px,0.75vw,10px);color:var(--muted);padding:12px 0;text-align:center;">'
+      + '— No schedule loaded for this date —<br>'
+      + '<span style="font-size:clamp(7px,0.6vw,8px);color:var(--border);">Upload next schedule to add data</span></div></div>';
+  }
+
+  // count overdue
+  var overdueCount = data.wos.filter(function(w){ return w.dueCls === 'overdue'; }).length;
+  var totalEst = data.wos.reduce(function(acc, w) {
+    var parts = w.est.match(/(\d+)h\s*(\d+)m/);
+    return parts ? acc + parseInt(parts[1])*60 + parseInt(parts[2]) : acc;
+  }, 0);
+  var estDisp = Math.floor(totalEst/60) + 'h ' + (totalEst%60).toString().padStart(2,'0') + 'm';
+
+  var html = '<div style="padding:0 0 0 0;border-top:1px solid var(--border);">';
+  // header
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;'
+    + 'font-family:\'Share Tech Mono\',monospace;font-size:clamp(7px,0.65vw,9px);'
+    + 'letter-spacing:2px;text-transform:uppercase;color:var(--orange);'
+    + 'padding:6px clamp(8px,1vw,16px) 3px;border-bottom:1px solid var(--border);">'
+    + '<span>' + data.label.toUpperCase() + ' — ' + shift + ' SHIFT</span>'
+    + '<span style="display:flex;gap:8px;align-items:center;">'
+    + '<span style="color:var(--dim);">' + data.wos.length + ' WOs · ' + estDisp + '</span>'
+    + (overdueCount > 0
+      ? '<span style="color:var(--danger);font-weight:700;">⚠ ' + overdueCount + ' OVERDUE</span>'
+      : '<span style="color:var(--green);">✓ On Track</span>')
+    + '</span></div>';
+
+  // table
+  html += '<table class="sched" style="margin-bottom:0;">'
+    + '<thead><tr><th>WO#</th><th>Equipment</th><th>Title</th><th>Type</th><th>Est</th><th>Due</th></tr></thead>'
+    + '<tbody>';
+
+  data.wos.forEach(function(w) {
+    var titleClass = TYPE_CLASS[w.type] || '';
+    var isCritical = w.note === 'critical';
+    var titleStyle = isCritical ? 'color:var(--danger);' : '';
+    var noteHTML   = (w.note && w.note !== 'critical')
+      ? ' <span style="color:var(--orange);font-size:clamp(7px,0.6vw,8px);">(' + w.note + ')</span>'
+      : '';
+    var dueHTML = w.dueCls === 'overdue'
+      ? '<span class="sched-overdue">⚠ ' + w.due + '</span>'
+      : '<span class="sched-ok">' + w.due + '</span>';
+    var typeTag = '<span style="font-family:\'Share Tech Mono\',monospace;font-size:clamp(6px,0.55vw,8px);'
+      + 'padding:1px 4px;border-radius:2px;font-weight:700;'
+      + (w.type==='pm'   ? 'background:rgba(30,120,60,0.15);color:var(--green);'   :
+         w.type==='bd'   ? 'background:rgba(160,40,40,0.18);color:var(--danger);'  :
+         w.type==='svc'  ? 'background:rgba(40,110,170,0.15);color:var(--blue);'   :
+                           'background:rgba(180,120,20,0.15);color:var(--yellow);')
+      + '">' + TYPE_LABEL[w.type] + '</span>';
+
+    html += '<tr>'
+      + '<td class="wo-num">' + w.wo + '</td>'
+      + '<td>' + w.equip + '</td>'
+      + '<td class="' + titleClass + '" style="' + titleStyle + '">' + w.title + noteHTML + '</td>'
+      + '<td>' + typeTag + '</td>'
+      + '<td style="font-family:\'Share Tech Mono\',monospace;font-size:clamp(8px,0.7vw,9px);color:var(--muted);">' + w.est + '</td>'
+      + '<td>' + dueHTML + '</td>'
+      + '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+  return html;
+}
+
+// ── render + auto-refresh on date change ─────────────────
+var _lastRenderedDate = '';
+
+function renderSchedules() {
+  var key = todayKey();
+  if (key === _lastRenderedDate) return;     // nothing changed
+  _lastRenderedDate = key;
+  var elA = document.getElementById('sched-A');
+  var elB = document.getElementById('sched-B');
+  if (elA) elA.innerHTML = buildSchedHTML('A');
+  if (elB) elB.innerHTML = buildSchedHTML('B');
+}
+
+// Run on load, then check every 60 seconds for midnight rollover
+renderSchedules();
+setInterval(renderSchedules, 60000);
 </script>
 </body>
 </html>
