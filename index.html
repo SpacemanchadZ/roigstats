@@ -8,23 +8,23 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:      #111318;
-  --surface: #191c24;
-  --border:  #2e3348;
-  --red:     #a8192e;
-  --orange:  #c9842a;
-  --green:   #2d9e58;
-  --blue:    #3a8fbf;
-  --yellow:  #c48a14;
-  --danger:  #b83333;
-  --text:    #d4d8e8;
-  --muted:   #525c74;
-  --dim:     #7a8499;
+  --bg:      #0c0e14;
+  --surface: #141720;
+  --border:  #272d40;
+  --red:     #c8102e;
+  --orange:  #f5a623;
+  --green:   #22c55e;
+  --blue:    #38bdf8;
+  --yellow:  #f59e0b;
+  --danger:  #ef4444;
+  --text:    #e6e8f0;
+  --muted:   #5a6278;
+  --dim:     #8490aa;
 }
 
 html { background: var(--bg); height: 100%; overflow: hidden; }
@@ -35,7 +35,6 @@ html::before {
   background-size: 28px 28px;
 }
 body > * { position: relative; z-index: 1; }
-
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -43,28 +42,17 @@ body > * { position: relative; z-index: 1; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, 'Helvetica Neue', sans-serif;
+  font-family: 'Barlow', 'Segoe UI', Arial, sans-serif;
   font-size: clamp(11px, 1.1vw, 14px);
   line-height: 1.4;
   height: 100vh;
   overflow: hidden;
 }
 
-.tag {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(8px, 0.75vw, 10px);
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--muted); padding: clamp(4px,0.5vw,7px) clamp(8px,1vw,16px);
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 3px;
-}
-.tag .hl { color: var(--orange); }
-
+/* ── HEADER ── */
 .hdr {
   background: var(--surface);
-  border-bottom: 2px solid var(--red);
+  border-bottom: 3px solid var(--red);
   padding: clamp(8px,0.8vw,14px) clamp(10px,1.2vw,20px);
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 8px;
@@ -82,7 +70,6 @@ body {
 }
 .logo-name { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(16px,2vw,26px); letter-spacing: 3px; line-height: 1; }
 .logo-dept { font-size: clamp(8px,0.75vw,11px); color: var(--dim); letter-spacing: 1px; }
-.hdr-center { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(12px,1.4vw,20px); letter-spacing: 4px; color: var(--dim); }
 .hdr-right  { text-align: right; }
 .hdr-clock-row { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
 .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.5s infinite; flex-shrink: 0; }
@@ -91,16 +78,19 @@ body {
 .hdr-src  { font-size: clamp(8px,0.75vw,11px); color: var(--muted); }
 #wx-temp  { font-family: 'Share Tech Mono', monospace; font-size: clamp(11px,1vw,13px); color: var(--orange); }
 
+/* Shift tabs */
 .hdr-shifts { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .shift { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 2px; font-family: 'Share Tech Mono', monospace; color: var(--muted); transition: all 0.3s; background: rgba(255,255,255,0.02); }
-.shift.active { border-color: var(--green); background: rgba(30,120,60,0.06); }
+.shift.active { border-color: var(--green); background: rgba(34,197,94,0.12); box-shadow: 0 0 8px rgba(34,197,94,0.2); }
 .shift-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: all 0.3s; }
-.shift.active .shift-dot { background: var(--green); animation: pulse 2s infinite; }
+.shift.active .shift-dot { background: var(--green); animation: pulse 1.5s infinite; }
 .shift-name { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.4vw,18px); color: var(--dim); line-height: 1; transition: color 0.3s; }
-.shift.active .shift-name { color: var(--green); }
+.shift.active .shift-name { color: var(--green); animation: shiftBlink 1.2s step-start infinite; }
 .shift-crew { font-size: clamp(7px,0.6vw,9px); color: var(--muted); letter-spacing: 0.5px; display: block; margin-top: 1px; transition: color 0.3s; }
 .shift.active .shift-crew { color: var(--green); opacity: 0.8; }
+@keyframes shiftBlink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
 
+/* Page nav */
 .page-nav {
   background: var(--bg);
   border-bottom: 2px solid var(--border);
@@ -119,411 +109,405 @@ body {
 .page-nav a:hover { color: var(--text); }
 .page-nav a.active { color: var(--orange); border-bottom-color: var(--orange); }
 
-/* Top 10 Ticker */
-.t10-ticker-outer {
-  background: rgba(160,40,40,0.03);
+
+/* ── UPDATES TICKER (shift page) ── */
+.ticker-outer {
+  background: #0f1219;
   border-bottom: 1px solid var(--border);
-  border-left: 3px solid var(--red);
-  display: flex;
-  align-items: stretch;
-  height: 32px;
+  border-left: 3px solid var(--green);
+  display: flex; align-items: stretch; height: 36px;
+  flex-shrink: 0; z-index: 20;
 }
-.t10t-item {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 0 24px;
-  white-space: nowrap;
-}
-.t10t-rk {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px; color: var(--muted);
-  width: 14px; text-align: center; flex-shrink: 0;
-}
-.t10t-rk.r1 { color: var(--danger); }
-.t10t-rk.r2 { color: var(--yellow); }
-.t10t-rk.r3 { color: var(--blue); }
-.t10t-eq {
+.ticker-wrap { flex: 1; overflow: hidden; display: flex; align-items: center; }
+.ticker-track { display: inline-flex; align-items: center; white-space: nowrap; animation: ticker-scroll 80s linear infinite; }
+.ticker-outer .ticker-track { animation-duration: 80s; }
+
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 40px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 11px; color: var(--text); letter-spacing: 0.3px;
+  font-size: clamp(11px, 1vw, 13px); color: var(--dim); letter-spacing: 0.3px; white-space: nowrap;
 }
-.t10t-val {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px; color: var(--orange);
+.ticker-item .ti-cat {
+  font-size: clamp(9px, 0.8vw, 11px); letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 2px; font-weight: 700; flex-shrink: 0;
 }
-.t10t-rep {
+.ti-cat.add      { background: rgba(34,197,94,0.15);  color: var(--green); }
+.ti-cat.crit     { background: rgba(239,68,68,0.15);   color: var(--danger); }
+.ti-cat.warn     { background: rgba(245,158,11,0.15);  color: var(--yellow); }
+.ti-cat.kpi-good { background: rgba(34,197,94,0.15);   color: var(--green); }
+.ti-cat.kpi-bad  { background: rgba(239,68,68,0.15);   color: var(--danger); }
+.ticker-sep { color: var(--border); padding: 0 2px; font-size: 14px; flex-shrink: 0; }
+
+
+
+.ticker-label {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 14px 0 12px;
+  border-right: 1px solid var(--border);
+  gap: 1px; flex-shrink: 0; background: #0f1219;
+  min-width: 90px;
+}
+.ticker-label .tl-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 15px; letter-spacing: 2.5px; color: var(--orange); line-height: 1;
+}
+.ticker-label .tl-sub {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 9px; color: var(--muted);
-}
-.t10t-sep {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 10px; color: var(--border);
-  padding: 0 8px; flex-shrink: 0; white-space: nowrap;
+  font-size: 8px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; line-height: 1;
 }
 
-/* 3-col layout */
-.layout {
+@keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ── SECTION LABEL ── */
+.tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px,0.75vw,10px); letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); padding: clamp(4px,0.5vw,7px) clamp(8px,1vw,16px);
+  border-bottom: 1px solid var(--border); background: var(--surface);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.tag .hl { color: var(--orange); }
+
+/* ── KPI PAGE LAYOUT ── */
+#kpi-page { height: calc(100vh - 88px); display: flex; flex-direction: column; overflow: hidden; }
+#kpi-page .kpi-scroll { flex: 1; overflow-y: auto; }
+
+/* 5 KPI cards grid */
+.kpi-grid {
   display: grid;
-  grid-template-columns: minmax(0,290px) minmax(0,1fr) minmax(0,520px);
-  height: calc(100vh - 124px);
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 2px solid var(--border);
 }
-.col-l { border-right: 1px solid var(--border); border-left: 3px solid var(--red); overflow-y: auto; height: 100%; }
-.col-c { overflow-y: auto; height: 100%; }
-.col-r { border-left: 1px solid var(--border); overflow-y: auto; height: 100%; }
+.kpi-card {
+  padding: clamp(10px,1vw,18px) clamp(10px,1.2vw,20px);
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.kpi-card:last-child { border-right: none; }
+.kpi-card-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.kpi-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px,0.7vw,10px); letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 6px;
+}
+.kpi-val {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(36px,4vw,56px); line-height: 1;
+}
+.kpi-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px,0.7vw,10px); color: var(--dim); margin-top: 4px;
+}
+.kpi-trend {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11px); font-weight: 700;
+  margin-top: 6px; padding: 2px 8px; border-radius: 2px;
+}
+.trend-good { background: rgba(34,197,94,0.12); color: var(--green); }
+.trend-bad  { background: rgba(239,68,68,0.12); color: var(--danger); }
+.trend-warn { background: rgba(245,158,11,0.12); color: var(--yellow); }
 
-/* IG 2x2 grid */
-.ig-grid {
+/* Month compare rows inside KPI cards */
+.kpi-months { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+.kpi-mo-row { display: flex; align-items: center; gap: 6px; }
+.kpi-mo-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.65vw,9px); color: var(--muted); width: 26px; }
+.kpi-mo-bar-bg { flex: 1; height: 10px; background: var(--border); border-radius: 1px; position: relative; overflow: visible; }
+.kpi-mo-bar-f  { height: 100%; border-radius: 1px; }
+.kpi-mo-bar-target { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--orange); }
+.kpi-mo-val { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 54px; text-align: right; white-space: nowrap; }
+
+/* Alert cards below KPIs */
+.alert-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid var(--border);
 }
-.ig-cell {
+.alert-card {
+  padding: clamp(8px,0.8vw,14px) clamp(10px,1.2vw,18px);
   border-right: 1px solid var(--border);
+  border-left: 4px solid var(--danger);
+  background: rgba(200,16,46,0.06);
+}
+.alert-card:last-child { border-right: none; }
+.alert-card.warn { border-left-color: var(--yellow); background: rgba(245,158,11,0.05); }
+.alert-title { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.65vw,9px); letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
+.alert-eq { color: var(--danger); font-family: 'Share Tech Mono', monospace; font-weight: 700; font-size: clamp(12px,1.2vw,16px); }
+.alert-card.warn .alert-eq { color: var(--yellow); }
+.alert-body { font-size: clamp(10px,0.9vw,13px); color: var(--dim); line-height: 1.5; margin-top: 3px; }
+
+/* MTBF section */
+.mtbf-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   border-bottom: 1px solid var(--border);
 }
-.ig-cell:nth-child(even) { border-right: none; }
-.ig-cell:nth-child(3), .ig-cell:nth-child(4) { border-bottom: none; }
+.mtbf-card {
+  padding: clamp(8px,0.8vw,14px) clamp(10px,1.2vw,18px);
+  border-right: 1px solid var(--border);
+}
+.mtbf-card:last-child { border-right: none; }
+.mtbf-line-name {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(28px,3.5vw,44px); line-height: 1;
+}
+.mtbf-sub { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.65vw,9px); color: var(--muted); letter-spacing: 1px; margin-bottom: 8px; }
+.mtbf-bar-wrap { display: flex; align-items: center; gap: 8px; }
+.mtbf-bar-bg { flex: 1; height: 14px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.mtbf-bar-f  { height: 100%; display: flex; align-items: center; padding-left: 6px; font-family: 'Bebas Neue', sans-serif; font-size: clamp(8px,0.7vw,11px); color: rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; }
+.mtbf-val { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11px); text-align: right; white-space: nowrap; }
+.mtbf-stats { display: flex; gap: 12px; margin-top: 8px; }
+.mtbf-stat { text-align: center; }
+.mtbf-stat-v { font-family: 'Bebas Neue', sans-serif; font-size: clamp(14px,1.5vw,20px); line-height: 1; }
+.mtbf-stat-l { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
 
-/* Stat pairs */
-.pair { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
-.cell { padding: clamp(3px,0.35vw,5px) clamp(8px,1vw,16px); }
-.cell + .cell { border-left: 1px solid var(--border); }
-.ctag { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,9px); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 1px; }
-.cval { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(18px,2.2vw,26px); line-height: 1; }
-.csub { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--dim); margin-top: 1px; }
-.trend { display: inline-flex; align-items: center; gap: 3px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); font-weight: 700; margin-left: 6px; }
-.trend.up   { color: var(--danger); }
-.trend.down { color: var(--green); }
-.trend.up-bad   { color: var(--danger); }
-.trend.down-good { color: var(--green); }
+/* ── SHIFT PERFORMANCE PAGE ── */
+.sp-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  height: calc(100vh - 88px);
+  overflow: hidden;
+}
 
-/* Mix bars */
-.leg { display: flex; gap: 10px; padding: 5px clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-.leg-i { display: flex; align-items: center; gap: 5px; font-size: clamp(8px,0.7vw,11px); color: var(--dim); }
-.leg-d { width: 9px; height: 9px; border-radius: 1px; flex-shrink: 0; }
-.mix { display: flex; align-items: center; gap: 6px; padding: clamp(3px,0.3vw,5px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); }
-.mix-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); width: 26px; }
-.mix-b  { flex: 1; height: 14px; display: flex; overflow: hidden; border-radius: 1px; }
-.mix-s  { height: 100%; display: flex; align-items: center; justify-content: center; font-size: clamp(7px,0.65vw,9px); font-weight: 700; color: rgba(0,0,0,0.75); white-space: nowrap; overflow: hidden; }
-.mix-t  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 38px; text-align: right; }
+/* Left panel — 4 shift stat cards stacked */
+.sp-stats-panel {
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-content: stretch;
+}
+.sp-card { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); overflow: hidden; }
+.sp-card:nth-child(2n) { border-right: none; }
+.sp-card:nth-child(3), .sp-card:nth-child(4) { border-bottom: none; }
+.sp-card-hdr {
+  padding: 5px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: baseline; gap: 10px;
+}
+.sp-shift-letter { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(20px,2.2vw,28px); line-height: 1; }
+.sp-ytd { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+.sp-ytd-val { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,18px); line-height: 1; margin-left: auto; }
+.sp-crew { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--muted); padding: 2px 14px; border-bottom: 1px solid var(--border); letter-spacing: 0.5px; }
+.sp-body { padding: 3px 14px 4px; }
+.sp-stat-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; border-bottom: 1px solid rgba(39,45,64,0.5); }
+.sp-stat-row:last-child { border-bottom: none; }
+.sp-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.62vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.sp-stat-val { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(13px,1.4vw,18px); }
+.sp-bar-section { padding: 3px 14px 5px; border-top: 1px solid var(--border); }
+.sp-bar-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+.sp-bar-row { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+.sp-bar-row:last-child { margin-bottom: 0; }
+.sp-bar-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--dim); width: 22px; }
+.sp-bar-bg { flex: 1; height: 8px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.sp-bar-f  { height: 100%; border-radius: 1px; }
+.sp-bar-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); width: 30px; text-align: right; }
 
-/* Target bars */
-.tgt { padding: clamp(4px,0.4vw,6px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); }
-.tgt-h { font-size: clamp(8px,0.7vw,11px); font-weight: 700; color: var(--dim); margin-bottom: 4px; }
-.tr { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
-.tr:last-of-type { margin-bottom: 0; }
-.tr-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); width: 26px; }
-.tr-bg { flex: 1; height: 11px; background: var(--border); border-radius: 1px; position: relative; overflow: visible; }
-.tr-f  { height: 100%; border-radius: 1px; }
-.tr-ln { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--orange); left: 35%; }
-.tr-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 86px; text-align: right; }
-.tgt-n { font-size: clamp(8px,0.65vw,10px); color: var(--muted); margin-top: 4px; font-family: 'Share Tech Mono', monospace; }
+/* Right panel — calendar */
+.sp-cal-panel {
+  overflow-y: auto;
+  height: 100%;
+  padding: 14px 18px;
+}
+.cal-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(16px,2vw,26px);
+  letter-spacing: 4px;
+  color: var(--dim);
+  margin-bottom: 10px;
+}
+.cal-legend {
+  display: flex; gap: 14px; margin-bottom: 12px; flex-wrap: wrap;
+}
+.cal-leg-item {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px,0.7vw,10px); color: var(--dim);
+}
+.cal-leg-dot { width: 10px; height: 10px; border-radius: 1px; flex-shrink: 0; }
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.cal-dow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(8px,0.7vw,10px);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); text-align: center;
+  padding: 4px 2px 6px;
+  border-bottom: 1px solid var(--border);
+}
+.cal-day {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 5px 6px;
+  min-height: clamp(50px,6.5vw,76px);
+  display: flex; flex-direction: column; gap: 3px;
+  transition: border-color 0.15s;
+}
+.cal-day:hover { border-color: var(--dim); }
+.cal-day.empty { background: transparent; border-color: transparent; pointer-events: none; }
+.cal-day.today { border-color: var(--orange); }
+.cal-day-num {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(13px,1.4vw,18px); line-height: 1; color: var(--dim);
+}
+.cal-day.today .cal-day-num { color: var(--orange); }
+.cal-shifts { display: flex; gap: 3px; flex-wrap: wrap; }
+.cal-shift-badge {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(10px,0.95vw,13px);
+  padding: 1px 5px; border-radius: 1px; line-height: 1.2;
+}
+.csb-a { background: rgba(56,189,248,0.18);  color: var(--blue); }
+.csb-b { background: rgba(34,197,94,0.15);   color: var(--green); }
+.csb-c { background: rgba(245,158,11,0.15);  color: var(--yellow); }
+.csb-d { background: rgba(255,107,132,0.15); color: #ff6b84; }
 
-/* Alerts */
-.alert { padding: clamp(4px,0.4vw,6px) clamp(8px,1vw,16px); border-bottom: 1px solid var(--border); border-left: 4px solid var(--danger); background: rgba(140,20,35,0.06); font-size: clamp(9px,0.8vw,12px); line-height: 1.4; }
-.alert.warn { border-left-color: var(--yellow); background: rgba(180,120,20,0.04); }
-.a-title { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.65vw,9px); letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-bottom: 3px; }
-.er { color: var(--danger); font-family: 'Share Tech Mono', monospace; font-weight: 700; }
-.ey { color: var(--yellow); font-family: 'Share Tech Mono', monospace; font-weight: 700; }
+/* Calendar day cells */
+.cday {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.15s;
+  overflow: hidden;
+}
+.cday:hover { border-color: var(--dim); }
+.cday.today { border-color: var(--orange); border-width: 2px; }
+.cday-num {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(18px, 2.2vw, 30px);
+  line-height: 1;
+  color: var(--dim);
+}
+.cday.today .cday-num { color: var(--orange); }
+.cday-shifts { display: flex; gap: 4px; flex-wrap: wrap; }
+.csb {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(13px, 1.4vw, 20px);
+  padding: 2px 8px;
+  border-radius: 2px;
+  line-height: 1.3;
+  letter-spacing: 1px;
+}
+.csb-a { background: rgba(56,189,248,0.2);  color: var(--blue); }
+.csb-b { background: rgba(34,197,94,0.18);  color: var(--green); }
+.csb-c { background: rgba(245,158,11,0.18); color: var(--yellow); }
+.csb-d { background: rgba(255,107,132,0.18);color: #ff6b84; }
 
-/* Top 10 */
-.t10g { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
-.t10p + .t10p { border-left: 1px solid var(--border); }
-table.t10 { width: 100%; border-collapse: collapse; }
-table.t10 th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.4vw,6px) clamp(4px,0.7vw,10px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
-table.t10 td { padding: clamp(3px,0.4vw,6px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.06); vertical-align: middle; font-size: clamp(11px,1vw,14px); }
-table.t10 tr:last-child td { border-bottom: none; }
-table.t10 tr:hover td { background: rgba(255,255,255,0.04); transition: background 0.15s; }
-table.t10 tbody tr:nth-child(1) td { background: rgba(160,40,40,0.06); }
-table.t10 tbody tr:nth-child(2) td { background: rgba(180,120,20,0.04); }
-table.t10 tbody tr:nth-child(3) td { background: rgba(56,189,248,0.04); }
-.rk { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,20px); color: var(--border); display: inline-block; min-width: 16px; }
-.r1 { color: var(--danger); } .r2 { color: var(--yellow); } .r3 { color: var(--dim); }
-.eq { font-family: 'Share Tech Mono', monospace; font-size: clamp(10px,0.9vw,13px); font-weight: 700; }
-td.m { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11px); }
-.bc { width: 55px; }
-.bb { height: 5px; background: var(--border); border-radius: 1px; }
-.bf { height: 100%; border-radius: 1px; }
-
-/* Line cards */
-.lcards { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--border); }
-.lcard  { padding: clamp(3px,0.3vw,5px) clamp(6px,0.8vw,14px); border-right: 1px solid var(--border); }
-.lcard:last-child { border-right: none; }
-.lc-n { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(18px,2.2vw,28px); line-height: 1; }
-.lc-h { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); color: var(--muted); letter-spacing: 1px; margin-bottom: 4px; }
-.lc-r { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; border-bottom: 1px solid rgba(39,45,64,0.06); }
-.lc-r:last-child { border-bottom: none; }
-.lc-l { font-size: clamp(7px,0.65vw,10px); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); }
-.lc-v { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.85vw,13px); font-weight: 700; }
-
-/* MTBF */
-.mtbf { padding: clamp(4px,0.4vw,6px) clamp(8px,1vw,16px); }
-.mbr  { display: grid; grid-template-columns: 32px 1fr 48px; align-items: center; gap: 6px; margin-bottom: 3px; }
-.mbr:last-child { margin-bottom: 0; }
-.mb-l  { font-family: 'Share Tech Mono', monospace; font-size: clamp(10px,0.9vw,12px); font-weight: 700; }
-.mb-bg { height: 14px; background: var(--border); border-radius: 1px; overflow: hidden; }
-.mb-f  { height: 100%; display: flex; align-items: center; padding-left: 6px; font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(8px,0.7vw,11px); color: rgba(0,0,0,0.75); white-space: nowrap; overflow: hidden; }
-.mb-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-align: right; }
-
-/* Detail tables */
-.lhdr { padding: clamp(2px,0.25vw,4px) clamp(8px,1vw,16px) 1px; border-top: 1px solid var(--border); display: flex; align-items: baseline; gap: 8px; }
-.lhdr.first { border-top: none; }
-.lh-n { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,18px); }
-.lh-h { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); }
-table.dt { width: 100%; border-collapse: collapse; }
-table.dt th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.35vw,5px) clamp(4px,0.7vw,10px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
-table.dt td { padding: clamp(1px,0.2vw,3px) clamp(4px,0.7vw,10px); border-bottom: 1px solid rgba(39,45,64,0.06); font-size: clamp(9px,0.85vw,11px); vertical-align: middle; }
-table.dt tr:last-child td { background: rgba(245,166,35,0.05); color: var(--orange); font-weight: 700; border-bottom: none; }
-table.dt tr:not(:last-child):hover td { background: rgba(255,255,255,0.03); transition: background 0.15s; }
-.bdg { display: inline-block; padding: 1px 5px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); border-radius: 2px; font-weight: 700; white-space: nowrap; }
-.bg { background: rgba(30,120,60,0.22);  color: var(--green); }
-.bw { background: rgba(180,120,20,0.22); color: var(--yellow); }
-.br { background: rgba(160,40,40,0.22);  color: var(--danger); }
-.bdg-leg { padding: clamp(3px,0.3vw,5px) clamp(8px,1vw,16px); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.bdg-leg .lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); }
-@keyframes countUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-.cval { animation: countUp 0.6s ease-out both; }
 
 /* ── SHIFT PERFORMANCE PAGE ── */
 #shift-page { display: none; }
 .sp-layout {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 340px;
   height: calc(100vh - 88px);
+  overflow: hidden;
 }
-.sp-col {
+.sp-stats-panel {
   border-right: 1px solid var(--border);
   overflow-y: auto;
   height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-content: stretch;
 }
-.sp-col:last-child { border-right: none; }
-.sp-col-hdr {
-  padding: clamp(8px,0.8vw,14px) clamp(8px,1vw,16px);
-  border-bottom: 1px solid var(--border);
+.sp-card { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); overflow: hidden; }
+.sp-card:nth-child(2n) { border-right: none; }
+.sp-card:nth-child(3), .sp-card:nth-child(4) { border-bottom: none; }
+.sp-card-hdr {
+  padding: 5px 14px;
   background: var(--surface);
-  position: sticky; top: 0; z-index: 10;
-}
-.sp-shift-letter {
-  font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(36px,5vw,56px);
-  line-height: 1;
-}
-.sp-ytd {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(8px,0.7vw,10px);
-  color: var(--muted);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-top: 2px;
-}
-.sp-ytd-val {
-  font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(16px,2vw,24px);
-  line-height: 1;
-}
-.sp-body { padding: clamp(6px,0.7vw,12px) clamp(8px,1vw,16px); }
-.sp-stat-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(39,45,64,0.06);
-}
-.sp-stat-row:last-child { border-bottom: none; }
-.sp-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-.sp-stat-val { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(18px,2vw,26px); }
-.sp-bar-section { padding: 10px clamp(8px,1vw,16px); border-top: 1px solid var(--border); }
-.sp-bar-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
-.sp-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-.sp-bar-row:last-child { margin-bottom: 0; }
-.sp-bar-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--dim); width: 24px; }
-.sp-bar-bg { flex: 1; height: 12px; background: var(--border); border-radius: 1px; overflow: hidden; }
-.sp-bar-f  { height: 100%; border-radius: 1px; }
-.sp-bar-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); width: 32px; text-align: right; }
-
-/* ── SCHEDULE TABLE ── */
-.sched-section { padding: 8px clamp(8px,1vw,16px) 0; border-top: 1px solid var(--border); }
-.sched-day-hdr {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(7px,0.65vw,9px);
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--orange);
-  padding: 6px 0 3px;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 2px;
-  display: flex; justify-content: space-between;
+  display: flex; align-items: baseline; gap: 10px;
 }
-table.sched { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
-table.sched th { font-family: 'Share Tech Mono', monospace; font-size: clamp(6px,0.55vw,8px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: 2px clamp(2px,0.4vw,5px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
-table.sched td { padding: clamp(1px,0.15vw,2px) clamp(2px,0.4vw,5px); border-bottom: 1px solid rgba(39,45,64,0.04); font-size: clamp(8px,0.75vw,10px); vertical-align: middle; font-family: 'Share Tech Mono', monospace; }
-table.sched tr:hover td { background: rgba(255,255,255,0.03); }
-.sched-type-pm  { color: var(--green); }
-.sched-type-bd  { color: var(--danger); font-weight: 700; }
-.sched-type-svc { color: var(--blue); }
-.sched-type-corr { color: var(--yellow); }
-.sched-overdue { color: var(--danger); font-size: clamp(7px,0.6vw,9px); }
-.sched-ok { color: var(--muted); font-size: clamp(7px,0.6vw,9px); }
-.wo-num { font-size: clamp(7px,0.6vw,8px); color: var(--muted); }
-.sched-unassigned { color: var(--muted); font-style: italic; }
+.sp-shift-letter { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(20px,2.2vw,28px); line-height: 1; }
+.sp-ytd { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+.sp-ytd-val { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,18px); line-height: 1; margin-left: auto; }
+.sp-crew { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--muted); padding: 2px 14px; border-bottom: 1px solid var(--border); letter-spacing: 0.5px; }
+.sp-body { padding: 3px 14px 4px; }
+.sp-stat-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; border-bottom: 1px solid rgba(39,45,64,0.5); }
+.sp-stat-row:last-child { border-bottom: none; }
+.sp-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.62vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.sp-stat-val { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(13px,1.4vw,18px); }
+.sp-bar-section { padding: 3px 14px 5px; border-top: 1px solid var(--border); }
+.sp-bar-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+.sp-bar-row { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+.sp-bar-row:last-child { margin-bottom: 0; }
+.sp-bar-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--dim); width: 22px; }
+.sp-bar-bg { flex: 1; height: 8px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.sp-bar-f  { height: 100%; border-radius: 1px; }
+.sp-bar-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); width: 30px; text-align: right; }
+.sp-cal-panel { overflow-y: auto; height: 100%; padding: 14px 18px; }
+.cal-title { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(16px,2vw,26px); letter-spacing: 4px; color: var(--dim); margin-bottom: 10px; }
+.cal-legend { display: flex; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+.cal-leg-item { display: flex; align-items: center; gap: 5px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--dim); }
+.cal-leg-dot { width: 10px; height: 10px; border-radius: 1px; flex-shrink: 0; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.cal-dow { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-align: center; padding: 4px 2px 6px; border-bottom: 1px solid var(--border); }
+.cal-day { background: var(--surface); border: 1px solid var(--border); border-radius: 2px; padding: 5px 6px; min-height: clamp(50px,6.5vw,76px); display: flex; flex-direction: column; gap: 3px; transition: border-color 0.15s; }
+.cal-day:hover { border-color: var(--dim); }
+.cal-day.empty { background: transparent; border-color: transparent; pointer-events: none; }
+.cal-day.today { border-color: var(--orange); }
+.cal-day-num { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(13px,1.4vw,18px); line-height: 1; color: var(--dim); }
+.cal-day.today .cal-day-num { color: var(--orange); }
+.cal-shifts { display: flex; gap: 3px; flex-wrap: wrap; }
+.cal-shift-badge { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(10px,0.95vw,13px); padding: 1px 5px; border-radius: 1px; line-height: 1.2; }
+.csb-a { background: rgba(56,189,248,0.18);  color: var(--blue); }
+.csb-b { background: rgba(34,197,94,0.15);   color: var(--green); }
+.csb-c { background: rgba(245,158,11,0.15);  color: var(--yellow); }
+.csb-d { background: rgba(255,107,132,0.15); color: #ff6b84; }
 
 /* Footer */
 .ftr { border-top: 1px solid var(--border); padding: clamp(4px,0.5vw,8px) clamp(10px,1.2vw,20px); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--muted); background: var(--surface); }
 
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-
-/* Ticker */
-.ticker-outer {
-  background: rgba(30,120,60,0.04);
-  border-bottom: 1px solid var(--border);
-  border-left: 3px solid var(--green);
-  display: flex;
-  align-items: stretch;
-  height: 36px;
-}
-.ticker-label {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 0 16px 0 14px;
-  border-right: 1px solid var(--border);
-  flex-shrink: 0;
-  background: #0f1219;
-  white-space: nowrap;
-}
-.ticker-wrap {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-.ticker-track {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  animation: ticker-scroll 80s linear infinite;
-}
-.ticker-item {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 0 40px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(11px, 1vw, 13px);
-  color: var(--dim);
-  letter-spacing: 0.3px;
-  white-space: nowrap;
-}
-.ticker-item .ti-cat {
-  font-size: clamp(9px, 0.8vw, 11px);
-  letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 2px 8px; border-radius: 2px; font-weight: 700;
-  flex-shrink: 0;
-}
-.ti-cat.add      { background: rgba(30,120,60,0.06);  color: var(--green); }
-.ti-cat.info     { background: rgba(40,110,170,0.06);  color: var(--blue); }
-.ti-cat.warn     { background: rgba(180,120,20,0.06);  color: var(--yellow); }
-.ti-cat.crit     { background: rgba(239,68,68,0.06);   color: var(--danger); }
-.ti-cat.kpi-good { background: rgba(30,120,60,0.06);   color: var(--green);  font-size: clamp(10px,0.9vw,12px); }
-.ti-cat.kpi-bad  { background: rgba(239,68,68,0.06);   color: var(--danger); font-size: clamp(10px,0.9vw,12px); }
-.ticker-sep { color: var(--border); padding: 0 2px; font-size: 14px; flex-shrink: 0; }
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-#global-ticker { display: none; }
-body.shift-page-active #global-ticker { display: flex; }
-
-/* Hero stat */
-.hero-stat {
-  padding: clamp(8px,0.8vw,14px) clamp(8px,1vw,16px) clamp(6px,0.6vw,10px);
-  border-bottom: 1px solid var(--border);
-  border-left: 3px solid var(--orange);
-  background: rgba(200,132,42,0.04);
-}
-.hero-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(7px,0.6vw,8px);
-  letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 3px;
-}
-.hero-row { display: flex; align-items: flex-end; gap: 16px; }
-.hero-val {
-  font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(42px,5.5vw,64px);
-  line-height: 1; color: var(--text);
-}
-.hero-delta { display: flex; flex-direction: column; gap: 2px; padding-bottom: 4px; }
-.hero-mo { display: flex; align-items: center; gap: 6px; }
-.hero-mo-lbl {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(7px,0.6vw,8px); letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--muted); width: 22px;
-}
-.hero-mo-val {
-  font-family: Arial, sans-serif;
-  font-size: clamp(11px,1vw,13px); color: var(--dim); font-weight: 600;
-}
-.hero-sub {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(7px,0.6vw,9px); color: var(--muted);
-  margin-top: 4px; letter-spacing: 0.3px;
-}
-
-/* Corrective WO Trend */
-.corr-wrap { padding: clamp(4px,0.4vw,8px) clamp(8px,1vw,16px) clamp(6px,0.6vw,10px); }
-.corr-row { display: grid; grid-template-columns: 32px 1fr 36px; align-items: center; gap: 6px; margin-bottom: 5px; }
-.corr-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(8px,0.7vw,10px); color: var(--muted); font-weight: 700; }
-.corr-bg { height: 22px; background: var(--border); border-radius: 1px; overflow: hidden; }
-.corr-f  { height: 100%; display: flex; align-items: center; padding-left: 8px; }
-.corr-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: rgba(255,255,255,0.75); white-space: nowrap; }
-.corr-v  { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(16px,1.6vw,22px); text-align: right; }
-.corr-note { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); color: var(--yellow); margin-top: 6px; line-height: 1.5; border-left: 2px solid var(--yellow); padding-left: 8px; }
-
-/* Labor leaderboard */
-.labor-lb { padding: 0; }
-table.labor-tbl { width: 100%; border-collapse: collapse; }
-table.labor-tbl th { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding: clamp(3px,0.35vw,5px) clamp(6px,0.8vw,12px); border-bottom: 1px solid var(--border); background: var(--surface); text-align: left; white-space: nowrap; }
-table.labor-tbl td { padding: clamp(2px,0.25vw,4px) clamp(6px,0.8vw,12px); border-bottom: 1px solid rgba(39,45,64,0.06); font-size: clamp(9px,0.85vw,11px); vertical-align: middle; }
-table.labor-tbl tr:last-child td { border-bottom: none; }
-table.labor-tbl tr:hover td { background: rgba(255,255,255,0.03); }
-.lb-name { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.85vw,11px); font-weight: 700; }
-.lb-bar-bg { height: 8px; background: var(--border); border-radius: 1px; overflow: hidden; display: inline-block; width: 80px; vertical-align: middle; margin-left: 6px; }
-.lb-bar-f  { height: 100%; border-radius: 1px; }
-.lb-hrs { font-family: 'Share Tech Mono', monospace; font-size: clamp(9px,0.8vw,11px); color: var(--orange); font-weight: 700; }
-.lb-shift-tag { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); padding: 1px 4px; border-radius: 2px; margin-left: 4px; }
-.lb-A { background: rgba(40,110,170,0.15); color: var(--blue); }
-.lb-B { background: rgba(30,120,60,0.15); color: var(--green); }
-.lb-C { background: rgba(180,120,20,0.15); color: var(--yellow); }
-.lb-D { background: rgba(255,107,132,0.15); color: #ff6b84; }
-.lb-Day { background: rgba(200,132,42,0.15); color: var(--orange); }
+@keyframes countUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.kpi-val { animation: countUp 0.6s ease-out both; }
 
 /* Responsive */
 @media (max-width: 1100px) {
   body { height: auto; overflow: auto; }
   html { height: auto; overflow: auto; }
-  .layout { grid-template-columns: 1fr 1fr; height: auto; }
-  .col-l { grid-column: 1 / -1; border-right: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
-  .col-c { border-right: 1px solid var(--border); height: auto; overflow: visible; }
-  .col-r { border-left: none; height: auto; overflow: visible; }
-  .hdr-center { display: none; }
-  .sp-layout { grid-template-columns: 1fr 1fr; height: auto; }
-  .sp-col { height: auto; overflow: visible; }
+  #kpi-page { height: auto; overflow: visible; display: block; }
+  #kpi-page .kpi-scroll { overflow: visible; }
+  .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  .sp-layout { grid-template-columns: 1fr; height: auto; }
+  .sp-stats-panel { flex-direction: row; flex-wrap: wrap; height: auto; }
+  .sp-card { flex: 1 1 45%; }
+  .sp-cal-panel { height: auto; }
 }
 @media (max-width: 768px) {
   body { height: auto; overflow: auto; }
   html { height: auto; overflow: auto; }
-  .layout { grid-template-columns: 1fr; height: auto; }
-  .col-l, .col-c, .col-r { grid-column: 1 / -1; border: none; border-bottom: 2px solid var(--border); height: auto; overflow: visible; }
-  .lcards { grid-template-columns: repeat(2, 1fr); }
-  .hdr-center { display: none; }
-  .sp-layout { grid-template-columns: 1fr; height: auto; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .sp-stats-panel { flex-direction: column; }
+  .sp-card { flex: 1 1 100%; }
+}
+@media (max-width: 480px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+  .hdr-right { display: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- ═══ HEADER ═══ -->
 <header class="hdr">
   <div class="logo-row">
-    <div class="hex">ROIG</div>
-    <div>
-      <div class="logo-name">Cardinal IG — Roanoke</div>
-      <div class="logo-dept">Maintenance Department</div>
-    </div>
+    <img src="data:image/png;base64,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" alt="Cardinal IG Roanoke" style="height:clamp(32px,3.5vw,50px);width:auto;display:block;background:#141720;padding:2px 4px;border-radius:2px;">
   </div>
   <div class="hdr-divider"></div>
   <div class="hdr-shifts">
@@ -547,60 +531,7 @@ table.labor-tbl tr:hover td { background: rgba(255,255,255,0.03); }
   </div>
 </header>
 
-<!-- UPDATES TICKER — shown only on Shift Performance page -->
-<div class="ticker-outer" id="global-ticker">
-  <div class="ticker-label">
-    <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--orange);">UPDATES</span>
-    <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">PMs · KPIs · Alerts</span>
-  </div>
-  <div class="ticker-wrap">
-    <div class="ticker-track">
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Muttin Master — Monthly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Furnace Water Filter — Weekly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Silicone Pump — Weekly Inspection</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG Conveyor Inspection</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> QC Bender — Weekly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG2 Washer — Bi-Weekly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat kpi-good">↑ IMPROVING</span> Planned Work Rate — Jan 78.8% → Feb 80.1% &nbsp;+1.3%</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> Breakdown % of WOs — Jan 19.5% → Feb 16.6% &nbsp;−2.9%</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.9% → Feb 36.8% &nbsp;over 35% target</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 Line 3 Washer — MTTR 12h 7m avg · 4 BDs in Feb</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 Razorback #2 — single repair took 6h 45m</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat warn">Watch</span> IG3 SQUID — still failing · #1 Jan · top 10 Feb · avg fail every 140h in Feb</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat info">Schedule</span> A Shift 02/24 — IG2 Monthly Blowout series in progress (20+ WOs)</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat crit">Overdue</span> A Shift — IG3 HAWK PM overdue since 02/22 &nbsp;·&nbsp; CUT CT1 freq drive fault overdue 02/22</span>
-      <span class="ticker-sep">·</span>
-      <!-- duplicate for loop -->
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Muttin Master — Monthly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Furnace Water Filter — Weekly</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Silicone Pump — Weekly Inspection</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat kpi-good">↑ IMPROVING</span> Planned Work Rate — Jan 78.8% → Feb 80.1% &nbsp;+1.3%</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat kpi-bad">↑ TRENDING BAD</span> BD Labor Mix — Jan 30.9% → Feb 36.8% &nbsp;over 35% target</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat crit">Alert</span> IG3 Line 3 Washer — MTTR 12h 7m avg · 4 BDs in Feb</span>
-      <span class="ticker-sep">·</span>
-      <span class="ticker-item"><span class="ti-cat warn">Watch</span> IG3 SQUID — still failing · avg fail every 140h in Feb</span>
-      <span class="ticker-sep">·</span>
-    </div>
-  </div>
-</div>
+
 
 <!-- PAGE NAV -->
 <nav class="page-nav">
@@ -610,517 +541,376 @@ table.labor-tbl tr:hover td { background: rgba(255,255,255,0.03); }
 
 <!-- ═══════════════════════════ KPI PAGE ═══════════════════════════ -->
 <div id="kpi-page">
-
-<!-- TOP 10 TICKER -->
-<div class="t10-ticker-outer">
-  <div class="ticker-label" style="background:#0f1219;">
-    <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--red);">TOP 10</span>
-    <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Downtime · Jan &amp; Feb</span>
+<div class="ticker-outer" id="kpi-ticker">
+  <div class="ticker-label">
+    <span class="tl-title">UPDATES</span>
+    <span class="tl-sub">PMs · KPIs · Alerts</span>
   </div>
   <div class="ticker-wrap">
-    <div class="ticker-track" style="animation-duration:100s;">
-      <span class="t10t-sep">── JAN 2026 ──</span>
-      <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">26h 35m</span><span class="t10t-rep">12 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">MEZ B2</span><span class="t10t-val">17h 45m</span><span class="t10t-rep">7 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">IG1 SQUID</span><span class="t10t-val">11h 50m</span><span class="t10t-rep">5 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">4</span><span class="t10t-eq">AE3</span><span class="t10t-val">10h 35m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">AE1</span><span class="t10t-val">9h 55m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">6</span><span class="t10t-eq">CUT CT3</span><span class="t10t-val">9h 45m</span><span class="t10t-rep">5 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">7</span><span class="t10t-eq">IG1 VWASH</span><span class="t10t-val">8h 1m</span><span class="t10t-rep">3 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">8</span><span class="t10t-eq">CUT CC3</span><span class="t10t-val">8h 1m</span><span class="t10t-rep">4 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">9</span><span class="t10t-eq">IG4 TGRIND</span><span class="t10t-val">8h 0m</span><span class="t10t-rep">1 repair</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">AE4</span><span class="t10t-val">6h 20m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">────────</span>
-      <span class="t10t-sep">── FEB 2026 ──</span>
-      <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 VWASH</span><span class="t10t-val" style="color:var(--danger);">48h 30m</span><span class="t10t-rep">4 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">QCB1</span><span class="t10t-val">19h 45m</span><span class="t10t-rep">4 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">TMP FURN</span><span class="t10t-val">18h 50m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">4</span><span class="t10t-eq">AE7</span><span class="t10t-val">13h 45m</span><span class="t10t-rep">2 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">MEZ B1</span><span class="t10t-val">12h 0m</span><span class="t10t-rep">1 repair</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">6</span><span class="t10t-eq">CUT LT1</span><span class="t10t-val">9h 10m</span><span class="t10t-rep">3 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">7</span><span class="t10t-eq">CUT CT2</span><span class="t10t-val">8h 0m</span><span class="t10t-rep">2 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">8</span><span class="t10t-eq">CUT CC1</span><span class="t10t-val">7h 35m</span><span class="t10t-rep">4 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">9</span><span class="t10t-eq">IG3 RB2</span><span class="t10t-val">6h 45m</span><span class="t10t-rep">1 repair</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">10</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">6h 12m</span><span class="t10t-rep">5 repairs</span></span>
-      <span class="t10t-sep">────────</span>
-      <!-- duplicate -->
-      <span class="t10t-sep">── JAN 2026 ──</span>
-      <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 SQUID</span><span class="t10t-val">26h 35m</span><span class="t10t-rep">12 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">MEZ B2</span><span class="t10t-val">17h 45m</span><span class="t10t-rep">7 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk">5</span><span class="t10t-eq">AE1</span><span class="t10t-val">9h 55m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-sep">── FEB 2026 ──</span>
-      <span class="t10t-item"><span class="t10t-rk r1">1</span><span class="t10t-eq">IG3 VWASH</span><span class="t10t-val" style="color:var(--danger);">48h 30m</span><span class="t10t-rep">4 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk r2">2</span><span class="t10t-eq">QCB1</span><span class="t10t-val">19h 45m</span><span class="t10t-rep">4 repairs</span></span>
-      <span class="t10t-sep">·</span>
-      <span class="t10t-item"><span class="t10t-rk r3">3</span><span class="t10t-eq">TMP FURN</span><span class="t10t-val">18h 50m</span><span class="t10t-rep">6 repairs</span></span>
-      <span class="t10t-sep">────────</span>
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ti-cat warn">↓ WATCH</span> Planned Work Rate — Jan 78.8% → Feb 77.3% · High PM volume driving dip</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> Breakdown % of WOs — Jan 19.5% → Feb 15.6% &nbsp;−3.9%</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> BD Labor Mix — Back under target · Feb 32.0% ✓ (was 36.5% thru 02/20)</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Muttin Master — Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Furnace Water Filter — Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Manual Tapper — Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Silicone Pump — Weekly Inspection</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG Conveyor Inspection</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> QC Bender — Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Lami Table — Bi-Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG2 Washer — Bi-Weekly</span>
+      <span class="ticker-sep">·</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ti-cat warn">↓ WATCH</span> Planned Work Rate — Jan 78.8% → Feb 77.3% · High PM volume driving dip</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> Breakdown % of WOs — Jan 19.5% → Feb 15.6% &nbsp;−3.9%</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat kpi-good">↓ IMPROVING</span> BD Labor Mix — Back under target · Feb 32.0% ✓ (was 36.5% thru 02/20)</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Muttin Master — Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Furnace Water Filter — Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Manual Tapper — Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Silicone Pump — Weekly Inspection</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG Conveyor Inspection</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> QC Bender — Weekly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> Lami Table — Bi-Monthly</span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ti-cat add">Added PM</span> IG2 Washer — Bi-Weekly</span>
+      <span class="ticker-sep">·</span>
     </div>
   </div>
 </div>
 
-<div class="layout">
 
-  <!-- LEFT COLUMN -->
-  <div class="col-l">
-    <div class="hero-stat">
-      <div class="hero-label">YTD 2026 — Work Orders</div>
-      <div class="hero-row">
-        <div class="hero-val">1,464</div>
-        <div class="hero-delta">
-          <div class="hero-mo"><span class="hero-mo-lbl">JAN</span><span class="hero-mo-val">717</span></div>
-          <div class="hero-mo"><span class="hero-mo-lbl">FEB</span><span class="hero-mo-val" style="color:var(--blue);">747 <span style="font-size:9px;color:var(--green);">↑</span></span></div>
+<div class="kpi-scroll">
+  <!-- ═══ 5 CORE KPI CARDS ═══ -->
+  <div class="tag">Core KPIs — YTD 2026 <span class="hl">Jan vs Feb (partial thru 02/23)</span></div>
+  <div class="kpi-grid">
+
+    <!-- KPI 1: Planned Work Rate -->
+    <div class="kpi-card">
+      <div class="kpi-card-accent" style="background:var(--green);"></div>
+      <div class="kpi-label">Planned Work Rate</div>
+      <div class="kpi-val" style="color:var(--yellow);">77.3%</div>
+      <div class="kpi-sub">Feb · 636 of 823 WOs scheduled</div>
+      <div class="kpi-trend trend-warn">↓ −1.5% vs Jan · Heavy PM weekend</div>
+      <div class="kpi-months">
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl">JAN</div>
+          <div class="kpi-mo-bar-bg">
+            <div class="kpi-mo-bar-f" style="width:78.8%;background:rgba(34,197,94,0.5);"></div>
+            <div class="kpi-mo-bar-target" style="left:85%;"></div>
+          </div>
+          <div class="kpi-mo-val" style="color:var(--green);">78.8%</div>
+        </div>
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl">FEB</div>
+          <div class="kpi-mo-bar-bg">
+            <div class="kpi-mo-bar-f" style="width:77.3%;background:rgba(245,158,11,0.7);"></div>
+            <div class="kpi-mo-bar-target" style="left:85%;"></div>
+          </div>
+          <div class="kpi-mo-val" style="color:var(--yellow);">77.3% ↓</div>
         </div>
       </div>
-      <div class="hero-sub">Thru 02/23 &nbsp;·&nbsp; <span style="color:var(--green);">↑ +4.2% WO volume month-over-month</span></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">Orange line = 85% target</div>
     </div>
-    <div class="pair">
-      <div class="cell">
-        <div class="ctag">Jan — Planned Work</div>
-        <div class="cval" style="color:var(--green);">78.8%</div>
-        <div class="csub">565 of 717 scheduled</div>
-      </div>
-      <div class="cell">
-        <div class="ctag">Feb — Planned Work</div>
-        <div class="cval" style="color:var(--green);">73.9% <span style="font-size:0.4em;vertical-align:middle;">↓</span></div>
-        <div class="csub">552 of 747 &nbsp;<span class="trend up-bad">↓ −4.9% vs Jan</span></div>
-      </div>
-    </div>
-    <div class="pair">
-      <div class="cell">
-        <div class="ctag">Jan — Breakdowns</div>
-        <div class="cval" style="color:var(--yellow);">19.5%</div>
-        <div class="csub">140 repairs &nbsp;|&nbsp; 221h labor</div>
-      </div>
-      <div class="cell">
-        <div class="ctag">Feb — Breakdowns</div>
-        <div class="cval" style="color:var(--green);">14.7% <span style="font-size:0.4em;vertical-align:middle;">↓</span></div>
-        <div class="csub">110 repairs &nbsp;|&nbsp; 232h &nbsp;<span class="trend down-good">↓ −4.8% IMPROVING</span></div>
-      </div>
-    </div>
-    <div class="pair">
-      <div class="cell">
-        <div class="ctag">Jan — Total Labor</div>
-        <div class="cval">653<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
-        <div class="csub">PM 440h &nbsp;|&nbsp; BD 202h &nbsp;|&nbsp; Other 11h</div>
-      </div>
-      <div class="cell">
-        <div class="ctag">Feb — Total Labor</div>
-        <div class="cval">719<span style="font-size:0.5em;color:var(--dim);"> hrs</span></div>
-        <div class="csub">Thru 02/23 &nbsp;<span class="trend up-bad">↑ +10.1% vs Jan</span></div>
-      </div>
-    </div>
-    <div class="tag">Labor Hour Mix <span class="hl">Planned vs Emergency Repairs</span></div>
-    <div class="leg">
-      <div class="leg-i"><div class="leg-d" style="background:var(--green);"></div>Planned / Preventive</div>
-      <div class="leg-i"><div class="leg-d" style="background:var(--danger);"></div>Breakdown</div>
-      <div class="leg-i"><div class="leg-d" style="background:var(--muted);"></div>Other</div>
-    </div>
-    <div class="mix">
-      <div class="mix-mo">JAN</div>
-      <div class="mix-b">
-        <div class="mix-s" style="width:67.4%;background:var(--green);">PM 67.4%</div>
-        <div class="mix-s" style="width:30.9%;background:var(--danger);">BD 30.9%</div>
-        <div class="mix-s" style="width:1.7%;background:var(--muted);">O</div>
-      </div>
-      <div class="mix-t">653h</div>
-    </div>
-    <div class="mix">
-      <div class="mix-mo">FEB</div>
-      <div class="mix-b">
-        <div class="mix-s" style="width:57.9%;background:var(--green);">PM 57.9%</div>
-        <div class="mix-s" style="width:32.2%;background:var(--danger);">BD 32.2%</div>
-        <div class="mix-s" style="width:9.9%;background:var(--muted);">Oth 9.9%</div>
-      </div>
-      <div class="mix-t">719h</div>
-    </div>
-    <div class="tgt">
-      <div class="tgt-h">Goal: Breakdown Hours Under 35% of Total Labor</div>
-      <div class="tr">
-        <div class="tr-mo">JAN</div>
-        <div class="tr-bg"><div class="tr-f" style="width:30.9%;background:var(--green);"></div><div class="tr-ln"></div></div>
-        <div class="tr-v" style="color:var(--green);">30.9% ✓</div>
-      </div>
-      <div class="tr">
-        <div class="tr-mo">FEB</div>
-        <div class="tr-bg"><div class="tr-f" style="width:32.2%;background:var(--green);"></div><div class="tr-ln"></div></div>
-        <div class="tr-v" style="color:var(--green);">32.2% ✓</div>
-      </div>
-      <div class="tgt-n">Orange line = 35% target</div>
-    </div>
-    <div class="tag">⚑ Priority Alerts</div>
-    <div class="alert">
-      <div class="a-title">🔴 Critical — February MTTR</div>
-      <span class="er">IG3 Line 3 Washer</span> — avg 12h 7m repair time across 4 breakdowns. MTBF only 176h.
-    </div>
-    <div class="alert">
-      <div class="a-title">🔴 Critical — February MTTR</div>
-      <span class="er">IG3 Razorback #2</span> — single repair logged at 6h 45m. Investigate root cause.
-    </div>
-    <div class="alert warn">
-      <div class="a-title">🟡 Repeat Offender</div>
-      <span class="ey">IG3 SQUID</span> — #1 Jan (73h MTBF), still failing in Feb (140h MTBF). Improving but watch.
-    </div>
-    <div class="alert warn">
-      <div class="a-title">🟡 IG3 — Worst Line Health</div>
-      <span class="ey">IG3</span> — 19 BDs in Feb, MTBF 37h, MTTR 3h 58m avg. All metrics worst on floor.
-    </div>
-  </div><!-- /col-l -->
 
-  <!-- CENTER COLUMN -->
-  <div class="col-c">
-    <!-- Feb MTBF/MTTR updated -->
-    <div class="tag">IG Line Health — February 2026 <span class="hl">Thru 02/23 · Longer MTBF = more reliable</span></div>
-    <div class="lcards">
-      <div class="lcard">
-        <div class="lc-n" style="color:var(--blue);">IG1</div>
-        <div class="lc-h">656 HRS &nbsp;|&nbsp; 10 BD</div>
-        <div class="lc-r"><span class="lc-l">MTBF</span><span class="lc-v" style="color:var(--blue);">65h 0m</span></div>
-        <div class="lc-r"><span class="lc-l">MTTR</span><span class="lc-v" style="color:var(--green);">0h 41m</span></div>
+    <!-- KPI 2: Breakdown % of WOs -->
+    <div class="kpi-card">
+      <div class="kpi-card-accent" style="background:var(--green);"></div>
+      <div class="kpi-label">Breakdown % of WOs</div>
+      <div class="kpi-val" style="color:var(--green);">15.6%</div>
+      <div class="kpi-sub">Feb · 128 BD-type WOs of 823 total</div>
+      <div class="kpi-trend trend-good">↓ −3.9% vs Jan · Trending right</div>
+      <div class="kpi-months">
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl">JAN</div>
+          <div class="kpi-mo-bar-bg">
+            <div class="kpi-mo-bar-f" style="width:19.5%;background:rgba(245,158,11,0.6);"></div>
+            <div class="kpi-mo-bar-target" style="left:15%;"></div>
+          </div>
+          <div class="kpi-mo-val" style="color:var(--yellow);">19.5%</div>
+        </div>
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl">FEB</div>
+          <div class="kpi-mo-bar-bg">
+            <div class="kpi-mo-bar-f" style="width:15.6%;background:rgba(34,197,94,0.7);"></div>
+            <div class="kpi-mo-bar-target" style="left:15%;"></div>
+          </div>
+          <div class="kpi-mo-val" style="color:var(--green);">15.6% ↓</div>
+        </div>
       </div>
-      <div class="lcard">
-        <div class="lc-n" style="color:var(--green);">IG2</div>
-        <div class="lc-h">568 HRS &nbsp;|&nbsp; 8 BD</div>
-        <div class="lc-r"><span class="lc-l">MTBF</span><span class="lc-v" style="color:var(--green);">71h 0m</span></div>
-        <div class="lc-r"><span class="lc-l">MTTR</span><span class="lc-v" style="color:var(--green);">0h 48m</span></div>
-      </div>
-      <div class="lcard">
-        <div class="lc-n" style="color:var(--danger);">IG3</div>
-        <div class="lc-h">704 HRS &nbsp;|&nbsp; 19 BD</div>
-        <div class="lc-r"><span class="lc-l">MTBF</span><span class="lc-v" style="color:var(--danger);">37h 0m</span></div>
-        <div class="lc-r"><span class="lc-l">MTTR</span><span class="lc-v" style="color:var(--danger);">3h 58m</span></div>
-      </div>
-      <div class="lcard">
-        <div class="lc-n" style="color:var(--yellow);">IG4</div>
-        <div class="lc-h">696 HRS &nbsp;|&nbsp; 8 BD</div>
-        <div class="lc-r"><span class="lc-l">MTBF</span><span class="lc-v" style="color:var(--green);">87h 0m</span></div>
-        <div class="lc-r"><span class="lc-l">MTTR</span><span class="lc-v" style="color:var(--green);">0h 22m</span></div>
-      </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">Orange line = 15% target</div>
     </div>
-    <div class="tag">Line Reliability — February 2026 <span class="hl">MTBF — Longer bar = breaks down less often</span></div>
-    <div class="mtbf">
-      <div class="mbr">
-        <div class="mb-l" style="color:var(--yellow);">IG4</div>
-        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(180,120,20,0.50);">BEST — 87h between breakdowns</div></div>
-        <div class="mb-v" style="color:var(--yellow);">87h</div>
-      </div>
-      <div class="mbr">
-        <div class="mb-l" style="color:var(--green);">IG2</div>
-        <div class="mb-bg"><div class="mb-f" style="width:81.6%;background:rgba(30,120,60,0.45);">71h</div></div>
-        <div class="mb-v" style="color:var(--green);">71h</div>
-      </div>
-      <div class="mbr">
-        <div class="mb-l" style="color:var(--blue);">IG1</div>
-        <div class="mb-bg"><div class="mb-f" style="width:74.7%;background:rgba(40,110,170,0.42);">65h</div></div>
-        <div class="mb-v" style="color:var(--blue);">65h</div>
-      </div>
-      <div class="mbr">
-        <div class="mb-l" style="color:var(--danger);">IG3</div>
-        <div class="mb-bg"><div class="mb-f" style="width:42.5%;background:rgba(160,40,40,0.55);">37h — CRITICAL</div></div>
-        <div class="mb-v" style="color:var(--danger);">37h</div>
-      </div>
-    </div>
-    <div class="tag">MTTR Comparison — February 2026 <span class="hl">Shorter = faster repairs</span></div>
-    <div class="mtbf">
-      <div class="mbr">
-        <div class="mb-l" style="color:var(--yellow);">IG4</div>
-        <div class="mb-bg"><div class="mb-f" style="width:9.3%;background:rgba(180,120,20,0.50);">0h 22m</div></div>
-        <div class="mb-v" style="color:var(--yellow);">0h 22m</div>
-      </div>
-      <div class="mbr">
-        <div class="mb-l" style="color:var(--blue);">IG1</div>
-        <div class="mb-bg"><div class="mb-f" style="width:17.2%;background:rgba(40,110,170,0.42);">0h 41m</div></div>
-        <div class="mb-v" style="color:var(--blue);">0h 41m</div>
-      </div>
-      <div class="mbr">
-        <div class="mb-l" style="color:var(--green);">IG2</div>
-        <div class="mb-bg"><div class="mb-f" style="width:20.1%;background:rgba(30,120,60,0.45);">0h 48m</div></div>
-        <div class="mb-v" style="color:var(--green);">0h 48m</div>
-      </div>
-      <div class="mbr">
-        <div class="mb-l" style="color:var(--danger);">IG3</div>
-        <div class="mb-bg"><div class="mb-f" style="width:100%;background:rgba(160,40,40,0.55);">3h 58m — CRITICAL</div></div>
-        <div class="mb-v" style="color:var(--danger);">3h 58m</div>
-      </div>
-    </div>
-  </div><!-- /col-c -->
 
-  <!-- RIGHT COLUMN: Feb MTBF detail tables -->
-  <div class="col-r">
-    <div class="tag">Equipment Repair Detail — February 2026 <span class="hl">All IG Lines · Thru 02/23</span></div>
-    <div class="ig-grid">
-      <!-- IG1 Feb -->
-      <div class="ig-cell">
-        <div class="lhdr first"><span class="lh-n" style="color:var(--blue);">IG1</span><span class="lh-h">656 line hrs</span></div>
-        <table class="dt">
-          <thead><tr><th>Equipment</th><th>BD</th><th>MTBF</th><th>MTTR</th></tr></thead>
-          <tbody>
-            <tr><td>Line 1 Squid</td><td class="m">7</td><td class="m">93h</td><td><span class="bdg bg">0h 43m</span></td></tr>
-            <tr><td>1ig042 Nozzle Cleaner</td><td class="m">1</td><td class="m">656h</td><td><span class="bdg bw">1h 0m</span></td></tr>
-            <tr><td>IG1 Mask Master 4</td><td class="m">1</td><td class="m">656h</td><td><span class="bdg bg">0h 30m</span></td></tr>
-            <tr><td>IG1 Razorback #2</td><td class="m">1</td><td class="m">656h</td><td><span class="bdg bg">0h 20m</span></td></tr>
-            <tr><td><strong>IG1 Total</strong></td><td class="m"><strong>10</strong></td><td class="m"><strong>65h</strong></td><td><span class="bdg bg">0h 41m</span></td></tr>
-          </tbody>
-        </table>
+    <!-- KPI 3: BD Labor Hour Mix -->
+    <div class="kpi-card">
+      <div class="kpi-card-accent" style="background:var(--danger);"></div>
+      <div class="kpi-label">BD Labor Hour Mix</div>
+      <div class="kpi-val" style="color:var(--green);">32.0%</div>
+      <div class="kpi-sub">Feb · 231.5h BD of 723h total</div>
+      <div class="kpi-trend trend-good">↓ Back under target · 76 PMs this weekend</div>
+      <div class="kpi-months">
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl">JAN</div>
+          <div class="kpi-mo-bar-bg">
+            <div class="kpi-mo-bar-f" style="width:30.5%;background:rgba(34,197,94,0.6);"></div>
+            <div class="kpi-mo-bar-target" style="left:35%;"></div>
+          </div>
+          <div class="kpi-mo-val" style="color:var(--green);">30.5% ✓</div>
+        </div>
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl">FEB</div>
+          <div class="kpi-mo-bar-bg">
+            <div class="kpi-mo-bar-f" style="width:32.0%;background:rgba(34,197,94,0.7);"></div>
+            <div class="kpi-mo-bar-target" style="left:35%;"></div>
+          </div>
+          <div class="kpi-mo-val" style="color:var(--green);">32.0% ✓</div>
+        </div>
       </div>
-      <!-- IG2 Feb -->
-      <div class="ig-cell">
-        <div class="lhdr first"><span class="lh-n" style="color:var(--green);">IG2</span><span class="lh-h">568 line hrs</span></div>
-        <table class="dt">
-          <thead><tr><th>Equipment</th><th>BD</th><th>MTBF</th><th>MTTR</th></tr></thead>
-          <tbody>
-            <tr><td>Line 2 Squid</td><td class="m">5</td><td class="m">113h</td><td><span class="bdg bg">0h 34m</span></td></tr>
-            <tr><td>2ig033 Nozzle Cleaner</td><td class="m">1</td><td class="m">568h</td><td><span class="bdg bw">1h 0m</span></td></tr>
-            <tr><td>IG2 Mask Master 3</td><td class="m">1</td><td class="m">568h</td><td><span class="bdg bw">2h 20m</span></td></tr>
-            <tr><td>LINE2 (general)</td><td class="m">1</td><td class="m">568h</td><td><span class="bdg bg">0h 20m</span></td></tr>
-            <tr><td><strong>IG2 Total</strong></td><td class="m"><strong>8</strong></td><td class="m"><strong>71h</strong></td><td><span class="bdg bg">0h 48m</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- IG3 Feb — CRITICAL -->
-      <div class="ig-cell">
-        <div class="lhdr first"><span class="lh-n" style="color:var(--danger);">IG3</span><span class="lh-h">704 line hrs · ⚠ CRITICAL</span></div>
-        <table class="dt">
-          <thead><tr><th>Equipment</th><th>BD</th><th>MTBF</th><th>MTTR</th></tr></thead>
-          <tbody>
-            <tr><td>Line 3 Squid</td><td class="m">5</td><td class="m">140h</td><td><span class="bdg bw">1h 14m</span></td></tr>
-            <tr><td>Line 3 Washer</td><td class="m" style="color:var(--danger);">4</td><td class="m" style="color:var(--danger);">176h</td><td><span class="bdg br">12h 7m ⚠</span></td></tr>
-            <tr><td>3ig015 84x36 Conv.</td><td class="m">2</td><td class="m">352h</td><td><span class="bdg bw">1h 7m</span></td></tr>
-            <tr><td>3ig017 84x36 Conv/Vision</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">1h 55m</span></td></tr>
-            <tr><td>3ig033 Logo Master</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bg">0h 10m</span></td></tr>
-            <tr><td>3ig041 84x150 Conv.</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg br">3h 0m</span></td></tr>
-            <tr><td>3ig053 Nozzle Cleaner</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">1h 0m</span></td></tr>
-            <tr><td>Hand Seal Washer</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">2h 0m</span></td></tr>
-            <tr><td>IG3 Razorback #2</td><td class="m" style="color:var(--danger);">1</td><td class="m">704h</td><td><span class="bdg br">6h 45m ⚠</span></td></tr>
-            <tr><td>IG3 UnFlipper</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">1h 30m</span></td></tr>
-            <tr><td>Richter Manip.</td><td class="m">1</td><td class="m">704h</td><td><span class="bdg bw">2h 20m</span></td></tr>
-            <tr><td><strong>IG3 Total</strong></td><td class="m" style="color:var(--danger);"><strong>19</strong></td><td class="m" style="color:var(--danger);"><strong>37h</strong></td><td><span class="bdg br">3h 58m</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- IG4 Feb -->
-      <div class="ig-cell">
-        <div class="lhdr first"><span class="lh-n" style="color:var(--yellow);">IG4</span><span class="lh-h">696 line hrs · Best MTBF</span></div>
-        <table class="dt">
-          <thead><tr><th>Equipment</th><th>BD</th><th>MTBF</th><th>MTTR</th></tr></thead>
-          <tbody>
-            <tr><td>IG4 AGP</td><td class="m">3</td><td class="m">232h</td><td><span class="bdg bg">0h 13m</span></td></tr>
-            <tr><td>Line 4 Squid</td><td class="m">2</td><td class="m">348h</td><td><span class="bdg bg">0h 10m</span></td></tr>
-            <tr><td>IG4 IQ Test</td><td class="m">1</td><td class="m">696h</td><td><span class="bdg bg">0h 0m</span></td></tr>
-            <tr><td>IG4 Robot</td><td class="m">1</td><td class="m">696h</td><td><span class="bdg bw">1h 30m</span></td></tr>
-            <tr><td>Line 4 Washer</td><td class="m">1</td><td class="m">696h</td><td><span class="bdg bg">0h 30m</span></td></tr>
-            <tr><td><strong>IG4 Total</strong></td><td class="m"><strong>8</strong></td><td class="m" style="color:var(--yellow);"><strong>87h</strong></td><td><span class="bdg bg">0h 22m</span></td></tr>
-          </tbody>
-        </table>
-      </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">Orange line = 35% target</div>
     </div>
-    <div class="bdg-leg">
-      <span class="lbl">MTTR:</span>
-      <span class="bdg bg">Under 1 hr — Good</span>
-      <span class="bdg bw">1–3 hrs — Monitor</span>
-      <span class="bdg br">Over 3 hrs — Concern</span>
-    </div>
-  </div><!-- /col-r -->
 
-</div><!-- /layout -->
+    <!-- KPI 4: MTBF — IG3 (worst line) -->
+    <div class="kpi-card">
+      <div class="kpi-card-accent" style="background:var(--danger);"></div>
+      <div class="kpi-label">MTBF — IG3 (Worst Line)</div>
+      <div class="kpi-val" style="color:var(--danger);">51h</div>
+      <div class="kpi-sub">Jan · avg hours between breakdowns</div>
+      <div class="kpi-trend trend-bad">17 BDs in Jan · 2.0h avg repair</div>
+      <div class="kpi-months" style="gap:4px;">
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl" style="width:32px;font-size:9px;">IG2</div>
+          <div class="kpi-mo-bar-bg"><div class="kpi-mo-bar-f" style="width:100%;background:rgba(34,197,94,0.55);"></div></div>
+          <div class="kpi-mo-val" style="color:var(--green);">108h ✓</div>
+        </div>
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl" style="width:32px;font-size:9px;">IG1</div>
+          <div class="kpi-mo-bar-bg"><div class="kpi-mo-bar-f" style="width:61.1%;background:rgba(56,189,248,0.5);"></div></div>
+          <div class="kpi-mo-val" style="color:var(--blue);">66h</div>
+        </div>
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl" style="width:32px;font-size:9px;">IG4</div>
+          <div class="kpi-mo-bar-bg"><div class="kpi-mo-bar-f" style="width:46.3%;background:rgba(245,158,11,0.5);"></div></div>
+          <div class="kpi-mo-val" style="color:var(--yellow);">50h</div>
+        </div>
+        <div class="kpi-mo-row">
+          <div class="kpi-mo-lbl" style="width:32px;font-size:9px;">IG3</div>
+          <div class="kpi-mo-bar-bg"><div class="kpi-mo-bar-f" style="width:47.2%;background:rgba(239,68,68,0.6);"></div></div>
+          <div class="kpi-mo-val" style="color:var(--danger);">51h ⚠</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI 5: Bad Actors -->
+    <div class="kpi-card">
+      <div class="kpi-card-accent" style="background:var(--red);"></div>
+      <div class="kpi-label">Bad Actors — Jan + Feb YTD</div>
+      <div class="kpi-val" style="color:var(--danger);font-size:clamp(22px,2.5vw,36px);margin-top:4px;">TOP 5</div>
+      <div class="kpi-sub" style="margin-bottom:10px;">Ranked by total downtime hours · Jan–Feb 2026</div>
+      <div style="border-top:1px solid var(--border);padding-top:8px;display:flex;flex-direction:column;gap:6px;">
+        <div style="padding:6px 10px;background:rgba(239,68,68,0.1);border-left:3px solid var(--danger);border-radius:1px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(13px,1.3vw,17px);color:var(--danger);letter-spacing:1px;">1 &nbsp;IG3 VWASH</div><div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);margin-top:1px;">4 repairs · Feb only — new entrant</div></div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(16px,1.6vw,22px);color:var(--danger);">48.5h</div>
+        </div>
+        <div style="padding:6px 10px;background:rgba(239,68,68,0.07);border-left:3px solid var(--red);border-radius:1px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(13px,1.3vw,17px);color:var(--text);letter-spacing:1px;">2 &nbsp;IG3 SQUID</div><div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);margin-top:1px;">17 repairs · #1 Jan · #10 Feb · Repeat offender</div></div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(16px,1.6vw,22px);color:var(--orange);">32.8h</div>
+        </div>
+        <div style="padding:6px 10px;background:rgba(245,158,11,0.07);border-left:3px solid var(--yellow);border-radius:1px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(13px,1.3vw,17px);color:var(--text);letter-spacing:1px;">3 &nbsp;QCB1</div><div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);margin-top:1px;">4 repairs · Feb only — new entrant</div></div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(16px,1.6vw,22px);color:var(--yellow);">19.8h</div>
+        </div>
+        <div style="padding:6px 10px;background:rgba(245,158,11,0.06);border-left:3px solid var(--orange);border-radius:1px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(13px,1.3vw,17px);color:var(--text);letter-spacing:1px;">4 &nbsp;TMP FURN</div><div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);margin-top:1px;">6 repairs · Projects open · Escalating</div></div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(16px,1.6vw,22px);color:var(--yellow);">18.8h</div>
+        </div>
+        <div style="padding:6px 10px;background:rgba(56,189,248,0.05);border-left:3px solid var(--blue);border-radius:1px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(13px,1.3vw,17px);color:var(--text);letter-spacing:1px;">5 &nbsp;MEZ B2</div><div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);margin-top:1px;">7 repairs · Jan only</div></div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(16px,1.6vw,22px);color:var(--dim);">17.8h</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /kpi-grid -->
+
+</div><!-- /kpi-scroll -->
 </div><!-- /kpi-page -->
+
 
 
 <!-- ═══════════════════════════ SHIFT PERFORMANCE PAGE ═══════════════════════════ -->
 <div id="shift-page">
   <div class="sp-layout">
 
-    <!-- A Shift -->
-    <div class="sp-col" style="border-left:3px solid var(--blue);">
-      <div class="sp-col-hdr">
-        <div class="sp-shift-letter" style="color:var(--blue);">A</div>
-        <div class="sp-ytd">YTD Labor</div>
-        <div class="sp-ytd-val" style="color:var(--blue);">474h</div>
-      </div>
-      <div class="sp-body">
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">January</span>
-          <span class="sp-stat-val" style="color:var(--green);">268h</span>
-        </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">February</span>
-          <span class="sp-stat-val" style="color:var(--blue);">206h</span>
-        </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">Techs on Shift</span>
-          <span class="sp-stat-val" style="color:var(--dim);">4</span>
-        </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">Avg / Tech YTD</span>
-          <span class="sp-stat-val" style="color:var(--dim);">118h</span>
-        </div>
-      </div>
-      <div class="sp-bar-section">
-        <div class="sp-bar-lbl">Monthly Labor</div>
-        <div class="sp-bar-row">
-          <div class="sp-bar-mo">JAN</div>
-          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:100%;background:var(--blue);opacity:0.7;"></div></div>
-          <div class="sp-bar-v" style="color:var(--blue);">268h</div>
-        </div>
-        <div class="sp-bar-row">
-          <div class="sp-bar-mo">FEB</div>
-          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:76.9%;background:var(--blue);opacity:0.4;"></div></div>
-          <div class="sp-bar-v" style="color:var(--dim);">206h</div>
-        </div>
-      </div>
-      <!-- A Shift Schedule — JS driven -->
-      <div id="sched-A"></div>
-    </div>
+    <!-- LEFT: 4 shift stat cards stacked -->
+    <div class="sp-stats-panel">
 
-    <!-- B Shift -->
-    <div class="sp-col" style="border-left:3px solid var(--green);">
-      <div class="sp-col-hdr">
-        <div class="sp-shift-letter" style="color:var(--green);">B</div>
-        <div class="sp-ytd">YTD Labor</div>
-        <div class="sp-ytd-val" style="color:var(--green);">279h</div>
-      </div>
-      <div class="sp-body">
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">January</span>
-          <span class="sp-stat-val" style="color:var(--green);">111h</span>
+      <!-- A Shift -->
+      <div class="sp-card">
+        <div class="sp-card-hdr" style="border-left:3px solid var(--blue);">
+          <span class="sp-shift-letter" style="color:var(--blue);">A</span>
+          <span class="sp-ytd">YTD Labor</span>
+          <span class="sp-ytd-val" style="color:var(--blue);">474h</span>
         </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">February</span>
-          <span class="sp-stat-val" style="color:var(--green);">168h 40m</span>
+        <div class="sp-crew">Link · Gilmer · Nakhle · Green</div>
+        <div class="sp-body">
+          <div class="sp-stat-row"><span class="sp-stat-lbl">January</span><span class="sp-stat-val" style="color:var(--green);">268h</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">February</span><span class="sp-stat-val" style="color:var(--blue);">206h</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">March</span><span class="sp-stat-val" style="color:var(--muted);">—</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">Techs</span><span class="sp-stat-val" style="color:var(--dim);">4</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">Avg/Tech YTD</span><span class="sp-stat-val" style="color:var(--dim);">118h</span></div>
         </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">Techs on Shift</span>
-          <span class="sp-stat-val" style="color:var(--dim);">3</span>
-        </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">Avg / Tech YTD</span>
-          <span class="sp-stat-val" style="color:var(--dim);">93h</span>
+        <div class="sp-bar-section">
+          <div class="sp-bar-lbl">Monthly Labor</div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">JAN</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:100%;background:var(--blue);opacity:0.7;"></div></div><div class="sp-bar-v" style="color:var(--blue);">268h</div></div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">FEB</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:76.8%;background:var(--blue);opacity:0.45;"></div></div><div class="sp-bar-v" style="color:var(--dim);">206h</div></div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">MAR</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:0%;"></div></div><div class="sp-bar-v" style="color:var(--muted);">—</div></div>
         </div>
       </div>
-      <div class="sp-bar-section">
-        <div class="sp-bar-lbl">Monthly Labor</div>
-        <div class="sp-bar-row">
-          <div class="sp-bar-mo">JAN</div>
-          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:65.8%;background:var(--green);opacity:0.7;"></div></div>
-          <div class="sp-bar-v" style="color:var(--dim);">111h</div>
-        </div>
-        <div class="sp-bar-row">
-          <div class="sp-bar-mo">FEB</div>
-          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:100%;background:var(--green);opacity:0.5;"></div></div>
-          <div class="sp-bar-v" style="color:var(--green);">168h</div>
-        </div>
-      </div>
-      <!-- B Shift Schedule — JS driven -->
-      <div id="sched-B"></div>
-    </div>
 
-    <!-- C Shift -->
-    <div class="sp-col" style="border-left:3px solid var(--yellow);">
-      <div class="sp-col-hdr">
-        <div class="sp-shift-letter" style="color:var(--yellow);">C</div>
-        <div class="sp-ytd">YTD Labor</div>
-        <div class="sp-ytd-val" style="color:var(--yellow);">188h</div>
-      </div>
-      <div class="sp-body">
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">January</span>
-          <span class="sp-stat-val" style="color:var(--green);">105h</span>
+      <!-- B Shift -->
+      <div class="sp-card">
+        <div class="sp-card-hdr" style="border-left:3px solid var(--green);">
+          <span class="sp-shift-letter" style="color:var(--green);">B</span>
+          <span class="sp-ytd">YTD Labor</span>
+          <span class="sp-ytd-val" style="color:var(--green);">280h</span>
         </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">February</span>
-          <span class="sp-stat-val" style="color:var(--yellow);">83h 40m</span>
+        <div class="sp-crew">Doss · Halstead · Tofano</div>
+        <div class="sp-body">
+          <div class="sp-stat-row"><span class="sp-stat-lbl">January</span><span class="sp-stat-val" style="color:var(--green);">111h</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">February</span><span class="sp-stat-val" style="color:var(--green);">169h</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">March</span><span class="sp-stat-val" style="color:var(--muted);">—</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">Techs</span><span class="sp-stat-val" style="color:var(--dim);">3</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">Avg/Tech YTD</span><span class="sp-stat-val" style="color:var(--dim);">93h</span></div>
         </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">Techs on Shift</span>
-          <span class="sp-stat-val" style="color:var(--dim);">4</span>
-        </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">Avg / Tech YTD</span>
-          <span class="sp-stat-val" style="color:var(--dim);">47h</span>
+        <div class="sp-bar-section">
+          <div class="sp-bar-lbl">Monthly Labor</div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">JAN</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:41.4%;background:var(--green);opacity:0.7;"></div></div><div class="sp-bar-v" style="color:var(--dim);">111h</div></div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">FEB</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:63.1%;background:var(--green);opacity:0.5;"></div></div><div class="sp-bar-v" style="color:var(--green);">169h</div></div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">MAR</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:0%;"></div></div><div class="sp-bar-v" style="color:var(--muted);">—</div></div>
         </div>
       </div>
-      <div class="sp-bar-section">
-        <div class="sp-bar-lbl">Monthly Labor</div>
-        <div class="sp-bar-row">
-          <div class="sp-bar-mo">JAN</div>
-          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:62.5%;background:var(--yellow);opacity:0.7;"></div></div>
-          <div class="sp-bar-v" style="color:var(--dim);">105h</div>
-        </div>
-        <div class="sp-bar-row">
-          <div class="sp-bar-mo">FEB</div>
-          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:49.6%;background:var(--yellow);opacity:0.5;"></div></div>
-          <div class="sp-bar-v" style="color:var(--yellow);">83h</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- D Shift -->
-    <div class="sp-col" style="border-left:3px solid #ff6b84;">
-      <div class="sp-col-hdr">
-        <div class="sp-shift-letter" style="color:#ff6b84;">D</div>
-        <div class="sp-ytd">YTD Labor</div>
-        <div class="sp-ytd-val" style="color:#ff6b84;">224h</div>
-      </div>
-      <div class="sp-body">
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">January</span>
-          <span class="sp-stat-val" style="color:var(--green);">103h</span>
+      <!-- C Shift -->
+      <div class="sp-card">
+        <div class="sp-card-hdr" style="border-left:3px solid var(--yellow);">
+          <span class="sp-shift-letter" style="color:var(--yellow);">C</span>
+          <span class="sp-ytd">YTD Labor</span>
+          <span class="sp-ytd-val" style="color:var(--yellow);">189h</span>
         </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">February</span>
-          <span class="sp-stat-val" style="color:#ff6b84;">121h 20m</span>
+        <div class="sp-crew">Moreno · Richard · Hall · Webb</div>
+        <div class="sp-body">
+          <div class="sp-stat-row"><span class="sp-stat-lbl">January</span><span class="sp-stat-val" style="color:var(--green);">105h</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">February</span><span class="sp-stat-val" style="color:var(--yellow);">84h</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">March</span><span class="sp-stat-val" style="color:var(--muted);">—</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">Techs</span><span class="sp-stat-val" style="color:var(--dim);">4</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">Avg/Tech YTD</span><span class="sp-stat-val" style="color:var(--dim);">47h</span></div>
         </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">Techs on Shift</span>
-          <span class="sp-stat-val" style="color:var(--dim);">4</span>
-        </div>
-        <div class="sp-stat-row">
-          <span class="sp-stat-lbl">Avg / Tech YTD</span>
-          <span class="sp-stat-val" style="color:var(--dim);">56h</span>
+        <div class="sp-bar-section">
+          <div class="sp-bar-lbl">Monthly Labor</div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">JAN</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:39.2%;background:var(--yellow);opacity:0.7;"></div></div><div class="sp-bar-v" style="color:var(--dim);">105h</div></div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">FEB</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:31.3%;background:var(--yellow);opacity:0.5;"></div></div><div class="sp-bar-v" style="color:var(--yellow);">84h</div></div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">MAR</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:0%;"></div></div><div class="sp-bar-v" style="color:var(--muted);">—</div></div>
         </div>
       </div>
-      <div class="sp-bar-section">
-        <div class="sp-bar-lbl">Monthly Labor</div>
-        <div class="sp-bar-row">
-          <div class="sp-bar-mo">JAN</div>
-          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:84.9%;background:#ff6b84;opacity:0.7;"></div></div>
-          <div class="sp-bar-v" style="color:var(--dim);">103h</div>
+
+      <!-- D Shift -->
+      <div class="sp-card" style="border-bottom:none;">
+        <div class="sp-card-hdr" style="border-left:3px solid #ff6b84;">
+          <span class="sp-shift-letter" style="color:#ff6b84;">D</span>
+          <span class="sp-ytd">YTD Labor</span>
+          <span class="sp-ytd-val" style="color:#ff6b84;">224h</span>
         </div>
-        <div class="sp-bar-row">
-          <div class="sp-bar-mo">FEB</div>
-          <div class="sp-bar-bg"><div class="sp-bar-f" style="width:100%;background:#ff6b84;opacity:0.6;"></div></div>
-          <div class="sp-bar-v" style="color:#ff6b84;">121h</div>
+        <div class="sp-crew">Beasley · Adkins · Waldron · Lyne</div>
+        <div class="sp-body">
+          <div class="sp-stat-row"><span class="sp-stat-lbl">January</span><span class="sp-stat-val" style="color:var(--green);">103h</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">February</span><span class="sp-stat-val" style="color:#ff6b84;">121h</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">March</span><span class="sp-stat-val" style="color:var(--muted);">—</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">Techs</span><span class="sp-stat-val" style="color:var(--dim);">4</span></div>
+          <div class="sp-stat-row"><span class="sp-stat-lbl">Avg/Tech YTD</span><span class="sp-stat-val" style="color:var(--dim);">56h</span></div>
+        </div>
+        <div class="sp-bar-section">
+          <div class="sp-bar-lbl">Monthly Labor</div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">JAN</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:38.4%;background:#ff6b84;opacity:0.7;"></div></div><div class="sp-bar-v" style="color:var(--dim);">103h</div></div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">FEB</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:45.1%;background:#ff6b84;opacity:0.5;"></div></div><div class="sp-bar-v" style="color:#ff6b84;">121h</div></div>
+          <div class="sp-bar-row"><div class="sp-bar-mo">MAR</div><div class="sp-bar-bg"><div class="sp-bar-f" style="width:0%;"></div></div><div class="sp-bar-v" style="color:var(--muted);">—</div></div>
         </div>
       </div>
-    </div>
+
+    </div><!-- /sp-stats-panel -->
+
+    <!-- RIGHT: March 2026 Calendar -->
+    <div class="sp-cal-panel">
+      <div class="cal-title">March 2026 — 2-2-3 Schedule</div>
+      <div class="cal-legend">
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(56,189,248,0.4);"></div>A · Link / Gilmer / Nakhle / Green</div>
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(34,197,94,0.35);"></div>B · Doss / Halstead / Tofano</div>
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(245,158,11,0.4);"></div>C · Moreno / Richard / Hall / Webb</div>
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(255,107,132,0.4);"></div>D · Beasley / Adkins / Waldron / Lyne</div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+        <div class="cal-day" id="mar-1"><div class="cal-day-num">1</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-2"><div class="cal-day-num">2</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-3"><div class="cal-day-num">3</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-4"><div class="cal-day-num">4</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-5"><div class="cal-day-num">5</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-6"><div class="cal-day-num">6</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-7"><div class="cal-day-num">7</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-8"><div class="cal-day-num">8</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-9"><div class="cal-day-num">9</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-10"><div class="cal-day-num">10</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-11"><div class="cal-day-num">11</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-12"><div class="cal-day-num">12</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-13"><div class="cal-day-num">13</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-14"><div class="cal-day-num">14</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-15"><div class="cal-day-num">15</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-16"><div class="cal-day-num">16</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-17"><div class="cal-day-num">17</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-18"><div class="cal-day-num">18</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-19"><div class="cal-day-num">19</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-20"><div class="cal-day-num">20</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-21"><div class="cal-day-num">21</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-22"><div class="cal-day-num">22</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-23"><div class="cal-day-num">23</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-24"><div class="cal-day-num">24</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-25"><div class="cal-day-num">25</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-26"><div class="cal-day-num">26</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-27"><div class="cal-day-num">27</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-28"><div class="cal-day-num">28</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-29"><div class="cal-day-num">29</div><div class="cal-shifts"><span class="cal-shift-badge csb-a">A</span><span class="cal-shift-badge csb-b">B</span></div></div>
+        <div class="cal-day" id="mar-30"><div class="cal-day-num">30</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day" id="mar-31"><div class="cal-day-num">31</div><div class="cal-shifts"><span class="cal-shift-badge csb-c">C</span><span class="cal-shift-badge csb-d">D</span></div></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+      </div><!-- /cal-grid -->
+    </div><!-- /sp-cal-panel -->
 
   </div><!-- /sp-layout -->
 </div><!-- /shift-page -->
 
 <footer class="ftr">
   <span>Cardinal IG Roanoke &nbsp;|&nbsp; Maintenance Department &nbsp;|&nbsp; PMWare CMMS</span>
-  <span id="ftr-date">Report Date: 02/23/2026</span>
+  <span>Report Date: 02/23/2026</span>
 </footer>
 
 <script>
@@ -1129,17 +919,25 @@ function showPage(page, el) {
   document.getElementById('shift-page').style.display = page === 'shift' ? 'block' : 'none';
   document.querySelectorAll('.page-nav a').forEach(function(a){ a.classList.remove('active'); });
   if (el) el.classList.add('active');
-  document.body.classList.toggle('shift-page-active', page === 'shift');
 }
 
+// Each 12h slot has exactly ONE shift on duty.
+// Anchor: Feb 23 2026 06:00 local = start of A-shift day slot (confirmed from calendar)
+// Rotation (20 slots = one full cycle):
+// Slot 0=A, 1=B, 2=C, 3=D, 4=C, 5=D, 6=A, 7=B, 8=A, 9=B,
+// 10=C, 11=D, 12=C, 13=D, 14=A, 15=B, 16=A, 17=B, 18=A, 19=B
+// This matches the 2-2-3 pattern: each pair shares same day block,
+// one takes 6am-6pm (day slot), partner takes 6pm-6am (night slot)
+var SHIFT_CYCLE = ['A','B','C','D','C','D','A','B','A','B','C','D','C','D','A','B','A','B','A','B'];
+var ANCHOR = new Date(2026, 1, 23, 6, 0, 0); // Feb 23 6:00am local
+
 function getActiveShift(now) {
-  var anchor = new Date('2026-02-20T06:00:00');
-  var msPerSlot = 12 * 60 * 60 * 1000;
-  var cycle = ['C','D','C','D','C','D','A','B','A','B','C','D','C','D','A','B','A','B','A','B'];
-  var slots = Math.floor((now - anchor) / msPerSlot);
-  var idx = ((slots % 20) + 20) % 20;
-  return cycle[idx];
+  var elapsed = now - ANCHOR;
+  if (elapsed < 0) elapsed = 0;
+  var slot = Math.floor(elapsed / (12 * 60 * 60 * 1000));
+  return SHIFT_CYCLE[((slot % 20) + 20) % 20];
 }
+
 
 function updateClock() {
   var now = new Date();
@@ -1150,24 +948,28 @@ function updateClock() {
     h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s + ' ' + ampm;
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var now2 = new Date();
   document.getElementById('hdr-day').textContent =
-    days[now2.getDay()] + ', ' + months[now2.getMonth()] + ' ' + now2.getDate() + ' ' + now2.getFullYear();
-  var active = getActiveShift(now2);
+    days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ' ' + now.getFullYear();
+
+  var active = getActiveShift(now); // single shift: 'A', 'B', 'C', or 'D'
+
+  // Header shift tabs — only the one shift on duty goes green
   ['A','B','C','D'].forEach(function(s) {
     var el = document.getElementById('shift-' + s);
     if (el) el.classList.toggle('active', s === active);
   });
+
 }
+
+
 setInterval(updateClock, 1000);
 updateClock();
 
-// Weather
-fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0887&longitude=-79.8981&current=temperature_2m,weather_code,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
+fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0887&longitude=-79.8981&current=temperature_2m,weather_code,weathercode,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
   .then(function(r){ return r.json(); })
   .then(function(d){
     var temp = Math.round(d.current.temperature_2m);
-    var code = d.current.weather_code;
+    var code = d.current.weather_code !== undefined ? d.current.weather_code : d.current.weathercode;
     var wind = Math.round(d.current.windspeed_10m);
     var icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'🌨️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
     var descs = {0:'Clear',1:'Mostly Clear',2:'Partly Cloudy',3:'Overcast',45:'Foggy',48:'Foggy',51:'Light Drizzle',53:'Drizzle',55:'Heavy Drizzle',61:'Light Rain',63:'Rain',65:'Heavy Rain',71:'Light Snow',73:'Snow',75:'Heavy Snow',80:'Showers',81:'Showers',82:'Heavy Showers',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'};
@@ -1176,199 +978,6 @@ fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0887&longitude=-79.898
     document.getElementById('wx-desc').textContent = (descs[code] || 'Clear') + ' · ' + wind + ' mph · Vinton, VA';
   })
   .catch(function(){ document.getElementById('wx-desc').textContent = 'Vinton, VA'; });
-
-// ═══════════════════════════════════════════════════════════
-//  DAILY SCHEDULE ENGINE
-//  Each entry: { wo, equip, title, type, est, due, dueCls, note }
-//  type: 'pm' | 'bd' | 'svc' | 'corr'
-//  dueCls: 'ok' | 'overdue'
-//  note: optional inline note string (shown in orange)
-// ═══════════════════════════════════════════════════════════
-var SCHEDULE = {
-  'A': {
-    '2026-02-23': {
-      label: 'Monday 02/23',
-      wos: [
-        { wo:'118800', equip:'IG3 MM3',     title:'IG Mask Master Monthly PM',              type:'pm',   est:'0h 45m', due:'02/28', dueCls:'ok' },
-        { wo:'118799', equip:'IG3 MM4',     title:'IG Mask Master Monthly PM',              type:'pm',   est:'0h 45m', due:'02/28', dueCls:'ok' },
-        { wo:'118802', equip:'IG3 MM2',     title:'IG Mask Master Monthly PM',              type:'pm',   est:'0h 45m', due:'02/28', dueCls:'ok' },
-        { wo:'119947', equip:'IG3 HAWK',    title:'Hawk Weekly PM',                         type:'pm',   est:'0h 15m', due:'02/22', dueCls:'overdue' },
-        { wo:'120045', equip:'IG2 VWASH',   title:'CRITICAL: IG2 Washer Weekly Insp.',      type:'pm',   est:'1h 0m',  due:'02/25', dueCls:'ok',      note:'critical' },
-        { wo:'119655', equip:'IG2 VWASH',   title:'CRITICAL: IG2 Washer Bi-Weekly PM',      type:'pm',   est:'1h 0m',  due:'02/23', dueCls:'overdue', note:'critical' },
-        { wo:'120015', equip:'L2-SILP-02',  title:'Silicone Pump Weekly PM',                type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'120012', equip:'L2-SILP-01',  title:'Silicone Pump Weekly PM',                type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'120027', equip:'IG2 GS',      title:'IQTest & Gas Scope Merlin Weekly PMs',   type:'pm',   est:'0h 15m', due:'02/23', dueCls:'overdue' },
-        { wo:'120054', equip:'3/G013',      title:'Install Backboard wheels & O-Ring',      type:'svc',  est:'0h 35m', due:'02/23', dueCls:'overdue' },
-        { wo:'120084', equip:'IG3 MM3',     title:'Masker 3 backboard',                     type:'svc',  est:'0h 0m',  due:'02/23', dueCls:'overdue', note:'czahner' },
-        { wo:'120120', equip:'MEZ B9',      title:'Bend arm slamming/breaking',             type:'bd',   est:'0h 0m',  due:'02/23', dueCls:'overdue' }
-      ]
-    },
-    '2026-02-24': {
-      label: 'Tuesday 02/24',
-      wos: [
-        { wo:'118893', equip:'IG4 VWASH',   title:'CRITICAL: IG Washer Monthly PM',         type:'pm',   est:'1h 30m', due:'02/28', dueCls:'ok',      note:'critical' },
-        { wo:'119937', equip:'IG3 SQUID',   title:'Critical: IG Squid Weekly PM',           type:'pm',   est:'0h 50m', due:'02/22', dueCls:'overdue', note:'critical' },
-        { wo:'119881', equip:'CUT CT1',     title:'Freq drive shuttle gripper fault',        type:'bd',   est:'1h 0m',  due:'02/22', dueCls:'overdue', note:'ttolley' },
-        { wo:'120060', equip:'AE4',         title:'Wheel alignment',                         type:'svc',  est:'0h 0m',  due:'02/22', dueCls:'overdue', note:'clyons' },
-        { wo:'120056', equip:'IG4 MM3',     title:'Sensor back side',                        type:'svc',  est:'1h 0m',  due:'02/22', dueCls:'overdue', note:'czahner' },
-        { wo:'119874', equip:'IG4 MM4',     title:'Sensor',                                  type:'svc',  est:'0h 0m',  due:'02/22', dueCls:'overdue', note:'czahner' },
-        { wo:'119780', equip:'IG2 Squid',   title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119779', equip:'IG2 TGRIND',  title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119778', equip:'IG2 FLIP',    title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119777', equip:'IG2 MM4',     title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119776', equip:'IG2 MM3',     title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119775', equip:'IG2 MM2',     title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119774', equip:'IG2 MM1',     title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119773', equip:'IG2 GB',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119772', equip:'IG2 ASSM',    title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119771', equip:'IG2 LOGO',    title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119770', equip:'2/G032',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119769', equip:'2/G029',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119768', equip:'2/G028',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119767', equip:'2/G026',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119766', equip:'2/G024',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119765', equip:'2/G022',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119764', equip:'2/G020',      title:'IG2 Monthly Blowout',                    type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' }
-      ]
-    }
-  },
-  'B': {
-    '2026-02-23': {
-      label: 'Monday 02/23',
-      wos: [
-        { wo:'120014', equip:'L1-SILP-02',   title:'Silicone Pump Weekly PM',               type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'120011', equip:'L1-SILP-01',   title:'Silicone Pump Weekly PM',               type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'120113', equip:'Shop',          title:'Weekly 5\'s',                           type:'pm',   est:'1h 49m', due:'02/27', dueCls:'ok' },
-        { wo:'120041', equip:'IG4 IQ',        title:'IQTest & Gas Scope Merlin Weekly PMs',  type:'pm',   est:'0h 15m', due:'02/23', dueCls:'overdue' },
-        { wo:'119756', equip:'2/G009',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119755', equip:'2/G006',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119754', equip:'2/G004',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119753', equip:'2/G003',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'120055', equip:'CUT Crush2S',   title:'Safety guard broke off',                type:'bd',   est:'0h 0m',  due:'02/23', dueCls:'overdue', note:'czahner' }
-      ]
-    },
-    '2026-02-24': {
-      label: 'Tuesday 02/24',
-      wos: [
-        { wo:'119554', equip:'Plant',         title:'Check all Air wand stations for leaks', type:'svc',  est:'0h 30m', due:'02/28', dueCls:'ok',  note:'nwhite' },
-        { wo:'120009', equip:'L4-SILP-02',    title:'Silicone Pump Weekly PM',               type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'120008', equip:'L4-SILP-01',    title:'Silicone Pump Weekly PM',               type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'120042', equip:'IG4 AGP',       title:'CRITICAL: AGP Weekly PM',               type:'pm',   est:'2h 0m',  due:'02/25', dueCls:'ok',  note:'critical' },
-        { wo:'119763', equip:'2/G019',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119762', equip:'2/G017',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119761', equip:'2/G016',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119760', equip:'2/G014',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119759', equip:'L4/G012',       title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119758', equip:'2/G011',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' },
-        { wo:'119757', equip:'2/G010',        title:'IG2 Monthly Blowout',                   type:'pm',   est:'0h 20m', due:'02/24', dueCls:'ok' }
-      ]
-    }
-  }
-};
-
-// ── helpers ──────────────────────────────────────────────
-function todayKey() {
-  var d = new Date();
-  var mm = String(d.getMonth()+1).padStart(2,'0');
-  var dd = String(d.getDate()).padStart(2,'0');
-  return d.getFullYear() + '-' + mm + '-' + dd;
-}
-
-var TYPE_CLASS = { pm:'sched-type-pm', bd:'sched-type-bd', svc:'sched-type-svc', corr:'sched-type-corr' };
-var TYPE_LABEL = { pm:'PM', bd:'BD', svc:'SVC', corr:'CORR' };
-
-function buildSchedHTML(shift) {
-  var key  = todayKey();
-  var data = SCHEDULE[shift] && SCHEDULE[shift][key];
-  var days  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  var today = new Date();
-  var dayName = days[today.getDay()];
-  var dateDisp = (today.getMonth()+1).toString().padStart(2,'0') + '/' + today.getDate().toString().padStart(2,'0');
-
-  if (!data) {
-    return '<div style="padding:16px clamp(8px,1vw,16px);border-top:1px solid var(--border);">'
-      + '<div style="font-family:\'Share Tech Mono\',monospace;font-size:clamp(7px,0.65vw,9px);letter-spacing:2px;text-transform:uppercase;color:var(--orange);padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px;">'
-      + dayName.toUpperCase() + ' ' + dateDisp + ' — ' + shift + ' SHIFT</div>'
-      + '<div style="font-family:\'Share Tech Mono\',monospace;font-size:clamp(8px,0.75vw,10px);color:var(--muted);padding:12px 0;text-align:center;">'
-      + '— No schedule loaded for this date —<br>'
-      + '<span style="font-size:clamp(7px,0.6vw,8px);color:var(--border);">Upload next schedule to add data</span></div></div>';
-  }
-
-  // count overdue
-  var overdueCount = data.wos.filter(function(w){ return w.dueCls === 'overdue'; }).length;
-  var totalEst = data.wos.reduce(function(acc, w) {
-    var parts = w.est.match(/(\d+)h\s*(\d+)m/);
-    return parts ? acc + parseInt(parts[1])*60 + parseInt(parts[2]) : acc;
-  }, 0);
-  var estDisp = Math.floor(totalEst/60) + 'h ' + (totalEst%60).toString().padStart(2,'0') + 'm';
-
-  var html = '<div style="padding:0 0 0 0;border-top:1px solid var(--border);">';
-  // header
-  html += '<div style="display:flex;justify-content:space-between;align-items:center;'
-    + 'font-family:\'Share Tech Mono\',monospace;font-size:clamp(7px,0.65vw,9px);'
-    + 'letter-spacing:2px;text-transform:uppercase;color:var(--orange);'
-    + 'padding:6px clamp(8px,1vw,16px) 3px;border-bottom:1px solid var(--border);">'
-    + '<span>' + data.label.toUpperCase() + ' — ' + shift + ' SHIFT</span>'
-    + '<span style="display:flex;gap:8px;align-items:center;">'
-    + '<span style="color:var(--dim);">' + data.wos.length + ' WOs · ' + estDisp + '</span>'
-    + (overdueCount > 0
-      ? '<span style="color:var(--danger);font-weight:700;">⚠ ' + overdueCount + ' OVERDUE</span>'
-      : '<span style="color:var(--green);">✓ On Track</span>')
-    + '</span></div>';
-
-  // table
-  html += '<table class="sched" style="margin-bottom:0;">'
-    + '<thead><tr><th>WO#</th><th>Equipment</th><th>Title</th><th>Type</th><th>Est</th><th>Due</th></tr></thead>'
-    + '<tbody>';
-
-  data.wos.forEach(function(w) {
-    var titleClass = TYPE_CLASS[w.type] || '';
-    var isCritical = w.note === 'critical';
-    var titleStyle = isCritical ? 'color:var(--danger);' : '';
-    var noteHTML   = (w.note && w.note !== 'critical')
-      ? ' <span style="color:var(--orange);font-size:clamp(7px,0.6vw,8px);">(' + w.note + ')</span>'
-      : '';
-    var dueHTML = w.dueCls === 'overdue'
-      ? '<span class="sched-overdue">⚠ ' + w.due + '</span>'
-      : '<span class="sched-ok">' + w.due + '</span>';
-    var typeTag = '<span style="font-family:\'Share Tech Mono\',monospace;font-size:clamp(6px,0.55vw,8px);'
-      + 'padding:1px 4px;border-radius:2px;font-weight:700;'
-      + (w.type==='pm'   ? 'background:rgba(30,120,60,0.15);color:var(--green);'   :
-         w.type==='bd'   ? 'background:rgba(160,40,40,0.18);color:var(--danger);'  :
-         w.type==='svc'  ? 'background:rgba(40,110,170,0.15);color:var(--blue);'   :
-                           'background:rgba(180,120,20,0.15);color:var(--yellow);')
-      + '">' + TYPE_LABEL[w.type] + '</span>';
-
-    html += '<tr>'
-      + '<td class="wo-num">' + w.wo + '</td>'
-      + '<td>' + w.equip + '</td>'
-      + '<td class="' + titleClass + '" style="' + titleStyle + '">' + w.title + noteHTML + '</td>'
-      + '<td>' + typeTag + '</td>'
-      + '<td style="font-family:\'Share Tech Mono\',monospace;font-size:clamp(8px,0.7vw,9px);color:var(--muted);">' + w.est + '</td>'
-      + '<td>' + dueHTML + '</td>'
-      + '</tr>';
-  });
-
-  html += '</tbody></table></div>';
-  return html;
-}
-
-// ── render + auto-refresh on date change ─────────────────
-var _lastRenderedDate = '';
-
-function renderSchedules() {
-  var key = todayKey();
-  if (key === _lastRenderedDate) return;     // nothing changed
-  _lastRenderedDate = key;
-  var elA = document.getElementById('sched-A');
-  var elB = document.getElementById('sched-B');
-  if (elA) elA.innerHTML = buildSchedHTML('A');
-  if (elB) elB.innerHTML = buildSchedHTML('B');
-}
-
-// Run on load, then check every 60 seconds for midnight rollover
-renderSchedules();
-setInterval(renderSchedules, 60000);
 </script>
 </body>
 </html>
