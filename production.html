@@ -9,7 +9,7 @@
   :root {
     --bg: #0a0c10; --surface: #111318; --surface2: #181c24;
     --border: #1e2230; --border-bright: #2d3348;
-    --text: #e8eaf0; --text-dim: #7a8099; --text-muted: #3d4460;
+    --text: #e8eaf0; --text-dim: #c8cedd; --text-muted: #8a94b0;
     --green: #22c55e; --green-dim: #14532d; --green-bg: #0a1f12;
     --yellow: #f59e0b; --yellow-dim: #78350f; --yellow-bg: #1f1505;
     --red: #ef4444; --red-dim: #7f1d1d; --red-bg: #1a0808;
@@ -79,12 +79,27 @@
   .pm .row-dot { background: var(--yellow); }
   .down .row-dot { background: var(--red); animation: pr 1s infinite; }
   .idle .row-dot { background: #2d3348; }
-  .row-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.05em; flex: 1; color: var(--text); }
+  .row-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.05em; flex: 0 0 150px; color: var(--text); }
   .row-sched { display: flex; gap: 3px; margin-right: 14px; }
   .sc { font-size: 8px; font-family: 'IBM Plex Mono', monospace; padding: 1px 5px; border: 1px solid var(--border); color: var(--text-muted); }
   .sc.on { border-color: var(--green-dim); color: var(--green); background: #0a1f1240; }
   .sc.current { border-color: var(--green); color: #fff; background: #14532d; box-shadow: 0 0 5px rgba(34,197,94,0.4); }
   .row-note { font-size: 10px; color: var(--text-dim); font-style: italic; margin-right: 14px; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+
+  /* ── INLINE ROW TICKER ── */
+  .row-ticker-wrap { flex: 1; min-width: 0; overflow: hidden; position: relative; margin: 0 8px; display: flex; align-items: center; height: 100%; }
+  .row-ticker-track { display: inline-flex; align-items: center; white-space: nowrap; animation: row-ticker-run 22s linear infinite; }
+  .row-ticker-track:hover { animation-play-state: paused; cursor: default; }
+  @keyframes row-ticker-run { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .row-ticker-item { display:inline-flex; align-items:center; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red); font-weight:700; letter-spacing:0.4px; padding-right:40px; }
+  .row-ticker-item .ti-icon { margin-right:6px; font-size:10px; }
+  .row-ticker-item .ti-type { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:#a04050; margin-right:6px; font-weight:400; padding:1px 4px; border:1px solid #3d0a12; }
+  .row-ticker-item .ti-sep { color:#3d0a12; padding:0 16px; font-size:12px; }
+
+  /* ticker button on row — admin only */
+  .row-ticker-btn { flex-shrink:0; background:none; border:1px solid #3d0a12; color:#7a2030; font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:700; letter-spacing:1px; cursor:pointer; padding:2px 7px; margin-right:10px; transition:all 0.15s; }
+  .row-ticker-btn:hover { color:var(--red); border-color:var(--red); background:rgba(239,68,68,0.08); }
+  .row-ticker-btn.has-items { color:var(--red); border-color:rgba(239,68,68,0.5); }
   .row-status { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 12px; flex-shrink: 0; min-width: 96px; text-align: center; }
   .running .row-status { background: var(--green-dim); color: var(--green); }
   .pm .row-status { background: var(--yellow-dim); color: var(--yellow); }
@@ -122,6 +137,26 @@
   #shift-change-banner { display:none; position:fixed; top:56px; left:50%; transform:translateX(-50%); background:var(--surface); border:1px solid var(--accent); border-top:3px solid var(--accent); padding:10px 24px; font-size:12px; color:var(--text); z-index:500; font-family:'IBM Plex Mono',monospace; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.7); white-space:nowrap; }
   #shift-change-banner.show { display:block; animation:fadeInDown 0.3s ease; }
   @keyframes fadeInDown { from{opacity:0;transform:translateX(-50%) translateY(-8px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+  /* ── DOWN MODAL ── */
+  .down-modal { background:var(--surface); border:1px solid var(--border-bright); border-top:3px solid var(--red); width:440px; max-width:95vw; padding:24px; }
+  .down-modal-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:0.06em; color:var(--red); margin-bottom:4px; }
+  .down-modal-sub { font-size:10px; color:var(--text-muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+  .down-list { display:flex; flex-direction:column; gap:4px; margin-bottom:14px; max-height:180px; overflow-y:auto; }
+  .down-list-item { display:flex; align-items:center; justify-content:space-between; background:rgba(239,68,68,0.07); border:1px solid rgba(239,68,68,0.2); padding:6px 10px; border-radius:2px; }
+  .down-list-item-text { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red); font-weight:600; }
+  .down-list-item-area { font-family:'IBM Plex Mono',monospace; font-size:9px; color:#a04050; margin-left:8px; }
+  .down-list-remove { background:none; border:none; color:#7f1d1d; cursor:pointer; font-size:14px; padding:0 4px; line-height:1; }
+  .down-list-remove:hover { color:var(--red); }
+  .down-list-empty { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-muted); text-align:center; padding:14px; }
+  .down-add-row { display:flex; gap:6px; margin-bottom:0; }
+  .down-area-select { background:var(--bg); border:1px solid var(--border-bright); color:var(--text); padding:8px 10px; font-family:inherit; font-size:12px; outline:none; flex-shrink:0; width:140px; }
+  .down-area-select:focus { border-color:var(--red); }
+  .down-machine-input { flex:1; background:var(--bg); border:1px solid var(--border-bright); color:var(--text); padding:8px 10px; font-family:inherit; font-size:13px; outline:none; }
+  .down-machine-input:focus { border-color:var(--red); }
+  .down-machine-input::placeholder { color:var(--text-muted); }
+  .btn-add-down { background:var(--red-dim); color:var(--red); border:1px solid rgba(239,68,68,0.4); padding:8px 14px; font-family:inherit; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; flex-shrink:0; }
+  .btn-add-down:hover { background:var(--red-bg); border-color:var(--red); }
 </style>
 </head>
 <body>
@@ -200,6 +235,25 @@
       <button class="btn btn-save" onclick="saveStatus()">Save</button>
       <button class="btn btn-reset" onclick="resetToSchedule()">↺ Schedule</button>
       <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+<!-- DOWN MACHINES MODAL -->
+<div class="overlay" id="down-overlay">
+  <div class="down-modal">
+    <div class="down-modal-title" id="down-modal-title">⚠ Down Issues</div>
+    <div class="down-modal-sub"   id="down-modal-sub">Add issues scrolling on this row</div>
+    <div class="down-list" id="down-list"></div>
+    <div class="down-add-row">
+      <select class="down-area-select" id="down-type" style="width:100px;flex-shrink:0">
+        <option value="issue">ISSUE</option>
+        <option value="corrective">CORRECTIVE</option>
+      </select>
+      <input class="down-machine-input" id="down-machine" type="text" placeholder="Describe issue or corrective action..." maxlength="80" style="flex:1">
+      <button class="btn-add-down" onclick="addDownItem()">Add</button>
+    </div>
+    <div class="modal-actions" style="margin-top:12px;">
+      <button class="btn btn-cancel" onclick="closeDownModal()">Close</button>
     </div>
   </div>
 </div>
@@ -309,6 +363,7 @@ function enterBoard(){
   document.getElementById('logout-btn').style.display=isAdmin?'':'none';
   if(isAdmin)document.getElementById('shift-notes').disabled=false;
   initState();renderBoard();loadFromSupabase();startPoll();loadNotes();
+  loadDownItems(); loadDownFromSupabase();
 }
 function doLogout(){
   isAdmin=false;currentUser='';
@@ -345,7 +400,7 @@ function buildRow(eq, s, info){
   var row=document.createElement('div');
   row.className='eq-row '+s.status+(isAdmin?' clickable':'');
   row.id='row-'+eq.id;
-  if(isAdmin){(function(id){row.onclick=function(){openModal(id);};})(eq.id);}
+  if(isAdmin){(function(id){row.onclick=function(e){if(e.target.closest('.row-ticker-btn'))return;openModal(id);};})(eq.id);}
 
   var chips;
   if(eq.id==='IG2'){
@@ -356,21 +411,47 @@ function buildRow(eq, s, info){
       var isCur=(n===info.shiftNum&&info.isWeekday&&isOn);
       return '<span class="sc'+(isOn?' on':'')+(isCur?' current':'')+'">'+SHIFT_SHORT[n]+'</span>';
     }).join('');
-    // If weekend, show a WKND tag
     if(!info.isWeekday){
       chips+='<span class="sc" style="color:var(--slate);border-color:var(--slate);margin-left:2px">WKND</span>';
     }
   }
 
-  // Show schedule note only if no user note
-  var noteText = s.note || '';
-  if(!s.note && !s.manual) noteText = eq.schedNote || '';
+  // Inline down ticker for this specific row
+  // downItems[eq.id] = [{type:'issue'|'corrective', text:'...'}]
+  var rowItems = (downItems[eq.id] || []);
+  // Normalize: handle old string-format entries gracefully
+  rowItems = rowItems.map(function(it){ return (typeof it === 'string') ? {type:'issue', text:it} : it; });
+  var tickerHtml;
+  if(rowItems.length > 0){
+    var inner='';
+    var totalLen = rowItems.reduce(function(acc,it){ return acc + (it.text||'').length; }, 0);
+    var speed = Math.max(12, Math.min(45, totalLen * 0.5 + rowItems.length * 4));
+    for(var ri=0; ri<2; ri++){
+      rowItems.forEach(function(item){
+        var isCorr    = (item.type==='corrective'||item.type==='wo');
+        var typeColor = isCorr ? '#fbbf24' : '#ef4444';
+        var typeBord  = isCorr ? '#92400e' : '#7f1d1d';
+        var typeBg    = isCorr ? 'rgba(251,191,36,0.1)' : 'rgba(239,68,68,0.1)';
+        var typeLabel = isCorr ? 'CORRECTIVE' : 'ISSUE';
+        var typeTag   = '<span class="ti-type" style="color:'+typeColor+';border-color:'+typeBord+';background:'+typeBg+'">'+typeLabel+'</span>';
+        inner+='<span class="row-ticker-item" style="color:'+typeColor+'"><span class="ti-icon" style="color:'+typeColor+'">&#9888; </span>'+typeTag+(item.text||'')+'<span class="ti-sep">&#9670;</span></span>';
+      });
+    }
+    tickerHtml='<div class="row-ticker-wrap"><div class="row-ticker-track" style="animation-duration:'+speed+'s">'+inner+'</div></div>';
+  } else {
+    tickerHtml='<div style="flex:1;min-width:0"></div>';
+  }
+
+  var addBtn=isAdmin
+    ? '<button class="row-ticker-btn'+(rowItems.length?' has-items':'')+'" data-eq="'+eq.id+'" onclick="openDownModal(this.dataset.eq)" title="Down issues for '+eq.name+'">'+(rowItems.length?'\u26a0 '+rowItems.length+' ISSUE'+(rowItems.length>1?'S':''):'+ DOWN')+'</button>'
+    : '';
 
   row.innerHTML=
     '<div class="row-dot"></div>'+
     '<div class="row-name">'+eq.name+'</div>'+
+    tickerHtml+
+    addBtn+
     '<div class="row-sched">'+chips+'</div>'+
-    '<div class="row-note">'+noteText+'</div>'+
     '<div class="row-status">'+pillLabel[s.status]+'</div>';
   return row;
 }
@@ -456,6 +537,7 @@ function startPoll(){
       var rows=await res.json();var changed=false;
       rows.forEach(function(row){
         if(row.id==='__shift_notes__'){var ni=document.getElementById('shift-notes');if(ni&&document.activeElement!==ni)ni.value=row.note||'';return;}
+        if(row.id==='__down_items__'){try{var di=JSON.parse(row.note||'{}');if(di&&typeof di==='object'&&!Array.isArray(di)&&JSON.stringify(di)!==JSON.stringify(downItems)){downItems=di;renderAllRowTickers();}}catch(e){}return;}
         if(state[row.id]&&state[row.id].updated_at!==row.updated_at){state[row.id]={status:row.status,note:row.note||'',manual:row.manual,updated_by:row.updated_by,updated_at:row.updated_at};refreshRow(row.id);changed=true;}
       });
       if(changed)updateCounts();
@@ -519,6 +601,125 @@ function setSyncDot(s){document.getElementById('sync-dot').className='sync-dot '
 function setSync(){var now=new Date(),p=function(n){return String(n).padStart(2,'0');};document.getElementById('last-sync-note').textContent='Live · '+p(now.getHours())+':'+p(now.getMinutes())+':'+p(now.getSeconds());}
 var toastT=null;
 function showToast(msg,err){var t=document.getElementById('toast');t.textContent=msg;t.className='show'+(err?' err':'');clearTimeout(toastT);toastT=setTimeout(function(){t.className='';},3000);}
+// ══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// DOWN ISSUES — keyed by equipment ID
+// downItems = { 'IG1': ['SQUID jam WO-1234', 'Seal fail'], 'CT2': ['Blade dull'] }
+// ══════════════════════════════════════════════════════
+var downItems = {};
+var activeDownId = null; // which equipment row the modal is open for
+
+function loadDownItems() {
+  try {
+    var raw = localStorage.getItem('roig_down_items_v2');
+    if (raw) { var p=JSON.parse(raw); if(p&&typeof p==='object'&&!Array.isArray(p)) downItems=p; }
+  } catch(e) { downItems = {}; }
+  renderAllRowTickers();
+}
+
+function saveDownItems() {
+  try { localStorage.setItem('roig_down_items_v2', JSON.stringify(downItems)); } catch(e){}
+  syncDownToSupabase();
+}
+
+async function syncDownToSupabase() {
+  try {
+    await fetch(API + '/board_status', {
+      method: 'POST',
+      headers: Object.assign({}, hdrs, {'Prefer':'resolution=merge-duplicates,return=minimal'}),
+      body: JSON.stringify({id:'__down_items__', status:'idle', note:JSON.stringify(downItems), manual:true, updated_by:currentUser, updated_at:new Date().toISOString()})
+    });
+  } catch(e){}
+}
+
+async function loadDownFromSupabase() {
+  try {
+    var res = await fetch(API + '/board_status?id=eq.__down_items__&select=note,updated_at', {headers:hdrs});
+    var data = await res.json();
+    if (data && data[0] && data[0].note) {
+      var parsed = JSON.parse(data[0].note);
+      if (parsed && typeof parsed==='object' && !Array.isArray(parsed)) {
+        downItems = parsed; renderAllRowTickers();
+      }
+    }
+  } catch(e){}
+}
+
+function renderAllRowTickers() {
+  // Re-render every row so ticker/button updates
+  Object.keys(equipment).forEach(function(id){ refreshRow(id); });
+}
+
+// openDownModal(eqId) — called from the + DOWN / ⚠ ISSUES button on each row
+function openDownModal(eqId) {
+  activeDownId = eqId;
+  var eq = equipment[eqId];
+  document.getElementById('down-modal-title').textContent = '⚠  ' + eq.name + '  —  Down Issues';
+  document.getElementById('down-modal-sub').textContent   = eq.area + '  ·  Add issues that are scrolling on this row';
+  renderDownList();
+  document.getElementById('down-overlay').classList.add('open');
+  setTimeout(function(){ document.getElementById('down-machine').focus(); }, 80);
+}
+
+function closeDownModal() {
+  document.getElementById('down-overlay').classList.remove('open');
+  document.getElementById('down-machine').value = '';
+  activeDownId = null;
+}
+
+function renderDownList() {
+  var list  = document.getElementById('down-list');
+  if (!list || !activeDownId) return;
+  var items = downItems[activeDownId] || [];
+  if (items.length === 0) {
+    list.innerHTML = '<div class="down-list-empty">No issues listed — add one below</div>';
+    return;
+  }
+  list.innerHTML = items.map(function(item, idx) {
+    var isCorr = (typeof item === 'object') ? (item.type==='corrective'||item.type==='wo') : false;
+    var txt  = (typeof item === 'object') ? item.text : item;
+    var typeLabel  = isCorr ? 'CORRECTIVE' : 'ISSUE';
+    var typeColor  = isCorr ? '#fbbf24' : 'var(--red)';
+    var typeBorder = isCorr ? '#92400e' : '#7f1d1d';
+    return '<div class="down-list-item">' +
+      '<span style="display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden">' +
+      '<span style="font-family:IBM Plex Mono,monospace;font-size:8px;font-weight:700;letter-spacing:1px;color:'+typeColor+';border:1px solid '+typeBorder+';padding:1px 5px;flex-shrink:0">'+typeLabel+'</span>' +
+      '<span class="down-list-item-text" style="color:'+typeColor+'">'+txt+'</span>' +
+      '</span>' +
+      '<button class="down-list-remove" onclick="removeDownItem('+idx+')" title="Remove">✕</button>' +
+      '</div>';
+  }).join('');
+}
+
+function addDownItem() {
+  var txt  = document.getElementById('down-machine').value.trim();
+  var type = document.getElementById('down-type') ? document.getElementById('down-type').value : 'issue';
+  if (!txt || !activeDownId) { document.getElementById('down-machine').focus(); return; }
+  if (!downItems[activeDownId]) downItems[activeDownId] = [];
+  downItems[activeDownId].push({type: type, text: txt});
+  document.getElementById('down-machine').value = '';
+  saveDownItems();
+  refreshRow(activeDownId);
+  renderDownList();
+}
+
+function removeDownItem(idx) {
+  if (!activeDownId) return;
+  if (downItems[activeDownId]) {
+    downItems[activeDownId].splice(idx, 1);
+    if (downItems[activeDownId].length === 0) delete downItems[activeDownId];
+  }
+  saveDownItems();
+  refreshRow(activeDownId);
+  renderDownList();
+}
+
+document.getElementById('down-machine').addEventListener('keydown', function(e){ if(e.key==='Enter') addDownItem(); });
+document.getElementById('down-overlay').addEventListener('click', function(e){ if(e.target===document.getElementById('down-overlay')) closeDownModal(); });
+
+function initTickerUI() { /* handled per-row in buildRow */ }
+
+
 </script>
 </body>
 </html>
