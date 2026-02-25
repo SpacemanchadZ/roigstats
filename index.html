@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +94,7 @@ body {
 .page-nav {
   background: var(--bg);
   border-bottom: 2px solid var(--border);
-  display: flex; gap: 0;
+  display: flex; gap: 0; align-items: center;
   padding: 0 20px;
   font-family: 'Share Tech Mono', monospace;
   font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
@@ -106,10 +105,20 @@ body {
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
   transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
 }
 .page-nav a:hover { color: var(--text); }
 .page-nav a.active { color: var(--orange); border-bottom-color: var(--orange); }
-
+.page-nav a.prod-link {
+  margin-left: auto;
+  color: var(--red);
+  border: 1px solid rgba(200,16,46,0.4);
+  padding: 5px 14px;
+  margin-bottom: 0;
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+.page-nav a.prod-link:hover { background: rgba(200,16,46,0.12); color: #ff4060; border-color: var(--red); }
 
 /* ── UPDATES TICKER (shift page) ── */
 .ticker-outer {
@@ -139,8 +148,6 @@ body {
 .ti-cat.kpi-good { background: rgba(34,197,94,0.15);   color: var(--green); }
 .ti-cat.kpi-bad  { background: rgba(239,68,68,0.15);   color: var(--danger); }
 .ticker-sep { color: var(--border); padding: 0 2px; font-size: 14px; flex-shrink: 0; }
-
-
 
 .ticker-label {
   display: flex; flex-direction: column; justify-content: center;
@@ -265,150 +272,6 @@ body {
 .mtbf-stat-l { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
 
 /* ── SHIFT PERFORMANCE PAGE ── */
-.sp-layout {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  height: calc(100vh - 88px);
-  overflow: hidden;
-}
-
-/* Left panel — 4 shift stat cards stacked */
-.sp-stats-panel {
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  align-content: stretch;
-}
-.sp-card { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); overflow: hidden; }
-.sp-card:nth-child(2n) { border-right: none; }
-.sp-card:nth-child(3), .sp-card:nth-child(4) { border-bottom: none; }
-.sp-card-hdr {
-  padding: 5px 14px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: baseline; gap: 10px;
-}
-.sp-shift-letter { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(20px,2.2vw,28px); line-height: 1; }
-.sp-ytd { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.65vw,9px); color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
-.sp-ytd-val { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(14px,1.5vw,18px); line-height: 1; margin-left: auto; }
-.sp-crew { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--muted); padding: 2px 14px; border-bottom: 1px solid var(--border); letter-spacing: 0.5px; }
-.sp-body { padding: 3px 14px 4px; }
-.sp-stat-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; border-bottom: 1px solid rgba(39,45,64,0.5); }
-.sp-stat-row:last-child { border-bottom: none; }
-.sp-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.62vw,9px); letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-.sp-stat-val { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(13px,1.4vw,18px); }
-.sp-bar-section { padding: 3px 14px 5px; border-top: 1px solid var(--border); }
-.sp-bar-lbl { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
-.sp-bar-row { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
-.sp-bar-row:last-child { margin-bottom: 0; }
-.sp-bar-mo { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,8px); color: var(--dim); width: 22px; }
-.sp-bar-bg { flex: 1; height: 8px; background: var(--border); border-radius: 1px; overflow: hidden; }
-.sp-bar-f  { height: 100%; border-radius: 1px; }
-.sp-bar-v  { font-family: 'Share Tech Mono', monospace; font-size: clamp(7px,0.6vw,9px); width: 30px; text-align: right; }
-
-/* Right panel — calendar */
-.sp-cal-panel {
-  overflow-y: auto;
-  height: 100%;
-  padding: 14px 18px;
-}
-.cal-title {
-  font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(16px,2vw,26px);
-  letter-spacing: 4px;
-  color: var(--dim);
-  margin-bottom: 10px;
-}
-.cal-legend {
-  display: flex; gap: 14px; margin-bottom: 12px; flex-wrap: wrap;
-}
-.cal-leg-item {
-  display: flex; align-items: center; gap: 5px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(8px,0.7vw,10px); color: var(--dim);
-}
-.cal-leg-dot { width: 10px; height: 10px; border-radius: 1px; flex-shrink: 0; }
-.cal-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 3px;
-}
-.cal-dow {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(8px,0.7vw,10px);
-  letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--muted); text-align: center;
-  padding: 4px 2px 6px;
-  border-bottom: 1px solid var(--border);
-}
-.cal-day {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 5px 6px;
-  min-height: clamp(50px,6.5vw,76px);
-  display: flex; flex-direction: column; gap: 3px;
-  transition: border-color 0.15s;
-}
-.cal-day:hover { border-color: var(--dim); }
-.cal-day.empty { background: transparent; border-color: transparent; pointer-events: none; }
-.cal-day.today { border-color: var(--orange); }
-.cal-day-num {
-  font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(13px,1.4vw,18px); line-height: 1; color: var(--dim);
-}
-.cal-day.today .cal-day-num { color: var(--orange); }
-.cal-shifts { display: flex; gap: 3px; flex-wrap: wrap; }
-.cal-shift-badge {
-  font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(10px,0.95vw,13px);
-  padding: 1px 5px; border-radius: 1px; line-height: 1.2;
-}
-.csb-a { background: rgba(56,189,248,0.18);  color: var(--blue); }
-.csb-b { background: rgba(34,197,94,0.15);   color: var(--green); }
-.csb-c { background: rgba(245,158,11,0.15);  color: var(--yellow); }
-.csb-d { background: rgba(255,107,132,0.15); color: #ff6b84; }
-
-/* Calendar day cells */
-.cday {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 8px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  transition: border-color 0.15s;
-  overflow: hidden;
-}
-.cday:hover { border-color: var(--dim); }
-.cday.today { border-color: var(--orange); border-width: 2px; }
-.cday-num {
-  font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(18px, 2.2vw, 30px);
-  line-height: 1;
-  color: var(--dim);
-}
-.cday.today .cday-num { color: var(--orange); }
-.cday-shifts { display: flex; gap: 4px; flex-wrap: wrap; }
-.csb {
-  font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(13px, 1.4vw, 20px);
-  padding: 2px 8px;
-  border-radius: 2px;
-  line-height: 1.3;
-  letter-spacing: 1px;
-}
-.csb-a { background: rgba(56,189,248,0.2);  color: var(--blue); }
-.csb-b { background: rgba(34,197,94,0.18);  color: var(--green); }
-.csb-c { background: rgba(245,158,11,0.18); color: var(--yellow); }
-.csb-d { background: rgba(255,107,132,0.18);color: #ff6b84; }
-
-
-/* ── SHIFT PERFORMANCE PAGE ── */
 #shift-page { display: none; }
 .sp-layout {
   display: grid;
@@ -478,7 +341,6 @@ body {
 @keyframes countUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 .kpi-val { animation: countUp 0.6s ease-out both; }
 
-/* Responsive */
 @media (max-width: 1100px) {
   body { height: auto; overflow: auto; }
   html { height: auto; overflow: auto; }
@@ -536,12 +398,11 @@ body {
   </div>
 </header>
 
-
-
 <!-- PAGE NAV -->
 <nav class="page-nav">
   <a href="#" class="active" id="nav-kpi" onclick="showPage('kpi',this);return false;">KPI Dashboard</a>
   <a href="#" id="nav-shift" onclick="showPage('shift',this);return false;">Shift Performance</a>
+  <a href="/production.html" class="prod-link">⬛ Production Board ↗</a>
 </nav>
 
 <!-- ═══════════════════════════ KPI PAGE ═══════════════════════════ -->
@@ -602,9 +463,7 @@ body {
   </div>
 </div>
 
-
 <div class="kpi-scroll">
-  <!-- ═══ 5 CORE KPI CARDS ═══ -->
   <div class="tag">Core KPIs — YTD 2026 <span class="hl">Jan vs Feb (partial thru 02/23)</span></div>
   <div class="kpi-grid">
 
@@ -692,7 +551,7 @@ body {
       <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">Orange line = 35% target</div>
     </div>
 
-    <!-- KPI 4: MTBF — IG3 (worst line) -->
+    <!-- KPI 4: MTBF -->
     <div class="kpi-card">
       <div class="kpi-card-accent" style="background:var(--danger);"></div>
       <div class="kpi-label">MTBF — IG3 (Worst Line)</div>
@@ -754,17 +613,12 @@ body {
     </div>
 
   </div><!-- /kpi-grid -->
-
 </div><!-- /kpi-scroll -->
 </div><!-- /kpi-page -->
-
-
 
 <!-- ═══════════════════════════ SHIFT PERFORMANCE PAGE ═══════════════════════════ -->
 <div id="shift-page">
   <div class="sp-layout">
-
-    <!-- LEFT: 4 shift stat cards stacked -->
     <div class="sp-stats-panel">
 
       <!-- A Shift -->
@@ -881,11 +735,11 @@ body {
         <div class="cal-day empty"></div>
         <div class="cal-day empty"></div>
         <div class="cal-day empty"></div>
-      </div><!-- /cal-grid -->
-    </div><!-- /sp-cal-panel -->
+      </div>
+    </div>
 
-  </div><!-- /sp-layout -->
-</div><!-- /shift-page -->
+  </div>
+</div>
 
 <footer class="ftr">
   <span>Cardinal IG Roanoke &nbsp;|&nbsp; Maintenance Department &nbsp;|&nbsp; PMWare CMMS</span>
@@ -900,23 +754,26 @@ function showPage(page, el) {
   if (el) el.classList.add('active');
 }
 
-// Each 12h slot has exactly ONE shift on duty.
-// Anchor: Feb 23 2026 06:00 local = start of A-shift day slot (confirmed from calendar)
-// Rotation (20 slots = one full cycle):
-// Slot 0=A, 1=B, 2=C, 3=D, 4=C, 5=D, 6=A, 7=B, 8=A, 9=B,
-// 10=C, 11=D, 12=C, 13=D, 14=A, 15=B, 16=A, 17=B, 18=A, 19=B
-// This matches the 2-2-3 pattern: each pair shares same day block,
-// one takes 6am-6pm (day slot), partner takes 6pm-6am (night slot)
-var SHIFT_CYCLE = ['A','B','C','D','C','D','A','B','A','B','C','D','C','D','A','B','A','B','A','B'];
-var ANCHOR = new Date(2026, 1, 23, 6, 0, 0); // Feb 23 6:00am local
+// ── SHIFT LOGIC ──
+// 2-2-3 schedule — 14-day AB/CD cycle confirmed from official calendar PDF
+// Anchor: Jan 12 2026 = index 0 = AB
+// Day shift (6am–6pm): A when AB, C when CD
+// Night shift (6pm–6am): B when AB, D when CD
+var CYCLE_14 = ['AB','AB','CD','CD','AB','AB','AB','CD','CD','AB','AB','CD','CD','CD'];
+var ANCHOR_DATE = new Date(2026, 0, 12); // Jan 12 2026 midnight local
 
-function getActiveShift(now) {
-  var elapsed = now - ANCHOR;
-  if (elapsed < 0) elapsed = 0;
-  var slot = Math.floor(elapsed / (12 * 60 * 60 * 1000));
-  return SHIFT_CYCLE[((slot % 20) + 20) % 20];
+function getPairOnDuty(now) {
+  var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var dayIndex = Math.round((midnight - ANCHOR_DATE) / (24*60*60*1000));
+  return CYCLE_14[((dayIndex % 14) + 14) % 14];
 }
 
+function getActiveShift(now) {
+  var pair = getPairOnDuty(now);
+  var isDayShift = (now.getHours() >= 6 && now.getHours() < 18);
+  if (pair === 'AB') return isDayShift ? 'A' : 'B';
+  else               return isDayShift ? 'C' : 'D';
+}
 
 function updateClock() {
   var now = new Date();
@@ -930,19 +787,24 @@ function updateClock() {
   document.getElementById('hdr-day').textContent =
     days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ' ' + now.getFullYear();
 
-  var active = getActiveShift(now); // single shift: 'A', 'B', 'C', or 'D'
-
-  // Header shift tabs — only the one shift on duty goes green
+  var active = getActiveShift(now);
   ['A','B','C','D'].forEach(function(s) {
     var el = document.getElementById('shift-' + s);
     if (el) el.classList.toggle('active', s === active);
   });
-
 }
-
 
 setInterval(updateClock, 1000);
 updateClock();
+
+// Highlight today in March calendar
+(function() {
+  var today = new Date();
+  if (today.getMonth() === 2 && today.getFullYear() === 2026) {
+    var el = document.getElementById('mar-' + today.getDate());
+    if (el) el.classList.add('today');
+  }
+})();
 
 fetch('https://api.open-meteo.com/v1/forecast?latitude=37.0887&longitude=-79.8981&current=temperature_2m,weather_code,weathercode,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York')
   .then(function(r){ return r.json(); })
