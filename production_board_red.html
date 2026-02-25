@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardinal IG Roanoke — Production Board</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14; --surface: #13161e; --surface2: #1a1e2a;
+    --border: #252a38; --border-bright: #363d52;
+    --text: #e8eaf0; --text-dim: #7a8099; --text-muted: #4a5068;
+    --green: #22c55e; --green-dim: #166534; --green-bg: #0d2818;
+    --yellow: #f59e0b; --yellow-dim: #92400e; --yellow-bg: #2a1f0a;
+    --red: #ef4444; --red-dim: #7f1d1d; --red-bg: #2a0d0d;
+    --slate: #94a3b8; --slate-bg: #1a1e2a;
+    --accent: #cc1f1f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', sans-serif; min-height: 100vh; }
+
+  /* ── LOGIN SCREEN ── */
+  #login-screen {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; background: var(--bg);
+  }
+  .login-box {
+    background: var(--surface); border: 1px solid var(--border-bright);
+    border-top: 3px solid var(--accent); padding: 36px 32px; width: 340px;
+  }
+  .login-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .login-mark { width: 44px; height: 44px; flex-shrink: 0; }
+  .login-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.08em; }
+  .login-sub { font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+  .login-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 5px; }
+  .login-input { width: 100%; background: var(--bg); border: 1px solid var(--border-bright); color: var(--text); padding: 10px 12px; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; outline: none; margin-bottom: 14px; }
+  .login-input:focus { border-color: var(--accent); }
+  .login-btn { width: 100%; padding: 11px; background: var(--accent); color: #fff; border: none; font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; margin-top: 4px; }
+  .login-btn:hover { background: #a81818; }
+  .login-err { color: var(--red); font-size: 11px; margin-top: 10px; display: none; text-align: center; }
+  .view-only-link { text-align: center; margin-top: 14px; }
+  .view-only-link a { font-size: 11px; color: var(--text-dim); cursor: pointer; text-decoration: underline; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface); border-bottom: 2px solid var(--accent);
+    padding: 0 24px; display: flex; align-items: center; justify-content: space-between;
+    height: 64px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .hex-logo { width: 44px; height: 44px; flex-shrink: 0; }
+  .facility-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.08em; }
+  .facility-sub { font-size: 10px; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  #clock { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--text-dim); }
+  .shift-badge { background: var(--surface2); border: 1px solid var(--border-bright); padding: 4px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--slate); transition: background 0.3s; }
+  .sync-dot.live { background: var(--green); animation: pulse-g 2s infinite; }
+  .sync-dot.saving { background: var(--yellow); }
+  .sync-dot.error { background: var(--red); }
+  .user-badge { font-size: 10px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+  .logout-btn { font-size: 10px; color: var(--text-muted); cursor: pointer; background: none; border: none; font-family: 'IBM Plex Sans', sans-serif; padding: 3px 6px; }
+  .logout-btn:hover { color: var(--text); }
+
+  /* ── LEGEND ── */
+  .legend { display: flex; gap: 14px; align-items: center; }
+  .leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 24px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .stat-chip { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--border); padding: 6px 16px; }
+  .stat-chip .count { font-family: 'Bebas Neue', sans-serif; font-size: 22px; line-height: 1; }
+  .stat-chip .lbl { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+  .updated-note { font-size: 10px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; margin-left: auto; }
+
+  /* ── SHIFT NOTES ── */
+  .notes-bar { background: var(--surface); border-bottom: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 8px 24px; display: flex; align-items: center; gap: 12px; }
+  .notes-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+  #shift-notes { background: transparent; border: none; color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; width: 100%; outline: none; }
+  #shift-notes::placeholder { color: var(--text-muted); }
+  #shift-notes:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── BOARD ── */
+  .main { padding: 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.22em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .section-title::before { content: ''; display: block; width: 4px; height: 16px; background: var(--accent); }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .eq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+
+  /* ── CARDS ── */
+  .eq-card { background: var(--surface); border: 1px solid var(--border); padding: 18px 18px 14px; position: relative; transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s; min-height: 100px; }
+  .eq-card.clickable { cursor: pointer; }
+  .eq-card.clickable:hover { border-color: var(--border-bright); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+  .eq-card.running { border-left: 4px solid var(--green);  background: linear-gradient(135deg, var(--green-bg) 0%, var(--surface) 60%); }
+  .eq-card.pm      { border-left: 4px solid var(--yellow); background: linear-gradient(135deg, var(--yellow-bg) 0%, var(--surface) 60%); }
+  .eq-card.down    { border-left: 4px solid var(--red);    background: linear-gradient(135deg, var(--red-bg) 0%, var(--surface) 60%); }
+  .eq-card.idle    { border-left: 4px solid var(--slate);  background: linear-gradient(135deg, var(--slate-bg) 0%, var(--surface) 60%); }
+  .eq-name { font-weight: 700; font-size: 16px; color: var(--text); margin-bottom: 4px; }
+  .eq-area { font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+  .eq-footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
+  .status-pill { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; }
+  .running .status-pill { background: var(--green-dim); color: var(--green); }
+  .pm      .status-pill { background: var(--yellow-dim); color: var(--yellow); }
+  .down    .status-pill { background: var(--red-dim);    color: var(--red); }
+  .idle    .status-pill { background: #252a38;           color: var(--slate); }
+  .eq-note { font-size: 10px; color: var(--text-dim); max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-style: italic; }
+  .status-dot { position: absolute; top: 10px; right: 10px; width: 8px; height: 8px; border-radius: 50%; }
+  .running .status-dot { background: var(--green); animation: pulse-g 2s infinite; }
+  .pm      .status-dot { background: var(--yellow); }
+  .down    .status-dot { background: var(--red); animation: pulse-r 1.2s infinite; }
+  .idle    .status-dot { background: var(--slate); }
+  @keyframes pulse-g { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(1.8)} }
+  @keyframes pulse-r { 0%,100%{opacity:1} 50%{opacity:.1} }
+
+  /* ── MODAL ── */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 200; align-items: center; justify-content: center; }
+  .overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--border-bright); border-top: 3px solid var(--accent); width: 420px; max-width: 95vw; padding: 28px; }
+  .modal-eq-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .modal-area { font-size: 10px; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; }
+  .sched-hint { font-size: 10px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; margin-top: 4px; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .form-row { margin-bottom: 14px; }
+  .form-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 5px; }
+  .status-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .status-btn { padding: 10px 8px; border: 2px solid var(--border); background: var(--bg); color: var(--text-dim); cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; transition: all 0.1s; }
+  .status-btn:hover { border-color: var(--border-bright); color: var(--text); }
+  .status-btn.sel-running { border-color: var(--green);  background: var(--green-bg);  color: var(--green); }
+  .status-btn.sel-pm      { border-color: var(--yellow); background: var(--yellow-bg); color: var(--yellow); }
+  .status-btn.sel-down    { border-color: var(--red);    background: var(--red-bg);    color: var(--red); }
+  .status-btn.sel-idle    { border-color: var(--slate);  background: var(--slate-bg);  color: var(--slate); }
+  .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border-bright); color: var(--text); padding: 9px 12px; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; outline: none; }
+  .form-input:focus { border-color: var(--accent); }
+  .form-input::placeholder { color: var(--text-muted); }
+  .modal-actions { display: flex; gap: 8px; margin-top: 20px; }
+  .btn { flex: 1; padding: 11px; font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: none; }
+  .btn-save   { background: var(--accent); color: #fff; }
+  .btn-save:hover { background: #a81818; }
+  .btn-reset  { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border-bright); flex: 0.8; font-size: 10px; }
+  .btn-reset:hover { color: var(--slate); border-color: var(--slate); }
+  .btn-cancel { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border-bright); flex: 0.6; }
+  .btn-cancel:hover { color: var(--text); }
+
+  /* ── TOAST ── */
+  #toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface2); border: 1px solid var(--border-bright); border-left: 3px solid var(--green); padding: 10px 16px; font-size: 12px; color: var(--text); opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; font-family: 'IBM Plex Mono', monospace; }
+  #toast.show { opacity: 1; }
+  #toast.err  { border-left-color: var(--red); }
+
+  /* ── SETUP BANNER ── */
+  #setup-banner { background: var(--yellow-bg); border-bottom: 1px solid var(--yellow-dim); padding: 10px 24px; font-size: 12px; color: var(--yellow); display: none; }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN SCREEN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg class="hex-logo" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="50,2 98,27 98,88 50,113 2,88 2,27" fill="#C41E3A"/><text x="50" y="68" text-anchor="middle" font-family="Bebas Neue,sans-serif" font-size="28" font-weight="700" fill="white" letter-spacing="2">ROIG</text></svg>
+      <div>
+        <div class="login-title">Cardinal IG Roanoke</div>
+        <div class="login-sub">Production Board</div>
+      </div>
+    </div>
+    <label class="login-label">Username</label>
+    <input class="login-input" id="login-user" type="text" placeholder="username" autocomplete="username">
+    <label class="login-label">Password</label>
+    <input class="login-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password">
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-err" id="login-err">Invalid username or password</div>
+    <div class="view-only-link"><a onclick="enterViewOnly()">View only (no login)</a></div>
+  </div>
+</div>
+
+<!-- ── MAIN BOARD (hidden until login) ── -->
+<div id="board-screen" style="display:none">
+
+<div id="setup-banner">⚠️ Database not connected — run the SQL setup in Supabase first. Status changes will not save.</div>
+
+<header>
+  <div class="header-left">
+    <svg class="hex-logo" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="50,2 98,27 98,88 50,113 2,88 2,27" fill="#C41E3A"/><text x="50" y="68" text-anchor="middle" font-family="Bebas Neue,sans-serif" font-size="28" font-weight="700" fill="white" letter-spacing="2">ROIG</text></svg>
+    <div>
+      <div class="facility-name">Cardinal IG Roanoke</div>
+      <div class="facility-sub">Production Status Board</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Running</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div>PM / Sched Down</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--red)"></div>Down</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--slate)"></div>Idle</div>
+    </div>
+    <div class="sync-dot" id="sync-dot" title="Sync status"></div>
+    <div class="shift-badge" id="shift-label">—</div>
+    <div id="clock">--:--:--</div>
+    <span class="user-badge" id="user-badge"></span>
+    <button class="logout-btn" id="logout-btn" onclick="doLogout()">Sign out</button>
+  </div>
+</header>
+
+<div class="summary-bar">
+  <div class="stat-chip"><span class="count" id="cnt-running" style="color:var(--green)">0</span><span class="lbl">Running</span></div>
+  <div class="stat-chip"><span class="count" id="cnt-pm"      style="color:var(--yellow)">0</span><span class="lbl">PM / Sched</span></div>
+  <div class="stat-chip"><span class="count" id="cnt-down"    style="color:var(--red)">0</span><span class="lbl">Down</span></div>
+  <div class="stat-chip"><span class="count" id="cnt-idle"    style="color:var(--slate)">0</span><span class="lbl">Idle</span></div>
+  <div class="updated-note" id="last-sync-note">Connecting...</div>
+</div>
+
+<div class="notes-bar">
+  <span class="notes-label">Shift Notes</span>
+  <input id="shift-notes" type="text" placeholder="Enter notes or handoff info for next shift..." disabled>
+</div>
+
+<div class="main">
+  <div class="section">
+    <div class="section-title">IG Lines</div>
+    <div class="eq-grid">
+      <div class="eq-card" id="card-IG1"><div class="status-dot"></div><div class="eq-name">IG Line 1</div><div class="eq-area">IG Assembly</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-IG2"><div class="status-dot"></div><div class="eq-name">IG Line 2</div><div class="eq-area">IG Assembly</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-IG3"><div class="status-dot"></div><div class="eq-name">IG Line 3</div><div class="eq-area">IG Assembly</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-IG4"><div class="status-dot"></div><div class="eq-name">IG Line 4</div><div class="eq-area">IG Assembly</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Cutting</div>
+    <div class="eq-grid">
+      <div class="eq-card" id="card-CT1"><div class="status-dot"></div><div class="eq-name">Cutting Table 1</div><div class="eq-area">Cutting</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-CT2"><div class="status-dot"></div><div class="eq-name">Cutting Table 2</div><div class="eq-area">Cutting</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-LAMI"><div class="status-dot"></div><div class="eq-name">Lami Table</div><div class="eq-area">Cutting</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Tempering</div>
+    <div class="eq-grid">
+      <div class="eq-card" id="card-FURN"><div class="status-dot"></div><div class="eq-name">Furnace</div><div class="eq-area">Tempering</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-CT3"><div class="status-dot"></div><div class="eq-name">Cutting Table 3</div><div class="eq-area">Tempering</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">Mezzanine</div>
+    <div class="eq-grid">
+      <div class="eq-card" id="card-MBEND"><div class="status-dot"></div><div class="eq-name">Mezz Bender</div><div class="eq-area">Mezzanine — Spacer</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-MMUT"><div class="status-dot"></div><div class="eq-name">Mezz Muntin</div><div class="eq-area">Mezzanine — Muntin</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-MEXT"><div class="status-dot"></div><div class="eq-name">Mezz Extruder</div><div class="eq-area">Mezzanine — Extrusion</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+      <div class="eq-card" id="card-MFILL"><div class="status-dot"></div><div class="eq-name">Mezz Fill Room</div><div class="eq-area">Mezzanine — Sieve Fill</div><div class="eq-footer"><span class="status-pill">—</span></div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end board-screen -->
+
+<!-- ── MODAL ── -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-eq-name" id="modal-name">—</div>
+    <div class="modal-area" id="modal-area">—</div>
+    <div class="sched-hint" id="modal-sched-hint"></div>
+    <div class="form-row">
+      <div class="form-label">Status</div>
+      <div class="status-btns">
+        <button class="status-btn" id="btn-running" onclick="selectStatus('running')">🟢 Running</button>
+        <button class="status-btn" id="btn-pm"      onclick="selectStatus('pm')">🟡 PM / Sched Down</button>
+        <button class="status-btn" id="btn-down"    onclick="selectStatus('down')">🔴 Down</button>
+        <button class="status-btn" id="btn-idle"    onclick="selectStatus('idle')">⚫ Idle / Standby</button>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-label" for="modal-note">Note / WO# (optional)</label>
+      <input class="form-input" id="modal-note" type="text" placeholder="e.g. WO-1234, bearing failure, planned shutdown...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-save"   onclick="saveStatus()">Save</button>
+      <button class="btn btn-reset"  onclick="resetToSchedule()">↺ Schedule</button>
+      <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// CONFIG — Supabase connection
+// ════════════════════════════════════════════════════════════
+const SUPABASE_URL = 'https://zqcxfbalufpkqoevazbe.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxY3hmYmFsdWZwa3FvZXZhemJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5Nzk1MDIsImV4cCI6MjA4NzU1NTUwMn0.LTKPUq1jt62U4q4UIHdbu8hVKbkMbFcPNHdXtm4c0eQ';
+const API = `${SUPABASE_URL}/rest/v1`;
+const headers = {
+  'apikey': SUPABASE_KEY,
+  'Authorization': `Bearer ${SUPABASE_KEY}`,
+  'Content-Type': 'application/json',
+  'Prefer': 'return=minimal'
+};
+
+// ════════════════════════════════════════════════════════════
+// EQUIPMENT REGISTRY
+// ════════════════════════════════════════════════════════════
+const equipment = {
+  IG1:   { name: 'IG Line 1',       area: 'IG Assembly',           schedule: [1,2,3] },
+  IG2:   { name: 'IG Line 2',       area: 'IG Assembly',           schedule: []      },
+  IG3:   { name: 'IG Line 3',       area: 'IG Assembly',           schedule: [1,3]   },
+  IG4:   { name: 'IG Line 4',       area: 'IG Assembly',           schedule: [2]     },
+  CT1:   { name: 'Cutting Table 1', area: 'Cutting',               schedule: [1,2,3] },
+  CT2:   { name: 'Cutting Table 2', area: 'Cutting',               schedule: [1,2,3] },
+  CT3:   { name: 'Cutting Table 3', area: 'Tempering',             schedule: [1,2,3] },
+  LAMI:  { name: 'Lami Table',      area: 'Cutting',               schedule: [1,2,3] },
+  FURN:  { name: 'Furnace',         area: 'Tempering',             schedule: [1,2,3] },
+  MBEND: { name: 'Mezz Bender',     area: 'Mezzanine — Spacer',    schedule: [1,2,3] },
+  MMUT:  { name: 'Mezz Muntin',     area: 'Mezzanine — Muntin',    schedule: [1,2,3] },
+  MEXT:  { name: 'Mezz Extruder',   area: 'Mezzanine — Extrusion', schedule: [1,2,3] },
+  MFILL: { name: 'Mezz Fill Room',  area: 'Mezzanine — Sieve Fill',schedule: [1,2,3] },
+};
+
+// ════════════════════════════════════════════════════════════
+// AUTH STATE
+// ════════════════════════════════════════════════════════════
+let isAdmin = false;
+let currentUser = '';
+let isViewOnly = false;
+
+async function doLogin() {
+  const user = document.getElementById('login-user').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  if (!user || !pass) return;
+
+  // Hash the password client-side (SHA-256) to compare with stored hash
+  const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pass));
+  const hashHex = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2,'0')).join('');
+
+  try {
+    const res = await fetch(
+      `${API}/board_admins?username=eq.${encodeURIComponent(user)}&password_hash=eq.${hashHex}&select=username`,
+      { headers }
+    );
+    const data = await res.json();
+    if (data && data.length > 0) {
+      isAdmin = true;
+      currentUser = user;
+      enterBoard();
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+    }
+  } catch(e) {
+    // If table doesn't exist yet, allow admin/admin123 as fallback for setup
+    document.getElementById('login-err').style.display = 'block';
+    document.getElementById('login-err').textContent = 'Connection error — check Supabase setup';
+  }
+}
+
+function enterViewOnly() {
+  isAdmin = false;
+  isViewOnly = true;
+  currentUser = 'viewer';
+  enterBoard();
+}
+
+function enterBoard() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('board-screen').style.display = 'block';
+  document.getElementById('user-badge').textContent = isAdmin ? `👤 ${currentUser}` : '👁 View Only';
+  document.getElementById('logout-btn').style.display = isAdmin ? '' : 'none';
+
+  // Only admins can edit
+  if (isAdmin) {
+    document.getElementById('shift-notes').disabled = false;
+    Object.keys(equipment).forEach(id => {
+      const card = document.getElementById('card-' + id);
+      if (card) { card.classList.add('clickable'); card.onclick = () => openModal(id); }
+    });
+  }
+
+  loadFromSupabase();
+  subscribeToChanges();
+  loadShiftNotes();
+}
+
+function doLogout() {
+  isAdmin = false; isViewOnly = false; currentUser = '';
+  document.getElementById('board-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-err').style.display = 'none';
+}
+
+// ════════════════════════════════════════════════════════════
+// SHIFT / SCHEDULE
+// ════════════════════════════════════════════════════════════
+function getCurrentShiftInfo() {
+  const now = new Date();
+  const day = now.getDay();
+  const h   = now.getHours();
+  const isWeekday = day >= 1 && day <= 5;
+  let shift = (h >= 7 && h < 15) ? 1 : (h >= 15 && h < 23) ? 2 : 3;
+  return { shift, isWeekday };
+}
+
+function getScheduledStatus(id) {
+  const eq = equipment[id];
+  const { shift, isWeekday } = getCurrentShiftInfo();
+  if (!isWeekday) return 'idle';
+  return eq.schedule.includes(shift) ? 'running' : 'idle';
+}
+
+function getShiftName(h) {
+  if (h >= 7  && h < 15) return '1st Shift (7a–3p)';
+  if (h >= 15 && h < 23) return '2nd Shift (3p–11p)';
+  return '3rd Shift (11p–7a)';
+}
+
+// ════════════════════════════════════════════════════════════
+// SUPABASE — LOAD & SAVE
+// ════════════════════════════════════════════════════════════
+let state = {};
+
+async function loadFromSupabase() {
+  setSyncDot('saving');
+  try {
+    const res = await fetch(`${API}/board_status?select=id,status,note,manual,updated_at,updated_by`, { headers });
+    if (!res.ok) throw new Error('fetch failed');
+    const rows = await res.json();
+
+    // Seed all equipment with schedule defaults first
+    Object.keys(equipment).forEach(id => {
+      state[id] = { status: getScheduledStatus(id), note: '', manual: false, updated_by: '', updated_at: null };
+    });
+
+    // Overlay with DB values
+    rows.forEach(row => {
+      if (state[row.id] !== undefined) {
+        state[row.id] = { status: row.status, note: row.note || '', manual: row.manual, updated_by: row.updated_by || '', updated_at: row.updated_at };
+      }
+    });
+
+    Object.keys(equipment).forEach(updateCard);
+    updateCounts();
+    setSyncDot('live');
+  } catch(e) {
+    setSyncDot('error');
+    document.getElementById('setup-banner').style.display = 'block';
+    document.getElementById('last-sync-note').textContent = '⚠ Not connected — run SQL setup in Supabase';
+    // Fall back to schedule defaults
+    Object.keys(equipment).forEach(id => {
+      state[id] = { status: getScheduledStatus(id), note: '', manual: false };
+    });
+    Object.keys(equipment).forEach(updateCard);
+    updateCounts();
+  }
+}
+
+async function upsertStatus(id, status, note, manual) {
+  setSyncDot('saving');
+  const payload = {
+    id, status, note, manual,
+    updated_at: new Date().toISOString(),
+    updated_by: currentUser
+  };
+  try {
+    const res = await fetch(`${API}/board_status`, {
+      method: 'POST',
+      headers: { ...headers, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('save failed');
+    setSyncDot('live');
+    showToast(`${equipment[id].name} → ${status.toUpperCase()}`);
+  } catch(e) {
+    setSyncDot('error');
+    showToast('Save failed — check connection', true);
+  }
+}
+
+async function upsertShiftNotes(notes) {
+  try {
+    await fetch(`${API}/board_status`, {
+      method: 'POST',
+      headers: { ...headers, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify({ id: '__shift_notes__', status: 'idle', note: notes, manual: false, updated_by: currentUser, updated_at: new Date().toISOString() })
+    });
+  } catch(e) {}
+}
+
+async function loadShiftNotes() {
+  try {
+    const res = await fetch(`${API}/board_status?id=eq.__shift_notes__&select=note`, { headers });
+    const data = await res.json();
+    if (data && data[0]) document.getElementById('shift-notes').value = data[0].note || '';
+  } catch(e) {}
+}
+
+// ════════════════════════════════════════════════════════════
+// REAL-TIME POLLING (every 5 seconds for cross-device sync)
+// ════════════════════════════════════════════════════════════
+function subscribeToChanges() {
+  setInterval(async () => {
+    if (!document.hidden) {
+      try {
+        const res = await fetch(`${API}/board_status?select=id,status,note,manual,updated_at,updated_by`, { headers });
+        if (!res.ok) return;
+        const rows = await res.json();
+        let changed = false;
+        rows.forEach(row => {
+          if (row.id === '__shift_notes__') {
+            const ni = document.getElementById('shift-notes');
+            if (ni && document.activeElement !== ni) ni.value = row.note || '';
+            return;
+          }
+          if (state[row.id] && state[row.id].updated_at !== row.updated_at) {
+            state[row.id] = { status: row.status, note: row.note || '', manual: row.manual, updated_by: row.updated_by, updated_at: row.updated_at };
+            updateCard(row.id);
+            changed = true;
+          }
+        });
+        if (changed) { updateCounts(); setSyncDot('live'); }
+      } catch(e) {}
+    }
+  }, 5000);
+}
+
+// ════════════════════════════════════════════════════════════
+// CARD RENDERING
+// ════════════════════════════════════════════════════════════
+const pillLabels = { running: 'Running', pm: 'PM / Sched', down: 'DOWN', idle: 'Idle' };
+
+function updateCard(id) {
+  const card = document.getElementById('card-' + id);
+  if (!card) return;
+  const s = state[id];
+  const base = isAdmin ? 'eq-card clickable' : 'eq-card';
+  card.className = base + ' ' + s.status;
+  const pill = card.querySelector('.status-pill');
+  if (pill) pill.textContent = pillLabels[s.status];
+  let noteEl = card.querySelector('.eq-note');
+  if (s.note) {
+    if (!noteEl) { noteEl = document.createElement('span'); noteEl.className = 'eq-note'; card.querySelector('.eq-footer').appendChild(noteEl); }
+    noteEl.textContent = s.note;
+  } else if (noteEl) noteEl.remove();
+}
+
+function updateCounts() {
+  const all = Object.values(state).filter((_,i) => Object.keys(state)[i] !== '__shift_notes__');
+  ['running','pm','down','idle'].forEach(s => {
+    const el = document.getElementById('cnt-' + s);
+    if (el) el.textContent = all.filter(x => x.status === s).length;
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+// MODAL
+// ════════════════════════════════════════════════════════════
+let activeId = null;
+let selectedStatus = null;
+
+function openModal(id) {
+  if (!isAdmin) return;
+  activeId = id;
+  const eq = equipment[id];
+  const s  = state[id];
+  document.getElementById('modal-name').textContent = eq.name;
+  document.getElementById('modal-area').textContent = eq.area;
+  document.getElementById('modal-note').value = s.note || '';
+  const schedLabels = { 1: '1st (7a–3p)', 2: '2nd (3p–11p)', 3: '3rd (11p–7a)' };
+  const schedText = eq.schedule.length ? 'Scheduled: ' + eq.schedule.map(n => schedLabels[n]).join(', ') : 'Not scheduled — Idle by default';
+  const manualTag = s.manual ? `&nbsp;<span style="color:var(--yellow)">[OVERRIDE by ${s.updated_by || '?'}]</span>` : '';
+  document.getElementById('modal-sched-hint').innerHTML = schedText + manualTag;
+  selectStatus(s.status);
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(() => document.getElementById('modal-note').focus(), 80);
+}
+
+function selectStatus(status) {
+  selectedStatus = status;
+  ['running','pm','down','idle'].forEach(s => {
+    document.getElementById('btn-' + s).className = 'status-btn' + (s === status ? ' sel-' + s : '');
+  });
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  activeId = null; selectedStatus = null;
+}
+
+function saveStatus() {
+  if (!activeId || !selectedStatus) return;
+  const note = document.getElementById('modal-note').value.trim();
+  state[activeId] = { status: selectedStatus, note, manual: true, updated_by: currentUser, updated_at: new Date().toISOString() };
+  updateCard(activeId);
+  updateCounts();
+  upsertStatus(activeId, selectedStatus, note, true);
+  closeModal();
+}
+
+function resetToSchedule() {
+  if (!activeId) return;
+  const scheduled = getScheduledStatus(activeId);
+  state[activeId] = { status: scheduled, note: '', manual: false, updated_by: currentUser, updated_at: new Date().toISOString() };
+  updateCard(activeId);
+  updateCounts();
+  upsertStatus(activeId, scheduled, '', false);
+  closeModal();
+}
+
+document.getElementById('overlay').addEventListener('click', e => { if (e.target === document.getElementById('overlay')) closeModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Enter' && activeId) saveStatus();
+});
+document.getElementById('login-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('login-user').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('login-pass').focus(); });
+
+// ════════════════════════════════════════════════════════════
+// SHIFT NOTES
+// ════════════════════════════════════════════════════════════
+let notesTimer = null;
+document.getElementById('shift-notes').addEventListener('input', e => {
+  clearTimeout(notesTimer);
+  notesTimer = setTimeout(() => upsertShiftNotes(e.target.value), 1000);
+});
+
+// ════════════════════════════════════════════════════════════
+// CLOCK
+// ════════════════════════════════════════════════════════════
+function tick() {
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  let h = now.getHours();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  document.getElementById('clock').textContent = `${h}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ${ampm}`;
+  document.getElementById('shift-label').textContent = getShiftName(now.getHours());
+}
+setInterval(tick, 1000); tick();
+
+// ════════════════════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════════════════════
+function setSyncDot(state) {
+  const dot = document.getElementById('sync-dot');
+  dot.className = 'sync-dot ' + state;
+}
+
+let toastTimer = null;
+function showToast(msg, isErr = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show' + (isErr ? ' err' : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = ''; }, 3000);
+}
+</script>
+</body>
+</html>
