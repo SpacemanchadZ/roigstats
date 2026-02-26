@@ -9,7 +9,7 @@
   :root {
     --bg: #0a0c10; --surface: #111318; --surface2: #181c24;
     --border: #1e2230; --border-bright: #2d3348;
-    --text: #e8eaf0; --text-dim: #c8cedd; --text-muted: #8a94b0;
+    --text: #e8eaf0; --text-dim: #f0f2f8; --text-muted: #d0d6e8;
     --green: #22c55e; --green-dim: #14532d; --green-bg: #0a1f12;
     --yellow: #f59e0b; --yellow-dim: #78350f; --yellow-bg: #1f1505;
     --red: #ef4444; --red-dim: #7f1d1d; --red-bg: #1a0808;
@@ -58,13 +58,13 @@
   .stat-chip .lbl { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
   .notes-wrap { flex: 1; display: flex; align-items: center; gap: 10px; padding: 0 14px; border-left: 3px solid var(--accent); height: 100%; }
   .notes-label { font-size: 8px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
-  #shift-notes { background: transparent; border: none; color: var(--text-dim); font-family: inherit; font-size: 12px; width: 100%; outline: none; }
+  #shift-notes { background: transparent; border: none; color: #f0f2f8; font-family: inherit; font-size: 12px; width: 100%; outline: none; }
   #shift-notes::placeholder { color: var(--text-muted); }
   #shift-notes:disabled { opacity: 0.3; }
   .sync-note { font-size: 9px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; white-space: nowrap; padding: 0 14px; }
   .board { flex: 1; display: flex; flex-direction: column; padding: 8px 16px 8px; gap: 0; overflow: hidden; justify-content: space-evenly; }
   .section { display: flex; flex-direction: column; gap: 2px; }
-  .section-label { font-family: 'Bebas Neue', sans-serif; font-size: 9px; letter-spacing: 0.28em; color: var(--text-muted); text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+  .section-label { font-family: 'Bebas Neue', sans-serif; font-size: 9px; letter-spacing: 0.28em; color: #d0d6e8; text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-bottom: 2px; font-weight: 700; }
   .section-label::before { content: ''; width: 3px; height: 9px; background: var(--accent); flex-shrink: 0; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .eq-row { display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid transparent; padding: 0 14px; height: 38px; transition: background 0.15s; position: relative; }
@@ -79,7 +79,7 @@
   .pm .row-dot { background: var(--yellow); }
   .down .row-dot { background: var(--red); animation: pr 1s infinite; }
   .idle .row-dot { background: #2d3348; }
-  .row-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.05em; flex: 0 0 150px; color: var(--text); }
+  .row-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.05em; flex: 0 0 150px; color: #ffffff; font-weight: 700; }
   .row-sched { display: flex; gap: 3px; margin-right: 14px; }
   .sc { font-size: 8px; font-family: 'IBM Plex Mono', monospace; padding: 1px 5px; border: 1px solid var(--border); color: var(--text-muted); }
   .sc.on { border-color: var(--green-dim); color: var(--green); background: #0a1f1240; }
@@ -248,8 +248,9 @@
       <select class="down-area-select" id="down-type" style="width:100px;flex-shrink:0">
         <option value="issue">ISSUE</option>
         <option value="corrective">CORRECTIVE</option>
+        <option value="pm">PM</option>
       </select>
-      <input class="down-machine-input" id="down-machine" type="text" placeholder="Describe issue or corrective action..." maxlength="80" style="flex:1">
+      <input class="down-machine-input" id="down-machine" type="text" placeholder="Describe issue, corrective, or PM..." maxlength="80" style="flex:1">
       <button class="btn-add-down" onclick="addDownItem()">Add</button>
     </div>
     <div class="modal-actions" style="margin-top:12px;">
@@ -291,14 +292,21 @@ var sections = [
     {id:'LAMI',name:'Lami Table',      area:'Cutting', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
   ]},
   {label:'Tempering', rows:[
-    {id:'FURN',name:'Furnace',         area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
-    {id:'CT3', name:'Cutting Table 3', area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
+    {id:'FURN',    name:'Furnace',         area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
+    {id:'CT3',     name:'Cutting Table 3', area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
+    {id:'FLEXSEAM',name:'Flexseam',        area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
   ]},
   {label:'Mezzanine', rows:[
     {id:'MBEND',name:'Mezz Bender',   area:'Spacer Fabrication', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
     {id:'MMUT', name:'Mezz Muntin',   area:'Muntin Fabrication', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
     {id:'MEXT', name:'Mezz Extruder', area:'Extrusion',          schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
     {id:'MFILL',name:'Mezz Fill Room',area:'Sieve Fill',         schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
+  ]},
+  {label:'Facilities', rows:[
+    {id:'FAC1', name:'Air Compressor',  area:'Facilities', schedule:[], weekdayOnly:false, schedNote:'Monitored — add correctives as needed'},
+    {id:'FAC2', name:'HVAC / Air Handling', area:'Facilities', schedule:[], weekdayOnly:false, schedNote:'Monitored — add correctives as needed'},
+    {id:'FAC3', name:'Nitrogen System', area:'Facilities', schedule:[], weekdayOnly:false, schedNote:'Monitored — add correctives as needed'},
+    {id:'FAC4', name:'Facilities — General', area:'Facilities', schedule:[], weekdayOnly:false, schedNote:'Monitored — add correctives as needed'},
   ]},
 ];
 
@@ -332,6 +340,8 @@ function getShiftInfo() {
 
 function scheduledStatus(id) {
   if (id === 'IG2') return 'idle';
+  // Facilities rows are always idle by default — status set manually
+  if (id === 'FAC1' || id === 'FAC2' || id === 'FAC3' || id === 'FAC4') return 'idle';
   var eq = equipment[id], info = getShiftInfo();
   if (eq.weekdayOnly && !info.isWeekday) return 'idle';
   return eq.schedule.includes(info.shiftNum) ? 'running' : 'idle';
@@ -405,6 +415,8 @@ function buildRow(eq, s, info){
   var chips;
   if(eq.id==='IG2'){
     chips='<span class="sc" style="color:var(--slate);border-color:var(--slate)">STANDBY</span>';
+  } else if(eq.area==='Facilities'){
+    chips='<span class="sc" style="color:var(--slate);border-color:var(--slate)">MONITORED</span>';
   } else {
     chips=[1,2,3].map(function(n){
       var isOn=eq.schedule.includes(n);
@@ -429,10 +441,11 @@ function buildRow(eq, s, info){
     for(var ri=0; ri<2; ri++){
       rowItems.forEach(function(item){
         var isCorr    = (item.type==='corrective'||item.type==='wo');
-        var typeColor = isCorr ? '#fbbf24' : '#ef4444';
-        var typeBord  = isCorr ? '#92400e' : '#7f1d1d';
-        var typeBg    = isCorr ? 'rgba(251,191,36,0.1)' : 'rgba(239,68,68,0.1)';
-        var typeLabel = isCorr ? 'CORRECTIVE' : 'ISSUE';
+        var isPM      = (item.type==='pm');
+        var typeColor = isPM ? '#22c55e' : (isCorr ? '#fbbf24' : '#ef4444');
+        var typeBord  = isPM ? '#14532d' : (isCorr ? '#92400e' : '#7f1d1d');
+        var typeBg    = isPM ? 'rgba(34,197,94,0.1)' : (isCorr ? 'rgba(251,191,36,0.1)' : 'rgba(239,68,68,0.1)');
+        var typeLabel = isPM ? 'PM' : (isCorr ? 'CORRECTIVE' : 'ISSUE');
         var typeTag   = '<span class="ti-type" style="color:'+typeColor+';border-color:'+typeBord+';background:'+typeBg+'">'+typeLabel+'</span>';
         inner+='<span class="row-ticker-item" style="color:'+typeColor+'"><span class="ti-icon" style="color:'+typeColor+'">&#9888; </span>'+typeTag+(item.text||'')+'<span class="ti-sep">&#9670;</span></span>';
       });
@@ -443,7 +456,7 @@ function buildRow(eq, s, info){
   }
 
   var addBtn=isAdmin
-    ? '<button class="row-ticker-btn'+(rowItems.length?' has-items':'')+'" data-eq="'+eq.id+'" onclick="openDownModal(this.dataset.eq)" title="Down issues for '+eq.name+'">'+(rowItems.length?'\u26a0 '+rowItems.length+' ISSUE'+(rowItems.length>1?'S':''):'+ DOWN')+'</button>'
+    ? '<button class="row-ticker-btn'+(rowItems.length?' has-items':'')+'" data-eq="'+eq.id+'" onclick="openDownModal(this.dataset.eq)" title="Issues / PMs for '+eq.name+'">'+(rowItems.length?'\u26a0 '+rowItems.length+' ITEM'+(rowItems.length>1?'S':''):'+ DOWN')+'</button>'
     : '';
 
   row.innerHTML=
@@ -677,10 +690,11 @@ function renderDownList() {
   }
   list.innerHTML = items.map(function(item, idx) {
     var isCorr = (typeof item === 'object') ? (item.type==='corrective'||item.type==='wo') : false;
+    var isPM   = (typeof item === 'object') ? (item.type==='pm') : false;
     var txt  = (typeof item === 'object') ? item.text : item;
-    var typeLabel  = isCorr ? 'CORRECTIVE' : 'ISSUE';
-    var typeColor  = isCorr ? '#fbbf24' : 'var(--red)';
-    var typeBorder = isCorr ? '#92400e' : '#7f1d1d';
+    var typeLabel  = isPM ? 'PM' : (isCorr ? 'CORRECTIVE' : 'ISSUE');
+    var typeColor  = isPM ? '#22c55e' : (isCorr ? '#fbbf24' : 'var(--red)');
+    var typeBorder = isPM ? '#14532d' : (isCorr ? '#92400e' : '#7f1d1d');
     return '<div class="down-list-item">' +
       '<span style="display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden">' +
       '<span style="font-family:IBM Plex Mono,monospace;font-size:8px;font-weight:700;letter-spacing:1px;color:'+typeColor+';border:1px solid '+typeBorder+';padding:1px 5px;flex-shrink:0">'+typeLabel+'</span>' +
