@@ -747,20 +747,6 @@ document.getElementById('down-overlay').addEventListener('click', function(e){ i
 
 function initTickerUI() { /* handled per-row in buildRow */ }
 
-// Auto-reload every 5 minutes — only if no modal open and user not typing
-setInterval(function() {
-  var modalOpen = document.getElementById('overlay').classList.contains('open') ||
-                  document.getElementById('down-overlay').classList.contains('open');
-  var typing = document.activeElement && (
-    document.activeElement.tagName === 'INPUT' ||
-    document.activeElement.tagName === 'TEXTAREA' ||
-    document.activeElement.tagName === 'SELECT'
-  );
-  if (!modalOpen && !typing) {
-    location.reload();
-  }
-}, 5 * 60 * 1000);
-
 </script>
 </body>
 </html>
