@@ -85,7 +85,7 @@
   .eq-row.running { border-left-color: var(--green); background: linear-gradient(90deg,#0a1f1280 0%,var(--surface) 25%); }
   .eq-row.pm { border-left-color: var(--yellow); background: linear-gradient(90deg,#1f150580 0%,var(--surface) 25%); }
   .eq-row.down { border-left-color: var(--red); background: linear-gradient(90deg,#1a080880 0%,var(--surface) 25%); }
-  .eq-row.idle { border-left-color: var(--slate); background: var(--surface); }
+  .eq-row.idle { border-left-color: #6b7fa0; background: var(--surface); }
   .row-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-right: 8px; }
   .running .row-dot { background: var(--green); animation: pg 2s infinite; }
   .pm .row-dot { background: var(--yellow); }
@@ -112,7 +112,7 @@
   .running .row-status { background: var(--green-dim); color: var(--green); }
   .pm .row-status { background: var(--yellow-dim); color: var(--yellow); }
   .down .row-status { background: var(--red-dim); color: var(--red); }
-  .idle .row-status { background: #1a1e2a; color: #94a3b8; }
+  .idle .row-status { background: #1a1e2a; color: #c0cce8; }
   @keyframes pg { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(1.7)} }
   @keyframes pr { 0%,100%{opacity:1} 50%{opacity:.1} }
   .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:200; align-items:center; justify-content:center; }
@@ -129,7 +129,7 @@
   .status-btn.sel-running { border-color:var(--green); background:var(--green-bg); color:var(--green); }
   .status-btn.sel-pm { border-color:var(--yellow); background:var(--yellow-bg); color:var(--yellow); }
   .status-btn.sel-down { border-color:var(--red); background:var(--red-bg); color:var(--red); }
-  .status-btn.sel-idle { border-color:var(--slate); background:var(--slate-bg); color:var(--slate); }
+  .status-btn.sel-idle { border-color:#8899bb; background:var(--slate-bg); color:#c0cce8; }
   .form-input { width:100%; background:var(--bg); border:1px solid var(--border-bright); color:var(--text); padding:8px 10px; font-family:inherit; font-size:13px; outline:none; }
   .form-input:focus { border-color:var(--accent); }
   .form-input::placeholder { color:var(--text-muted); }
@@ -294,7 +294,7 @@
         <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Running</div>
         <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div>PM / Sched</div>
         <div class="leg-item"><div class="leg-dot" style="background:var(--red)"></div>Down</div>
-        <div class="leg-item"><div class="leg-dot" style="background:var(--slate)"></div>Idle</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#b0bcd8"></div>Idle</div>
       </div>
       <div class="sync-dot" id="sync-dot"></div>
       <div class="shift-badge" id="shift-label">—</div>
@@ -305,7 +305,7 @@
     <div class="stat-chip"><span class="count" id="cnt-running" style="color:var(--green)">0</span><span class="lbl">Running</span></div>
     <div class="stat-chip"><span class="count" id="cnt-pm" style="color:var(--yellow)">0</span><span class="lbl">PM/Sched</span></div>
     <div class="stat-chip"><span class="count" id="cnt-down" style="color:var(--red)">0</span><span class="lbl">Down</span></div>
-    <div class="stat-chip"><span class="count" id="cnt-idle" style="color:var(--slate)">0</span><span class="lbl">Idle</span></div>
+    <div class="stat-chip"><span class="count" id="cnt-idle" style="color:#b0bcd8">0</span><span class="lbl">Idle</span></div>
     <div class="notes-wrap">
       <span class="notes-label">Shift Notes</span>
       <input id="shift-notes" type="text" placeholder="Enter handoff notes for next shift..." disabled>
