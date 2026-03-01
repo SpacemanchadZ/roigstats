@@ -3,32 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardinal IG Roanoke — Operations</title>
+<title>Cardinal IG Roanoke — Production Board</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0c10; --surface: #111318; --surface2: #181c24;
     --border: #1e2230; --border-bright: #2d3348;
-    --text: #f0f2fa; --text-dim: #f8f9ff; --text-muted: #eaecfa;
+    --text: #e8eaf0; --text-dim: #c8cedd; --text-muted: #8a94b0;
     --green: #22c55e; --green-dim: #14532d; --green-bg: #0a1f12;
     --yellow: #f59e0b; --yellow-dim: #78350f; --yellow-bg: #1f1505;
     --red: #ef4444; --red-dim: #7f1d1d; --red-bg: #1a0808;
-    --blue: #3b82f6; --blue-dim: #1e3a5f; --blue-bg: #0d1f38;
     --slate: #94a3b8; --slate-bg: #0f1420;
     --accent: #C41E3A;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; overflow: hidden; }
   body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', sans-serif; display: flex; flex-direction: column; }
-
-  /* ── TAB BAR ── */
-  #tab-bar { display: none; background: var(--surface); border-bottom: 2px solid var(--accent); flex-shrink: 0; height: 42px; align-items: stretch; }
-  .tab-btn { background: none; border: none; border-bottom: 3px solid transparent; color: var(--slate); font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.1em; padding: 0 28px; cursor: pointer; transition: all 0.15s; margin-bottom: -2px; }
-  .tab-btn:hover { color: var(--text-dim); }
-  .tab-btn.active { color: #fff; border-bottom-color: var(--accent); }
-  #tab-spacer { flex: 1; }
-
-  /* ── SCREENS ── */
   #login-screen { display: flex; align-items: center; justify-content: center; height: 100vh; }
   .login-box { background: var(--surface); border: 1px solid var(--border-bright); border-top: 3px solid var(--accent); padding: 36px 32px; width: 340px; }
   .login-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
@@ -43,10 +33,8 @@
   .login-err { color: var(--red); font-size: 11px; margin-top: 10px; display: none; text-align: center; }
   .view-only-link { text-align: center; margin-top: 14px; }
   .view-only-link a { font-size: 11px; color: var(--text-dim); cursor: pointer; text-decoration: underline; }
-
-  /* ── PRODUCTION BOARD ── */
-  #board-screen { display: none; flex-direction: column; flex: 1; overflow: hidden; }
-  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 46px; flex-shrink: 0; }
+  #board-screen { display: none; flex-direction: column; height: 100vh; }
+  header { background: var(--surface); border-bottom: 2px solid var(--accent); padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 46px; flex-shrink: 0; }
   .header-left { display: flex; align-items: center; gap: 12px; }
   .logo-mark { width: 32px; height: 32px; background: var(--accent); clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 9px; color: #fff; letter-spacing: 1px; }
   .facility-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.1em; }
@@ -61,7 +49,7 @@
   .sync-dot.live { background: var(--green); animation: pg 2s infinite; }
   .sync-dot.saving { background: var(--yellow); }
   .sync-dot.error { background: var(--red); }
-  .user-badge { font-size: 9px; color: #c8d0e8; font-family: 'IBM Plex Mono', monospace; }
+  .user-badge { font-size: 9px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
   .logout-btn { font-size: 10px; color: var(--text-muted); cursor: pointer; background: none; border: none; font-family: inherit; }
   .logout-btn:hover { color: var(--text-dim); }
   .top-bar { display: flex; align-items: center; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; height: 36px; }
@@ -70,33 +58,35 @@
   .stat-chip .lbl { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
   .notes-wrap { flex: 1; display: flex; align-items: center; gap: 10px; padding: 0 14px; border-left: 3px solid var(--accent); height: 100%; }
   .notes-label { font-size: 8px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
-  #shift-notes { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: 12px; width: 100%; outline: none; -webkit-text-fill-color: #ffffff; }
+  #shift-notes { background: transparent; border: none; color: var(--text-dim); font-family: inherit; font-size: 12px; width: 100%; outline: none; }
   #shift-notes::placeholder { color: var(--text-muted); }
-  #shift-notes:disabled { opacity: 1; -webkit-text-fill-color: #ffffff; color: #ffffff; }
-  .sync-note { font-size: 9px; color: #c8d0e8; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; padding: 0 14px; }
+  #shift-notes:disabled { opacity: 0.3; }
+  .sync-note { font-size: 9px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; white-space: nowrap; padding: 0 14px; }
   .board { flex: 1; display: flex; flex-direction: column; padding: 8px 16px 8px; gap: 0; overflow: hidden; justify-content: space-evenly; }
   .section { display: flex; flex-direction: column; gap: 2px; }
-  .section-label { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.15em; color: #eaeeff; text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-bottom: 2px; font-weight: 700; overflow: visible; white-space: nowrap; }
-  .section-label::before { content: ''; width: 3px; height: 11px; background: var(--accent); flex-shrink: 0; }
+  .section-label { font-family: 'Bebas Neue', sans-serif; font-size: 9px; letter-spacing: 0.28em; color: var(--text-muted); text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+  .section-label::before { content: ''; width: 3px; height: 9px; background: var(--accent); flex-shrink: 0; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .eq-row { display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid transparent; padding: 0 8px; height: 38px; transition: background 0.15s; position: relative; }
+  .eq-row { display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid transparent; padding: 0 14px; height: 38px; transition: background 0.15s; position: relative; }
   .eq-row.clickable { cursor: pointer; }
   .eq-row.clickable:hover { background: var(--surface2); }
   .eq-row.running { border-left-color: var(--green); background: linear-gradient(90deg,#0a1f1280 0%,var(--surface) 25%); }
   .eq-row.pm { border-left-color: var(--yellow); background: linear-gradient(90deg,#1f150580 0%,var(--surface) 25%); }
   .eq-row.down { border-left-color: var(--red); background: linear-gradient(90deg,#1a080880 0%,var(--surface) 25%); }
   .eq-row.idle { border-left-color: #6b7fa0; background: var(--surface); }
-  .row-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-right: 8px; }
+  .row-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-right: 12px; }
   .running .row-dot { background: var(--green); animation: pg 2s infinite; }
   .pm .row-dot { background: var(--yellow); }
   .down .row-dot { background: var(--red); animation: pr 1s infinite; }
   .idle .row-dot { background: #2d3348; }
-  .row-name { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.04em; flex: 0 0 175px; color: #ffffff; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .row-sched { display: flex; gap: 2px; margin-right: 8px; flex-shrink: 0; }
-  .sc { font-size: 7px; font-family: 'IBM Plex Mono', monospace; padding: 1px 4px; border: 1px solid var(--border); color: var(--text-muted); }
+  .row-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.05em; flex: 0 0 150px; color: var(--text); }
+  .row-sched { display: flex; gap: 3px; margin-right: 14px; }
+  .sc { font-size: 8px; font-family: 'IBM Plex Mono', monospace; padding: 1px 5px; border: 1px solid var(--border); color: var(--text-muted); }
   .sc.on { border-color: var(--green-dim); color: var(--green); background: #0a1f1240; }
   .sc.current { border-color: var(--green); color: #fff; background: #14532d; box-shadow: 0 0 5px rgba(34,197,94,0.4); }
   .row-note { font-size: 10px; color: var(--text-dim); font-style: italic; margin-right: 14px; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+
+  /* ── INLINE ROW TICKER ── */
   .row-ticker-wrap { flex: 1; min-width: 0; overflow: hidden; position: relative; margin: 0 8px; display: flex; align-items: center; height: 100%; }
   .row-ticker-track { display: inline-flex; align-items: center; white-space: nowrap; animation: row-ticker-run 22s linear infinite; }
   .row-ticker-track:hover { animation-play-state: paused; cursor: default; }
@@ -105,10 +95,12 @@
   .row-ticker-item .ti-icon { margin-right:6px; font-size:10px; }
   .row-ticker-item .ti-type { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:#a04050; margin-right:6px; font-weight:400; padding:1px 4px; border:1px solid #3d0a12; }
   .row-ticker-item .ti-sep { color:#3d0a12; padding:0 16px; font-size:12px; }
-  .row-ticker-btn { flex-shrink:0; background:none; border:1px solid #3d0a12; color:#7a2030; font-family:'IBM Plex Mono',monospace; font-size:8px; font-weight:700; letter-spacing:1px; cursor:pointer; padding:2px 5px; margin-right:6px; transition:all 0.15s; }
+
+  /* ticker button on row — admin only */
+  .row-ticker-btn { flex-shrink:0; background:none; border:1px solid #3d0a12; color:#7a2030; font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:700; letter-spacing:1px; cursor:pointer; padding:2px 7px; margin-right:10px; transition:all 0.15s; }
   .row-ticker-btn:hover { color:var(--red); border-color:var(--red); background:rgba(239,68,68,0.08); }
   .row-ticker-btn.has-items { color:var(--red); border-color:rgba(239,68,68,0.5); }
-  .row-status { font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; flex-shrink: 0; min-width: 76px; text-align: center; }
+  .row-status { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 12px; flex-shrink: 0; min-width: 96px; text-align: center; }
   .running .row-status { background: var(--green-dim); color: var(--green); }
   .pm .row-status { background: var(--yellow-dim); color: var(--yellow); }
   .down .row-status { background: var(--red-dim); color: var(--red); }
@@ -121,7 +113,7 @@
   .modal-eq-name { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:0.06em; margin-bottom:2px; }
   .modal-area { font-size:10px; color:var(--text-dim); letter-spacing:0.12em; text-transform:uppercase; }
   .sched-hint { font-size:10px; color:var(--text-muted); font-family:'IBM Plex Mono',monospace; margin-top:4px; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--border); line-height:1.7; }
-  .form-row-modal { margin-bottom:12px; }
+  .form-row { margin-bottom:12px; }
   .form-label { display:block; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-dim); margin-bottom:5px; }
   .status-btns { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
   .status-btn { padding:9px 8px; border:2px solid var(--border); background:var(--bg); color:var(--text-dim); cursor:pointer; font-family:inherit; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; transition:all 0.1s; }
@@ -129,7 +121,7 @@
   .status-btn.sel-running { border-color:var(--green); background:var(--green-bg); color:var(--green); }
   .status-btn.sel-pm { border-color:var(--yellow); background:var(--yellow-bg); color:var(--yellow); }
   .status-btn.sel-down { border-color:var(--red); background:var(--red-bg); color:var(--red); }
-  .status-btn.sel-idle { border-color:#8899bb; background:var(--slate-bg); color:#c0cce8; }
+  .status-btn.sel-idle { border-color:var(--slate); background:var(--slate-bg); color:var(--slate); }
   .form-input { width:100%; background:var(--bg); border:1px solid var(--border-bright); color:var(--text); padding:8px 10px; font-family:inherit; font-size:13px; outline:none; }
   .form-input:focus { border-color:var(--accent); }
   .form-input::placeholder { color:var(--text-muted); }
@@ -145,12 +137,15 @@
   #shift-change-banner { display:none; position:fixed; top:56px; left:50%; transform:translateX(-50%); background:var(--surface); border:1px solid var(--accent); border-top:3px solid var(--accent); padding:10px 24px; font-size:12px; color:var(--text); z-index:500; font-family:'IBM Plex Mono',monospace; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.7); white-space:nowrap; }
   #shift-change-banner.show { display:block; animation:fadeInDown 0.3s ease; }
   @keyframes fadeInDown { from{opacity:0;transform:translateX(-50%) translateY(-8px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+  /* ── DOWN MODAL ── */
   .down-modal { background:var(--surface); border:1px solid var(--border-bright); border-top:3px solid var(--red); width:440px; max-width:95vw; padding:24px; }
   .down-modal-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:0.06em; color:var(--red); margin-bottom:4px; }
   .down-modal-sub { font-size:10px; color:var(--text-muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--border); }
   .down-list { display:flex; flex-direction:column; gap:4px; margin-bottom:14px; max-height:180px; overflow-y:auto; }
   .down-list-item { display:flex; align-items:center; justify-content:space-between; background:rgba(239,68,68,0.07); border:1px solid rgba(239,68,68,0.2); padding:6px 10px; border-radius:2px; }
   .down-list-item-text { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red); font-weight:600; }
+  .down-list-item-area { font-family:'IBM Plex Mono',monospace; font-size:9px; color:#a04050; margin-left:8px; }
   .down-list-remove { background:none; border:none; color:#7f1d1d; cursor:pointer; font-size:14px; padding:0 4px; line-height:1; }
   .down-list-remove:hover { color:var(--red); }
   .down-list-empty { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-muted); text-align:center; padding:14px; }
@@ -163,101 +158,77 @@
   .btn-add-down { background:var(--red-dim); color:var(--red); border:1px solid rgba(239,68,68,0.4); padding:8px 14px; font-family:inherit; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; flex-shrink:0; }
   .btn-add-down:hover { background:var(--red-bg); border-color:var(--red); }
 
-  /* ── HANDOFF SCREEN ── */
-  #handoff-screen { display: none; flex-direction: column; flex: 1; overflow: hidden; }
-  .handoff-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 46px; flex-shrink: 0; }
-  .handoff-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.1em; }
-  .handoff-body { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+  /* ── TAB BAR ── */
+  #tab-bar { display: none; background: var(--surface); border-bottom: 2px solid var(--accent); flex-shrink: 0; height: 42px; align-items: stretch; }
+  .tab-btn { background: none; border: none; border-bottom: 3px solid transparent; color: #94a3b8; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.1em; padding: 0 28px; cursor: pointer; transition: all 0.15s; margin-bottom: -2px; }
+  .tab-btn:hover { color: #f8f9ff; }
+  .tab-btn.active { color: #fff; border-bottom-color: var(--accent); }
 
-  /* Add form */
-  .ho-form { background: var(--surface); border: 1px solid var(--border-bright); border-top: 3px solid var(--blue); padding: 16px; flex-shrink: 0; }
-  .ho-form-title { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 12px; }
-  .ho-form-grid { display: grid; grid-template-columns: 120px 120px 140px 1fr; gap: 8px; align-items: end; margin-bottom: 10px; }
-  .ho-form-grid2 { display: grid; grid-template-columns: 1fr 140px; gap: 8px; align-items: end; }
-  .ho-field-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
-  .ho-select { width: 100%; background: var(--bg); border: 1px solid var(--border-bright); color: var(--text); padding: 7px 9px; font-family: inherit; font-size: 12px; outline: none; }
-  .ho-select:focus { border-color: var(--blue); }
-  .ho-input { width: 100%; background: var(--bg); border: 1px solid var(--border-bright); color: var(--text); padding: 7px 9px; font-family: inherit; font-size: 12px; outline: none; }
-  .ho-input:focus { border-color: var(--blue); }
-  .ho-input::placeholder { color: var(--text-muted); }
-  .ho-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border-bright); color: var(--text); padding: 7px 9px; font-family: inherit; font-size: 12px; outline: none; resize: vertical; min-height: 60px; }
-  .ho-textarea:focus { border-color: var(--blue); }
-  .ho-textarea::placeholder { color: var(--text-muted); }
-  .btn-ho-add { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(59,130,246,0.4); padding: 8px 18px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; white-space: nowrap; height: 100%; }
-  .btn-ho-add:hover { background: var(--blue-bg); border-color: var(--blue); }
-  .btn-ho-add:disabled { opacity: 0.4; cursor: not-allowed; }
+  /* ── KANBAN ── */
+  #kanban-screen { display: none; flex-direction: column; flex: 1; overflow: hidden; background: var(--bg); }
+  .kanban-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 46px; flex-shrink: 0; }
+  .kanban-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.1em; }
+  .kanban-body { flex: 1; overflow-x: auto; overflow-y: hidden; padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .kanban-col { flex: 0 0 260px; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--border); max-height: 100%; }
+  .kanban-col.col-backlog    { border-top-color: #475569; }
+  .kanban-col.col-inprogress { border-top-color: var(--blue); }
+  .kanban-col.col-waiting    { border-top-color: var(--yellow); }
+  .kanban-col.col-done       { border-top-color: var(--green); }
+  .kanban-col-header { padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .kanban-col-title { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.12em; }
+  .kanban-col-count { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #e8ecf8; background: var(--bg); border: 1px solid var(--border); padding: 1px 7px; border-radius: 10px; }
+  .kanban-cards { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 6px; min-height: 80px; }
+  .kanban-card { background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--border); padding: 10px 12px; cursor: grab; transition: border-color 0.15s, background 0.15s; user-select: none; }
+  .kanban-card:hover { background: #0e1118; border-color: var(--border-bright); }
+  .kanban-card.dragging { opacity: 0.4; cursor: grabbing; }
+  .kanban-col.drop-target { background: rgba(255,255,255,0.02); }
+  .kanban-card.pri-Critical { border-left-color: var(--red); }
+  .kanban-card.pri-High     { border-left-color: var(--yellow); }
+  .kanban-card.pri-Medium   { border-left-color: var(--blue); }
+  .kanban-card.pri-Low      { border-left-color: #475569; }
+  .kc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+  .kc-title { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.3; flex: 1; }
+  .kc-pri { font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 1px 6px; border: 1px solid; border-radius: 2px; flex-shrink: 0; }
+  .kc-pri.pri-Critical { color: var(--red);    border-color: rgba(239,68,68,0.4);  background: rgba(239,68,68,0.1); }
+  .kc-pri.pri-High     { color: var(--yellow); border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.1); }
+  .kc-pri.pri-Medium   { color: var(--blue);   border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.1); }
+  .kc-pri.pri-Low      { color: #94a3b8;       border-color: rgba(71,85,105,0.4);  background: rgba(71,85,105,0.1); }
+  .kc-notes { font-size: 11px; color: #e8ecf8; line-height: 1.4; margin-bottom: 8px; }
+  .kc-footer { display: flex; align-items: center; justify-content: space-between; }
+  .kc-move-btns { display: flex; gap: 3px; }
+  .kc-move-btn { background: none; border: 1px solid var(--border); color: #e8ecf8; padding: 2px 7px; font-size: 10px; cursor: pointer; font-family: 'IBM Plex Mono', monospace; transition: all 0.12s; }
+  .kc-move-btn:hover { border-color: var(--border-bright); color: #fff; }
+  .kc-del-btn { background: none; border: 1px solid transparent; color: #8899bb; padding: 2px 6px; font-size: 11px; cursor: pointer; transition: all 0.12s; }
+  .kc-del-btn:hover { border-color: rgba(239,68,68,0.4); color: var(--red); }
+  .kanban-add-btn { padding: 8px 12px; background: none; border: 1px dashed var(--border); color: #e8ecf8; font-family: inherit; font-size: 11px; cursor: pointer; text-align: left; transition: all 0.15s; flex-shrink: 0; margin: 0 8px 8px; }
+  .kanban-add-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(196,30,58,0.05); }
+  .kanban-add-form { padding: 8px; background: #090c12; border-top: 1px solid var(--border); flex-shrink: 0; }
+  .kaf-input { width: 100%; background: var(--bg); border: 1px solid var(--border-bright); color: var(--text); padding: 7px 9px; font-family: inherit; font-size: 12px; outline: none; margin-bottom: 6px; }
+  .kaf-input:focus { border-color: var(--accent); }
+  .kaf-input::placeholder { color: #e8ecf8; }
+  .kaf-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border-bright); color: var(--text); padding: 7px 9px; font-family: inherit; font-size: 11px; outline: none; resize: none; height: 52px; margin-bottom: 6px; }
+  .kaf-textarea:focus { border-color: var(--accent); }
+  .kaf-textarea::placeholder { color: #e8ecf8; }
+  .kaf-pri-row { display: flex; gap: 4px; margin-bottom: 8px; }
+  .kaf-pri-btn { flex: 1; padding: 4px; border: 1px solid var(--border); background: var(--bg); font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.12s; color: #e8ecf8; }
+  .kaf-pri-btn.sel-Critical { border-color: var(--red);    color: var(--red);    background: rgba(239,68,68,0.1); }
+  .kaf-pri-btn.sel-High     { border-color: var(--yellow); color: var(--yellow); background: rgba(245,158,11,0.1); }
+  .kaf-pri-btn.sel-Medium   { border-color: var(--blue);   color: var(--blue);   background: rgba(59,130,246,0.1); }
+  .kaf-pri-btn.sel-Low      { border-color: #475569;       color: #94a3b8;       background: rgba(71,85,105,0.1); }
+  .kaf-actions { display: flex; gap: 6px; }
+  .kaf-save { flex: 1; background: rgba(196,30,58,0.15); color: var(--accent); border: 1px solid rgba(196,30,58,0.4); padding: 6px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+  .kaf-save:hover { background: rgba(196,30,58,0.25); }
+  .kaf-cancel { background: none; border: 1px solid var(--border); color: #e8ecf8; padding: 6px 10px; font-family: inherit; font-size: 11px; cursor: pointer; }
 
-  /* Filter bar */
-  .ho-filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .ho-filter-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); padding: 4px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
-  .ho-filter-btn:hover { border-color: var(--border-bright); color: var(--text-dim); }
-  .ho-filter-btn.active { background: var(--surface2); border-color: var(--blue); color: var(--blue); }
-  .ho-filter-label { font-size: 9px; color: #c8d0e8; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
-
-  /* Entry cards */
-  .ho-entries { display: flex; flex-direction: column; gap: 8px; }
-  .ho-entry { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--border); padding: 12px 14px; transition: border-color 0.15s; }
-  .ho-entry.pri-critical { border-left-color: var(--red); }
-  .ho-entry.pri-high { border-left-color: var(--yellow); }
-  .ho-entry.pri-medium { border-left-color: var(--blue); }
-  .ho-entry.pri-low { border-left-color: var(--slate); }
-  .ho-entry.acked { opacity: 0.6; }
-  .ho-entry-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
-  .ho-entry-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; flex-shrink: 0; }
-  .ho-badge { display: inline-block; padding: 1px 7px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid; border-radius: 2px; }
-  .ho-badge.shift-A  { background: rgba(34,197,94,0.1);  color: #22c55e; border-color: #14532d; }
-  .ho-badge.shift-B  { background: rgba(59,130,246,0.1);  color: #60a5fa; border-color: #1e3a5f; }
-  .ho-badge.shift-C  { background: rgba(245,158,11,0.1);  color: #fbbf24; border-color: #78350f; }
-  .ho-badge.shift-D  { background: rgba(168,85,247,0.1);  color: #c084fc; border-color: #581c87; }
-  .ho-badge.shift-Day{ background: rgba(255,255,255,0.07); color: #e2e8f0; border-color: #2d3348; }
-  .ho-badge.pri-Critical { background: rgba(239,68,68,0.1);  color: var(--red);    border-color: var(--red-dim); }
-  .ho-badge.pri-High     { background: rgba(245,158,11,0.1); color: var(--yellow); border-color: var(--yellow-dim); }
-  .ho-badge.pri-Medium   { background: rgba(59,130,246,0.1); color: var(--blue);   border-color: var(--blue-dim); }
-  .ho-badge.pri-Low      { background: rgba(100,116,139,0.1);color: var(--slate);  border-color: #334155; }
-  .ho-badge.acked  { background: rgba(34,197,94,0.1);  color: var(--green); border-color: var(--green-dim); }
-  .ho-badge.open   { background: rgba(239,68,68,0.08); color: #f87171;     border-color: #7f1d1d; }
-  .ho-entry-desc { flex: 1; font-size: 13px; color: var(--text); line-height: 1.4; }
-  .ho-entry-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-  .ho-entry-info { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  .ho-info-item { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-muted); }
-  .ho-info-item span { color: var(--text-dim); }
-  .ho-entry-actions { display: flex; gap: 6px; }
-  .btn-ack { background: rgba(34,197,94,0.1); color: var(--green); border: 1px solid var(--green-dim); padding: 3px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
-  .btn-ack:hover { background: rgba(34,197,94,0.2); }
-  .btn-del-entry { background: none; border: 1px solid var(--border); color: var(--text-muted); padding: 3px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; cursor: pointer; transition: all 0.15s; }
-  .btn-del-entry:hover { border-color: var(--red-dim); color: var(--red); }
-  .ho-wo-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--blue); background: var(--blue-bg); border: 1px solid var(--blue-dim); padding: 1px 7px; }
-  .ho-empty { text-align: center; padding: 40px; color: #c8d0e8; font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
-  .ho-day-header { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; padding: 6px 0 4px; border-bottom: 1px solid var(--border); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
-  .ho-day-count { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-muted); font-weight: normal; }
-
-  /* ── TABLET RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    .board { padding: 6px 8px; }
-    .row-name { flex: 0 0 140px; font-size: 12px; letter-spacing: 0.02em; }
-    .row-ticker-wrap { display: none; }
-    .row-status { min-width: 64px; font-size: 8px; padding: 3px 6px; }
-    .row-sched { margin-right: 6px; }
-    .sc { font-size: 7px; padding: 1px 3px; }
-    .row-ticker-btn { font-size: 8px; padding: 2px 4px; margin-right: 4px; }
-    .section-label { font-size: 11px; letter-spacing: 0.12em; }
-    header { padding: 0 10px; }
-    .header-right { gap: 8px; }
-    .top-bar { font-size: 11px; }
-    .ho-form-grid { grid-template-columns: 1fr 1fr; }
-    .ho-form-grid2 { grid-template-columns: 1fr; }
-    .btn-ho-add { width: 100%; }
-  }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">
       <div class="login-mark">ROIG</div>
-      <div><div class="login-title">Cardinal IG Roanoke</div><div class="login-sub">Operations Board</div></div>
+      <div><div class="login-title">Cardinal IG Roanoke</div><div class="login-sub">Production Board</div></div>
     </div>
     <label class="login-label">Username</label>
     <input class="login-input" id="login-user" type="text" placeholder="username" autocomplete="username">
@@ -269,18 +240,13 @@
   </div>
 </div>
 
-<!-- TAB BAR -->
+<!-- TAB BAR (shown after login) -->
 <div id="tab-bar" style="display:none;align-items:stretch;">
   <button class="tab-btn active" id="tab-prod" onclick="switchTab('prod')">Production Board</button>
-  <button class="tab-btn" id="tab-handoff" onclick="switchTab('handoff')">Shift Handoff</button>
-  <div id="tab-spacer"></div>
-  <div style="display:flex;align-items:center;gap:10px;padding:0 16px;">
-    <span class="user-badge" id="tab-user-badge"></span>
-    <button class="logout-btn" id="tab-logout-btn" onclick="doLogout()" style="display:none">Sign out</button>
-  </div>
+  <button class="tab-btn" id="tab-kanban" onclick="switchTab('kanban')" style="display:none">My Tasks</button>
+  <div style="flex:1"></div>
 </div>
 
-<!-- PRODUCTION BOARD -->
 <div id="board-screen">
   <div id="setup-banner">⚠ Database not connected — run SQL setup in Supabase.</div>
   <div id="shift-change-banner"></div>
@@ -299,6 +265,8 @@
       <div class="sync-dot" id="sync-dot"></div>
       <div class="shift-badge" id="shift-label">—</div>
       <div id="clock">--:--:--</div>
+      <span class="user-badge" id="user-badge"></span>
+      <button class="logout-btn" id="logout-btn" onclick="doLogout()" style="display:none">Sign out</button>
     </div>
   </header>
   <div class="top-bar">
@@ -315,13 +283,12 @@
   <div class="board" id="board"></div>
 </div>
 
-<!-- STATUS MODAL -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-eq-name" id="modal-name">—</div>
     <div class="modal-area" id="modal-area">—</div>
     <div class="sched-hint" id="modal-sched-hint"></div>
-    <div class="form-row-modal">
+    <div class="form-row">
       <div class="form-label">Status</div>
       <div class="status-btns">
         <button class="status-btn" id="btn-running" onclick="selectStatus('running')">🟢 Running</button>
@@ -330,7 +297,7 @@
         <button class="status-btn" id="btn-idle" onclick="selectStatus('idle')">⚫ Idle / Standby</button>
       </div>
     </div>
-    <div class="form-row-modal">
+    <div class="form-row">
       <label class="form-label" for="modal-note">Note / WO# (optional)</label>
       <input class="form-input" id="modal-note" type="text" placeholder="e.g. WO-1234, bearing failure...">
     </div>
@@ -341,20 +308,18 @@
     </div>
   </div>
 </div>
-
-<!-- DOWN ISSUES MODAL -->
+<!-- DOWN MACHINES MODAL -->
 <div class="overlay" id="down-overlay">
   <div class="down-modal">
     <div class="down-modal-title" id="down-modal-title">⚠ Down Issues</div>
-    <div class="down-modal-sub" id="down-modal-sub">Add issues scrolling on this row</div>
+    <div class="down-modal-sub"   id="down-modal-sub">Add issues scrolling on this row</div>
     <div class="down-list" id="down-list"></div>
     <div class="down-add-row">
       <select class="down-area-select" id="down-type" style="width:100px;flex-shrink:0">
         <option value="issue">ISSUE</option>
         <option value="corrective">CORRECTIVE</option>
-        <option value="pm">PM</option>
       </select>
-      <input class="down-machine-input" id="down-machine" type="text" placeholder="Describe issue, corrective, or PM..." maxlength="80" style="flex:1">
+      <input class="down-machine-input" id="down-machine" type="text" placeholder="Describe issue or corrective action..." maxlength="80" style="flex:1">
       <button class="btn-add-down" onclick="addDownItem()">Add</button>
     </div>
     <div class="modal-actions" style="margin-top:12px;">
@@ -362,92 +327,6 @@
     </div>
   </div>
 </div>
-
-<!-- SHIFT HANDOFF -->
-<div id="handoff-screen">
-  <div class="handoff-header">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div class="logo-mark">ROIG</div>
-      <div>
-        <div class="handoff-title">Shift Handoff Log</div>
-        <div style="font-size:8px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;">Daily Issue Tracking</div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div class="sync-dot" id="ho-sync-dot"></div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-muted);" id="ho-sync-note">—</div>
-    </div>
-  </div>
-
-  <div class="handoff-body">
-
-    <!-- Add Entry Form (admin/supervisor/teamlead only) -->
-    <div class="ho-form" id="ho-add-form" style="display:none;">
-      <div class="ho-form-title">+ Log Shift Issue</div>
-      <div class="ho-form-grid">
-        <div>
-          <div class="ho-field-label">Shift</div>
-          <select class="ho-select" id="ho-shift">
-            <option>A</option><option>B</option><option>C</option><option>D</option><option>Day</option>
-          </select>
-        </div>
-        <div>
-          <div class="ho-field-label">Priority</div>
-          <select class="ho-select" id="ho-pri">
-            <option>Critical</option><option>High</option><option selected>Medium</option><option>Low</option>
-          </select>
-        </div>
-        <div>
-          <div class="ho-field-label">Equipment / Area</div>
-          <input class="ho-input" id="ho-asset" type="text" placeholder="e.g. IG3 SQUID">
-        </div>
-        <div>
-          <div class="ho-field-label">WO # (optional)</div>
-          <input class="ho-input" id="ho-wo" type="text" placeholder="WO-2026-XXXX">
-        </div>
-      </div>
-      <div class="ho-form-grid2">
-        <div>
-          <div class="ho-field-label">Issue Description</div>
-          <textarea class="ho-textarea" id="ho-desc" placeholder="Describe the issue, what was done, and what needs follow-up..."></textarea>
-        </div>
-        <div style="display:flex;flex-direction:column;justify-content:flex-end;">
-          <button class="btn-ho-add" id="ho-submit-btn" onclick="addHandoffEntry()">Log Issue</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Filters -->
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <div class="ho-filters">
-        <span class="ho-filter-label">Shift:</span>
-        <button class="ho-filter-btn active" onclick="setHoFilter('shift','ALL',this)">All</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('shift','A',this)">A</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('shift','B',this)">B</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('shift','C',this)">C</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('shift','D',this)">D</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('shift','Day',this)">Day</button>
-      </div>
-      <div class="ho-filters">
-        <span class="ho-filter-label">Status:</span>
-        <button class="ho-filter-btn active" onclick="setHoFilter('status','ALL',this)">All</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('status','Open',this)">Open</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('status','Acknowledged',this)">Acked</button>
-      </div>
-      <div class="ho-filters">
-        <span class="ho-filter-label">Days:</span>
-        <button class="ho-filter-btn active" onclick="setHoFilter('days',7,this)">7 Days</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('days',14,this)">14 Days</button>
-        <button class="ho-filter-btn" onclick="setHoFilter('days',30,this)">30 Days</button>
-      </div>
-    </div>
-
-    <!-- Entries -->
-    <div id="ho-entries-wrap"></div>
-
-  </div>
-</div>
-
 <div id="toast"></div>
 
 <script>
@@ -456,110 +335,19 @@ var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 var API = SUPABASE_URL + '/rest/v1';
 var hdrs = {'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'};
 
-// ── USERS (same as CMMS, role-based) ──
-var USERS = [
-  {id:"u001",username:"chad",    password:"Cardinal2024", name:"Chad",     role:"admin",      shift:"Day"},
-  {id:"u002",username:"wwhite",  password:"Cardinal2024", name:"White",    role:"admin",      shift:"Day"},
-  {id:"u003",username:"alink",   password:"Supervisor1",  name:"Link",     role:"supervisor", shift:"A"},
-  {id:"u004",username:"cmoreno", password:"Supervisor1",  name:"Moreno",   role:"supervisor", shift:"C"},
-  {id:"u005",username:"tdoss",   password:"TeamLead1",    name:"Doss",     role:"teamlead",   shift:"B"},
-  {id:"u006",username:"dbeasley",password:"TeamLead1",    name:"Beasley",  role:"teamlead",   shift:"D"},
-  {id:"u007",username:"jhalstead",password:"Tech1234",   name:"Halstead", role:"user",       shift:"B"},
-  {id:"u008",username:"ftofano", password:"Tech1234",     name:"Tofano",   role:"user",       shift:"B"},
-  {id:"u009",username:"jgreen",  password:"Tech1234",     name:"Green",    role:"user",       shift:"A"},
-  {id:"u010",username:"tgilmer", password:"Tech1234",     name:"Gilmer",   role:"user",       shift:"A"},
-  {id:"u011",username:"bnakhle", password:"Tech1234",     name:"Nakhle",   role:"user",       shift:"A"},
-  {id:"u012",username:"drichard",password:"Tech1234",     name:"Richard",  role:"user",       shift:"C"},
-  {id:"u013",username:"jhall",   password:"Tech1234",     name:"Hall",     role:"user",       shift:"C"},
-  {id:"u014",username:"cwebb",   password:"Tech1234",     name:"Webb",     role:"user",       shift:"C"},
-  {id:"u015",username:"badkins", password:"Tech1234",     name:"Adkins",   role:"user",       shift:"D"},
-  {id:"u016",username:"jwaldron",password:"Tech1234",     name:"Waldron",  role:"user",       shift:"D"},
-  {id:"u017",username:"tlyne",   password:"Tech1234",     name:"Lyne",     role:"user",       shift:"D"},
-  {id:"u018",username:"kwillis", password:"Tech1234",     name:"Willis",   role:"user",       shift:"Day"},
-  {id:"u019",username:"dgordon", password:"Tech1234",     name:"Gordon",   role:"user",       shift:"Day"},
-  {id:"u020",username:"mgudeman",password:"Tech1234",     name:"Gudeman",  role:"user",       shift:"Day"},
-  {id:"u021",username:"jhoback", password:"Tech1234",     name:"Hoback",   role:"user",       shift:"Fac"},
-  {id:"u022",username:"bsotherd",password:"Tech1234",     name:"Sotherden",role:"user",       shift:"Fac"},
-];
-
-var currentUser = '';
-var currentUserObj = null;
-var isAdmin = false;
-var canLog = false; // teamlead, supervisor, admin can log
-var canAck = false; // same
-var currentTab = 'prod';
-
-// ── AUTH ──
-async function doLogin() {
-  var user = document.getElementById('login-user').value.trim().toLowerCase();
-  var pass = document.getElementById('login-pass').value;
-  if (!user||!pass) return;
-  var found = USERS.find(function(u){ return u.username===user && u.password===pass; });
-  if (found) {
-    currentUserObj = found;
-    currentUser = found.name;
-    isAdmin = (found.role==='admin');
-    canLog = ['admin','supervisor','teamlead','user'].includes(found.role);
-    canAck = ['admin','supervisor','teamlead'].includes(found.role);
-    enterBoard();
-  } else {
-    // Also try Supabase board_admins for legacy admin logins
-    try {
-      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pass));
-      var hex = Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
-      var res = await fetch(API+'/board_admins?username=eq.'+encodeURIComponent(user)+'&password_hash=eq.'+hex+'&select=username',{headers:hdrs});
-      var data = await res.json();
-      if (data&&data.length>0){
-        currentUser=user; isAdmin=true; canLog=true; canAck=true;
-        currentUserObj={name:user,role:'admin',shift:'Day'};
-        enterBoard();
-      } else { showLoginErr('Invalid username or password'); }
-    } catch(e){ showLoginErr('Connection error'); }
-  }
-}
-function showLoginErr(msg){var el=document.getElementById('login-err');el.textContent=msg;el.style.display='block';}
-function enterViewOnly(){isAdmin=false;currentUser='viewer';canLog=false;canAck=false;currentUserObj=null;enterBoard();}
-function enterBoard(){
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('tab-bar').style.display='flex';
-  document.getElementById('tab-user-badge').textContent=currentUser?('👤 '+currentUser):'👁 View Only';
-  document.getElementById('tab-logout-btn').style.display=currentUser&&currentUser!=='viewer'?'':'none';
-  if(isAdmin) document.getElementById('shift-notes').disabled=false;
-  if(canLog) document.getElementById('ho-add-form').style.display='block';
-  // Pre-fill shift selector to logged-in user's shift
-  if(currentUserObj && currentUserObj.shift) {
-    var sel = document.getElementById('ho-shift');
-    if(sel) { for(var i=0;i<sel.options.length;i++){ if(sel.options[i].value===currentUserObj.shift){sel.selectedIndex=i;break;} } }
-  }
-  initState(); renderBoard(); loadFromSupabase(); startPoll(); loadNotes();
-  loadDownItems(); loadDownFromSupabase();
-  switchTab('prod');
-  loadHandoffEntries();
-  startHandoffPoll();
-}
-function doLogout(){
-  isAdmin=false;currentUser='';canLog=false;canAck=false;currentUserObj=null;
-  document.getElementById('tab-bar').style.display='none';
-  document.getElementById('board-screen').style.display='none';
-  document.getElementById('handoff-screen').style.display='none';
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('login-pass').value='';
-  document.getElementById('login-err').style.display='none';
-}
-
-// ── TAB SWITCHING ──
-function switchTab(tab) {
-  currentTab = tab;
-  document.getElementById('tab-prod').classList.toggle('active', tab==='prod');
-  document.getElementById('tab-handoff').classList.toggle('active', tab==='handoff');
-  document.getElementById('board-screen').style.display = tab==='prod' ? 'flex' : 'none';
-  document.getElementById('handoff-screen').style.display = tab==='handoff' ? 'flex' : 'none';
-  if(tab==='handoff') renderHandoff();
-}
-
-// ════════════════════════════════════════════════
-// PRODUCTION BOARD (unchanged logic)
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// PRODUCTION SCHEDULE
+// 3 shifts, Mon-Fri only (weekdays):
+//   1st: 7:00 AM  – 3:00 PM
+//   2nd: 3:00 PM  – 11:00 PM
+//   3rd: 11:00 PM – 7:00 AM  (overnight, belongs to start day)
+//
+// IG1  = weekdays, all 3 shifts
+// IG2  = always Standby (never auto-running)
+// IG3  = weekdays, 1st and 3rd shifts only
+// IG4  = weekdays, 2nd shift only
+// All others = weekdays, all 3 shifts
+// ══════════════════════════════════════════════════════
 var sections = [
   {label:'IG Lines', rows:[
     {id:'IG1', name:'IG Line 1', area:'IG Assembly', schedule:[1,2,3], weekdayOnly:true,  schedNote:'Mon–Fri · All shifts'},
@@ -573,9 +361,8 @@ var sections = [
     {id:'LAMI',name:'Lami Table',      area:'Cutting', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
   ]},
   {label:'Tempering', rows:[
-    {id:'FURN',    name:'Furnace',         area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
-    {id:'CT3',     name:'Cutting Table 3', area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
-    {id:'FLEXSEAM',name:'Flexseam',        area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
+    {id:'FURN',name:'Furnace',         area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
+    {id:'CT3', name:'Cutting Table 3', area:'Tempering', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
   ]},
   {label:'Mezzanine', rows:[
     {id:'MBEND',name:'Mezz Bender',   area:'Spacer Fabrication', schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
@@ -583,106 +370,214 @@ var sections = [
     {id:'MEXT', name:'Mezz Extruder', area:'Extrusion',          schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
     {id:'MFILL',name:'Mezz Fill Room',area:'Sieve Fill',         schedule:[1,2,3], weekdayOnly:true, schedNote:'Mon–Fri · All shifts'},
   ]},
-  {label:'Facilities', rows:[
-    {id:'FAC1', name:'Air Compressor',     area:'Facilities', schedule:[], weekdayOnly:false, schedNote:'Monitored — add correctives as needed'},
-    {id:'FAC2', name:'HVAC / Air Handling',area:'Facilities', schedule:[], weekdayOnly:false, schedNote:'Monitored — add correctives as needed'},
-    {id:'FAC3', name:'Nitrogen System',    area:'Facilities', schedule:[], weekdayOnly:false, schedNote:'Monitored — add correctives as needed'},
-    {id:'FAC4', name:'Facilities — General',area:'Facilities',schedule:[], weekdayOnly:false, schedNote:'Monitored — add correctives as needed'},
-  ]},
 ];
+
 var equipment = {};
 sections.forEach(function(s){s.rows.forEach(function(e){equipment[e.id]=e;});});
+
+// Shift times
 var SHIFT_NAMES  = {1:'1st Shift  (7:00 AM – 3:00 PM)', 2:'2nd Shift  (3:00 PM – 11:00 PM)', 3:'3rd Shift  (11:00 PM – 7:00 AM)'};
 var SHIFT_SHORT  = {1:'1ST', 2:'2ND', 3:'3RD'};
 var SHIFT_ACCENT = {1:'#22c55e', 2:'#38bdf8', 3:'#f59e0b'};
+
 function getShiftInfo() {
-  var now=new Date(),h=now.getHours(),shiftNum,shiftDay;
-  if(h>=7&&h<15){shiftNum=1;shiftDay=new Date(now.getFullYear(),now.getMonth(),now.getDate());}
-  else if(h>=15&&h<23){shiftNum=2;shiftDay=new Date(now.getFullYear(),now.getMonth(),now.getDate());}
-  else{shiftNum=3;shiftDay=(h<7)?new Date(now.getFullYear(),now.getMonth(),now.getDate()-1):new Date(now.getFullYear(),now.getMonth(),now.getDate());}
-  var dow=shiftDay.getDay();
-  return {shiftNum:shiftNum,shiftDay:shiftDay,isWeekday:(dow>=1&&dow<=5)};
+  var now = new Date(), h = now.getHours();
+  var shiftNum, shiftDay;
+  if (h >= 7 && h < 15) {
+    shiftNum = 1;
+    shiftDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  } else if (h >= 15 && h < 23) {
+    shiftNum = 2;
+    shiftDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  } else {
+    shiftNum = 3;
+    // h < 7: we're in the AM tail of 3rd shift which started last night
+    shiftDay = (h < 7)
+      ? new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
+      : new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  }
+  var dow = shiftDay.getDay();
+  return {shiftNum:shiftNum, shiftDay:shiftDay, isWeekday:(dow>=1&&dow<=5)};
 }
-function scheduledStatus(id){
-  if(id==='IG2')return 'idle';
-  if(id==='FAC1'||id==='FAC2'||id==='FAC3'||id==='FAC4')return 'idle';
-  var eq=equipment[id],info=getShiftInfo();
-  if(eq.weekdayOnly&&!info.isWeekday)return 'idle';
-  return eq.schedule.includes(info.shiftNum)?'running':'idle';
+
+function scheduledStatus(id) {
+  if (id === 'IG2') return 'idle';
+  var eq = equipment[id], info = getShiftInfo();
+  if (eq.weekdayOnly && !info.isWeekday) return 'idle';
+  return eq.schedule.includes(info.shiftNum) ? 'running' : 'idle';
 }
-var state={},lastShiftKey=null;
+
+var state = {}, isAdmin = false, currentUser = '';
+var lastShiftKey = null;
+
+// ── AUTH ──
+async function doLogin() {
+  var user = document.getElementById('login-user').value.trim();
+  var pass = document.getElementById('login-pass').value;
+  if (!user||!pass) return;
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pass));
+  var hex = Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+  try {
+    var res = await fetch(API+'/board_admins?username=eq.'+encodeURIComponent(user)+'&password_hash=eq.'+hex+'&select=username',{headers:hdrs});
+    var data = await res.json();
+    if (data&&data.length>0){isAdmin=true;currentUser=user;enterBoard();}
+    else showLoginErr('Invalid username or password');
+  } catch(e){showLoginErr('Connection error — check Supabase');}
+}
+function showLoginErr(msg){var el=document.getElementById('login-err');el.textContent=msg;el.style.display='block';}
+function enterViewOnly(){isAdmin=false;currentUser='viewer';enterBoard();}
+function enterBoard(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('tab-bar').style.display='flex';
+  document.getElementById('user-badge').textContent=isAdmin?('👤 '+currentUser):'👁 View Only';
+  document.getElementById('logout-btn').style.display=isAdmin?'':'none';
+  if(isAdmin){
+    document.getElementById('shift-notes').disabled=false;
+    document.getElementById('tab-kanban').style.display='';
+  }
+  initState();renderBoard();loadFromSupabase();startPoll();loadNotes();
+  loadDownItems(); loadDownFromSupabase();
+  switchTab('prod');
+  if(isAdmin) kanbanLoadSupabase();
+}
+function doLogout(){
+  isAdmin=false;currentUser='';
+  document.getElementById('tab-bar').style.display='none';
+  document.getElementById('board-screen').style.display='none';
+  document.getElementById('kanban-screen').style.display='none';
+  document.getElementById('tab-kanban').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('login-pass').value='';
+  document.getElementById('login-err').style.display='none';
+}
+
+function switchTab(tab){
+  document.getElementById('tab-prod').classList.toggle('active', tab==='prod');
+  document.getElementById('tab-kanban').classList.toggle('active', tab==='kanban');
+  document.getElementById('board-screen').style.display = tab==='prod' ? 'flex' : 'none';
+  document.getElementById('kanban-screen').style.display = tab==='kanban' ? 'flex' : 'none';
+  if(tab==='kanban') renderKanban();
+}
+
 function initState(){
-  Object.keys(equipment).forEach(function(id){state[id]={status:scheduledStatus(id),note:'',manual:false,updated_by:'',updated_at:null};});
-  var info=getShiftInfo();lastShiftKey=info.shiftNum+'-'+info.shiftDay.toDateString();
+  Object.keys(equipment).forEach(function(id){
+    state[id]={status:scheduledStatus(id),note:'',manual:false,updated_by:'',updated_at:null};
+  });
+  var info=getShiftInfo();
+  lastShiftKey=info.shiftNum+'-'+info.shiftDay.toDateString();
 }
+
 var pillLabel={running:'Running',pm:'PM / Sched',down:'DOWN',idle:'Idle'};
+
 function renderBoard(){
-  var board=document.getElementById('board'),info=getShiftInfo();board.innerHTML='';
+  var board=document.getElementById('board'), info=getShiftInfo();
+  board.innerHTML='';
   sections.forEach(function(sec){
-    var wrap=document.createElement('div');wrap.className='section';
-    var lbl=document.createElement('div');lbl.className='section-label';lbl.textContent=sec.label;
+    var wrap=document.createElement('div'); wrap.className='section';
+    var lbl=document.createElement('div'); lbl.className='section-label'; lbl.textContent=sec.label;
     wrap.appendChild(lbl);
     sec.rows.forEach(function(eq){wrap.appendChild(buildRow(eq,state[eq.id]||{status:'idle',note:''},info));});
     board.appendChild(wrap);
   });
   updateCounts();
 }
-function buildRow(eq,s,info){
+
+function buildRow(eq, s, info){
   var row=document.createElement('div');
   row.className='eq-row '+s.status+(isAdmin?' clickable':'');
   row.id='row-'+eq.id;
   if(isAdmin){(function(id){row.onclick=function(e){if(e.target.closest('.row-ticker-btn'))return;openModal(id);};})(eq.id);}
+
   var chips;
-  if(eq.id==='IG2'){chips='<span class="sc" style="color:var(--slate);border-color:var(--slate)">STANDBY</span>';}
-  else if(eq.area==='Facilities'){chips='<span class="sc" style="color:var(--slate);border-color:var(--slate)">MONITORED</span>';}
-  else{
-    chips=[1,2,3].map(function(n){var isOn=eq.schedule.includes(n);var isCur=(n===info.shiftNum&&info.isWeekday&&isOn);return '<span class="sc'+(isOn?' on':'')+(isCur?' current':'')+'">'+SHIFT_SHORT[n]+'</span>';}).join('');
-    if(!info.isWeekday){chips+='<span class="sc" style="color:var(--slate);border-color:var(--slate);margin-left:2px">WKND</span>';}
+  if(eq.id==='IG2'){
+    chips='<span class="sc" style="color:var(--slate);border-color:var(--slate)">STANDBY</span>';
+  } else {
+    chips=[1,2,3].map(function(n){
+      var isOn=eq.schedule.includes(n);
+      var isCur=(n===info.shiftNum&&info.isWeekday&&isOn);
+      return '<span class="sc'+(isOn?' on':'')+(isCur?' current':'')+'">'+SHIFT_SHORT[n]+'</span>';
+    }).join('');
+    if(!info.isWeekday){
+      chips+='<span class="sc" style="color:var(--slate);border-color:var(--slate);margin-left:2px">WKND</span>';
+    }
   }
-  var rowItems=(downItems[eq.id]||[]).map(function(it){return(typeof it==='string')?{type:'issue',text:it}:it;});
+
+  // Inline down ticker for this specific row
+  // downItems[eq.id] = [{type:'issue'|'corrective', text:'...'}]
+  var rowItems = (downItems[eq.id] || []);
+  // Normalize: handle old string-format entries gracefully
+  rowItems = rowItems.map(function(it){ return (typeof it === 'string') ? {type:'issue', text:it} : it; });
   var tickerHtml;
-  if(rowItems.length>0){
-    var inner='',totalLen=rowItems.reduce(function(acc,it){return acc+(it.text||'').length;},0);
-    var speed=Math.max(12,Math.min(45,totalLen*0.5+rowItems.length*4));
-    for(var ri=0;ri<2;ri++){
+  if(rowItems.length > 0){
+    var inner='';
+    var totalLen = rowItems.reduce(function(acc,it){ return acc + (it.text||'').length; }, 0);
+    var speed = Math.max(12, Math.min(45, totalLen * 0.5 + rowItems.length * 4));
+    for(var ri=0; ri<2; ri++){
       rowItems.forEach(function(item){
-        var isCorr=(item.type==='corrective'||item.type==='wo'),isPM=(item.type==='pm');
-        var typeColor=isPM?'#22c55e':(isCorr?'#fbbf24':'#ef4444');
-        var typeBord=isPM?'#14532d':(isCorr?'#92400e':'#7f1d1d');
-        var typeBg=isPM?'rgba(34,197,94,0.1)':(isCorr?'rgba(251,191,36,0.1)':'rgba(239,68,68,0.1)');
-        var typeLabel=isPM?'PM':(isCorr?'CORRECTIVE':'ISSUE');
-        var typeTag='<span class="ti-type" style="color:'+typeColor+';border-color:'+typeBord+';background:'+typeBg+'">'+typeLabel+'</span>';
+        var isCorr    = (item.type==='corrective'||item.type==='wo');
+        var typeColor = isCorr ? '#fbbf24' : '#ef4444';
+        var typeBord  = isCorr ? '#92400e' : '#7f1d1d';
+        var typeBg    = isCorr ? 'rgba(251,191,36,0.1)' : 'rgba(239,68,68,0.1)';
+        var typeLabel = isCorr ? 'CORRECTIVE' : 'ISSUE';
+        var typeTag   = '<span class="ti-type" style="color:'+typeColor+';border-color:'+typeBord+';background:'+typeBg+'">'+typeLabel+'</span>';
         inner+='<span class="row-ticker-item" style="color:'+typeColor+'"><span class="ti-icon" style="color:'+typeColor+'">&#9888; </span>'+typeTag+(item.text||'')+'<span class="ti-sep">&#9670;</span></span>';
       });
     }
     tickerHtml='<div class="row-ticker-wrap"><div class="row-ticker-track" style="animation-duration:'+speed+'s">'+inner+'</div></div>';
-  } else { tickerHtml='<div style="flex:1;min-width:0"></div>'; }
-  var addBtn=isAdmin?'<button class="row-ticker-btn'+(rowItems.length?' has-items':'')+'" data-eq="'+eq.id+'" onclick="openDownModal(this.dataset.eq)" title="Issues / PMs for '+eq.name+'">'+(rowItems.length?'\u26a0 '+rowItems.length+' ITEM'+(rowItems.length>1?'S':''):'+ DOWN')+'</button>':'';
-  row.innerHTML='<div class="row-dot"></div><div class="row-name">'+eq.name+'</div>'+tickerHtml+addBtn+'<div class="row-sched">'+chips+'</div><div class="row-status">'+pillLabel[s.status]+'</div>';
+  } else {
+    tickerHtml='<div style="flex:1;min-width:0"></div>';
+  }
+
+  var addBtn=isAdmin
+    ? '<button class="row-ticker-btn'+(rowItems.length?' has-items':'')+'" data-eq="'+eq.id+'" onclick="openDownModal(this.dataset.eq)" title="Down issues for '+eq.name+'">'+(rowItems.length?'\u26a0 '+rowItems.length+' ISSUE'+(rowItems.length>1?'S':''):'+ DOWN')+'</button>'
+    : '';
+
+  row.innerHTML=
+    '<div class="row-dot"></div>'+
+    '<div class="row-name">'+eq.name+'</div>'+
+    tickerHtml+
+    addBtn+
+    '<div class="row-sched">'+chips+'</div>'+
+    '<div class="row-status">'+pillLabel[s.status]+'</div>';
   return row;
 }
-function refreshRow(id){var old=document.getElementById('row-'+id);if(!old)return;old.replaceWith(buildRow(equipment[id],state[id],getShiftInfo()));}
+
+function refreshRow(id){
+  var old=document.getElementById('row-'+id); if(!old)return;
+  old.replaceWith(buildRow(equipment[id],state[id],getShiftInfo()));
+}
+
 function updateCounts(){
   var vals=Object.entries(state).filter(function(e){return e[0]!=='__shift_notes__';}).map(function(e){return e[1];});
-  ['running','pm','down','idle'].forEach(function(st){var el=document.getElementById('cnt-'+st);if(el)el.textContent=vals.filter(function(x){return x.status===st;}).length;});
+  ['running','pm','down','idle'].forEach(function(st){
+    var el=document.getElementById('cnt-'+st); if(el)el.textContent=vals.filter(function(x){return x.status===st;}).length;
+  });
 }
+
+// Auto-update on shift change
 function checkShiftChange(){
-  var info=getShiftInfo(),key=info.shiftNum+'-'+info.shiftDay.toDateString();
+  var info=getShiftInfo();
+  var key=info.shiftNum+'-'+info.shiftDay.toDateString();
   if(lastShiftKey&&key!==lastShiftKey){
     lastShiftKey=key;
-    Object.keys(equipment).forEach(function(id){if(!state[id].manual){state[id].status=scheduledStatus(id);state[id].note='';refreshRow(id);}});
+    Object.keys(equipment).forEach(function(id){
+      if(!state[id].manual){state[id].status=scheduledStatus(id);state[id].note='';refreshRow(id);}
+    });
     updateCounts();
-    var banner=document.getElementById('shift-change-banner'),col=SHIFT_ACCENT[info.shiftNum]||'#fff';
+    var banner=document.getElementById('shift-change-banner');
+    var col=SHIFT_ACCENT[info.shiftNum]||'#fff';
     var dayLabel=info.shiftDay.toLocaleDateString('en-US',{weekday:'long'})+(info.isWeekday?'':' (Weekend)');
-    banner.innerHTML='&#8635; Shift change &rarr; <b style="color:'+col+'">'+SHIFT_NAMES[info.shiftNum]+'</b> &nbsp;|&nbsp; '+dayLabel+' &nbsp;<span style="color:var(--text-muted);cursor:pointer" onclick="this.parentElement.classList.remove(\'show\')">[dismiss]</span>';
-    banner.classList.add('show');setTimeout(function(){banner.classList.remove('show');},15000);
+    banner.innerHTML='&#8635; Shift change &rarr; <b style="color:'+col+'">'+SHIFT_NAMES[info.shiftNum]+'</b> &nbsp;|&nbsp; '+dayLabel+
+      ' &nbsp;<span style="color:var(--text-muted);cursor:pointer" onclick="this.parentElement.classList.remove(\'show\')">[dismiss]</span>';
+    banner.classList.add('show');
+    setTimeout(function(){banner.classList.remove('show');},15000);
     showToast('Shift change \u2192 '+SHIFT_NAMES[info.shiftNum].split(' ')[0]+' '+SHIFT_NAMES[info.shiftNum].split(' ')[1]);
   }
 }
+
+// ── SUPABASE ──
 function getShiftKey(dateStr){
-  // Returns a string like "2026-02-28-shift1" representing the shift period a timestamp belongs to
-  var d=new Date(dateStr);
-  var h=d.getHours(),shiftNum,shiftDay;
+  var d=new Date(dateStr),h=d.getHours(),shiftNum,shiftDay;
   if(h>=7&&h<15){shiftNum=1;shiftDay=new Date(d.getFullYear(),d.getMonth(),d.getDate());}
   else if(h>=15&&h<23){shiftNum=2;shiftDay=new Date(d.getFullYear(),d.getMonth(),d.getDate());}
   else{shiftNum=3;shiftDay=(h<7)?new Date(d.getFullYear(),d.getMonth(),d.getDate()-1):new Date(d.getFullYear(),d.getMonth(),d.getDate());}
@@ -698,10 +593,9 @@ async function loadFromSupabase(){
     var currentKey=info.shiftNum+'-'+info.shiftDay.toDateString();
     var staleResets=[];
     rows.forEach(function(row){
-      if(row.id==='__shift_notes__'||row.id==='__down_items__')return;
+      if(row.id==='__shift_notes__'||row.id==='__down_items__'||row.id==='__kanban__')return;
       if(state[row.id]===undefined)return;
-      // If manual override was set in a previous shift, auto-reset to schedule
-      if(row.manual && row.updated_at && getShiftKey(row.updated_at)!==currentKey){
+      if(row.manual&&row.updated_at&&getShiftKey(row.updated_at)!==currentKey){
         var sched=scheduledStatus(row.id);
         state[row.id]={status:sched,note:'',manual:false,updated_by:'auto',updated_at:new Date().toISOString()};
         staleResets.push(row.id);
@@ -709,27 +603,39 @@ async function loadFromSupabase(){
         state[row.id]={status:row.status,note:row.note||'',manual:row.manual,updated_by:row.updated_by||'',updated_at:row.updated_at};
       }
     });
-    // Push resets back to Supabase
-    staleResets.forEach(function(id){
-      upsert(id,state[id].status,'',false);
-    });
-    if(staleResets.length>0)showToast(staleResets.length+' stale override'+(staleResets.length>1?'s':'')+' auto-reset to schedule');
-    renderBoard();setSyncDot('live');document.getElementById('setup-banner').style.display='none';setSync();
-  }catch(e){setSyncDot('error');document.getElementById('setup-banner').style.display='block';document.getElementById('last-sync-note').textContent='⚠ Not connected';}
+    staleResets.forEach(function(id){upsert(id,state[id].status,'',false);});
+    if(staleResets.length>0)showToast(staleResets.length+' stale override'+(staleResets.length>1?'s':'')+' auto-reset');
+    renderBoard();setSyncDot('live');
+    document.getElementById('setup-banner').style.display='none';
+    setSync();
+  }catch(e){
+    setSyncDot('error');
+    document.getElementById('setup-banner').style.display='block';
+    document.getElementById('last-sync-note').textContent='⚠ Not connected';
+  }
 }
+
 async function upsert(id,status,note,manual){
   setSyncDot('saving');
   try{
     var res=await fetch(API+'/board_status',{method:'POST',headers:Object.assign({},hdrs,{'Prefer':'resolution=merge-duplicates,return=minimal'}),body:JSON.stringify({id:id,status:status,note:note,manual:manual,updated_at:new Date().toISOString(),updated_by:currentUser})});
     if(!res.ok)throw new Error();
-    setSyncDot('live');setSync();showToast(equipment[id].name+' \u2192 '+status.toUpperCase());
+    setSyncDot('live');setSync();
+    showToast(equipment[id].name+' \u2192 '+status.toUpperCase());
   }catch(e){setSyncDot('error');showToast('Save failed',true);}
 }
-async function upsertNotes(val){try{await fetch(API+'/board_status',{method:'POST',headers:Object.assign({},hdrs,{'Prefer':'resolution=merge-duplicates,return=minimal'}),body:JSON.stringify({id:'__shift_notes__',status:'idle',note:val,manual:false,updated_by:currentUser,updated_at:new Date().toISOString()})});}catch(e){}}
-async function loadNotes(){try{var res=await fetch(API+'/board_status?id=eq.__shift_notes__&select=note',{headers:hdrs});var data=await res.json();if(data&&data[0])document.getElementById('shift-notes').value=data[0].note||'';}catch(e){}}
+
+async function upsertNotes(val){
+  try{await fetch(API+'/board_status',{method:'POST',headers:Object.assign({},hdrs,{'Prefer':'resolution=merge-duplicates,return=minimal'}),body:JSON.stringify({id:'__shift_notes__',status:'idle',note:val,manual:false,updated_by:currentUser,updated_at:new Date().toISOString()})});}catch(e){}
+}
+
+async function loadNotes(){
+  try{var res=await fetch(API+'/board_status?id=eq.__shift_notes__&select=note',{headers:hdrs});var data=await res.json();if(data&&data[0])document.getElementById('shift-notes').value=data[0].note||'';}catch(e){}
+}
+
 function startPoll(){
   setInterval(async function(){
-    if(document.hidden||currentTab!=='prod')return;
+    if(document.hidden)return;
     try{
       var res=await fetch(API+'/board_status?select=id,status,note,manual,updated_at,updated_by',{headers:hdrs});
       if(!res.ok)return;
@@ -739,13 +645,17 @@ function startPoll(){
         if(row.id==='__down_items__'){try{var di=JSON.parse(row.note||'{}');if(di&&typeof di==='object'&&!Array.isArray(di)&&JSON.stringify(di)!==JSON.stringify(downItems)){downItems=di;renderAllRowTickers();}}catch(e){}return;}
         if(state[row.id]&&state[row.id].updated_at!==row.updated_at){state[row.id]={status:row.status,note:row.note||'',manual:row.manual,updated_by:row.updated_by,updated_at:row.updated_at};refreshRow(row.id);changed=true;}
       });
-      if(changed)updateCounts();setSyncDot('live');setSync();
+      if(changed)updateCounts();
+      setSyncDot('live');setSync();
     }catch(e){}
   },5000);
 }
+
+// ── MODAL ──
 var activeId=null,selStatus=null;
 function openModal(id){
-  if(!isAdmin)return;activeId=id;
+  if(!isAdmin)return;
+  activeId=id;
   var eq=equipment[id],s=state[id],info=getShiftInfo();
   document.getElementById('modal-name').textContent=eq.name;
   document.getElementById('modal-area').textContent=eq.area;
@@ -753,7 +663,8 @@ function openModal(id){
   var manNote=s.manual?(' <span style="color:var(--yellow)">[Override: '+(s.updated_by||'?')+']</span>'):'';
   var curLine='<span style="color:var(--text-muted)">Now: '+SHIFT_NAMES[info.shiftNum]+(info.isWeekday?'':' &nbsp;·&nbsp; WEEKEND — all weekday machines idle')+'</span>';
   document.getElementById('modal-sched-hint').innerHTML=eq.schedNote+manNote+'<br>'+curLine;
-  selectStatus(s.status);document.getElementById('overlay').classList.add('open');
+  selectStatus(s.status);
+  document.getElementById('overlay').classList.add('open');
   setTimeout(function(){document.getElementById('modal-note').focus();},80);
 }
 function selectStatus(st){selStatus=st;['running','pm','down','idle'].forEach(function(s){document.getElementById('btn-'+s).className='status-btn'+(s===st?' sel-'+s:'');});}
@@ -765,7 +676,8 @@ function saveStatus(){
   refreshRow(activeId);updateCounts();upsert(activeId,selStatus,note,true);closeModal();
 }
 function resetToSchedule(){
-  if(!activeId)return;var st=scheduledStatus(activeId);
+  if(!activeId)return;
+  var st=scheduledStatus(activeId);
   state[activeId]={status:st,note:'',manual:false,updated_by:currentUser,updated_at:new Date().toISOString()};
   refreshRow(activeId);updateCounts();upsert(activeId,st,'',false);closeModal();
 }
@@ -775,277 +687,329 @@ document.getElementById('login-pass').addEventListener('keydown',function(e){if(
 document.getElementById('login-user').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('login-pass').focus();});
 var notesT=null;
 document.getElementById('shift-notes').addEventListener('input',function(e){clearTimeout(notesT);notesT=setTimeout(function(){upsertNotes(e.target.value);},1000);});
+
+// ── CLOCK ──
 function tick(){
   var now=new Date(),p=function(n){return String(n).padStart(2,'0');};
   var h=now.getHours(),ap=h>=12?'PM':'AM';h=h%12||12;
   document.getElementById('clock').textContent=h+':'+p(now.getMinutes())+':'+p(now.getSeconds())+' '+ap;
-  var info=getShiftInfo(),badge=document.getElementById('shift-label');
+  var info=getShiftInfo();
+  var badge=document.getElementById('shift-label');
   var col=info.isWeekday?(SHIFT_ACCENT[info.shiftNum]||'var(--accent)'):'var(--slate)';
   badge.textContent=SHIFT_NAMES[info.shiftNum]+(info.isWeekday?'':'  ·  Weekend');
-  badge.style.color=col;checkShiftChange();
+  badge.style.color=col;
+  checkShiftChange();
 }
 setInterval(tick,1000);tick();
+
 function setSyncDot(s){document.getElementById('sync-dot').className='sync-dot '+s;}
 function setSync(){var now=new Date(),p=function(n){return String(n).padStart(2,'0');};document.getElementById('last-sync-note').textContent='Live · '+p(now.getHours())+':'+p(now.getMinutes())+':'+p(now.getSeconds());}
 var toastT=null;
 function showToast(msg,err){var t=document.getElementById('toast');t.textContent=msg;t.className='show'+(err?' err':'');clearTimeout(toastT);toastT=setTimeout(function(){t.className='';},3000);}
-var downItems={},activeDownId=null;
-function loadDownItems(){try{var raw=localStorage.getItem('roig_down_items_v2');if(raw){var p=JSON.parse(raw);if(p&&typeof p==='object'&&!Array.isArray(p))downItems=p;}}catch(e){downItems={};}renderAllRowTickers();}
-function saveDownItems(){try{localStorage.setItem('roig_down_items_v2',JSON.stringify(downItems));}catch(e){}syncDownToSupabase();}
-async function syncDownToSupabase(){try{await fetch(API+'/board_status',{method:'POST',headers:Object.assign({},hdrs,{'Prefer':'resolution=merge-duplicates,return=minimal'}),body:JSON.stringify({id:'__down_items__',status:'idle',note:JSON.stringify(downItems),manual:true,updated_by:currentUser,updated_at:new Date().toISOString()})});}catch(e){}}
-async function loadDownFromSupabase(){try{var res=await fetch(API+'/board_status?id=eq.__down_items__&select=note,updated_at',{headers:hdrs});var data=await res.json();if(data&&data[0]&&data[0].note){var parsed=JSON.parse(data[0].note);if(parsed&&typeof parsed==='object'&&!Array.isArray(parsed)){downItems=parsed;renderAllRowTickers();}}}catch(e){}}
-function renderAllRowTickers(){Object.keys(equipment).forEach(function(id){refreshRow(id);});}
-function openDownModal(eqId){activeDownId=eqId;var eq=equipment[eqId];document.getElementById('down-modal-title').textContent='⚠  '+eq.name+'  —  Down Issues';document.getElementById('down-modal-sub').textContent=eq.area+'  ·  Add issues that are scrolling on this row';renderDownList();document.getElementById('down-overlay').classList.add('open');setTimeout(function(){document.getElementById('down-machine').focus();},80);}
-function closeDownModal(){document.getElementById('down-overlay').classList.remove('open');document.getElementById('down-machine').value='';activeDownId=null;}
-function renderDownList(){
-  var list=document.getElementById('down-list');if(!list||!activeDownId)return;
-  var items=downItems[activeDownId]||[];
-  if(items.length===0){list.innerHTML='<div class="down-list-empty">No issues listed — add one below</div>';return;}
-  list.innerHTML=items.map(function(item,idx){
-    var isCorr=(typeof item==='object')?(item.type==='corrective'||item.type==='wo'):false;
-    var isPM=(typeof item==='object')?(item.type==='pm'):false;
-    var txt=(typeof item==='object')?item.text:item;
-    var typeLabel=isPM?'PM':(isCorr?'CORRECTIVE':'ISSUE');
-    var typeColor=isPM?'#22c55e':(isCorr?'#fbbf24':'var(--red)');
-    var typeBorder=isPM?'#14532d':(isCorr?'#92400e':'#7f1d1d');
-    return '<div class="down-list-item"><span style="display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden"><span style="font-family:IBM Plex Mono,monospace;font-size:8px;font-weight:700;letter-spacing:1px;color:'+typeColor+';border:1px solid '+typeBorder+';padding:1px 5px;flex-shrink:0">'+typeLabel+'</span><span class="down-list-item-text" style="color:'+typeColor+'">'+txt+'</span></span><button class="down-list-remove" onclick="removeDownItem('+idx+')" title="Remove">✕</button></div>';
-  }).join('');
-}
-function addDownItem(){
-  var txt=document.getElementById('down-machine').value.trim();
-  var type=document.getElementById('down-type')?document.getElementById('down-type').value:'issue';
-  if(!txt||!activeDownId){document.getElementById('down-machine').focus();return;}
-  if(!downItems[activeDownId])downItems[activeDownId]=[];
-  downItems[activeDownId].push({type:type,text:txt});
-  document.getElementById('down-machine').value='';saveDownItems();refreshRow(activeDownId);renderDownList();
-}
-function removeDownItem(idx){
-  if(!activeDownId)return;
-  if(downItems[activeDownId]){downItems[activeDownId].splice(idx,1);if(downItems[activeDownId].length===0)delete downItems[activeDownId];}
-  saveDownItems();refreshRow(activeDownId);renderDownList();
-}
-document.getElementById('down-machine').addEventListener('keydown',function(e){if(e.key==='Enter')addDownItem();});
-document.getElementById('down-overlay').addEventListener('click',function(e){if(e.target===document.getElementById('down-overlay'))closeDownModal();});
+// ══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// DOWN ISSUES — keyed by equipment ID
+// downItems = { 'IG1': ['SQUID jam WO-1234', 'Seal fail'], 'CT2': ['Blade dull'] }
+// ══════════════════════════════════════════════════════
+var downItems = {};
+var activeDownId = null; // which equipment row the modal is open for
 
-// ════════════════════════════════════════════════
-// SHIFT HANDOFF
-// ════════════════════════════════════════════════
-var hoEntries = [];
-var hoFilters = { shift:'ALL', status:'ALL', days:7 };
-
-async function loadHandoffEntries() {
-  setHoSync('saving');
+function loadDownItems() {
   try {
-    var cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - 30); // load 30 days max
-    var res = await fetch(API+'/shift_handoff?select=*&order=created_at.desc&limit=200', {headers:hdrs});
-    if(!res.ok) throw new Error('table missing');
-    hoEntries = await res.json();
-    setHoSync('live');
-    renderHandoff();
-  } catch(e) {
-    setHoSync('error');
-    // fallback to localStorage
-    try { var raw=localStorage.getItem('roig_handoff_v1'); if(raw) hoEntries=JSON.parse(raw)||[]; } catch(e2){}
-    renderHandoff();
-  }
+    var raw = localStorage.getItem('roig_down_items_v2');
+    if (raw) { var p=JSON.parse(raw); if(p&&typeof p==='object'&&!Array.isArray(p)) downItems=p; }
+  } catch(e) { downItems = {}; }
+  renderAllRowTickers();
 }
 
-function saveHandoffLocal() {
-  try { localStorage.setItem('roig_handoff_v1', JSON.stringify(hoEntries)); } catch(e){}
+function saveDownItems() {
+  try { localStorage.setItem('roig_down_items_v2', JSON.stringify(downItems)); } catch(e){}
+  syncDownToSupabase();
 }
 
-async function addHandoffEntry() {
-  var shift = document.getElementById('ho-shift').value;
-  var pri   = document.getElementById('ho-pri').value;
-  var asset = document.getElementById('ho-asset').value.trim();
-  var wo    = document.getElementById('ho-wo').value.trim();
-  var desc  = document.getElementById('ho-desc').value.trim();
-  if(!desc || !asset) { showToast('Equipment and description required', true); return; }
-  var btn = document.getElementById('ho-submit-btn');
-  btn.disabled = true;
-  var entry = {
-    id: 'ho-' + Date.now(),
-    shift: shift,
-    priority: pri,
-    asset: asset,
-    wo_number: wo || null,
-    description: desc,
-    logged_by: currentUser,
-    status: 'Open',
-    acked_by: null,
-    acked_at: null,
-    created_at: new Date().toISOString(),
-  };
+async function syncDownToSupabase() {
   try {
-    var res = await fetch(API+'/shift_handoff', {
-      method:'POST',
-      headers: Object.assign({},hdrs,{'Prefer':'return=representation'}),
-      body: JSON.stringify(entry)
-    });
-    if(res.ok) {
-      var saved = await res.json();
-      if(Array.isArray(saved)&&saved[0]) entry = saved[0];
-    }
-  } catch(e) {}
-  hoEntries.unshift(entry);
-  saveHandoffLocal();
-  // Clear form
-  document.getElementById('ho-asset').value='';
-  document.getElementById('ho-wo').value='';
-  document.getElementById('ho-desc').value='';
-  btn.disabled = false;
-  renderHandoff();
-  showToast('Issue logged — ' + shift + ' shift');
-}
-
-async function acknowledgeEntry(id) {
-  if(!canAck) return;
-  var idx = hoEntries.findIndex(function(e){return e.id===id;});
-  if(idx<0) return;
-  var entry = hoEntries[idx];
-  var updated = Object.assign({}, entry, {status:'Acknowledged', acked_by:currentUser, acked_at:new Date().toISOString()});
-  hoEntries[idx] = updated;
-  saveHandoffLocal();
-  try {
-    await fetch(API+'/shift_handoff?id=eq.'+encodeURIComponent(id), {
-      method:'PATCH',
-      headers: Object.assign({},hdrs,{'Prefer':'return=minimal'}),
-      body: JSON.stringify({status:'Acknowledged', acked_by:currentUser, acked_at:updated.acked_at})
+    await fetch(API + '/board_status', {
+      method: 'POST',
+      headers: Object.assign({}, hdrs, {'Prefer':'resolution=merge-duplicates,return=minimal'}),
+      body: JSON.stringify({id:'__down_items__', status:'idle', note:JSON.stringify(downItems), manual:true, updated_by:currentUser, updated_at:new Date().toISOString()})
     });
   } catch(e){}
-  renderHandoff();
-  showToast('Acknowledged by ' + currentUser);
 }
 
-async function deleteEntry(id) {
-  if(!isAdmin) return;
-  hoEntries = hoEntries.filter(function(e){return e.id!==id;});
-  saveHandoffLocal();
-  try { await fetch(API+'/shift_handoff?id=eq.'+encodeURIComponent(id), {method:'DELETE',headers:hdrs}); } catch(e){}
-  renderHandoff();
-  showToast('Entry removed');
+async function loadDownFromSupabase() {
+  try {
+    var res = await fetch(API + '/board_status?id=eq.__down_items__&select=note,updated_at', {headers:hdrs});
+    var data = await res.json();
+    if (data && data[0] && data[0].note) {
+      var parsed = JSON.parse(data[0].note);
+      if (parsed && typeof parsed==='object' && !Array.isArray(parsed)) {
+        downItems = parsed; renderAllRowTickers();
+      }
+    }
+  } catch(e){}
 }
 
-function setHoFilter(type, val, btn) {
-  hoFilters[type] = val;
-  // update button states for this filter group
-  var btns = btn.parentElement.querySelectorAll('.ho-filter-btn');
-  btns.forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  renderHandoff();
+function renderAllRowTickers() {
+  // Re-render every row so ticker/button updates
+  Object.keys(equipment).forEach(function(id){ refreshRow(id); });
 }
 
-function renderHandoff() {
-  if(currentTab !== 'handoff') return;
-  var wrap = document.getElementById('ho-entries-wrap');
-  if(!wrap) return;
+// openDownModal(eqId) — called from the + DOWN / ⚠ ISSUES button on each row
+function openDownModal(eqId) {
+  activeDownId = eqId;
+  var eq = equipment[eqId];
+  document.getElementById('down-modal-title').textContent = '⚠  ' + eq.name + '  —  Down Issues';
+  document.getElementById('down-modal-sub').textContent   = eq.area + '  ·  Add issues that are scrolling on this row';
+  renderDownList();
+  document.getElementById('down-overlay').classList.add('open');
+  setTimeout(function(){ document.getElementById('down-machine').focus(); }, 80);
+}
 
-  // Filter
-  var cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - hoFilters.days);
-  var filtered = hoEntries.filter(function(e){
-    if(hoFilters.shift !== 'ALL' && e.shift !== hoFilters.shift) return false;
-    if(hoFilters.status !== 'ALL' && e.status !== hoFilters.status) return false;
-    if(new Date(e.created_at) < cutoff) return false;
-    return true;
-  });
+function closeDownModal() {
+  document.getElementById('down-overlay').classList.remove('open');
+  document.getElementById('down-machine').value = '';
+  activeDownId = null;
+}
 
-  if(filtered.length === 0) {
-    wrap.innerHTML = '<div class="ho-empty">No entries found for the selected filters.</div>';
+function renderDownList() {
+  var list  = document.getElementById('down-list');
+  if (!list || !activeDownId) return;
+  var items = downItems[activeDownId] || [];
+  if (items.length === 0) {
+    list.innerHTML = '<div class="down-list-empty">No issues listed — add one below</div>';
     return;
   }
-
-  // Group by date
-  var byDate = {};
-  filtered.forEach(function(e){
-    var d = e.created_at ? e.created_at.slice(0,10) : '0000-00-00';
-    if(!byDate[d]) byDate[d] = [];
-    byDate[d].push(e);
-  });
-
-  var dates = Object.keys(byDate).sort(function(a,b){return b>a?1:-1;});
-  var html = '';
-  dates.forEach(function(d){
-    var label = formatDateLabel(d);
-    var entries = byDate[d];
-    var openCount = entries.filter(function(e){return e.status==='Open';}).length;
-    html += '<div class="ho-day-header">' + label + ' <span class="ho-day-count">(' + entries.length + ' entries' + (openCount>0?' · <span style="color:var(--red)">'+openCount+' open</span>':'') + ')</span></div>';
-    html += '<div class="ho-entries">';
-    entries.forEach(function(e){
-      var isAcked = e.status === 'Acknowledged';
-      var priClass = 'pri-'+(e.priority||'Medium').toLowerCase();
-      html += '<div class="ho-entry '+priClass+(isAcked?' acked':'') +'">';
-      // Top row
-      html += '<div class="ho-entry-top">';
-      html += '<div class="ho-entry-meta">';
-      html += '<span class="ho-badge shift-'+(e.shift||'A')+'">'+(e.shift||'?')+'</span>';
-      html += '<span class="ho-badge pri-'+(e.priority||'Medium')+'">'+(e.priority||'Medium')+'</span>';
-      html += '<span class="ho-badge '+(isAcked?'acked':'open')+'">'+(isAcked?'✓ Acked':'Open')+'</span>';
-      if(e.wo_number) html += '<span class="ho-wo-tag">'+(e.wo_number)+'</span>';
-      html += '</div>';
-      html += '<div class="ho-entry-desc"><strong style="color:#fff;font-size:12px;">' + escHtml(e.asset||'') + '</strong> &nbsp;— ' + escHtml(e.description||'') + '</div>';
-      html += '</div>';
-      // Bottom row
-      html += '<div class="ho-entry-bottom">';
-      html += '<div class="ho-entry-info">';
-      html += '<div class="ho-info-item">Logged by <span>'+escHtml(e.logged_by||'?')+'</span></div>';
-      html += '<div class="ho-info-item">'+formatTime(e.created_at)+'</div>';
-      if(isAcked && e.acked_by) html += '<div class="ho-info-item">Acked by <span>'+escHtml(e.acked_by)+'</span>'+(e.acked_at?' at '+formatTime(e.acked_at):'')+'</div>';
-      html += '</div>';
-      html += '<div class="ho-entry-actions">';
-      if(!isAcked && canAck) html += '<button class="btn-ack" onclick="acknowledgeEntry(\''+e.id+'\')">✓ Acknowledge</button>';
-      if(isAdmin) html += '<button class="btn-del-entry" onclick="deleteEntry(\''+e.id+'\')">✕</button>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-    });
-    html += '</div>';
-  });
-  wrap.innerHTML = html;
+  list.innerHTML = items.map(function(item, idx) {
+    var isCorr = (typeof item === 'object') ? (item.type==='corrective'||item.type==='wo') : false;
+    var txt  = (typeof item === 'object') ? item.text : item;
+    var typeLabel  = isCorr ? 'CORRECTIVE' : 'ISSUE';
+    var typeColor  = isCorr ? '#fbbf24' : 'var(--red)';
+    var typeBorder = isCorr ? '#92400e' : '#7f1d1d';
+    return '<div class="down-list-item">' +
+      '<span style="display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden">' +
+      '<span style="font-family:IBM Plex Mono,monospace;font-size:8px;font-weight:700;letter-spacing:1px;color:'+typeColor+';border:1px solid '+typeBorder+';padding:1px 5px;flex-shrink:0">'+typeLabel+'</span>' +
+      '<span class="down-list-item-text" style="color:'+typeColor+'">'+txt+'</span>' +
+      '</span>' +
+      '<button class="down-list-remove" onclick="removeDownItem('+idx+')" title="Remove">✕</button>' +
+      '</div>';
+  }).join('');
 }
 
-function formatDateLabel(d) {
-  var today = new Date().toISOString().slice(0,10);
-  var yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
-  if(d===today) return 'Today — ' + new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
-  if(d===yesterday) return 'Yesterday — ' + new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
-  return new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric'});
+function addDownItem() {
+  var txt  = document.getElementById('down-machine').value.trim();
+  var type = document.getElementById('down-type') ? document.getElementById('down-type').value : 'issue';
+  if (!txt || !activeDownId) { document.getElementById('down-machine').focus(); return; }
+  if (!downItems[activeDownId]) downItems[activeDownId] = [];
+  downItems[activeDownId].push({type: type, text: txt});
+  document.getElementById('down-machine').value = '';
+  saveDownItems();
+  refreshRow(activeDownId);
+  renderDownList();
 }
-function formatTime(iso) {
-  if(!iso) return '';
-  var d = new Date(iso);
-  var h=d.getHours(),m=d.getMinutes(),ap=h>=12?'PM':'AM';h=h%12||12;
-  return (d.getMonth()+1)+'/'+d.getDate()+' '+h+':'+(m<10?'0':'')+m+' '+ap;
-}
-function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-function setHoSync(s){
-  var dot=document.getElementById('ho-sync-dot');
-  var note=document.getElementById('ho-sync-note');
-  if(dot) dot.className='sync-dot '+s;
-  if(note){
-    if(s==='live'){var now=new Date(),p=function(n){return String(n).padStart(2,'0');};note.textContent='Live · '+p(now.getHours())+':'+p(now.getMinutes())+':'+p(now.getSeconds());}
-    else if(s==='error') note.textContent='⚠ Offline — local only';
-    else note.textContent='Syncing...';
+function removeDownItem(idx) {
+  if (!activeDownId) return;
+  if (downItems[activeDownId]) {
+    downItems[activeDownId].splice(idx, 1);
+    if (downItems[activeDownId].length === 0) delete downItems[activeDownId];
   }
+  saveDownItems();
+  refreshRow(activeDownId);
+  renderDownList();
 }
 
-function startHandoffPoll(){
-  setInterval(async function(){
-    if(document.hidden) return;
-    try {
-      var res = await fetch(API+'/shift_handoff?select=*&order=created_at.desc&limit=200', {headers:hdrs});
-      if(!res.ok) return;
-      var fresh = await res.json();
-      // merge: keep local unsynced, update rest
-      hoEntries = fresh;
-      saveHandoffLocal();
-      setHoSync('live');
-      if(currentTab==='handoff') renderHandoff();
-    } catch(e){}
-  }, 10000);
+document.getElementById('down-machine').addEventListener('keydown', function(e){ if(e.key==='Enter') addDownItem(); });
+document.getElementById('down-overlay').addEventListener('click', function(e){ if(e.target===document.getElementById('down-overlay')) closeDownModal(); });
+
+function initTickerUI() { /* handled per-row in buildRow */ }
+// ════════════════════════════════════════════════
+// KANBAN
+// ════════════════════════════════════════════════
+var KANBAN_COLS=[
+  {id:'backlog',    label:'Backlog',          cls:'col-backlog'},
+  {id:'inprogress', label:'In Progress',      cls:'col-inprogress'},
+  {id:'waiting',    label:'Review / Waiting', cls:'col-waiting'},
+  {id:'done',       label:'Done',             cls:'col-done'},
+];
+var kanbanCards=[];
+var kanbanDragId=null;
+var kanbanAddingCol=null;
+var kanbanFormPri='Medium';
+
+function kanbanSaveLocal(){try{localStorage.setItem('roig_kanban_v1',JSON.stringify(kanbanCards));}catch(e){}}
+function kanbanLoadLocal(){try{var r=localStorage.getItem('roig_kanban_v1');if(r)kanbanCards=JSON.parse(r)||[];}catch(e){}}
+
+async function kanbanSaveSupabase(){
+  try{
+    await fetch(API+'/board_status',{method:'POST',
+      headers:Object.assign({},hdrs,{'Prefer':'resolution=merge-duplicates,return=minimal'}),
+      body:JSON.stringify({id:'__kanban__',status:'idle',note:JSON.stringify(kanbanCards),manual:true,updated_by:currentUser,updated_at:new Date().toISOString()})});
+    setKanbanSync('live');
+  }catch(e){setKanbanSync('error');}
 }
+
+async function kanbanLoadSupabase(){
+  try{
+    var res=await fetch(API+'/board_status?id=eq.__kanban__&select=note',{headers:hdrs});
+    var data=await res.json();
+    if(data&&data[0]&&data[0].note){var p=JSON.parse(data[0].note);if(Array.isArray(p)){kanbanCards=p;kanbanSaveLocal();}}
+    setKanbanSync('live');
+  }catch(e){kanbanLoadLocal();setKanbanSync('error');}
+}
+
+function setKanbanSync(s){
+  var el=document.getElementById('kanban-sync-note');if(!el)return;
+  var now=new Date(),pad=function(n){return String(n).padStart(2,'0');};
+  if(s==='live'){el.textContent='● Live · '+pad(now.getHours())+':'+pad(now.getMinutes());el.style.color='var(--green)';}
+  else if(s==='error'){el.textContent='⚠ Offline';el.style.color='var(--red)';}
+  else{el.textContent='Syncing...';el.style.color='var(--yellow)';}
+}
+
+function kanbanSave(){kanbanSaveLocal();kanbanSaveSupabase();}
+
+function moveCard(id,col){
+  var c=kanbanCards.find(function(x){return x.id===id;});
+  if(c){c.col=col;kanbanSave();renderKanban();}
+}
+function deleteCard(id){
+  if(!confirm('Delete this card?'))return;
+  kanbanCards=kanbanCards.filter(function(c){return c.id!==id;});
+  kanbanSave();renderKanban();
+}
+function clearDoneCards(){
+  var n=kanbanCards.filter(function(c){return c.col==='done';}).length;
+  if(!n){showToast('No done cards to clear');return;}
+  if(!confirm('Clear all '+n+' done card'+(n>1?'s':'')+'?'))return;
+  kanbanCards=kanbanCards.filter(function(c){return c.col!=='done';});
+  kanbanSave();renderKanban();showToast(n+' card'+(n>1?'s':'')+' cleared');
+}
+
+function mkBtn(text,cls,fn){
+  var b=document.createElement('button');
+  b.className=cls;b.textContent=text;
+  b.addEventListener('click',fn);
+  return b;
+}
+
+function renderKanban(){
+  var body=document.getElementById('kanban-body');if(!body)return;
+  body.innerHTML='';
+  var priOrder={Critical:0,High:1,Medium:2,Low:3};
+
+  KANBAN_COLS.forEach(function(col,colIdx){
+    var cards=kanbanCards.filter(function(c){return c.col===col.id;});
+    cards.sort(function(a,b){return (priOrder[a.priority]||2)-(priOrder[b.priority]||2);});
+
+    var colEl=document.createElement('div');
+    colEl.className='kanban-col '+col.cls;
+    colEl.addEventListener('dragover',function(e){e.preventDefault();colEl.classList.add('drop-target');});
+    colEl.addEventListener('dragleave',function(){colEl.classList.remove('drop-target');});
+    colEl.addEventListener('drop',function(e){e.preventDefault();colEl.classList.remove('drop-target');if(kanbanDragId)moveCard(kanbanDragId,col.id);});
+
+    var hdr=document.createElement('div');hdr.className='kanban-col-header';
+    var ttl=document.createElement('span');ttl.className='kanban-col-title';ttl.textContent=col.label;
+    var cnt=document.createElement('span');cnt.className='kanban-col-count';cnt.textContent=cards.length;
+    hdr.appendChild(ttl);hdr.appendChild(cnt);colEl.appendChild(hdr);
+
+    var cardsEl=document.createElement('div');cardsEl.className='kanban-cards';
+    cards.forEach(function(card){
+      var cardEl=document.createElement('div');
+      cardEl.className='kanban-card pri-'+card.priority;
+      cardEl.draggable=true;
+      cardEl.addEventListener('dragstart',function(){kanbanDragId=card.id;cardEl.classList.add('dragging');});
+      cardEl.addEventListener('dragend',function(){kanbanDragId=null;cardEl.classList.remove('dragging');});
+
+      var top=document.createElement('div');top.className='kc-top';
+      var titleEl=document.createElement('div');titleEl.className='kc-title';titleEl.textContent=card.title;
+      var priEl=document.createElement('span');priEl.className='kc-pri pri-'+card.priority;priEl.textContent=card.priority;
+      top.appendChild(titleEl);top.appendChild(priEl);cardEl.appendChild(top);
+
+      if(card.notes){
+        var notesEl=document.createElement('div');notesEl.className='kc-notes';notesEl.textContent=card.notes;
+        cardEl.appendChild(notesEl);
+      }
+
+      var footer=document.createElement('div');footer.className='kc-footer';
+      var moveBtns=document.createElement('div');moveBtns.className='kc-move-btns';
+      if(colIdx>0){
+        (function(lc){
+          moveBtns.appendChild(mkBtn('< '+lc.label,'kc-move-btn',function(){moveCard(card.id,lc.id);}));
+        })(KANBAN_COLS[colIdx-1]);
+      }
+      if(colIdx<KANBAN_COLS.length-1){
+        (function(rc){
+          moveBtns.appendChild(mkBtn(rc.label+' >','kc-move-btn',function(){moveCard(card.id,rc.id);}));
+        })(KANBAN_COLS[colIdx+1]);
+      }
+      (function(cid){
+        footer.appendChild(moveBtns);
+        footer.appendChild(mkBtn('x','kc-del-btn',function(){deleteCard(cid);}));
+      })(card.id);
+      cardEl.appendChild(footer);
+      cardsEl.appendChild(cardEl);
+    });
+    colEl.appendChild(cardsEl);
+
+    var addArea=document.createElement('div');
+    if(kanbanAddingCol===col.id){
+      var form=document.createElement('div');form.className='kanban-add-form';
+      var titleIn=document.createElement('input');
+      titleIn.className='kaf-input';titleIn.placeholder='Task title...';titleIn.maxLength=120;
+      var notesIn=document.createElement('textarea');
+      notesIn.className='kaf-textarea';notesIn.placeholder='Notes (optional)...';notesIn.maxLength=400;
+      var priRow=document.createElement('div');priRow.className='kaf-pri-row';
+      ['Critical','High','Medium','Low'].forEach(function(p){
+        var pb=document.createElement('button');
+        pb.className='kaf-pri-btn'+(kanbanFormPri===p?' sel-'+p:'');
+        pb.textContent=p;
+        pb.addEventListener('click',function(){
+          kanbanFormPri=p;
+          priRow.querySelectorAll('.kaf-pri-btn').forEach(function(b){b.className='kaf-pri-btn'+(b.textContent===p?' sel-'+p:'');});
+        });
+        priRow.appendChild(pb);
+      });
+      var actions=document.createElement('div');actions.className='kaf-actions';
+      var saveBtn=mkBtn('Add Card','kaf-save',function(){
+        var title=titleIn.value.trim();if(!title)return;
+        kanbanCards.push({id:'kc-'+Date.now(),col:col.id,title:title,notes:notesIn.value.trim(),priority:kanbanFormPri,created:new Date().toISOString()});
+        kanbanSave();kanbanAddingCol=null;renderKanban();showToast('Card added');
+      });
+      var cancelBtn=mkBtn('Cancel','kaf-cancel',function(){kanbanAddingCol=null;renderKanban();});
+      actions.appendChild(saveBtn);actions.appendChild(cancelBtn);
+      form.appendChild(titleIn);form.appendChild(notesIn);form.appendChild(priRow);form.appendChild(actions);
+      addArea.appendChild(form);
+      setTimeout(function(){titleIn.focus();},40);
+    } else {
+      (function(cid){
+        var addBtn=mkBtn('+ Add card','kanban-add-btn',function(){kanbanAddingCol=cid;kanbanFormPri='Medium';renderKanban();});
+        addArea.appendChild(addBtn);
+      })(col.id);
+    }
+    colEl.appendChild(addArea);
+    body.appendChild(colEl);
+  });
+}
+
 </script>
+
+<!-- KANBAN SCREEN -->
+<div id="kanban-screen">
+  <div class="kanban-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="logo-mark">ROIG</div>
+      <div>
+        <div class="kanban-title">My Tasks</div>
+        <div style="font-size:8px;color:#e8ecf8;letter-spacing:0.15em;text-transform:uppercase;">Personal Kanban — Admin Only</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button onclick="clearDoneCards()" style="background:none;border:1px solid var(--border);color:#e8ecf8;padding:4px 12px;font-family:inherit;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='#e8ecf8'">✕ Clear Done</button>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;" id="kanban-sync-note"></span>
+    </div>
+  </div>
+  <div class="kanban-body" id="kanban-body"></div>
+</div>
+
 </body>
 </html>
