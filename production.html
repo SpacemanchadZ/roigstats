@@ -220,6 +220,81 @@
   .kaf-save:hover { background: rgba(196,30,58,0.25); }
   .kaf-cancel { background: none; border: 1px solid var(--border); color: #e8ecf8; padding: 6px 10px; font-family: inherit; font-size: 11px; cursor: pointer; }
 
+
+  /* ── WEEKLY PLANNER ── */
+  #planner-screen { display:none; flex-direction:column; flex:1; overflow:hidden; background:var(--bg); }
+  .planner-header { background:var(--surface); border-bottom:1px solid var(--border); padding:0 20px; display:flex; align-items:center; justify-content:space-between; height:46px; flex-shrink:0; }
+  .planner-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:0.1em; }
+  .planner-week-nav { display:flex; align-items:center; gap:10px; }
+  .planner-week-btn { background:none; border:1px solid var(--border); color:var(--text-muted); padding:3px 10px; font-family:'IBM Plex Mono',monospace; font-size:11px; cursor:pointer; }
+  .planner-week-btn:hover { border-color:var(--border-bright); color:#fff; }
+  .planner-week-label { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-dim); min-width:160px; text-align:center; }
+  .planner-body { flex:1; overflow:auto; padding:12px 16px; display:grid; grid-template-columns:repeat(7,1fr); gap:10px; align-content:start; }
+  .planner-day-col { display:flex; flex-direction:column; gap:6px; min-width:0; }
+  .planner-day-header { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.12em; padding:6px 10px; border-bottom:2px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .planner-day-header.today { border-bottom-color:var(--accent); color:var(--accent); }
+  .planner-day-date { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--text-muted); }
+  .planner-cards { display:flex; flex-direction:column; gap:5px; min-height:60px; border-radius:2px; padding:2px; }
+  .planner-cards.drag-over { background:rgba(245,166,35,0.06); outline:1px dashed var(--yellow); }
+  .planner-card { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--blue); padding:8px 10px; cursor:grab; }
+  .planner-card:hover { border-color:var(--border-bright); }
+  .planner-card.dragging { opacity:0.3; }
+  .planner-card.pri-Critical { border-left-color:var(--red); }
+  .planner-card.pri-High { border-left-color:var(--yellow); }
+  .planner-card.pri-Medium { border-left-color:var(--blue); }
+  .planner-card.pri-Low { border-left-color:#475569; }
+  .pc-wo { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--blue); margin-bottom:3px; }
+  .pc-desc { font-size:12px; font-weight:600; color:#fff; margin-bottom:3px; line-height:1.3; }
+  .pc-tech { font-size:10px; color:var(--text-muted); }
+  .pc-footer { display:flex; justify-content:flex-end; margin-top:6px; }
+  .pc-del { background:none; border:none; color:#4a5568; font-size:11px; cursor:pointer; padding:0 2px; }
+  .pc-del:hover { color:var(--red); }
+  .planner-add-btn { background:none; border:1px dashed var(--border); color:var(--text-muted); padding:6px; font-family:inherit; font-size:10px; cursor:pointer; text-align:center; }
+  .planner-add-btn:hover { border-color:var(--yellow); color:var(--yellow); }
+  .planner-add-form { background:#090c12; border:1px solid var(--border); padding:8px; display:flex; flex-direction:column; gap:5px; }
+  .paf-input { background:var(--bg); border:1px solid var(--border-bright); color:var(--text); padding:5px 8px; font-family:inherit; font-size:11px; outline:none; width:100%; }
+  .paf-input:focus { border-color:var(--accent); }
+  .paf-input::placeholder { color:var(--text-muted); }
+  .paf-row { display:flex; gap:4px; }
+  .paf-save { flex:1; background:rgba(196,30,58,0.15); color:var(--accent); border:1px solid rgba(196,30,58,0.4); padding:5px; font-family:inherit; font-size:10px; font-weight:700; text-transform:uppercase; cursor:pointer; }
+  .paf-cancel { background:none; border:1px solid var(--border); color:var(--text-muted); padding:5px 8px; font-family:inherit; font-size:10px; cursor:pointer; }
+  .planner-unscheduled { background:var(--surface); border:1px solid var(--border); border-top:3px solid var(--yellow); padding:10px 14px; margin:0 16px 10px; flex-shrink:0; }
+  .planner-unsched-title { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.1em; color:var(--yellow); margin-bottom:8px; }
+  .planner-unsched-cards { display:flex; flex-wrap:wrap; gap:6px; min-height:32px; }
+  .planner-unsched-cards.drag-over { outline:1px dashed var(--yellow); }
+
+  /* ── REPEAT FAILURE TRACKER ── */
+  #rft-screen { display:none; flex-direction:column; flex:1; overflow:hidden; background:var(--bg); }
+  .rft-header { background:var(--surface); border-bottom:1px solid var(--border); padding:0 20px; display:flex; align-items:center; justify-content:space-between; height:46px; flex-shrink:0; }
+  .rft-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:0.1em; }
+  .rft-body { flex:1; overflow:auto; display:grid; grid-template-columns:1fr 340px; gap:0; }
+  .rft-list { border-right:1px solid var(--border); overflow-y:auto; }
+  .rft-log-panel { overflow-y:auto; padding:14px; }
+  .rft-section-label { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); padding:8px 16px 6px; border-bottom:1px solid var(--border); background:var(--surface); position:sticky; top:0; }
+  .rft-machine-row { padding:10px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:background 0.1s; }
+  .rft-machine-row:hover { background:var(--surface); }
+  .rft-machine-row.flagged { border-left:3px solid var(--red); background:rgba(239,68,68,0.05); }
+  .rft-machine-name { font-size:13px; font-weight:600; color:#fff; }
+  .rft-machine-sub { font-size:10px; color:var(--text-muted); font-family:'IBM Plex Mono',monospace; margin-top:2px; }
+  .rft-count-badge { font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:700; padding:2px 10px; border-radius:2px; }
+  .rft-count-badge.flagged { background:rgba(239,68,68,0.15); color:var(--red); border:1px solid rgba(239,68,68,0.3); }
+  .rft-count-badge.normal { background:var(--surface); color:var(--text-muted); border:1px solid var(--border); }
+  .rft-log-title { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:0.1em; margin-bottom:12px; }
+  .rft-log-form { background:var(--surface); border:1px solid var(--border); padding:12px; margin-bottom:14px; }
+  .rft-form-label { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; display:block; }
+  .rft-input { width:100%; background:var(--bg); border:1px solid var(--border-bright); color:var(--text); padding:7px 9px; font-family:inherit; font-size:12px; outline:none; margin-bottom:8px; }
+  .rft-input:focus { border-color:var(--accent); }
+  .rft-input::placeholder { color:var(--text-muted); }
+  .rft-save-btn { width:100%; background:rgba(196,30,58,0.15); color:var(--accent); border:1px solid rgba(196,30,58,0.4); padding:8px; font-family:inherit; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; }
+  .rft-save-btn:hover { background:rgba(196,30,58,0.25); }
+  .rft-event { padding:8px 0; border-bottom:1px solid var(--border); }
+  .rft-event-machine { font-size:12px; font-weight:600; color:#fff; }
+  .rft-event-time { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--text-muted); }
+  .rft-event-desc { font-size:11px; color:var(--text-dim); margin-top:2px; }
+  .rft-event-del { float:right; background:none; border:none; color:#4a5568; cursor:pointer; font-size:11px; }
+  .rft-event-del:hover { color:var(--red); }
+  .rft-flag-banner { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); padding:8px 12px; margin-bottom:10px; font-size:11px; color:var(--red); font-weight:700; display:none; }
+
 </style>
 </head>
 <body>
@@ -243,6 +318,8 @@
 <!-- TAB BAR (shown after login) -->
 <div id="tab-bar" style="display:none;align-items:stretch;">
   <button class="tab-btn active" id="tab-prod" onclick="switchTab('prod')">Production Board</button>
+  <button class="tab-btn" id="tab-planner" onclick="switchTab('planner')" style="display:none">Weekly Planner</button>
+  <button class="tab-btn" id="tab-rft" onclick="switchTab('rft')">Repeat Failures</button>
   <button class="tab-btn" id="tab-kanban" onclick="switchTab('kanban')" style="display:none">My Tasks</button>
   <div style="flex:1"></div>
 </div>
@@ -434,11 +511,13 @@ function enterBoard(){
   if(isAdmin){
     document.getElementById('shift-notes').disabled=false;
     document.getElementById('tab-kanban').style.display='';
+    document.getElementById('tab-planner').style.display='';
   }
   initState();renderBoard();loadFromSupabase();startPoll();loadNotes();
   loadDownItems(); loadDownFromSupabase();
   switchTab('prod');
-  if(isAdmin) kanbanLoadSupabase();
+  if(isAdmin){kanbanLoadSupabase();plannerLoad();}
+  rftLoad();
 }
 function doLogout(){
   isAdmin=false;currentUser='';
@@ -446,17 +525,24 @@ function doLogout(){
   document.getElementById('board-screen').style.display='none';
   document.getElementById('kanban-screen').style.display='none';
   document.getElementById('tab-kanban').style.display='none';
+  document.getElementById('planner-screen').style.display='none';
+  document.getElementById('tab-planner').style.display='none';
+  document.getElementById('rft-screen').style.display='none';
   document.getElementById('login-screen').style.display='flex';
   document.getElementById('login-pass').value='';
   document.getElementById('login-err').style.display='none';
 }
 
 function switchTab(tab){
-  document.getElementById('tab-prod').classList.toggle('active', tab==='prod');
-  document.getElementById('tab-kanban').classList.toggle('active', tab==='kanban');
-  document.getElementById('board-screen').style.display = tab==='prod' ? 'flex' : 'none';
-  document.getElementById('kanban-screen').style.display = tab==='kanban' ? 'flex' : 'none';
-  if(tab==='kanban') renderKanban();
+  ['prod','planner','rft','kanban'].forEach(function(t){
+    var btn=document.getElementById('tab-'+t);
+    var scr=document.getElementById(t==='prod'?'board-screen':t+'-screen');
+    if(btn)btn.classList.toggle('active',tab===t);
+    if(scr)scr.style.display=tab===t?'flex':'none';
+  });
+  if(tab==='kanban')renderKanban();
+  if(tab==='planner')renderPlanner();
+  if(tab==='rft')renderRFT();
 }
 
 function initState(){
@@ -823,6 +909,343 @@ document.getElementById('down-machine').addEventListener('keydown', function(e){
 document.getElementById('down-overlay').addEventListener('click', function(e){ if(e.target===document.getElementById('down-overlay')) closeDownModal(); });
 
 function initTickerUI() { /* handled per-row in buildRow */ }
+
+// ════════════════════════════════════════════════
+// WEEKLY PLANNER
+// ════════════════════════════════════════════════
+var plannerCards = [];
+var plannerWeekOffset = 0;
+var plannerDragId = null;
+var plannerAddingDay = null;
+
+function plannerGetMonday(offset) {
+  var d = new Date();
+  var day = d.getDay();
+  var diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  var mon = new Date(d.setDate(diff));
+  mon.setHours(0,0,0,0);
+  mon.setDate(mon.getDate() + (offset || 0) * 7);
+  return mon;
+}
+
+function plannerWeekDays(offset) {
+  var mon = plannerGetMonday(offset);
+  var days = [];
+  var dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(mon);
+    d.setDate(d.getDate() + i);
+    days.push({ date: d, label: dayNames[i], key: d.toISOString().slice(0,10) });
+  }
+  return days;
+}
+
+function plannerWeekLabel(offset) {
+  var days = plannerWeekDays(offset);
+  var opts = { month: 'short', day: 'numeric' };
+  return days[0].date.toLocaleDateString('en-US', opts) + ' – ' + days[6].date.toLocaleDateString('en-US', opts);
+}
+
+function plannerSaveLocal() { try { localStorage.setItem('roig_planner_v1', JSON.stringify(plannerCards)); } catch(e) {} }
+function plannerLoadLocal() { try { var r = localStorage.getItem('roig_planner_v1'); if (r) plannerCards = JSON.parse(r) || []; } catch(e) {} }
+
+async function plannerSave() {
+  plannerSaveLocal();
+  try {
+    await fetch(API+'/board_status', { method:'POST',
+      headers: Object.assign({}, hdrs, {'Prefer':'resolution=merge-duplicates,return=minimal'}),
+      body: JSON.stringify({id:'__planner__',status:'idle',note:JSON.stringify(plannerCards),manual:true,updated_by:currentUser,updated_at:new Date().toISOString()})
+    });
+    setPlannerSync('live');
+  } catch(e) { setPlannerSync('error'); }
+}
+
+async function plannerLoad() {
+  try {
+    var res = await fetch(API+'/board_status?id=eq.__planner__&select=note', {headers:hdrs});
+    var data = await res.json();
+    if (data && data[0] && data[0].note) {
+      var p = JSON.parse(data[0].note);
+      if (Array.isArray(p)) { plannerCards = p; plannerSaveLocal(); }
+    }
+    setPlannerSync('live');
+  } catch(e) { plannerLoadLocal(); setPlannerSync('error'); }
+}
+
+function setPlannerSync(s) {
+  var el = document.getElementById('planner-sync'); if (!el) return;
+  var now = new Date(), pad = function(n){return String(n).padStart(2,'0');};
+  if (s==='live') { el.textContent='● Live · '+pad(now.getHours())+':'+pad(now.getMinutes()); el.style.color='var(--green)'; }
+  else if (s==='error') { el.textContent='⚠ Offline'; el.style.color='var(--red)'; }
+  else { el.textContent='Syncing...'; el.style.color='var(--yellow)'; }
+}
+
+function plannerPrevWeek() { plannerWeekOffset--; renderPlanner(); }
+function plannerNextWeek() { plannerWeekOffset++; renderPlanner(); }
+function plannerThisWeek() { plannerWeekOffset = 0; renderPlanner(); }
+
+function plannerAddUnscheduled() {
+  plannerAddingDay = '__unscheduled__';
+  renderPlanner();
+  document.getElementById('planner-unscheduled-bar').style.display = '';
+}
+
+function renderPlanner() {
+  var lbl = document.getElementById('planner-week-label');
+  if (lbl) lbl.textContent = plannerWeekLabel(plannerWeekOffset);
+
+  var days = plannerWeekDays(plannerWeekOffset);
+  var today = new Date().toISOString().slice(0,10);
+  var body = document.getElementById('planner-body');
+  if (!body) return;
+  body.innerHTML = '';
+
+  // Unscheduled bar
+  var unschedBar = document.getElementById('planner-unscheduled-bar');
+  var unschedCards = document.getElementById('planner-unsched-cards');
+  var unscheduled = plannerCards.filter(function(c){return c.day==='__unscheduled__';});
+  if (unschedCards) {
+    unschedCards.innerHTML = '';
+    unscheduled.forEach(function(card) {
+      var el = makePlannerCard(card, true);
+      unschedCards.appendChild(el);
+    });
+    if (unscheduled.length > 0 && unschedBar) unschedBar.style.display = '';
+  }
+
+  // Day columns
+  days.forEach(function(day) {
+    var dayCards = plannerCards.filter(function(c){return c.day===day.key;});
+    var col = document.createElement('div');
+    col.className = 'planner-day-col';
+
+    var hdr = document.createElement('div');
+    hdr.className = 'planner-day-header' + (day.key===today?' today':'');
+    hdr.innerHTML = '<span>'+day.label+'</span><span class="planner-day-date">'+
+      day.date.toLocaleDateString('en-US',{month:'short',day:'numeric'})+'</span>';
+    col.appendChild(hdr);
+
+    var cardsEl = document.createElement('div');
+    cardsEl.className = 'planner-cards';
+    cardsEl.addEventListener('dragover', function(e){e.preventDefault();cardsEl.classList.add('drag-over');});
+    cardsEl.addEventListener('dragleave', function(){cardsEl.classList.remove('drag-over');});
+    cardsEl.addEventListener('drop', function(e){
+      e.preventDefault();cardsEl.classList.remove('drag-over');
+      if (plannerDragId) {
+        var c = plannerCards.find(function(x){return x.id===plannerDragId;});
+        if (c) { c.day=day.key; plannerSave(); renderPlanner(); }
+      }
+    });
+
+    dayCards.forEach(function(card){
+      cardsEl.appendChild(makePlannerCard(card, false));
+    });
+    col.appendChild(cardsEl);
+
+    // Add form or button
+    var addArea = document.createElement('div');
+    if (plannerAddingDay === day.key) {
+      addArea.appendChild(makePlannerForm(day.key));
+    } else {
+      var addBtn = document.createElement('button');
+      addBtn.className = 'planner-add-btn';
+      addBtn.textContent = '+ Add WO';
+      addBtn.addEventListener('click', function(){plannerAddingDay=day.key;renderPlanner();setTimeout(function(){var el=document.getElementById('paf-wo-'+day.key);if(el)el.focus();},40);});
+      addArea.appendChild(addBtn);
+    }
+    col.appendChild(addArea);
+    body.appendChild(col);
+  });
+
+  // Unscheduled add form
+  if (plannerAddingDay === '__unscheduled__' && unschedCards) {
+    var formWrap = document.createElement('div');
+    formWrap.appendChild(makePlannerForm('__unscheduled__'));
+    unschedCards.appendChild(formWrap);
+    setTimeout(function(){var el=document.getElementById('paf-wo-__unscheduled__');if(el)el.focus();},40);
+  }
+}
+
+function makePlannerCard(card, compact) {
+  var el = document.createElement('div');
+  el.className = 'planner-card pri-'+(card.priority||'Medium');
+  el.draggable = true;
+  el.addEventListener('dragstart', function(){plannerDragId=card.id;el.classList.add('dragging');});
+  el.addEventListener('dragend', function(){plannerDragId=null;el.classList.remove('dragging');});
+  if (card.wo) { var wo=document.createElement('div');wo.className='pc-wo';wo.textContent=card.wo;el.appendChild(wo); }
+  var desc=document.createElement('div');desc.className='pc-desc';desc.textContent=card.description||'';el.appendChild(desc);
+  if (card.tech) { var tech=document.createElement('div');tech.className='pc-tech';tech.textContent='Tech: '+card.tech;el.appendChild(tech); }
+  var footer=document.createElement('div');footer.className='pc-footer';
+  var del=document.createElement('button');del.className='pc-del';del.textContent='✕';
+  del.addEventListener('click',function(){if(!confirm('Remove this WO?'))return;plannerCards=plannerCards.filter(function(c){return c.id!==card.id;});plannerSave();renderPlanner();});
+  footer.appendChild(del);el.appendChild(footer);
+  return el;
+}
+
+function makePlannerForm(dayKey) {
+  var form = document.createElement('div');
+  form.className = 'planner-add-form';
+  var woIn=document.createElement('input');woIn.className='paf-input';woIn.id='paf-wo-'+dayKey;woIn.placeholder='WO # (e.g. WO-2026-1234)';woIn.maxLength=30;
+  var descIn=document.createElement('input');descIn.className='paf-input';descIn.placeholder='Description...';descIn.maxLength=80;
+  var techIn=document.createElement('input');techIn.className='paf-input';techIn.placeholder='Assigned tech...';techIn.maxLength=40;
+  var priSel=document.createElement('select');priSel.className='paf-input';
+  ['Medium','High','Critical','Low'].forEach(function(p){var o=document.createElement('option');o.value=p;o.textContent=p;priSel.appendChild(o);});
+  var row=document.createElement('div');row.className='paf-row';
+  var save=document.createElement('button');save.className='paf-save';save.textContent='Add';
+  save.addEventListener('click',function(){
+    var desc=descIn.value.trim();if(!desc)return;
+    plannerCards.push({id:'pc-'+Date.now(),day:dayKey,wo:woIn.value.trim(),description:desc,tech:techIn.value.trim(),priority:priSel.value,created:new Date().toISOString()});
+    plannerSave();plannerAddingDay=null;renderPlanner();showToast('WO added');
+  });
+  var cancel=document.createElement('button');cancel.className='paf-cancel';cancel.textContent='Cancel';
+  cancel.addEventListener('click',function(){plannerAddingDay=null;renderPlanner();});
+  row.appendChild(save);row.appendChild(cancel);
+  form.appendChild(woIn);form.appendChild(descIn);form.appendChild(techIn);form.appendChild(priSel);form.appendChild(row);
+  return form;
+}
+
+// ════════════════════════════════════════════════
+// REPEAT FAILURE TRACKER
+// ════════════════════════════════════════════════
+var rftEvents = [];
+var rftSelectedMachine = null;
+var RFT_WINDOW_DAYS = 7;
+var RFT_THRESHOLD = 2;
+
+function rftSaveLocal(){try{localStorage.setItem('roig_rft_v1',JSON.stringify(rftEvents));}catch(e){}}
+function rftLoadLocal(){try{var r=localStorage.getItem('roig_rft_v1');if(r)rftEvents=JSON.parse(r)||[];}catch(e){}}
+
+async function rftSave(){
+  rftSaveLocal();
+  try{
+    await fetch(API+'/board_status',{method:'POST',
+      headers:Object.assign({},hdrs,{'Prefer':'resolution=merge-duplicates,return=minimal'}),
+      body:JSON.stringify({id:'__rft__',status:'idle',note:JSON.stringify(rftEvents),manual:true,updated_by:currentUser,updated_at:new Date().toISOString()})});
+    setRFTSync('live');
+  }catch(e){setRFTSync('error');}
+}
+
+async function rftLoad(){
+  try{
+    var res=await fetch(API+'/board_status?id=eq.__rft__&select=note',{headers:hdrs});
+    var data=await res.json();
+    if(data&&data[0]&&data[0].note){var p=JSON.parse(data[0].note);if(Array.isArray(p)){rftEvents=p;rftSaveLocal();}}
+    setRFTSync('live');
+  }catch(e){rftLoadLocal();setRFTSync('error');}
+}
+
+function setRFTSync(s){
+  var el=document.getElementById('rft-sync');if(!el)return;
+  var now=new Date(),pad=function(n){return String(n).padStart(2,'0');};
+  if(s==='live'){el.textContent='● Live · '+pad(now.getHours())+':'+pad(now.getMinutes());el.style.color='var(--green)';}
+  else if(s==='error'){el.textContent='⚠ Offline';el.style.color='var(--red)';}
+}
+
+function rftRecentCount(machineId){
+  var cutoff=new Date(Date.now()-RFT_WINDOW_DAYS*86400000);
+  return rftEvents.filter(function(e){return e.machine===machineId&&new Date(e.ts)>=cutoff;}).length;
+}
+
+function rftIsFlagged(machineId){ return rftRecentCount(machineId)>=RFT_THRESHOLD; }
+
+function renderRFT(){
+  var list=document.getElementById('rft-list');if(!list)return;
+  list.innerHTML='<div class="rft-section-label">Machines — click to log failure</div>';
+
+  // Build machine list from equipment object
+  var machines=Object.values(equipment).filter(function(e){return e.id&&e.name;});
+  // Sort: flagged first, then by name
+  machines.sort(function(a,b){
+    var af=rftIsFlagged(a.id),bf=rftIsFlagged(b.id);
+    if(af&&!bf)return -1;if(!af&&bf)return 1;
+    return a.name.localeCompare(b.name);
+  });
+
+  machines.forEach(function(m){
+    var count=rftRecentCount(m.id);
+    var flagged=count>=RFT_THRESHOLD;
+    var row=document.createElement('div');
+    row.className='rft-machine-row'+(flagged?' flagged':'');
+    row.addEventListener('click',function(){rftSelectMachine(m.id,m.name);});
+    var info=document.createElement('div');
+    var name=document.createElement('div');name.className='rft-machine-name';name.textContent=m.name;
+    var sub=document.createElement('div');sub.className='rft-machine-sub';
+    sub.textContent=count+' failure'+(count!==1?'s':'')+' in last '+RFT_WINDOW_DAYS+'d'+(m.area?' · '+m.area:'');
+    info.appendChild(name);info.appendChild(sub);
+    var badge=document.createElement('span');
+    badge.className='rft-count-badge '+(flagged?'flagged':'normal');
+    badge.textContent=count+'x';
+    row.appendChild(info);row.appendChild(badge);
+    list.appendChild(row);
+  });
+
+  // Update right panel if machine selected
+  if(rftSelectedMachine)rftUpdatePanel(rftSelectedMachine.id,rftSelectedMachine.name);
+}
+
+function rftSelectMachine(id,name){
+  rftSelectedMachine={id:id,name:name};
+  document.getElementById('rft-log-form').style.display='';
+  document.getElementById('rft-desc').value='';
+  document.getElementById('rft-wo').value='';
+  rftUpdatePanel(id,name);
+}
+
+function rftUpdatePanel(id,name){
+  var titleEl=document.getElementById('rft-log-title');
+  if(titleEl)titleEl.textContent=name;
+  var banner=document.getElementById('rft-flag-banner');
+  if(banner)banner.style.display=rftIsFlagged(id)?'block':'none';
+
+  // Show events for this machine
+  var evList=document.getElementById('rft-events-list');if(!evList)return;
+  evList.innerHTML='';
+  var machineEvents=rftEvents.filter(function(e){return e.machine===id;})
+    .sort(function(a,b){return new Date(b.ts)-new Date(a.ts);});
+
+  if(machineEvents.length===0){
+    var empty=document.createElement('div');
+    empty.style.cssText='font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--text-muted);padding:12px 0;';
+    empty.textContent='No failures logged yet';
+    evList.appendChild(empty);return;
+  }
+
+  var cutoff=new Date(Date.now()-RFT_WINDOW_DAYS*86400000);
+  machineEvents.forEach(function(ev){
+    var recent=new Date(ev.ts)>=cutoff;
+    var row=document.createElement('div');row.className='rft-event';
+    if(!recent)row.style.opacity='0.5';
+    var ts=new Date(ev.ts);
+    var timeStr=ts.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+ts.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+    var del=document.createElement('button');del.className='rft-event-del';del.textContent='✕';
+    del.addEventListener('click',function(){rftEvents=rftEvents.filter(function(e){return e.id!==ev.id;});rftSave();renderRFT();});
+    row.appendChild(del);
+    var timeEl=document.createElement('div');timeEl.className='rft-event-time';
+    timeEl.textContent=timeStr+(recent?' · within window':'· older than '+RFT_WINDOW_DAYS+'d');
+    if(recent)timeEl.style.color='var(--red)';
+    var desc=document.createElement('div');desc.className='rft-event-desc';
+    desc.textContent=(ev.wo?ev.wo+' — ':'')+ev.desc;
+    row.appendChild(timeEl);row.appendChild(desc);
+    evList.appendChild(row);
+  });
+}
+
+function rftLogFailure(){
+  if(!rftSelectedMachine)return;
+  var desc=document.getElementById('rft-desc').value.trim();
+  if(!desc){showToast('Enter a description');return;}
+  var wo=document.getElementById('rft-wo').value.trim();
+  rftEvents.push({id:'rft-'+Date.now(),machine:rftSelectedMachine.id,machineName:rftSelectedMachine.name,desc:desc,wo:wo,ts:new Date().toISOString(),logged_by:currentUser||'unknown'});
+  rftSave();
+  document.getElementById('rft-desc').value='';
+  document.getElementById('rft-wo').value='';
+  var count=rftRecentCount(rftSelectedMachine.id);
+  if(count>=RFT_THRESHOLD){showToast('⚠ REPEAT FAILURE flagged on '+rftSelectedMachine.name,true);}
+  else{showToast('Failure logged');}
+  renderRFT();
+}
+
+
 // ════════════════════════════════════════════════
 // KANBAN
 // ════════════════════════════════════════════════
@@ -1009,6 +1432,66 @@ function renderKanban(){
     </div>
   </div>
   <div class="kanban-body" id="kanban-body"></div>
+</div>
+
+
+<!-- WEEKLY PLANNER SCREEN -->
+<div id="planner-screen">
+  <div class="planner-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="logo-mark">ROIG</div>
+      <div>
+        <div class="planner-title">Weekly Planner</div>
+        <div style="font-size:8px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;">Admin Only — Mon–Sun Work Schedule</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="planner-week-nav">
+        <button class="planner-week-btn" onclick="plannerPrevWeek()">&#9664; Prev</button>
+        <div class="planner-week-label" id="planner-week-label">—</div>
+        <button class="planner-week-btn" onclick="plannerNextWeek()">Next &#9654;</button>
+        <button class="planner-week-btn" onclick="plannerThisWeek()" style="color:var(--accent);border-color:rgba(196,30,58,0.4)">This Week</button>
+      </div>
+      <button onclick="plannerAddUnscheduled()" style="background:rgba(245,166,35,0.1);color:var(--yellow);border:1px solid rgba(245,166,35,0.3);padding:4px 12px;font-family:inherit;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;">+ Add WO</button>
+      <span id="planner-sync" style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-muted);"></span>
+    </div>
+  </div>
+  <div id="planner-unscheduled-bar" style="background:var(--surface);border-bottom:1px solid var(--border);padding:8px 16px;flex-shrink:0;display:none;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--yellow);margin-bottom:6px;">Unscheduled / Backlog</div>
+    <div class="planner-unsched-cards" id="planner-unsched-cards"></div>
+  </div>
+  <div class="planner-body" id="planner-body"></div>
+</div>
+
+<!-- REPEAT FAILURE TRACKER SCREEN -->
+<div id="rft-screen">
+  <div class="rft-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="logo-mark">ROIG</div>
+      <div>
+        <div class="rft-title">Repeat Failure Tracker</div>
+        <div style="font-size:8px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;">Flags same machine 2x failures within 7 days</div>
+      </div>
+    </div>
+    <span id="rft-sync" style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-muted);"></span>
+  </div>
+  <div class="rft-body">
+    <div class="rft-list" id="rft-list">
+      <div class="rft-section-label">Machines — click to log failure</div>
+    </div>
+    <div class="rft-log-panel">
+      <div class="rft-log-title" id="rft-log-title">Select a machine</div>
+      <div class="rft-flag-banner" id="rft-flag-banner">&#9888; REPEAT FAILURE — Same machine failed 2+ times in the last 7 days</div>
+      <div class="rft-log-form" id="rft-log-form" style="display:none;">
+        <label class="rft-form-label">Description / What happened</label>
+        <input class="rft-input" id="rft-desc" placeholder="Brief description..." maxlength="120">
+        <label class="rft-form-label">WO # (optional)</label>
+        <input class="rft-input" id="rft-wo" placeholder="WO-2026-XXXX" maxlength="30">
+        <button class="rft-save-btn" onclick="rftLogFailure()">Log Failure</button>
+      </div>
+      <div id="rft-events-list"></div>
+    </div>
+  </div>
 </div>
 
 </body>
