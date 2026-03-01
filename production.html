@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,2 98,26 98,74 50,98 2,74 2,26' fill='%23c8102e'/><text x='50' y='57' font-family='Arial Black,sans-serif' font-size='26' font-weight='900' fill='white' text-anchor='middle' letter-spacing='1'>ROIG</text></svg>" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ROIG Board">
+  <meta name="theme-color" content="#0c0e14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230c0e14'/><polygon points='50,5 95,27 95,73 50,95 5,73 5,27' fill='%23c8102e'/><text x='50' y='58' font-family='Arial Black,sans-serif' font-size='24' font-weight='900' fill='white' text-anchor='middle' letter-spacing='1'>ROIG</text></svg>">
+  <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22ROIG+Production+Board%22%2C%22short_name%22%3A%22ROIG+Board%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230c0e14%22%2C%22theme_color%22%3A%22%230c0e14%22%2C%22orientation%22%3A%22any%22%7D">
 <title>Cardinal IG Roanoke — Production Board</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -295,6 +302,91 @@
   .rft-event-del { float:right; background:none; border:none; color:#4a5568; cursor:pointer; font-size:11px; }
   .rft-event-del:hover { color:var(--red); }
   .rft-flag-banner { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); padding:8px 12px; margin-bottom:10px; font-size:11px; color:var(--red); font-weight:700; display:none; }
+
+
+  /* ════════════════════════════════════════════
+     RESPONSIVE — tablet & mobile
+  ════════════════════════════════════════════ */
+
+  /* Tablet landscape (≤1024px) */
+  @media (max-width: 1024px) {
+    .board-section { grid-template-columns: repeat(2,1fr) !important; }
+    .planner-body { grid-template-columns: repeat(4,1fr) !important; }
+    .rft-body { grid-template-columns: 1fr !important; }
+    .rft-log-panel { border-top: 1px solid var(--border); }
+    .kanban-body { gap: 10px !important; padding: 10px 12px !important; }
+    .kanban-col { flex: 0 0 220px !important; }
+  }
+
+  /* Tablet portrait & large phone landscape (≤768px) */
+  @media (max-width: 768px) {
+    /* Header */
+    .logo-mark { font-size: 16px !important; padding: 3px 8px !important; }
+    header { padding: 0 10px !important; gap: 8px !important; }
+    #clock { font-size: 11px !important; min-width: 70px !important; }
+    .shift-badge { font-size: 9px !important; padding: 2px 8px !important; }
+
+    /* Tab bar */
+    .tab-btn { font-size: 11px !important; padding: 0 12px !important; letter-spacing: 0.06em !important; }
+
+    /* Top bar stats */
+    .top-bar { flex-wrap: wrap !important; gap: 6px !important; padding: 6px 10px !important; }
+    .stat-chip .count { font-size: 18px !important; }
+    .stat-chip .lbl { font-size: 7px !important; }
+    .notes-wrap { min-width: 0 !important; flex: 1 1 100% !important; order: 10; }
+
+    /* Board */
+    .board-section { grid-template-columns: 1fr !important; }
+    .eq-row { padding: 8px 10px !important; min-height: 44px !important; }
+    .eq-name { font-size: 12px !important; }
+    .row-status { font-size: 9px !important; padding: 3px 8px !important; }
+    .sc { display: none !important; }
+    .row-note { max-width: 120px !important; font-size: 9px !important; }
+
+    /* Planner */
+    .planner-body { grid-template-columns: repeat(2,1fr) !important; gap: 6px !important; padding: 8px !important; }
+    .planner-header { flex-wrap: wrap !important; height: auto !important; padding: 8px 12px !important; gap: 6px !important; }
+    .planner-week-nav { flex-wrap: wrap !important; gap: 6px !important; }
+    .planner-week-label { min-width: 0 !important; }
+
+    /* Kanban */
+    .kanban-body { flex-direction: column !important; overflow-x: hidden !important; overflow-y: auto !important; padding: 8px !important; }
+    .kanban-col { flex: none !important; width: 100% !important; }
+    .kanban-header { flex-wrap: wrap !important; height: auto !important; padding: 8px 12px !important; gap: 6px !important; }
+
+    /* RFT */
+    .rft-body { grid-template-columns: 1fr !important; }
+    .rft-log-panel { border-top: 1px solid var(--border); padding: 10px !important; }
+    .rft-header { flex-wrap: wrap !important; height: auto !important; padding: 8px 12px !important; }
+
+    /* Modals */
+    .overlay > div { width: 95vw !important; max-height: 90vh !important; overflow-y: auto !important; }
+    .status-btns { grid-template-columns: 1fr 1fr !important; }
+  }
+
+  /* Phone portrait (≤480px) */
+  @media (max-width: 480px) {
+    .tab-btn { font-size: 10px !important; padding: 0 8px !important; letter-spacing: 0 !important; }
+    .planner-body { grid-template-columns: 1fr !important; }
+    .board-section { grid-template-columns: 1fr !important; }
+    .eq-row { touch-action: manipulation; }
+    .top-bar { padding: 5px 8px !important; }
+    header { height: auto !important; min-height: 44px !important; padding: 6px 10px !important; }
+    .logo-mark { font-size: 14px !important; }
+    #clock { display: none !important; }
+    .stat-chip { min-width: 44px !important; }
+    .kanban-col { flex: none !important; width: 100% !important; }
+    .kc-move-btn { font-size: 9px !important; padding: 2px 5px !important; }
+  }
+
+  /* Touch improvements */
+  @media (hover: none) {
+    .eq-row { min-height: 48px; }
+    .tab-btn { min-height: 44px; }
+    .kc-move-btn, .kc-del-btn, .kanban-add-btn, .planner-add-btn { min-height: 36px; }
+    button { -webkit-tap-highlight-color: transparent; }
+    input, textarea, select { font-size: 16px !important; } /* prevents iOS zoom on focus */
+  }
 
 </style>
 </head>
