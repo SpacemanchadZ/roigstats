@@ -95,12 +95,12 @@
   .month-btn.disabled { color: rgba(255,255,255,0.15); cursor: default; }
 
   /* tabs */
-  .tabs { display: flex; align-items: center; margin-bottom: -1px; }
+  .tabs { display: flex; align-items: center; margin-bottom: -1px; position: relative; z-index: 5; }
   .tab-btn { padding: 10px 20px; border: none; cursor: pointer; background: transparent; color: rgba(255,255,255,0.35); font-size: 11px; font-family: var(--mono); letter-spacing: 1px; border-bottom: 2px solid transparent; transition: all 0.15s; }
   .tab-btn.active { color: white; border-bottom-color: white; }
   .tab-btn:hover:not(.active) { color: rgba(255,255,255,0.7); }
   .tab-spacer { flex: 1; }
-  .prod-link { color: var(--muted); font-size: 10px; font-family: var(--mono); letter-spacing: 1px; text-decoration: none; text-transform: uppercase; padding-bottom: 2px; border-bottom: 2px solid transparent; transition: color 0.15s; }
+  .prod-link { color: var(--muted); font-size: 10px; font-family: var(--mono); letter-spacing: 1px; text-decoration: none; text-transform: uppercase; padding: 4px 8px; border-bottom: 2px solid transparent; transition: color 0.15s; position: relative; z-index: 10; pointer-events: all; cursor: pointer; }
   .prod-link:hover { color: var(--red); }
 
   /* ── CONTENT ── */
