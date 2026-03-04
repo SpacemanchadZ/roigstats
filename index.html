@@ -109,32 +109,34 @@
   .tab-panel.active { display: flex; }
 
   /* summary pills */
-  .pill-row { display: flex; gap: 12px; flex-wrap: wrap; }
   .pill { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 18px; display: flex; flex-direction: column; gap: 3px; }
   .pill-label { font-size: 9px; letter-spacing: 2px; color: white; font-weight: 700; text-transform: uppercase; }
-  .pill-value { font-family: var(--display); font-size: 20px; font-weight: 700; color: white; }
+  .pill-value { font-family: var(--display); font-size: 22px; font-weight: 700; color: white; }
   .pill-delta { font-size: 10px; color: rgba(255,255,255,0.7); }
 
   /* KPI cards */
-  .kpi-grid { display: flex; gap: 16px; flex-wrap: wrap; }
-  .kpi-card { flex: 1 1 200px; min-width: 200px; min-height: 170px; border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 4px; position: relative; }
-  .kpi-label { font-size: 10px; font-family: var(--mono); letter-spacing: 1.5px; color: white; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; white-space: nowrap; }
-  .kpi-value { font-size: 32px; font-family: var(--mono); font-weight: 700; line-height: 1; letter-spacing: -1px; }
-  .kpi-target { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 5px; }
-  .kpi-bar-wrap { position: relative; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; margin-top: 10px; }
+  .kpi-grid { display: flex; gap: 14px; flex-wrap: wrap; align-items: stretch; }
+  .kpi-card { flex: 1 1 170px; min-width: 170px; border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; gap: 3px; position: relative; overflow: hidden; }
+  .kpi-label { font-size: 9px; font-family: var(--mono); letter-spacing: 1.5px; color: rgba(255,255,255,0.8); font-weight: 700; text-transform: uppercase; margin-bottom: 4px; white-space: nowrap; }
+  .kpi-value { font-size: 34px; font-family: var(--display); font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
+  .kpi-target { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 4px; font-family: var(--mono); }
+  .kpi-bar-wrap { position: relative; height: 6px; background: rgba(0,0,0,0.3); border-radius: 4px; margin-top: 10px; }
   .kpi-bar { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
-  .kpi-bar-tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: rgba(255,255,255,0.6); border-radius: 2px; }
-  .kpi-delta { font-size: 11px; font-family: var(--mono); margin-top: 2px; opacity: 0.8; }
-  .kpi-badge { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-family: var(--mono); letter-spacing: 1px; }
+  .kpi-bar-tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: rgba(255,255,255,0.55); border-radius: 2px; }
+  .kpi-delta { font-size: 10px; font-family: var(--mono); margin-top: 4px; opacity: 0.85; }
+  .kpi-badge { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 20px; font-size: 9px; font-family: var(--mono); letter-spacing: 1px; font-weight: 700; }
 
-  /* card color variants */
-  .kpi-card.good { background: linear-gradient(135deg, var(--good-bg), rgba(15,17,24,0.9)); border: 1px solid var(--good-border); }
-  .kpi-card.warn { background: linear-gradient(135deg, var(--warn-bg), rgba(15,17,24,0.9)); border: 1px solid var(--warn-border); }
-  .kpi-card.bad  { background: linear-gradient(135deg, var(--bad-bg),  rgba(15,17,24,0.9)); border: 1px solid var(--bad-border);  }
-  .kpi-badge.good { background: var(--good-bg); border: 1px solid var(--good-border); color: var(--good); }
-  .kpi-badge.warn { background: var(--warn-bg); border: 1px solid var(--warn-border); color: var(--warn); }
-  .kpi-badge.bad  { background: var(--bad-bg);  border: 1px solid var(--bad-border);  color: var(--bad);  }
-  .kpi-card .glow { position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; border-radius: 50%; opacity: 0.04; filter: blur(20px); pointer-events: none; }
+  /* card color variants — richer colors */
+  .kpi-card.good { background: linear-gradient(140deg, rgba(34,197,94,0.25) 0%, rgba(34,197,94,0.08) 100%); border: 1px solid rgba(34,197,94,0.5); }
+  .kpi-card.warn { background: linear-gradient(140deg, rgba(245,158,11,0.25) 0%, rgba(245,158,11,0.08) 100%); border: 1px solid rgba(245,158,11,0.5); }
+  .kpi-card.bad  { background: linear-gradient(140deg, rgba(239,68,68,0.28)  0%, rgba(239,68,68,0.08)  100%); border: 1px solid rgba(239,68,68,0.5);  }
+  .kpi-badge.good { background: rgba(34,197,94,0.2);  border: 1px solid rgba(34,197,94,0.5);  color: #22c55e; }
+  .kpi-badge.warn { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.5); color: #f59e0b; }
+  .kpi-badge.bad  { background: rgba(239,68,68,0.2);  border: 1px solid rgba(239,68,68,0.5);  color: #ef4444; }
+  .kpi-card .glow { position: absolute; top: -30px; right: -30px; width: 130px; height: 130px; border-radius: 50%; opacity: 0.15; filter: blur(32px); pointer-events: none; }
+
+  /* shift indicator in tab bar */
+  @keyframes pulse-tab { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(1.7)} }
 
   /* alert banners */
   .section-title { font-size: 11px; letter-spacing: 3px; color: white; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
@@ -239,7 +241,19 @@
     <button class="tab-btn" onclick="switchTab('shifts')">SHIFT ANALYSIS</button>
     <button class="tab-btn" onclick="switchTab('alerts')">ALERTS</button>
     <div class="tab-spacer"></div>
-    <a href="production_board.html" class="prod-link" style="margin-right:4px;">Production Board ↗</a>
+    <!-- Live maintenance shift indicator -->
+    <div id="shift-indicator" style="display:flex;align-items:center;gap:10px;padding:0 20px;border-left:1px solid rgba(255,255,255,0.07);border-right:1px solid rgba(255,255,255,0.07);">
+      <div id="shift-dot" style="width:7px;height:7px;border-radius:50%;animation:pulse-tab 2s infinite;flex-shrink:0;"></div>
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <div style="display:flex;align-items:baseline;gap:8px;">
+          <div id="shift-team-tab" style="font-size:12px;font-family:var(--mono);font-weight:700;letter-spacing:2px;line-height:1;"></div>
+          <div id="shift-name-tab" style="font-size:9px;font-family:var(--mono);font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,0.5);line-height:1;"></div>
+        </div>
+        <div id="shift-time-tab" style="font-size:8px;font-family:var(--mono);color:rgba(255,255,255,0.35);letter-spacing:1px;"></div>
+      </div>
+      <div id="shift-clock-tab" style="font-size:13px;font-family:var(--mono);font-weight:700;letter-spacing:2px;"></div>
+    </div>
+    <a href="https://spacemanchadzZ.github.io/roigstats/production.html" class="prod-link" style="margin-right:4px;margin-left:16px;">Production Board ↗</a>
   </div>
 </header>
 
@@ -248,8 +262,15 @@
 
   <!-- OVERVIEW TAB -->
   <div class="tab-panel active" id="tab-overview">
-    <div class="pill-row" id="pill-row"></div>
-    <div class="kpi-grid" id="kpi-grid"></div>
+    <!-- Top row: summary pills LEFT + KPI cards RIGHT -->
+    <div style="display:flex;gap:16px;align-items:stretch;flex-wrap:wrap;">
+      <!-- Summary pills stacked vertically on the left -->
+      <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
+        <div id="pill-row" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+      <!-- KPI cards fill the rest of the row -->
+      <div class="kpi-grid" id="kpi-grid" style="flex:1;min-width:0;"></div>
+    </div>
     <div>
       <div class="section-title">Key Findings & Alerts</div>
       <div class="alert-list" id="alert-banner"></div>
@@ -282,10 +303,7 @@
       <div class="card-title" style="margin-bottom:6px;">Shift Performance Breakdown</div>
       <div class="shift-table" id="shift-table-headers" style="margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.07);"></div>
       <div id="shift-rows"></div>
-      <div style="display:flex;gap:16px;margin-top:16px;padding:0 14px;">
-        <div class="legend-item"><div class="legend-dot" style="background:var(--good)"></div>PM %</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--bad);opacity:0.6"></div>BD %</div>
-      </div>
+      <div id="shift-legend" style="display:flex;gap:16px;margin-top:16px;padding:0 14px;align-items:center;flex-wrap:wrap;"></div>
     </div>
     <div class="card">
       <div class="card-title" style="margin-bottom:20px;">BD% by Shift — vs 35% Threshold</div>
@@ -418,6 +436,83 @@ function catColor(cat) {
   return o ? o.color : '#ffffff';
 }
 
+// ── MAINTENANCE SHIFT INDICATOR (2-2-3 Panama) ──
+// Anchor: March 2 2026 = day 0 of cycle (CD block starts)
+// Pattern: CD:2, AB:2, CD:3, AB:2, CD:2, AB:3 (14-day cycle)
+// A/C = day shift (6am-6pm), B/D = night shift (6pm-6am)
+// When AB pair is on: A=days, B=nights
+// When CD pair is on: C=days, D=nights
+
+var PANAMA_PATTERN = [
+  {pair:'CD', days:2},
+  {pair:'AB', days:2},
+  {pair:'CD', days:3},
+  {pair:'AB', days:2},
+  {pair:'CD', days:2},
+  {pair:'AB', days:3},
+];
+var PANAMA_CYCLE_START = new Date('2026-03-02T00:00:00');
+
+function getActivePair(date) {
+  var d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  var dayNum = Math.round((d - PANAMA_CYCLE_START) / 86400000);
+  var cycleDay = ((dayNum % 14) + 14) % 14;
+  var pos = 0;
+  for (var i = 0; i < PANAMA_PATTERN.length; i++) {
+    if (cycleDay < pos + PANAMA_PATTERN[i].days) return PANAMA_PATTERN[i].pair;
+    pos += PANAMA_PATTERN[i].days;
+  }
+  return 'AB';
+}
+
+function getShiftInfo() {
+  var now = new Date();
+  var h = now.getHours();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+
+  if (h >= 6 && h < 18) {
+    // Day shift — A or C on duty today
+    var pair = getActivePair(today);
+    var tech = pair === 'AB' ? 'A' : 'C';
+    return { tech: tech, pair: pair, shift: 'DAY', hours: '6:00 AM – 6:00 PM', nextTech: pair === 'AB' ? 'B' : 'D' };
+  } else {
+    // Night shift — B or D on duty
+    // Night shift belongs to the same pair as the day that started (today if after 6pm, yesterday if before 6am)
+    var refDate = h >= 18 ? today : new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    var pair = getActivePair(refDate);
+    var tech = pair === 'AB' ? 'B' : 'D';
+    // Next up = day shift tomorrow
+    var nextPair = getActivePair(h >= 18 ? tomorrow : today);
+    var nextTech = nextPair === 'AB' ? 'A' : 'C';
+    return { tech: tech, pair: pair, shift: 'NIGHT', hours: '6:00 PM – 6:00 AM', nextTech: nextTech };
+  }
+}
+
+var TECH_COLORS = { A:'#22c55e', B:'#f59e0b', C:'#38bdf8', D:'#a78bfa' };
+
+function updateShiftIndicator() {
+  var info = getShiftInfo();
+  var color = TECH_COLORS[info.tech];
+  var now = new Date();
+  var p = function(v){ return String(v).padStart(2,'0'); };
+  var timeStr = p(now.getHours())+':'+p(now.getMinutes())+':'+p(now.getSeconds());
+
+  var nameEl  = document.getElementById('shift-name-tab');
+  var timeEl  = document.getElementById('shift-time-tab');
+  var clockEl = document.getElementById('shift-clock-tab');
+  var dotEl   = document.getElementById('shift-dot');
+  var teamEl  = document.getElementById('shift-team-tab');
+
+  if (teamEl)  { teamEl.textContent = info.tech+' SHIFT'; teamEl.style.color = color; }
+  if (nameEl)  { nameEl.textContent = info.shift; nameEl.style.color = 'rgba(255,255,255,0.45)'; }
+  if (timeEl)  { timeEl.textContent = info.hours+' · Next: '+info.nextTech; }
+  if (clockEl) { clockEl.textContent = timeStr; clockEl.style.color = color; }
+  if (dotEl)   { dotEl.style.background = color; dotEl.style.boxShadow = '0 0 6px '+color; }
+}
+setInterval(updateShiftIndicator, 1000);
+updateShiftIndicator();
+
 // ── MONTH SELECTOR ──
 function buildMonthSelector() {
   var sel = document.getElementById('month-selector');
@@ -455,18 +550,20 @@ function render() {
 
 // OVERVIEW
 function renderOverview(d, prev) {
-  // pills
+  // pills — stacked vertically on the left
   var pr = document.getElementById('pill-row');
   pr.innerHTML = '';
   [
-    { label:'Total WOs', value:d.totalWOs, prev: prev&&prev.totalWOs },
-    { label:'BD WOs',    value:d.bdWOs,    prev: prev&&prev.bdWOs },
-    { label:'Top BD Asset', value:d.topAsset, isText:true },
+    { label:'Total WOs',    value:d.totalWOs,  prev: prev&&prev.totalWOs,  color:'#38bdf8', bg:'rgba(56,189,248,0.1)',   border:'rgba(56,189,248,0.3)'   },
+    { label:'BD WOs',       value:d.bdWOs,     prev: prev&&prev.bdWOs,     color:'#ef4444', bg:'rgba(239,68,68,0.1)',    border:'rgba(239,68,68,0.3)'    },
+    { label:'Top BD Asset', value:d.topAsset,  isText:true,                color:'#f59e0b', bg:'rgba(245,158,11,0.1)',   border:'rgba(245,158,11,0.3)'   },
   ].forEach(function(s){
     var pill = document.createElement('div'); pill.className='pill';
-    pill.innerHTML = '<div class="pill-label">'+s.label+'</div>'
-      +'<div class="pill-value">'+s.value+'</div>'
-      +(s.prev && !s.isText ? '<div class="pill-delta">'+(s.value>s.prev?'▲':'▼')+' '+Math.abs(s.value-s.prev)+' vs JAN</div>' : '');
+    pill.style.background = s.bg;
+    pill.style.borderColor = s.border;
+    pill.innerHTML = '<div class="pill-label" style="color:'+s.color+';opacity:0.8">'+s.label+'</div>'
+      +'<div class="pill-value" style="color:'+s.color+'">'+s.value+'</div>'
+      +(s.prev && !s.isText ? '<div class="pill-delta" style="color:'+s.color+';opacity:0.6">'+(s.value>s.prev?'▲':'▼')+' '+Math.abs(s.value-s.prev)+' vs JAN</div>' : '');
     pr.appendChild(pill);
   });
 
@@ -596,17 +693,25 @@ function buildMetricBar(line, value, target, prev, higherBetter, unit) {
 function renderShifts(d) {
   // headers
   var sh = document.getElementById('shift-table-headers'); sh.innerHTML='';
-  ['Shift','PM vs BD Distribution','WOs','PMs','BDs','BD %'].forEach(function(h,i){
+  ['Shift','WO Volume vs Plant Total','WOs','PMs','BDs','BD %'].forEach(function(h,i){
     var el=document.createElement('div'); el.className='shift-header';
     el.style.textAlign = i>1?'right':'left'; el.textContent=h; sh.appendChild(el);
   });
 
+  // max WOs across all shifts — normalize bars against the highest-volume shift
+  var maxWOs = Math.max.apply(null, d.shifts.map(function(s){ return s.wos; }));
+
   // rows
   var sr = document.getElementById('shift-rows'); sr.innerHTML='';
   d.shifts.forEach(function(s,idx){
-    var bdCol = s.bd_pct>35?'#ef4444':s.bd_pct>25?'#f59e0b':'#22c55e';
-    var pmPct = (s.pms/(s.wos||1))*100;
-    var bdPct2= (s.bds/(s.wos||1))*100;
+    var bdCol  = s.bd_pct>35?'#ef4444':s.bd_pct>25?'#f59e0b':'#22c55e';
+    // bars: each segment is absolute count scaled against maxWOs
+    // so you can visually compare volumes across shifts
+    var totalBarPct = (s.wos / maxWOs) * 100;
+    var pmBarPct    = (s.pms / maxWOs) * 100;
+    var bdBarPct    = (s.bds / maxWOs) * 100;
+    var otherPct    = Math.max(0, totalBarPct - pmBarPct - bdBarPct); // remaining WOs (non-PM, non-BD)
+
     var row = document.createElement('div');
     row.className='shift-table';
     row.style.background = idx%2===0?'rgba(255,255,255,0.02)':'transparent';
@@ -614,9 +719,13 @@ function renderShifts(d) {
     row.innerHTML =
       '<div class="shift-row-cell shift-name">'+s.name+'</div>'
       +'<div class="shift-row-cell">'
-        +'<div class="shift-bar-wrap" style="width:100%;position:relative;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;">'
-          +'<div style="position:absolute;left:0;top:0;height:100%;width:'+pmPct+'%;background:#22c55e;border-radius:3px;opacity:0.8"></div>'
-          +'<div style="position:absolute;left:0;top:0;height:100%;width:'+bdPct2+'%;background:'+bdCol+';border-radius:3px;opacity:0.6"></div>'
+        +'<div style="width:100%;position:relative;height:8px;background:rgba(255,255,255,0.05);border-radius:4px;">'
+          // PM segment (green)
+          +'<div style="position:absolute;left:0;top:0;height:100%;width:'+pmBarPct+'%;background:#22c55e;border-radius:4px 0 0 4px;opacity:0.85"></div>'
+          // BD segment (color-coded) immediately after PM
+          +'<div style="position:absolute;left:'+pmBarPct+'%;top:0;height:100%;width:'+bdBarPct+'%;background:'+bdCol+';opacity:0.85"></div>'
+          // Other WOs (grey) after BD
+          +'<div style="position:absolute;left:'+(pmBarPct+bdBarPct)+'%;top:0;height:100%;width:'+otherPct+'%;background:rgba(255,255,255,0.2);border-radius:0 4px 4px 0;opacity:0.85"></div>'
         +'</div>'
       +'</div>'
       +'<div class="shift-row-cell" style="color:white;justify-content:flex-end">'+s.wos+'</div>'
@@ -634,15 +743,28 @@ function renderShifts(d) {
     wrap.innerHTML=
       '<div style="display:flex;justify-content:space-between;margin-bottom:5px;">'
         +'<span style="font-size:11px;color:white;font-weight:700">'+s.name+'</span>'
-        +'<span style="font-size:11px;color:'+col+';font-weight:700">'+pct.toFixed(1)+'%</span>'
+        +'<div style="display:flex;gap:16px;align-items:baseline;">'
+          +'<span style="font-size:9px;color:rgba(255,255,255,0.4);">'+s.wos+' WOs · '+s.pms+' PMs · '+s.bds+' BDs</span>'
+          +'<span style="font-size:11px;color:'+col+';font-weight:700">'+pct.toFixed(1)+'%</span>'
+        +'</div>'
       +'</div>'
       +'<div class="bd-bar-wrap">'
         +'<div class="bd-bar-fill" style="width:'+Math.min(pct,100)+'%;background:linear-gradient(90deg,'+col+'aa,'+col+');box-shadow:0 0 10px '+col+'55"></div>'
         +'<div class="bd-threshold"></div>'
       +'</div>'
-      +'<div style="font-size:9px;color:rgba(255,255,255,0.6);margin-top:3px;">Target threshold: 35%</div>';
+      +'<div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:3px;">35% threshold · white line</div>';
     bb.appendChild(wrap);
   });
+
+  // update legend
+  var legendEl = document.getElementById('shift-legend');
+  if (legendEl) {
+    legendEl.innerHTML =
+      '<div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>PM WOs</div>'
+      +'<div class="legend-item"><div class="legend-dot" style="background:#ef4444;opacity:0.85"></div>BD WOs</div>'
+      +'<div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.25)"></div>Other WOs</div>'
+      +'<div style="font-size:9px;color:rgba(255,255,255,0.3);margin-left:8px;">Bar width = volume relative to highest shift</div>';
+  }
 }
 
 // ALERTS
